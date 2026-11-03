@@ -18,7 +18,9 @@ Xatspace.cliente({
   xatUrl: "https://xat.com/RHB",
   xatNome: "xat.com/RHB",
 
-  fotos: {},
+  fotos: {
+    perfil: "valesca/perfil.jpg"
+  },
 
   cor: ""
 });

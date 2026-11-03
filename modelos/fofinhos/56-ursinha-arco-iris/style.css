@@ -169,3 +169,9 @@
 .mob .bicho { top: 116px; height: 228px; }
 .mob .chao { top: 334px; }
 .mob .nuvem-chao { top: 322px; height: 66px; }
+
+/* Foto da Valesca: o rosto fica no alto, à esquerda; aproxima e centraliza nele */
+.foto { background-size: 185%; background-position: 20% 2%; }
+
+/* O V do nome começa inclinado e mais para dentro; o sobrenome acompanha */
+.desk .sobrenome { margin-left: 4px; }
