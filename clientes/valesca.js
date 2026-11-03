@@ -22,5 +22,13 @@ Xatspace.cliente({
     perfil: "valesca/perfil.jpg"
   },
 
+  // Agora Eu Sou Solteira (Gaiola das Popozudas). Só a música: o álbum do link
+  // (list=OLAK5uy_…) não entrega as outras faixas fora do YouTube.
+  musica: {
+    youtube: "oYQRz0vG49k",
+    titulo: "Agora Eu Sou Solteira",
+    artista: "Gaiola das Popozudas"
+  },
+
   cor: ""
 });
