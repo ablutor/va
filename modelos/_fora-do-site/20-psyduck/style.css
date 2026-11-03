@@ -1,0 +1,142 @@
+/* Pessoal · Psyduck (família Fofinhos, fan-art de uso pessoal)
+   Cores: original (amarelo-quente com azul de lago), masculino (verde-água), feminino (rosa), feminino-2 (lilás). */
+
+:root,
+[data-cor="original"]   { --bg: #fdf4d9; --bg2: #fffcf0; --card: #fffef9; --ink: #3c3522; --ac: #3a8fc6; --ac2: #d4e9f6; --pegada: #e8d59e; --agua: #b9def3; --agua-forte: #8cc6e8; }
+[data-cor="masculino"]  { --bg: #e4f2f1; --bg2: #f6fcfb; --card: #fdfffe; --ink: #213f3d; --ac: #2f9790; --ac2: #c9e8e5; --pegada: #afd6d2; --agua: #b4e0dc; --agua-forte: #84c8c2; }
+[data-cor="feminino"]   { --bg: #fcecef; --bg2: #fffafb; --card: #fffcfc; --ink: #4a2e35; --ac: #de6f8d; --ac2: #f8d4dd; --pegada: #edc2cc; --agua: #c6e2f1; --agua-forte: #9fcbe5; }
+[data-cor="feminino-2"] { --bg: #f0ebf8; --bg2: #fcfaff; --card: #fefdff; --ink: #362b4a; --ac: #8f74cc; --ac2: #e0d6f2; --pegada: #cfc2e6; --agua: #c9dcf3; --agua-forte: #a6c2ea; }
+
+/* Cores do Psyduck (as mesmas em todas as paletas) */
+:root {
+  --pena-luz: #fff3b0;
+  --pena: #ffd84a;
+  --pena-sombra: #e8ad2c;
+  --bico-luz: #fff8dc;
+  --bico: #f6e2a4;
+  --bico-sombra: #d9b96a;
+  --bochecha: #ffab8f;
+  --estrela: #ffcf3d;
+  --olho: #2d2519;
+}
+
+.pulo-todo,
+.corpo-todo,
+.bicho .cabeca,
+.onda {
+  transform-box: fill-box;
+}
+
+/* A cabeça balança meio tonta e, de vez em quando, entorta de lado */
+.bicho .cabeca {
+  transform-origin: 50% 88%;
+  animation: tonto 9s ease-in-out infinite;
+}
+
+@keyframes tonto {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(-4deg); }
+  20% { transform: rotate(4deg); }
+  30% { transform: rotate(-3deg); }
+  40% { transform: rotate(3deg); }
+  50% { transform: rotate(0deg); }
+  58%, 74% { transform: rotate(10deg); }
+  80% { transform: rotate(-3deg); }
+  88% { transform: rotate(2deg); }
+}
+
+/* Estrelinhas girando em volta da cabeça, aparecem e somem */
+.estrelas { animation: estrelas 9s ease-in-out infinite; }
+
+@keyframes estrelas {
+  0%, 50%, 100% { opacity: 0; }
+  56%, 80% { opacity: 1; }
+}
+
+/* O giro das estrelinhas é feito pelo próprio SVG (animateMotion) */
+
+/* Ondinhas no lago */
+.onda { transform-origin: center; opacity: 0; animation: onda 3.6s ease-out infinite; }
+.onda-2 { animation-delay: 1.8s; }
+
+@keyframes onda {
+  0% { transform: scale(.4); opacity: 0; }
+  15% { opacity: .8; }
+  100% { transform: scale(1.12); opacity: 0; }
+}
+
+/* A sombra fica clarinha porque ele está na água */
+.chao { opacity: .4; }
+
+/* Interrogações e redemoinhos flutuando pela cena */
+.duvida,
+.redemoinho {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  color: var(--ac);
+}
+
+.duvida {
+  font-family: "Fredoka", sans-serif;
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1;
+  animation: duvida 6s ease-in-out infinite;
+}
+
+.duvida.d2 { color: var(--pena-sombra); }
+
+@keyframes duvida {
+  0% { opacity: 0; transform: translate(0, 0) rotate(-14deg) scale(.6); }
+  15% { opacity: .85; }
+  40% { transform: translate(12px, -50px) rotate(12deg) scale(1); }
+  65% { opacity: .7; transform: translate(-10px, -100px) rotate(-10deg) scale(1); }
+  100% { opacity: 0; transform: translate(6px, -150px) rotate(8deg) scale(1.1); }
+}
+
+.redemoinho { width: 30px; height: 30px; animation: redemoinho 7s linear infinite; }
+.redemoinho svg { width: 100%; height: 100%; display: block; overflow: visible; fill: none; stroke: currentColor; stroke-width: 3.5; stroke-linecap: round; }
+.redemoinho.r2 { color: var(--agua-forte); }
+
+@keyframes redemoinho {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(.6); }
+  15% { opacity: .7; }
+  80% { opacity: .5; }
+  100% { opacity: 0; transform: translate(-20px, -130px) rotate(-540deg) scale(1); }
+}
+
+.desk .duvida.d1 { left: 20px; top: 470px; }
+.desk .duvida.d2 { left: 450px; top: 420px; animation-delay: -2s; font-size: 52px; }
+.desk .duvida.d3 { left: 470px; top: 600px; animation-delay: -4s; font-size: 36px; }
+.desk .redemoinho.r1 { left: 40px; top: 640px; animation-delay: -1.5s; }
+.desk .redemoinho.r2 { left: 400px; top: 340px; animation-delay: -4.5s; width: 24px; height: 24px; }
+
+.mob .duvida { font-size: 28px; animation-name: duvida-mob; }
+.mob .duvida.d1 { left: 30px; top: 300px; }
+.mob .duvida.d2 { left: 60px; top: 230px; animation-delay: -3s; font-size: 22px; }
+.mob .redemoinho { width: 20px; height: 20px; }
+.mob .redemoinho.r1 { left: 34px; top: 330px; animation-delay: -2s; }
+
+@keyframes duvida-mob {
+  0% { opacity: 0; transform: translate(0, 0) rotate(-14deg) scale(.6); }
+  15% { opacity: .85; }
+  50% { transform: translate(8px, -50px) rotate(12deg) scale(1); }
+  100% { opacity: 0; transform: translate(-4px, -100px) rotate(-8deg) scale(1.1); }
+}
+
+/* ---------- Layout próprio ---------- */
+
+/* Desktop: cartões trocados de lado e Psyduck à esquerda do centro */
+.desk .perfil { left: auto; right: 170px; }
+.desk .lado { left: 170px; }
+.desk .cena { left: 690px; }
+.desk .balao { left: 0; right: 70px; }
+.desk .balao::after { left: 44%; }
+.desk .bicho { left: 50px; top: 330px; }
+.desk .chao { left: 100px; top: 708px; }
+
+/* Mobile: Psyduck um pouco à direita, interrogações à esquerda */
+.mob .bicho { left: 115px; }
+.mob .chao { left: 140px; }
+.mob .balao::after { left: 58%; }

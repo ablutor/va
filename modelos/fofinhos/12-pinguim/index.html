@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino feminino-2">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Pinguim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../_fofinhos/fofinhos.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Desenhos usados mais de uma vez: a pegada e o bichinho -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Pegada de pinguim: três dedinhos finos para a frente e um calcanhar pequeno -->
+      <symbol id="pegada" viewBox="0 0 100 100">
+        <g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round">
+          <path d="M50 66 L50 16"/>
+          <path d="M50 66 L22 30"/>
+          <path d="M50 66 L78 30"/>
+        </g>
+        <ellipse cx="50" cy="76" rx="11" ry="13" fill="currentColor"/>
+      </symbol>
+
+      <!-- Penas das costas, barriga branquinha e laranja do bico e dos pés -->
+      <radialGradient id="plumagem" cx="38%" cy="26%" r="80%">
+        <stop offset="0" stop-color="var(--costas-luz)"/>
+        <stop offset=".45" stop-color="var(--costas)"/>
+        <stop offset="1" stop-color="var(--costas-sombra)"/>
+      </radialGradient>
+      <radialGradient id="barriga" gradientUnits="userSpaceOnUse" cx="172" cy="196" r="210">
+        <stop offset="0" stop-color="var(--barriga)"/>
+        <stop offset=".55" stop-color="var(--barriga)"/>
+        <stop offset="1" stop-color="var(--barriga-sombra)"/>
+      </radialGradient>
+      <linearGradient id="bico" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--bico)"/>
+        <stop offset="1" stop-color="var(--bico-sombra)"/>
+      </linearGradient>
+      <linearGradient id="cachecol" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--cachecol-luz)"/>
+        <stop offset="1" stop-color="var(--cachecol-sombra)"/>
+      </linearGradient>
+      <clipPath id="corpo-pinguim">
+        <ellipse cx="190" cy="232" rx="132" ry="150"/>
+      </clipPath>
+
+    </defs>
+  </svg>
+
+  <!-- O bichinho: o fofinhos.js copia este desenho para dentro de cada .bicho -->
+  <template id="bichinho">
+    <svg viewBox="0 0 380 400">
+        <g class="pulo-todo">
+          <g class="corpo-todo">
+            <!-- tudo que ginga de um lado para o outro -->
+            <g class="gingado">
+              <!-- asinhas -->
+              <g class="asa asa-esq">
+                <path d="M92 196 C54 210 28 268 38 322 C44 332 56 328 62 318 C78 292 90 262 98 232 Z" fill="url(#plumagem)"/>
+              </g>
+              <g class="asa asa-dir">
+                <path d="M288 196 C326 210 352 268 342 322 C336 332 324 328 318 318 C302 292 290 262 282 232 Z" fill="url(#plumagem)"/>
+              </g>
+              <!-- corpo redondinho -->
+              <ellipse cx="190" cy="232" rx="132" ry="150" fill="url(#plumagem)"/>
+              <!-- topetinho -->
+              <path d="M182 88 C176 66 186 50 206 50 C194 58 192 72 198 86 Z" fill="var(--costas)"/>
+              <!-- brilho nas penas -->
+              <ellipse cx="128" cy="122" rx="38" ry="18" transform="rotate(-32 128 122)" fill="#fff" opacity=".13"/>
+              <!-- rostinho em forma de coração e barriga -->
+              <ellipse cx="190" cy="288" rx="100" ry="86" fill="url(#barriga)"/>
+              <circle cx="149" cy="190" r="58" fill="url(#barriga)"/>
+              <circle cx="231" cy="190" r="58" fill="url(#barriga)"/>
+              <!-- cachecol -->
+              <g clip-path="url(#corpo-pinguim)">
+                <path d="M40 236 Q190 292 340 236 L340 268 Q190 324 40 268 Z" fill="url(#cachecol)"/>
+                <path d="M40 250 Q190 306 340 250" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round" opacity=".7"/>
+              </g>
+              <path d="M240 280 C246 302 246 322 240 344 L270 340 C274 318 270 296 262 276 Z" fill="url(#cachecol)"/>
+              <path d="M242 344 l4 10 M252 343 l3 10 M262 342 l3 10" stroke="var(--ac)" stroke-width="4" stroke-linecap="round"/>
+              <!-- bochechas -->
+              <ellipse cx="114" cy="226" rx="21" ry="12" fill="var(--bochecha)" opacity=".75"/>
+              <ellipse cx="266" cy="226" rx="21" ry="12" fill="var(--bochecha)" opacity=".75"/>
+              <!-- olhos -->
+              <g class="olhos-abertos">
+                <circle cx="150" cy="192" r="17" fill="var(--olho)"/>
+                <circle cx="230" cy="192" r="17" fill="var(--olho)"/>
+                <circle cx="156" cy="185" r="6" fill="#fff"/>
+                <circle cx="236" cy="185" r="6" fill="#fff"/>
+                <circle cx="145" cy="199" r="2.5" fill="#fff"/>
+                <circle cx="225" cy="199" r="2.5" fill="#fff"/>
+              </g>
+              <g class="olhos-felizes" fill="none" stroke="var(--olho)" stroke-width="6" stroke-linecap="round">
+                <path d="M134 196 q16 -18 32 0"/>
+                <path d="M214 196 q16 -18 32 0"/>
+              </g>
+              <!-- biquinho -->
+              <path d="M174 211 Q190 202 206 211 Q201 228 190 232 Q179 228 174 211 Z" fill="url(#bico)"/>
+              <ellipse cx="184" cy="211" rx="6" ry="2.5" fill="#fff" opacity=".55"/>
+            </g>
+            <!-- pezinhos -->
+            <g class="pe pe-esq">
+              <ellipse cx="146" cy="384" rx="34" ry="14" fill="url(#bico)"/>
+              <path d="M136 380 l-3 10 M156 380 l3 10" stroke="var(--bico-sombra)" stroke-width="3" stroke-linecap="round"/>
+            </g>
+            <g class="pe pe-dir">
+              <ellipse cx="234" cy="384" rx="34" ry="14" fill="url(#bico)"/>
+              <path d="M224 380 l-3 10 M244 380 l3 10" stroke="var(--bico-sombra)" stroke-width="3" stroke-linecap="round"/>
+            </g>
+          </g>
+        </g>
+    </svg>
+  </template>
+
+  <!-- Fundo da tela toda, com rastros de pegadas -->
+  <div class="xs-fundo fundo"><div class="pegadas" data-pegadas="6"></div></div>
+
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <section class="perfil card">
+      <div class="topo">
+        <div class="foto" data-xs-bg="fotos.perfil"></div>
+        <div>
+          <h1 class="nome" data-xs="nome">Albert</h1>
+          <div class="sobrenome nome" data-xs="sobrenome">Alves</div>
+        </div>
+      </div>
+      <div class="linha-online">
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+      <p class="local" data-xs-se="local">📍 <span data-xs="local"></span></p>
+      <ul class="chips" data-gostos style="margin-top:10px"></ul>
+      <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span> ↗</a>
+    </section>
+
+    <div class="cena">
+      <div class="balao carinho"><span class="num" data-carinhos>0</span><div><span class="cap">Carinhos no pinguim</span><p>Clica nele para dar mais um ♥</p></div></div>
+      <button class="bicho" type="button" aria-label="Fazer carinho no pinguim">
+        
+      </button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="lado">
+      <div class="card citacao" data-xs-se="citacao.texto">
+        <span class="cap">Frase favorita</span>
+        <p data-xs="citacao.texto"></p>
+        <small>— <span data-xs="citacao.autor"></span></small>
+      </div>
+      <div class="card player" data-xs-player>
+        <span class="xs-controles">
+          <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+          <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+        </span>
+        <div class="info">
+          <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+          <div class="barra"><span data-xs-barra></span></div>
+        </div>
+        <span class="eq"><i></i><i></i><i></i><i></i></span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <div class="cabeca">
+      <div class="foto" data-xs-bg="fotos.perfil"></div>
+      <div>
+        <h1 class="nome" data-xs="nome">Albert</h1>
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+    </div>
+
+    <div class="cena">
+      <div class="balao carinho"><span class="num" data-carinhos>0</span><div><span class="cap">Carinhos no pinguim</span><p>Clica nele para dar mais um ♥</p></div></div>
+      <button class="bicho" type="button" aria-label="Fazer carinho no pinguim">
+        
+      </button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="perfil card">
+      <div class="citacao" data-xs-se="citacao.texto">
+        <span class="cap">Frase favorita</span>
+        <p data-xs="citacao.texto"></p>
+        <small>— <span data-xs="citacao.autor"></span></small>
+      </div>
+      <ul class="chips" data-gostos></ul>
+      <div class="rodape">
+        <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span></a>
+      </div>
+    </section>
+
+    <div class="card player" data-xs-player>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+      <div class="info">
+        <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+        <div class="barra"><span data-xs-barra></span></div>
+      </div>
+      <span class="eq"><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="../../_fofinhos/fofinhos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

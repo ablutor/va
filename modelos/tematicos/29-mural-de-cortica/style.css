@@ -1,0 +1,402 @@
+/* Modelo 29 · Mural de cortiça
+   Um quadro de cortiça com moldura de madeira: polaroides, post-it com a frase, ficha pautada,
+   ingresso (o player), fitas adesivas, tachinhas e um barbante. Tudo desenhado aqui, vazio por
+   dentro; só as fotos do cliente entram nas polaroides.
+   Cores (nome → rótulo):
+   original → cortiça (tachinhas e barbante vermelhos, post-it amarelo)
+   homem    → cortiça escura e azul
+   mulher   → cortiça rosada e rosa */
+
+:root,
+[data-cor="original"] {
+  --moldura: #6b4a2e;       /* madeira em volta do quadro */
+  --moldura-borda: #4a321e;
+  --cortica: #b47c4b;       /* cor da cortiça */
+  --cortica-claro: #c38d5a;
+  --cortica-escuro: #9a6639;
+  --tacha: #e0333f;         /* tachinhas e barbante */
+  --tacha-claro: #ff8a8f;
+  --barbante: #c4202c;
+  --postit: #f9e27c;
+  --papel: #fbf9f4;         /* polaroides e ficha */
+  --tinta: #2b2440;
+  --fita: rgba(244, 230, 160, .78);
+  --ingresso: #f3e4c6;
+  --ingresso-tinta: #5a2d16;
+  --ingresso-borda: #b8573a;
+  --play: #5a2a14;
+  --play-tinta: #fff;
+  /* Papéis das letras recortadas: fundo e letra, em ciclo de 6 */
+  --l1: #141414; --l1-t: #fff;
+  --l2: #f1ece0; --l2-t: #c41f2a;
+  --l3: #2147b8; --l3-t: #fff;
+  --l4: #f6e27a; --l4-t: #111;
+  --l5: #fff;    --l5-t: #111;
+  --l6: #c9161f; --l6-t: #fff;
+}
+
+[data-cor="homem"] {
+  --moldura: #2e2018;
+  --moldura-borda: #1c130e;
+  --cortica: #9c6239;
+  --cortica-claro: #ab6f44;
+  --cortica-escuro: #82502c;
+  --tacha: #3d7fd6;
+  --tacha-claro: #9cc8ff;
+  --barbante: #2f62b8;
+  --postit: #a9d5f2;
+  --papel: #fbf9f4;
+  --tinta: #1d2238;
+  --fita: rgba(205, 175, 125, .85);
+  --ingresso: #e4e9ef;
+  --ingresso-tinta: #1d2f4f;
+  --ingresso-borda: #2c4a75;
+  --play: #1f3a5f;
+  --play-tinta: #fff;
+  --l1: #141414; --l1-t: #fff;
+  --l2: #f1ece0; --l2-t: #2147b8;
+  --l3: #2f6b3f; --l3-t: #fff;
+  --l4: #a9d3f2; --l4-t: #111;
+  --l5: #fff;    --l5-t: #111;
+  --l6: #d9772a; --l6-t: #fff;
+}
+
+[data-cor="mulher"] {
+  --moldura: #f1e7dd;
+  --moldura-borda: #d9c5b4;
+  --cortica: #ac7a6d;
+  --cortica-claro: #b98a7d;
+  --cortica-escuro: #946559;
+  --tacha: #f0b737;
+  --tacha-claro: #ffe9a0;
+  --barbante: #d4609c;
+  --postit: #f8c2db;
+  --papel: #fbf9f4;
+  --tinta: #4a1d35;
+  --fita: rgba(248, 168, 200, .8);
+  --ingresso: #fde3ee;
+  --ingresso-tinta: #6b1f45;
+  --ingresso-borda: #c24d86;
+  --play: #c24d86;
+  --play-tinta: #fff;
+  --l1: #fff;    --l1-t: #e0559a;
+  --l2: #f6b7d0; --l2-t: #6e1e47;
+  --l3: #2a9a96; --l3-t: #fff;
+  --l4: #f7dc8a; --l4-t: #111;
+  --l5: #6e1e47; --l5-t: #fff;
+  --l6: #fff;    --l6-t: #2a9a96;
+}
+
+:root {
+  --xs-marca-cor: var(--papel);
+  --xs-marca-fundo: var(--moldura-borda);
+  --xs-marca-destaque: var(--tacha);
+}
+
+body {
+  background: var(--moldura);
+  color: var(--tinta);
+  font-family: "Kalam", cursive;
+}
+
+.desk { width: 1920px; }
+.mob { width: 390px; }
+
+/* ---------- Cortiça ---------- */
+
+/* Grãos da cortiça em gradientes: furinhos escuros, pontinhos claros e uma luz no meio */
+.cortica {
+  position: absolute;
+  border: 2px solid var(--moldura-borda);
+  background-color: var(--cortica);
+  background-image:
+    radial-gradient(circle, rgba(40, 20, 5, .26) 0 1px, transparent 1.7px),
+    radial-gradient(circle, rgba(255, 235, 200, .16) 0 1px, transparent 1.6px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, .05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, .05) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at 50% 45%, var(--cortica-claro), var(--cortica) 55%, var(--cortica-escuro));
+  background-size: 6px 6px, 6px 6px, auto, auto, 100% 100%;
+  background-position: 0 0, 3px 3px, 0 0, 0 0, 0 0;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15), inset 0 0 40px rgba(0, 0, 0, .25);
+}
+
+.desk .cortica { inset: 28px; }
+.mob .cortica { inset: 14px; }
+
+/* ---------- Nome em letras recortadas ---------- */
+
+.recorte {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.recorte span {
+  display: grid;
+  place-items: center;
+  background: var(--l1);
+  color: var(--l1-t);
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, .3);
+}
+
+.recorte span.espaco { background: none; box-shadow: none; }
+
+/* Cada letra num papel, numa fonte e num ângulo diferentes */
+.recorte span:nth-child(6n+1) { background: var(--l1); color: var(--l1-t); font-family: "Abril Fatface", serif; transform: rotate(-4deg); }
+.recorte span:nth-child(6n+2) { background: var(--l2); color: var(--l2-t); font-family: "Archivo Black", sans-serif; transform: rotate(3deg) translateY(-4px); }
+.recorte span:nth-child(6n+3) { background: var(--l3); color: var(--l3-t); font-family: "Playfair Display", serif; font-style: italic; transform: rotate(-2deg) translateY(4px); }
+.recorte span:nth-child(6n+4) { background: var(--l4); color: var(--l4-t); font-family: "Playfair Display", serif; font-style: italic; transform: rotate(4deg) translateY(-2px); }
+.recorte span:nth-child(6n+5) { background: var(--l5); color: var(--l5-t); font-family: "Abril Fatface", serif; transform: rotate(-5deg) translateY(-8px); }
+.recorte span:nth-child(6n)   { background: var(--l6); color: var(--l6-t); font-family: "Special Elite", monospace; font-weight: 700; transform: rotate(2deg) translateY(-2px); }
+
+/* ---------- Barbante e tachinhas ---------- */
+
+.barbante {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.barbante polyline {
+  fill: none;
+  stroke: var(--barbante);
+  stroke-width: 2;
+  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .3));
+}
+
+/* Tachinha: bolinha brilhante com sombra; o centro fica no ponto do style="left;top" */
+.tacha {
+  position: absolute;
+  z-index: 6;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--tacha-claro), var(--tacha) 45%, color-mix(in srgb, var(--tacha) 65%, #000));
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, .4);
+}
+
+.mob .tacha {
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+}
+
+/* ---------- Polaroides ---------- */
+
+.pol {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 17px 17px 0;
+  background: var(--papel);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .15), 4px 10px 18px rgba(0, 0, 0, .35);
+}
+
+.pol .ft {
+  flex: none;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--tinta) 15%, var(--papel));
+}
+
+.pol .ft img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.pol figcaption {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  font-style: italic;
+  color: var(--tinta);
+  white-space: nowrap;
+}
+
+/* Fita adesiva meio transparente, presa no alto */
+.fita {
+  position: absolute;
+  z-index: 3;
+  background: var(--fita);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .12);
+}
+
+.pol .fita {
+  left: 50%;
+  top: -12px;
+  width: 130px;
+  height: 34px;
+  transform: translateX(-50%) rotate(1deg);
+}
+
+/* ---------- Post-it ---------- */
+
+.postit {
+  position: absolute;
+  padding: 34px 28px 20px 30px;
+  background: linear-gradient(170deg, color-mix(in srgb, var(--postit) 92%, #fff), var(--postit) 40%, color-mix(in srgb, var(--postit) 90%, #000));
+  color: var(--tinta);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.35;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .12), 4px 10px 16px rgba(0, 0, 0, .3);
+}
+
+/* ---------- Ficha pautada ---------- */
+
+.ficha {
+  position: absolute;
+  padding: 44px 18px 12px 28px;
+  background-color: var(--papel);
+  /* Linha vermelha da margem de cima e pautas azuis */
+  background-image:
+    linear-gradient(180deg, transparent 36px, rgba(220, 70, 80, .6) 36px 38px, transparent 38px),
+    repeating-linear-gradient(180deg, transparent 0 29px, rgba(90, 130, 200, .35) 29px 30px);
+  background-position: 0 0, 0 43px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .12), 4px 10px 16px rgba(0, 0, 0, .3);
+  font-family: "Special Elite", monospace;
+  font-size: 20px;
+  line-height: 30px;
+  color: #222;
+}
+
+.ficha p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Ingresso (player) ---------- */
+
+.ingresso {
+  position: absolute;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 24px 0 20px;
+  background: var(--ingresso);
+  color: var(--ingresso-tinta);
+  outline: 2px dashed var(--ingresso-borda);
+  outline-offset: -5px;
+  box-shadow: 3px 8px 14px rgba(0, 0, 0, .3);
+  font-family: "Special Elite", monospace;
+}
+
+.ingresso .fita {
+  left: -34px;
+  top: -24px;
+  width: 80px;
+  height: 36px;
+  transform: rotate(-32deg);
+}
+
+.ingresso .comandos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ingresso .xs-pular { color: var(--ingresso-tinta); }
+
+.ingresso .play {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--play);
+  color: var(--play-tinta);
+}
+
+.ingresso .info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.1;
+}
+
+.ingresso small {
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.ingresso b {
+  font-weight: 400;
+  font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ingresso .artista {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Desktop (1920×900) ---------- */
+
+.desk .recorte { left: 88px; top: 66px; gap: 0; }
+.desk .recorte span { width: 54px; height: 80px; font-size: 62px; }
+.desk .recorte span.espaco { width: 24px; }
+
+.desk .p1 { left: 109px; top: 230px; width: 335px; height: 437px; transform: rotate(-3.6deg); }
+.desk .p1 .ft { height: 365px; }
+
+.desk .p2 { left: 500px; top: 120px; width: 312px; height: 455px; padding: 15px 15px 0; transform: rotate(3.6deg); }
+.desk .p2 .ft { height: 395px; }
+
+.desk .p3 { left: 1340px; top: 80px; width: 451px; height: 357px; transform: rotate(-2.5deg); }
+.desk .p3 .ft { height: 285px; }
+
+.desk .p4 { left: 900px; top: 430px; width: 283px; height: 406px; padding: 14px 14px 0; transform: rotate(5.6deg); }
+.desk .p4 .ft { height: 340px; }
+
+.desk .postit { left: 880px; top: 109px; width: 341px; height: 212px; font-size: 29px; transform: rotate(-2deg); }
+
+.desk .ficha { left: 1360px; top: 470px; width: 420px; height: 182px; transform: rotate(2.7deg); }
+
+.desk .ingresso { left: 302px; top: 688px; width: 433px; height: 85px; transform: rotate(-1.3deg); }
+
+/* ---------- Mobile (390×844) ---------- */
+
+.mob .recorte { left: 31px; top: 34px; }
+.mob .recorte span { width: 33px; height: 46px; font-size: 36px; }
+.mob .recorte span.espaco { width: 14px; }
+
+.mob .pol { padding: 11px 11px 0; }
+.mob .pol figcaption { font-size: 15px; }
+.mob .pol .fita { width: 90px; height: 22px; top: -8px; }
+
+.mob .p1 { left: 30px; top: 123px; width: 220px; height: 298px; transform: rotate(-3.9deg); }
+.mob .p1 .ft { height: 256px; }
+
+.mob .postit { left: 228px; top: 150px; width: 139px; height: 215px; padding: 22px 10px 10px 16px; font-size: 21px; line-height: 1.3; transform: rotate(3.3deg); }
+
+.mob .p2 { left: 36px; top: 448px; width: 159px; height: 229px; transform: rotate(3deg); }
+.mob .p2 .ft { height: 184px; }
+
+.mob .p4 { left: 206px; top: 421px; width: 159px; height: 228px; transform: rotate(-5.5deg); }
+.mob .p4 .ft { height: 184px; }
+
+.mob .ingresso { left: 41px; top: 722px; width: 284px; height: 53px; gap: 8px; padding: 0 10px 0 14px; transform: rotate(-1.7deg); }
+.mob .ingresso .comandos { gap: 0; }
+.mob .ingresso .xs-pular { width: 20px; }
+.mob .ingresso .play { width: 34px; height: 34px; }
+.mob .ingresso .fita { left: -22px; top: -16px; width: 60px; height: 26px; }
+.mob .ingresso small { font-size: 8px; }
+.mob .ingresso b { font-size: 14px; }
+.mob .ingresso .artista { font-size: 8.5px; }

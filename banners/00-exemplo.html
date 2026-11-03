@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · exemplo (modelo para copiar)</title>
+  <!-- Exemplo mínimo de banner: fundo do tema + moldura em volta do avatar. Copie para NN-modelo.html e troque o desenho. -->
+  <link rel="stylesheet" href="_base.css">
+  <link rel="stylesheet" href="../core/cores.css">
+  <style>
+    :root { --fundo: #20262b; --fundo2: #34404a; --moldura: #f4efe4; }
+    [data-cor="feminino"] { --fundo: #2b1f24; --fundo2: #4a3540; --moldura: #f8eeee; }
+    html, body { background: var(--fundo); }
+    .tudo { background: linear-gradient(135deg, var(--fundo2), var(--fundo)); }
+    .moldura { background: var(--moldura); box-shadow: 0 2px 6px rgba(0, 0, 0, .45); }
+  </style>
+</head>
+<body>
+  <div class="tudo"><div class="moldura" id="moldura"></div></div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function (d) {
+      // A moldura pode ser redonda para temas em que a foto é redonda: document.getElementById("moldura").classList.add("redonda");
+      XB.pronto2();
+    });
+  </script>
+</body>
+</html>

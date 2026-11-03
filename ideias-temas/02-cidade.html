@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Rafael · Cidade ao Anoitecer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=Inter:wght@400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root{ --ouro:#ffcf7a; --azul:#8fb8ff; --txt:#f3f5fa; --dim:#a9b3c7 }
+body{ background:#0a1020; color:var(--txt); font-family:"Inter",sans-serif }
+.cena{ position:absolute; inset:0; background:url(fotos/cidade.jpg) center 40%/cover }
+.cena::after{ content:""; position:absolute; inset:0; background:
+  linear-gradient(180deg, rgba(8,12,28,.35) 0%, rgba(8,12,28,.05) 30%, rgba(8,12,28,.55) 55%, rgba(6,9,20,.94) 72%, #060914 100%) }
+.hud{ position:absolute; z-index:2; font:400 11px/1.8 "Space Mono",monospace; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.75) }
+.hud b{ color:var(--ouro); font-weight:400 }
+.hud.e{ left:80px; top:64px } .hud.d{ right:80px; top:64px; text-align:right }
+.frase{ position:absolute; z-index:2; right:80px; top:150px; width:280px; text-align:right; font:300 15px/1.6 "Unbounded",sans-serif; color:#fff; text-shadow:0 2px 14px rgba(0,0,0,.5) }
+.frase::before{ content:""; display:block; margin:0 0 14px auto; width:40px; height:1px; background:var(--ouro) }
+
+.foto{ position:absolute; z-index:3; left:860px; top:250px; width:200px; height:200px; border-radius:50%; overflow:hidden;
+  box-shadow:0 0 0 3px rgba(255,255,255,.9), 0 0 0 10px rgba(255,207,122,.22), 0 20px 60px rgba(0,0,0,.6) }
+.foto img{ width:100%; height:100%; object-fit:cover; object-position:50% 30% }
+
+.nome{ position:absolute; z-index:2; left:0; right:0; top:500px; text-align:center }
+h1{ margin:0; font:700 66px/1 "Unbounded",sans-serif; letter-spacing:.32em; padding-left:.32em; color:#fff }
+.meta{ margin-top:18px; display:flex; justify-content:center; gap:26px; font:400 12.5px "Space Mono",monospace; letter-spacing:.14em; color:var(--dim) }
+.meta span{ display:flex; align-items:center; gap:8px } .meta svg{ width:14px; height:14px }
+.meta .on{ width:7px; height:7px; border-radius:50%; background:#7dffb0; box-shadow:0 0 8px #7dffb0 }
+.bio{ margin:20px auto 0; width:620px; font-size:16.5px; line-height:1.65; color:#cfd6e4 }
+
+.player{ position:absolute; z-index:2; left:550px; width:820px; top:762px; height:76px; border-radius:20px; display:flex; align-items:center; gap:22px; padding:0 26px 0 14px;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(14px) }
+.tocar{ width:50px; height:50px; border-radius:15px; background:linear-gradient(140deg, #ffe2a8, var(--ouro)); color:#1a1205; display:grid; place-items:center }
+.tocar svg{ width:22px; height:22px; margin-left:2px }
+.faixa{ width:220px } .faixa b{ display:block; font-weight:600; font-size:14.5px } .faixa span{ font-size:12px; color:var(--dim) }
+.barra{ flex:1; position:relative; height:3px; border-radius:3px; background:rgba(255,255,255,.14) }
+.barra i{ position:absolute; left:0; top:0; bottom:0; width:58%; border-radius:3px; background:linear-gradient(90deg, var(--azul), var(--ouro)) }
+.barra i::after{ content:""; position:absolute; right:-6px; top:-4.5px; width:12px; height:12px; border-radius:50%; background:#fff; box-shadow:0 0 12px 2px rgba(255,207,122,.8) }
+.tempo{ font:400 12px "Space Mono",monospace; color:var(--dim) }
+.player > svg{ width:20px; height:20px; color:var(--dim) }
+</style>
+</head>
+<body>
+<div class="cena"></div>
+<div class="hud e"><b>● ao vivo da cidade</b><br>19h12 · céu limpo<br>a cidade nunca dorme</div>
+<div class="hud d">morador<br><b>nº 82460885</b></div>
+<div class="frase">Cidade grande, sonhos maiores ainda.</div>
+
+<div class="foto"><img src="../clientes/exemplo/perfil-masculino.jpg" alt=""></div>
+<div class="nome">
+  <h1>RAFAEL</h1>
+  <div class="meta"><span><i class="on"></i>online agora</span><span>ID 82460885 <i data-i="copy"></i></span><span><i data-i="pin"></i>Nova York</span></div>
+  <p class="bio">Gosto do silêncio das madrugadas, de filmes longos e de gente que fala pouco e sente muito.</p>
+</div>
+<div class="player">
+  <div class="tocar"><i data-i="play"></i></div>
+  <div class="faixa"><b>Jay-Z · Empire State of Mind</b><span>tocando no meu perfil</span></div>
+  <div class="tempo">2:04</div>
+  <div class="barra"><i></i></div>
+  <div class="tempo">4:36</div>
+  <i data-i="volume"></i>
+</div>
+<script src="apoio.js"></script>
+<script>Apoio.icones();</script>
+</body>
+</html>

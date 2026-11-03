@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino feminino-2 pastel-rosa">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Varal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@1,500&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../../core/cores.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <svg class="fios" viewBox="0 0 1920 900" aria-hidden="true">
+      <path class="fio" d="M-20 142C200 160 330 192 480 172S800 122 1000 127S1500 118 1750 140S1900 165 1940 172"/>
+      <path class="fio" d="M-20 497C100 507 300 548 450 548"/>
+      <path class="fio" d="M1480 482C1650 480 1800 497 1940 512"/>
+      <path class="luzes-fio" d="M-20 72C200 86 330 140 560 138S900 134 1030 132S1400 102 1740 92S1900 86 1940 90"/>
+      <g class="luzes"></g>
+    </svg>
+    <div class="parede" data-varal="6"></div>
+    <div class="bilhete">
+      <span class="pino"></span>
+      <span class="online" data-xs-se="online">● online</span>
+      <div class="rotulo" data-texto="rotulo"></div>
+      <div class="nome" data-xs="nome"></div>
+      <div class="local" data-xs-se="local" data-xs="local"></div>
+      <div class="traco"></div>
+      <div class="frase" data-xs-se="frase"></div>
+      <div class="gostos" data-texto="gostos"></div>
+    </div>
+    <a class="insta" data-xs-se="instagram" data-xs-link="instagramUrl">@<span data-xs="instagram"></span></a>
+    <div class="player" data-xs-player>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+      <div class="info"><b data-xs="musica.titulo"></b><span><span data-xs="musica.artista"></span> · <span data-xs-tempo>0:00</span></span></div>
+      <span class="bar"><span data-xs-barra></span></span>
+    </div>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <svg class="fios" viewBox="0 0 390 844" aria-hidden="true">
+      <path class="fio" d="M-10 72C60 80 120 90 200 84S330 68 400 76"/>
+      <path class="fio" d="M-10 548C40 556 90 562 200 556S330 540 400 546"/>
+      <path class="luzes-fio" d="M-10 44C50 54 100 70 170 66S300 46 400 56"/>
+      <g class="luzes"></g>
+    </svg>
+    <div class="parede" data-varal="4"></div>
+    <div class="bilhete">
+      <span class="pino"></span>
+      <span class="online" data-xs-se="online">● online</span>
+      <div class="rotulo" data-texto="rotulo"></div>
+      <div class="nome" data-xs="nome"></div>
+      <div class="local" data-xs-se="local" data-xs="local"></div>
+      <div class="traco"></div>
+      <div class="frase" data-xs-se="frase"></div>
+      <div class="gostos" data-texto="gostos"></div>
+    </div>
+    <a class="insta" data-xs-se="instagram" data-xs-link="instagramUrl">@<span data-xs="instagram"></span></a>
+    <div class="player" data-xs-player>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+      <div class="info"><b data-xs="musica.titulo"></b><span data-xs="musica.artista"></span></div>
+      <span class="bar"><span data-xs-barra></span></span>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

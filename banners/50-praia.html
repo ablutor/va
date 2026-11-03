@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Praia</title>
+  <!-- Banner do modelo 50 · Praia: recorte da foto de praia do próprio modelo (mar e horizonte, zona das etiquetas calma),
+       cartão cor de areia à direita com fio de coral e moldura com o anel em degradê (coral, pêssego e turquesa) em volta do avatar. -->
+  <link rel="stylesheet" href="_base.css">
+  <style>
+    :root { --ac: #f0775a; --ac2: #f7a26f; --mar: #1fa9a5; --card: #fbf3ea; --ink: #3b2a25; }
+    [data-cor="original"]  { --ac: #f0775a; --ac2: #f7a26f; --mar: #1fa9a5; --card: #fbf3ea; --ink: #3b2a25; }
+    [data-cor="masculino"] { --ac: #1f78b4; --ac2: #4fb0d8; --mar: #e0925f; --card: #f2f6f8; --ink: #1d2e3b; }
+    [data-cor="feminino"]  { --ac: #e2688f; --ac2: #f59bb5; --mar: #2aa5a0; --card: #fdf2f4; --ink: #3d2630; }
+    html, body { background: var(--card); }
+    .foto { position: absolute; left: 0; top: 0; width: 380px; height: 100px; background: url("../modelos/cenarios/50-praia/praia.jpg") 0% 0% / auto no-repeat; filter: brightness(1.07) saturate(1.12); }
+    .foto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.08), transparent 30%, transparent 70%, rgba(40,20,10,.1)); }
+
+    /* Cartão claro à direita, como o cartão do modelo (canto arredondado e sombra sobre a foto) */
+    .cartao { position: absolute; left: 292px; top: -6px; width: 120px; height: 112px; border-radius: 16px; background: var(--card); box-shadow: -6px 0 14px -4px rgba(70, 30, 20, .45); }
+    .cartao .fio { position: absolute; left: 22px; top: 34px; width: 54px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--ac), var(--ac2) 60%, var(--mar)); }
+    .cartao .pilula { position: absolute; left: 22px; height: 12px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); background: #fff; }
+    .cartao .p1 { top: 52px; width: 28px; } .cartao .p2 { top: 52px; left: 56px; width: 20px; } .cartao .p3 { top: 70px; width: 38px; }
+    .cartao .pilula::before { content: ""; position: absolute; left: 3.5px; top: 3.5px; width: 3px; height: 3px; border-radius: 50%; background: var(--ac); }
+
+    /* Moldura: anel em degradê (como o da foto do modelo) de 4 px, com um fio claro por fora e a bolinha de destaque no canto */
+    .moldura { border-radius: 9px; background: linear-gradient(140deg, var(--ac), var(--ac2) 55%, var(--mar)); box-shadow: 0 0 0 1.5px rgba(255,255,255,.75), 0 3px 7px rgba(40, 20, 10, .35); }
+    .moldura.redonda, .redonda .moldura { border-radius: 50%; }
+    .vao { position: absolute; left: 4px; top: 4px; width: 76px; height: 76px; background: var(--card); border-radius: 0; }
+    .redonda .vao { border-radius: 50%; }
+    .selo { position: absolute; width: 15px; height: 15px; border-radius: 50%; background: var(--ac); border: 2.5px solid var(--card); box-shadow: 0 1px 3px rgba(40,20,10,.4); left: 73px; top: 73px; }
+    .redonda .selo { left: 63px; top: 63px; }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="foto" id="foto"></div>
+    <div class="cartao"><i class="fio"></i><i class="pilula p1"></i><i class="pilula p2"></i><i class="pilula p3"></i></div>
+    <div class="moldura" id="moldura"><div class="vao"></div><i class="selo"></i></div>
+  </div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function () {
+      if (XB.redonda) document.getElementById("moldura").classList.add("redonda");
+      // recorte da foto (1600×1063): escala e posição escolhidas na prévia
+      var f = document.getElementById("foto");
+      f.style.backgroundSize = "720px auto";
+      f.style.backgroundPosition = "-150px -204px";
+      XB.pronto2();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Mangá</title>
+  <!-- Banner de 380×100: página de mangá com quadros retos de borda grossa; o avatar fica num quadro de tinta com linhas de velocidade,
+       a moldura é um anel em degradê com filete branco; à direita, quadros com retícula, linhas de velocidade e o degradê do acento. -->
+  <link rel="stylesheet" href="_base.css">
+  <link rel="stylesheet" href="../core/cores.css">
+  <style>
+    :root { --folha: #fbfaf6; --tinta: #111; --grad: linear-gradient(100deg, var(--ac1), var(--ac2)); }
+    :root,
+    [data-cor="original"]   { --ac1: #ff2d46; --ac2: #ff9a1f; }
+    [data-cor="masculino"]  { --ac1: #2d6bff; --ac2: #19d3ff; }
+    [data-cor="feminino"]   { --ac1: #ff3d9a; --ac2: #ffa57a; }
+    [data-cor="feminino-2"] { --ac1: #7b3dff; --ac2: #ff5fb0; }
+    [data-cor^="pastel-"]   { --folha: var(--p-papel); --tinta: var(--p-dk); }
+    [data-cor="pastel-azul"]    { --ac1: #6f9fd0; --ac2: #8fd3e6; }
+    [data-cor="pastel-menta"]   { --ac1: #5fb38f; --ac2: #b6e07a; }
+    [data-cor="pastel-areia"]   { --ac1: #c9985a; --ac2: #f0c77c; }
+    [data-cor="pastel-rosa"]    { --ac1: #e58aa0; --ac2: #f6b48a; }
+    [data-cor="pastel-lilas"]   { --ac1: #9a7ed8; --ac2: #e29ad6; }
+    [data-cor="pastel-pessego"] { --ac1: #e59a72; --ac2: #f2c27e; }
+
+    html, body { background: var(--folha); }
+    .p { position: absolute; border: 2.5px solid var(--tinta); background: var(--folha); overflow: hidden; }
+
+    /* Quadro do avatar: tinta com linhas de velocidade saindo do retrato e uma retícula que some para a esquerda */
+    .pl { left: -8px; top: 3px; width: 220px; height: 94px; background: var(--tinta); }
+    .pl::before { content: ""; position: absolute; inset: 0;
+      background: repeating-conic-gradient(from 2deg at 65px 45px, rgba(255, 255, 255, .09) 0 1.4deg, transparent 1.4deg 7deg); }
+    .pl::after { content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle, rgba(255, 255, 255, .22) 0 .8px, transparent 1.3px) 0 0 / 4px 4px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 55%, #000 100%); mask-image: linear-gradient(90deg, transparent 55%, #000 100%); }
+    /* Raio de degradê atravessando o canto de baixo do quadro */
+    .pl i { position: absolute; right: 0; bottom: 0; width: 70px; height: 7px; background: var(--grad); }
+
+    .pa { left: 218px; top: 3px; width: 80px; height: 44px; background: radial-gradient(circle, var(--tinta) 0 .9px, transparent 1.4px) 0 0 / 4px 4px, var(--folha); }
+    .pa .sol { position: absolute; right: 9px; top: 7px; width: 26px; height: 26px; border-radius: 50%; background: var(--grad); border: 2.5px solid var(--tinta); }
+    .pb { left: 304px; top: 3px; width: 82px; height: 60px; background: repeating-conic-gradient(from 0deg at 50% 52%, var(--tinta) 0 1.6deg, transparent 1.6deg 7.5deg), var(--folha); }
+    .pb::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 52%, var(--folha) 0 9px, transparent 21px); }
+    .pc { left: 218px; top: 53px; width: 80px; height: 44px; background: var(--grad); }
+    .pc::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, var(--tinta) 0 .9px, transparent 1.4px) 0 0 / 4px 4px; opacity: .45;
+      -webkit-mask-image: linear-gradient(135deg, #000, transparent 70%); mask-image: linear-gradient(135deg, #000, transparent 70%); }
+    .pd { left: 304px; top: 69px; width: 82px; height: 28px; background: var(--tinta); }
+    .pd::before { content: ""; position: absolute; left: 10px; right: 0; top: 7px; height: 3px; background: var(--folha); }
+    .pd::after { content: ""; position: absolute; left: 10px; width: 38px; top: 15px; height: 3px; background: var(--grad); }
+
+    /* Moldura: anel em degradê de 4 px, filete de papel por fora, brilho (estrela de quatro pontas) no canto */
+    .moldura { background: var(--grad); box-shadow: 0 0 0 2px var(--folha); z-index: 5; }
+    .moldura::before { content: ""; position: absolute; inset: 4px; background: var(--folha); border-radius: inherit; }
+    .moldura svg { position: absolute; overflow: visible; fill: var(--folha); stroke: var(--tinta); stroke-width: .8px; }
+    .b1 { left: 85px; top: -5px; width: 18px; height: 18px; }
+    .moldura.redonda .b1 { left: 77px; top: 2px; }
+    .moldura.redonda
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="p pl"><i></i></div>
+    <div class="p pa"><span class="sol"></span></div>
+    <div class="p pb"></div>
+    <div class="p pc"></div>
+    <div class="p pd"></div>
+    <div class="moldura" id="moldura">
+      <svg class="b1" viewBox="-10 -10 20 20"><path d="M0 -9 C1 -3 3 -1 9 0 C3 1 1 3 0 9 C-1 3 -3 1 -9 0 C-3 -1 -1 -3 0 -9Z"/></svg>
+    </div>
+  </div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function (d) {
+      if (XB.redonda) document.getElementById("moldura").classList.add("redonda");
+      XB.pronto2();
+    });
+  </script>
+</body>
+</html>

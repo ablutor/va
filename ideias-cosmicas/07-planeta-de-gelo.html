@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Marina · Planeta de Gelo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root{ --gelo:#c8f1ff; --ciano:#5fdcff; --txt:#eaf8ff; --dim:#86a6bb; --linha:rgba(180,235,255,.14) }
+body{ background:#030a14; color:var(--txt); font-family:"Outfit",sans-serif }
+.grade{ position:absolute; left:340px; top:120px; display:grid; grid-template-columns:560px 320px 328px; grid-template-rows:200px 220px 208px; gap:16px }
+.t{ position:relative; border-radius:24px; overflow:hidden; border:1px solid var(--linha);
+  background:linear-gradient(160deg, rgba(40,90,130,.32), rgba(8,22,40,.75)); box-shadow:0 24px 50px -24px rgba(0,0,0,.9), inset 0 1px 0 rgba(220,248,255,.12) }
+.rot{ font-size:11.5px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--dim) }
+
+.cena{ grid-row:1 / span 3 }
+.cena canvas{ position:absolute; inset:0; width:100%; height:100% }
+.cena .info{ position:absolute; left:28px; right:28px; bottom:26px; display:flex; justify-content:space-between; align-items:flex-end; z-index:2 }
+.cena .info b{ display:block; font:700 30px "Syne"; letter-spacing:-.02em; color:#fff }
+.cena .info .rot{ color:rgba(220,248,255,.8) }
+.temp{ font:600 44px "Syne"; color:var(--gelo); text-shadow:0 0 30px rgba(95,220,255,.6) }
+.cena .topo{ position:absolute; left:28px; top:26px; z-index:2; display:flex; gap:8px }
+.etq{ padding:7px 12px; border-radius:999px; background:rgba(200,241,255,.12); backdrop-filter:blur(6px); font-size:12px; font-weight:500; letter-spacing:.06em }
+
+.foto{ grid-row:1 / span 2 }
+.foto img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 20%; filter:saturate(.85) hue-rotate(-8deg) }
+.foto::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(3,14,28,.92)), linear-gradient(200deg, rgba(95,220,255,.18), transparent 40%) }
+.foto .nome{ position:absolute; left:24px; right:24px; bottom:22px; z-index:2 }
+.foto h1{ margin:0; font:800 46px/1 "Syne"; letter-spacing:-.03em }
+.foto .on{ margin-top:8px; display:flex; align-items:center; gap:8px; font-size:14px; color:var(--gelo) }
+.foto .on::before{ content:""; width:8px; height:8px; border-radius:50%; background:#8dffcf; box-shadow:0 0 8px #8dffcf }
+
+.sobre{ padding:24px 26px }
+.sobre p{ margin:12px 0 0; font-size:16px; line-height:1.55; color:#cfe6f2 }
+.sobre .id{ position:absolute; left:26px; right:26px; bottom:20px; display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid var(--linha); font-size:14px; font-weight:500; letter-spacing:.08em }
+.sobre .id svg{ width:16px; height:16px; color:var(--dim) }
+
+.frase{ padding:26px 26px; background:linear-gradient(160deg, rgba(95,220,255,.22), rgba(30,80,140,.25)) }
+.frase q{ display:block; quotes:none; font:600 23px/1.25 "Syne"; letter-spacing:-.01em; color:#fff }
+.frase .rede{ position:absolute; left:26px; bottom:22px; display:flex; gap:8px; align-items:center; font-size:14px; color:var(--gelo) }
+.frase .rede svg{ width:17px; height:17px }
+.frase .floco{ position:absolute; right:-18px; top:-18px; font-size:120px; line-height:1; color:rgba(255,255,255,.08) }
+
+.player{ grid-column:2 / span 2; padding:26px 30px; display:grid; grid-template-columns:auto 1fr auto; gap:0 24px; align-items:center }
+.disco{ width:150px; height:150px; border-radius:50%; position:relative; background:
+  radial-gradient(circle, #e8faff 0 9px, #0a1a2a 10px 26px, transparent 27px),
+  repeating-radial-gradient(circle, rgba(255,255,255,.06) 0 1px, transparent 1px 4px),
+  conic-gradient(from 30deg, #0b1d30, #2b6f95, #0b1d30, #4aa9d4, #0b1d30); box-shadow:0 10px 30px -6px rgba(95,220,255,.45) }
+.musica .rot{ color:var(--ciano) }
+.musica h3{ margin:8px 0 0; font:700 30px/1.05 "Syne"; letter-spacing:-.02em } .musica span{ display:block; margin-top:6px; font-size:15px; color:var(--dim) }
+.onda{ margin-top:18px; display:flex; align-items:center; gap:3px; height:38px }
+.onda b{ flex:1; border-radius:3px; background:rgba(200,241,255,.18) } .onda b.on{ background:linear-gradient(180deg, #fff, var(--ciano)) }
+.tocar{ width:74px; height:74px; border-radius:24px; background:linear-gradient(150deg, #ffffff, var(--gelo) 40%, var(--ciano)); color:#06233a; display:grid; place-items:center; box-shadow:0 0 34px rgba(95,220,255,.45) }
+.tocar svg{ width:30px; height:30px; margin-left:3px }
+.player .tempo{ grid-column:3; text-align:center; margin-top:10px; font-size:13px; color:var(--dim) }
+</style>
+</head>
+<body>
+<canvas id="ceu" class="fundo"></canvas>
+<div class="grade">
+  <div class="t cena">
+    <canvas id="gelo"></canvas>
+    <div class="topo"><span class="etq">❄ mundo congelado</span><span class="etq">órbita 2 de 5</span></div>
+    <div class="info"><div><span class="rot">planeta</span><b>HD-82460885 b</b></div><div class="temp">−218°</div></div>
+  </div>
+  <div class="t foto"><img src="../clientes/exemplo/perfil-feminino.jpg" alt=""><div class="nome"><h1>Marina</h1><div class="on">online agora</div></div></div>
+  <div class="t sobre"><div class="rot">sobre mim</div><p>Fria só por fora. Por dentro, café quente e mil playlists.</p>
+    <div class="id"><span>ID 82460885</span><i data-i="copy"></i></div></div>
+  <div class="t frase"><span class="floco">❄</span><q>Até o gelo derrete com a pessoa certa.</q><div class="rede"><i data-i="insta"></i>@marina.costa</div></div>
+  <div class="t player">
+    <div class="disco"></div>
+    <div class="musica"><div class="rot">tocando no perfil</div><h3>Let It Go · lo-fi</h3><span>Frozen · trilha sonora</span><div class="onda" data-n="56" data-p=".44"></div></div>
+    <div><div class="tocar"><i data-i="play"></i></div><div class="tempo">1:24 / 3:44</div></div>
+  </div>
+</div>
+
+<script src="cosmos.js"></script>
+<script>
+const C = Cosmos; C.icones(); C.ondas();
+{ const { ctx, w, h } = C.tela("#ceu");
+  C.gradiente(ctx, w, h, [[0, "#04101e"], [1, "#02060c"]]);
+  C.nebulosa(ctx, w, h, { semente: 44, freq: 1 / 700, limiar: .5, suave: .45, forca: .3, cores: [[0, "#03101e"], [.7, "#0f3a5c"], [1, "#2f86b0"]] });
+  C.estrelas(ctx, w, h, { n: 700, semente: 33, max: 1.3, cores: ["#ffffff", "#d8f3ff"] }); }
+{ const { ctx, w, h } = C.tela("#gelo");
+  C.gradiente(ctx, w, h, [[0, "#020814"], [.6, "#06223b"], [1, "#0b3a5c"]]);
+  C.nebulosa(ctx, w, h, { semente: 5, freq: 1 / 240, esc: 2, limiar: .45, suave: .45, forca: .55, cores: [[0, "#031020"], [.6, "#1d6f9c"], [1, "#a8e9ff"]], mascara: (x, y) => C.ss(700, 0, y) });
+  C.estrelas(ctx, w, h, { n: 700, semente: 6, max: 1.4, cores: ["#ffffff", "#d8f3ff", "#bfeaff"] });
+  // o planeta de gelo
+  const cor = C.rampa([[0, "#2f6f9a"], [.4, "#8fd3f0"], [.7, "#dff6ff"], [1, "#ffffff"]]);
+  C.planeta(ctx, { x: 330, y: 250, r: 190, luz: [-.6, -.55, .6], inclinacao: .25, atmosfera: "#a8ecff", halo: .09, forcaHalo: 1,
+    textura: (sx, sy, sz) => {
+      const n = C.fbm(sx * 2.2, sy * 2.2, sz * 2.2, 2, 5), f = 1 - Math.abs(C.fbm(sx * 5, sy * 5, sz * 5, 8, 4) * 2 - 1);
+      const b = .5 + .5 * Math.sin(sy * 9 + n * 3);
+      let c = cor(C.cl(n * .6 + b * .4 + .1)); const k = C.ss(.94, .99, f) * .55 + C.ss(.8, .99, f) * .2;
+      return [C.mix(c[0], 90, k), C.mix(c[1], 120, k), C.mix(c[2], 160, k)];
+    } });
+  C.planeta(ctx, { x: 105, y: 110, r: 26, luz: [-.6, -.55, .6], textura: (sx, sy, sz) => { const n = 120 + C.fbm(sx * 4, sy * 4, sz * 4, 3, 4) * 120; return [n * .9, n, n * 1.05]; } });
+  // planície e cristais de gelo
+  const chao = ctx.createLinearGradient(0, 520, 0, h); chao.addColorStop(0, "#5b9cc0"); chao.addColorStop(.25, "#1b4a6c"); chao.addColorStop(1, "#04121f");
+  ctx.fillStyle = chao; ctx.beginPath(); ctx.moveTo(0, h); ctx.lineTo(0, 556);
+  for (let x = 0; x <= w; x += 4) ctx.lineTo(x, 548 + (C.fbm(x / 60, 2, 0, 3, 3) - .5) * 24); ctx.lineTo(w, h); ctx.fill();
+  const r = C.rng(12);
+  const cristal = (x, base, alt, larg, incl) => {
+    const tx = x + incl * alt, ty = base - alt;
+    ctx.save();
+    let g = ctx.createLinearGradient(x - larg, ty, x, base); g.addColorStop(0, "rgba(235,252,255,.95)"); g.addColorStop(1, "rgba(120,200,240,.55)");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x - larg, base); ctx.lineTo(tx, ty); ctx.lineTo(x + larg * .15, base); ctx.fill();
+    g = ctx.createLinearGradient(x, ty, x + larg, base); g.addColorStop(0, "rgba(90,170,220,.9)"); g.addColorStop(1, "rgba(10,50,90,.8)");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x + larg * .15, base); ctx.lineTo(tx, ty); ctx.lineTo(x + larg, base); ctx.fill();
+    ctx.strokeStyle = "rgba(255,255,255,.7)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x + larg * .15, base); ctx.lineTo(tx, ty); ctx.stroke();
+    ctx.restore();
+    C.brilho(ctx, tx, ty, 14, "#e8fbff", .6);
+  };
+  const lista = [];
+  for (let i = 0; i < 16; i++) { const lado = i % 2 ? r() * 170 : w - r() * 170, perto = r(), x = i < 4 ? 200 + r() * 160 : lado;
+    lista.push([x, 556 + perto * 60, (i < 4 ? 25 : 50) + perto * (i < 4 ? 30 : 170) * (.5 + r()), 8 + perto * 22, (r() - .5) * .35]); }
+  lista.sort((a, b) => a[1] - b[1]).forEach(c => cristal(...c));
+  C.graos(ctx, w, h, { n: 80, semente: 8, max: 2.2, cores: ["#ffffff", "#c8f1ff"], alfa: .7 });
+  const gb = ctx.createLinearGradient(0, 520, 0, h); gb.addColorStop(0, "rgba(2,10,20,0)"); gb.addColorStop(1, "rgba(2,10,20,.85)");
+  ctx.fillStyle = gb; ctx.fillRect(0, 520, w, h - 520); }
+</script>
+</body>
+</html>

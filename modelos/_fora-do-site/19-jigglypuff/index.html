@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino feminino-2">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Jigglypuff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../_fofinhos/fofinhos.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fan-art de uso pessoal (Jigglypuff é personagem da Nintendo / The Pokémon Company) -->
+  <!-- Desenhos usados mais de uma vez: a pegada e a Jigglypuff -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Pegada da Jigglypuff: um pezinho redondo com um calcanhar pequeno -->
+      <symbol id="pegada" viewBox="0 0 100 100">
+        <g fill="currentColor">
+          <ellipse cx="50" cy="38" rx="26" ry="30"/>
+          <ellipse cx="50" cy="82" rx="14" ry="12"/>
+        </g>
+      </symbol>
+
+      <!-- Corpinho rosa e redondo, com luz no alto -->
+      <radialGradient id="rosa" cx="38%" cy="30%" r="78%">
+        <stop offset="0" stop-color="var(--rosa-luz)"/>
+        <stop offset=".55" stop-color="var(--rosa)"/>
+        <stop offset="1" stop-color="var(--rosa-sombra)"/>
+      </radialGradient>
+
+      <!-- Olhos azul-esverdeados -->
+      <radialGradient id="iris" cx="45%" cy="62%" r="70%">
+        <stop offset="0" stop-color="var(--iris-luz)"/>
+        <stop offset=".6" stop-color="var(--iris)"/>
+        <stop offset="1" stop-color="var(--iris-escura)"/>
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <!-- O bichinho: o fofinhos.js copia este desenho para dentro de cada .bicho -->
+  <template id="bichinho">
+    <svg viewBox="0 0 380 400">
+        <g class="pulo-todo">
+          <g class="corpo-todo">
+            <!-- orelhinhas pontudas, com o miolo escuro -->
+            <g class="orelha orelha-esq">
+              <path d="M92 132 Q64 70 58 30 Q104 52 152 92 Z" fill="url(#rosa)" stroke="var(--rosa)" stroke-width="10" stroke-linejoin="round"/>
+              <path d="M98 112 Q80 76 76 52 Q104 68 132 92 Z" fill="var(--orelha-dentro)" stroke="var(--orelha-dentro)" stroke-width="6" stroke-linejoin="round"/>
+            </g>
+            <g class="orelha orelha-dir">
+              <path d="M288 132 Q316 70 322 30 Q276 52 228 92 Z" fill="url(#rosa)" stroke="var(--rosa)" stroke-width="10" stroke-linejoin="round"/>
+              <path d="M282 112 Q300 76 304 52 Q276 68 248 92 Z" fill="var(--orelha-dentro)" stroke="var(--orelha-dentro)" stroke-width="6" stroke-linejoin="round"/>
+            </g>
+            <!-- bracinhos -->
+            <g class="braco braco-esq"><ellipse cx="46" cy="262" rx="26" ry="18" transform="rotate(-30 46 262)" fill="url(#rosa)"/></g>
+            <g class="braco braco-dir"><ellipse cx="334" cy="262" rx="26" ry="18" transform="rotate(30 334 262)" fill="url(#rosa)"/></g>
+            <!-- pezinhos -->
+            <ellipse cx="136" cy="372" rx="36" ry="20" fill="var(--rosa-sombra)"/>
+            <ellipse cx="244" cy="372" rx="36" ry="20" fill="var(--rosa-sombra)"/>
+            <ellipse cx="134" cy="368" rx="26" ry="11" fill="var(--rosa)" opacity=".8"/>
+            <ellipse cx="246" cy="368" rx="26" ry="11" fill="var(--rosa)" opacity=".8"/>
+            <!-- corpo-bolinha -->
+            <circle cx="190" cy="218" r="150" fill="url(#rosa)"/>
+            <ellipse cx="128" cy="128" rx="54" ry="26" transform="rotate(-30 128 128)" fill="#fff" opacity=".45"/>
+            <!-- topete enroladinho na testa -->
+            <path d="M206 112 C150 108 134 52 176 40 C214 30 230 74 198 82 C180 86 174 66 188 62" fill="none" stroke="url(#rosa)" stroke-width="21" stroke-linecap="round"/>
+            <path d="M198 106 C156 100 146 58 176 48" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".45"/>
+            <path d="M206 112 C150 108 134 52 176 40 C214 30 230 74 198 82 C180 86 174 66 188 62" fill="none" stroke="var(--rosa-sombra)" stroke-width="3" stroke-linecap="round" opacity=".5" transform="translate(0 12)"/>
+            <!-- bochechas -->
+            <ellipse cx="88" cy="262" rx="26" ry="14" fill="var(--bochecha)" opacity=".75"/>
+            <ellipse cx="292" cy="262" rx="26" ry="14" fill="var(--bochecha)" opacity=".75"/>
+            <!-- olhões -->
+            <g class="olhos-abertos">
+              <circle cx="128" cy="206" r="46" fill="#fff"/>
+              <circle cx="252" cy="206" r="46" fill="#fff"/>
+              <circle cx="128" cy="212" r="39" fill="url(#iris)"/>
+              <circle cx="252" cy="212" r="39" fill="url(#iris)"/>
+              <path d="M84 196 Q128 150 172 196" fill="none" stroke="var(--olho)" stroke-width="5" stroke-linecap="round"/>
+              <path d="M208 196 Q252 150 296 196" fill="none" stroke="var(--olho)" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="114" cy="194" r="15" fill="#fff"/>
+              <circle cx="238" cy="194" r="15" fill="#fff"/>
+              <circle cx="144" cy="230" r="6" fill="#fff"/>
+              <circle cx="268" cy="230" r="6" fill="#fff"/>
+              <circle cx="130" cy="186" r="4" fill="#fff" opacity=".8"/>
+              <circle cx="254" cy="186" r="4" fill="#fff" opacity=".8"/>
+            </g>
+            <g class="olhos-felizes" fill="none" stroke="var(--olho)" stroke-width="7" stroke-linecap="round">
+              <path d="M102 214 q26 -28 52 0"/>
+              <path d="M226 214 q26 -28 52 0"/>
+            </g>
+            <!-- boquinha que abre para cantar -->
+            <g class="boca">
+              <ellipse cx="190" cy="280" rx="16" ry="14" fill="var(--boca)"/>
+              <ellipse cx="190" cy="288" rx="10" ry="6" fill="var(--lingua)"/>
+            </g>
+            <path d="M176 272 q14 8 28 0" fill="none" stroke="var(--olho)" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
+          </g>
+        </g>
+    </svg>
+  </template>
+
+  <!-- Fundo da tela toda, com rastros de pegadas -->
+  <div class="xs-fundo fundo"><div class="pegadas" data-pegadas="6"></div></div>
+
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <section class="perfil card">
+      <div class="topo">
+        <div class="foto" data-xs-bg="fotos.perfil"></div>
+        <div>
+          <h1 class="nome" data-xs="nome">Albert</h1>
+          <div class="sobrenome nome" data-xs="sobrenome">Alves</div>
+        </div>
+      </div>
+      <div class="linha-online">
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+      <p class="local" data-xs-se="local">📍 <span data-xs="local"></span></p>
+      <div class="cap">Meu mundinho</div>
+      <ul class="chips" data-gostos style="margin-top:10px"></ul>
+      <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span> ↗</a>
+    </section>
+
+    <div class="cena">
+      <p class="balao" data-balao></p>
+      <!-- Notinhas musicais subindo enquanto ela canta -->
+      <span class="nota n1" aria-hidden="true">♪</span>
+      <span class="nota n2" aria-hidden="true">♫</span>
+      <span class="nota n3" aria-hidden="true">♪</span>
+      <span class="nota n4" aria-hidden="true">♫</span>
+      <span class="nota n5" aria-hidden="true">♪</span>
+      <button class="bicho" type="button" aria-label="Fazer carinho na Jigglypuff">
+
+      </button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="lado">
+      <div class="card carinho">
+        <span class="num" data-carinhos>0</span>
+        <div><span class="cap">Carinhos na Jigglypuff</span><p>Clica nela para dar mais um ♥</p></div>
+      </div>
+      <div class="card citacao" data-xs-se="citacao.texto">
+        <span class="cap">Frase favorita</span>
+        <p data-xs="citacao.texto"></p>
+        <small>— <span data-xs="citacao.autor"></span></small>
+      </div>
+      <div class="card player" data-xs-player>
+        <span class="xs-controles">
+          <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+          <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+        </span>
+        <div class="info">
+          <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+          <div class="barra"><span data-xs-barra></span></div>
+        </div>
+        <span class="eq"><i></i><i></i><i></i><i></i></span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <div class="cabeca">
+      <div class="foto" data-xs-bg="fotos.perfil"></div>
+      <div>
+        <h1 class="nome" data-xs="nome">Albert</h1>
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+    </div>
+
+    <div class="cena">
+      <p class="balao" data-balao></p>
+      <span class="nota n1" aria-hidden="true">♪</span>
+      <span class="nota n2" aria-hidden="true">♫</span>
+      <span class="nota n3" aria-hidden="true">♪</span>
+      <button class="bicho" type="button" aria-label="Fazer carinho na Jigglypuff">
+
+      </button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="perfil card">
+      <div class="cap" style="margin-bottom:8px">Meu mundinho</div>
+      <ul class="chips" data-gostos></ul>
+      <div class="rodape">
+        <div class="carinho"><span class="num" data-carinhos>0</span><p>carinhos ♥</p></div>
+        <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span></a>
+      </div>
+    </section>
+
+    <div class="card player" data-xs-player>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+      <div class="info">
+        <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+        <div class="barra"><span data-xs-barra></span></div>
+      </div>
+      <span class="eq"><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="../../_fofinhos/fofinhos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

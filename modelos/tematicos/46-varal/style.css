@@ -1,0 +1,258 @@
+/* Modelo 46 · Varal
+   Polaroids presos num varal com luzinhas e um bilhete com o nome no meio.
+   Cores (nome → rótulo → bolinha do catálogo):
+   original   → areia e âmbar  → #d9a35b
+   masculino  → noite azul     → #5b8bd6  (fundo escuro; polaroids e bilhete continuam claros)
+   feminino   → rosé           → #e8628f
+   feminino-2 → lilás          → #9a6bf0
+   pastel-*   → as 6 pastel de core/cores.css */
+
+:root,
+[data-cor="original"]   { --bg1: #f3e3cc; --bg2: #e4c9a4; --fio: #7a5a3c; --luz: #ffd45e; --papel: #fffdf8; --ink: #2a3a5f; --mudo: #7a5a3c; --rot: #b9834a; --etq: #f2c9a8; --pino: #e5707a; --pregador: #c9893a; --pl: #4a2f22; --pl-fg: #fff7ea; --pl-ac: #ffd45e; --mesa-ink: #4a2f22; }
+[data-cor="masculino"]  { --bg1: #1d2740; --bg2: #0f1626; --fio: #8fa3c7; --luz: #ffd877; --papel: #f7f4ec; --ink: #1f2d4d; --mudo: #6b6a63; --rot: #6c7fa8; --etq: #cfd9ee; --pino: #d9625f; --pregador: #b98a4e; --pl: #0b1220; --pl-fg: #f2efe6; --pl-ac: #8fb4ff; --mesa-ink: #f2efe6; }
+[data-cor="feminino"]   { --bg1: #fbe1e7; --bg2: #f1bfcf; --fio: #9a5a6b; --luz: #ffe08a; --papel: #fffafb; --ink: #6b2a4a; --mudo: #8a5a6a; --rot: #c0607f; --etq: #f9c6d4; --pino: #e56b8a; --pregador: #d98a86; --pl: #5a2a3f; --pl-fg: #fff2f5; --pl-ac: #ffb3c8; --mesa-ink: #5a2a3f; }
+[data-cor="feminino-2"] { --bg1: #ebe2fa; --bg2: #cdbdf0; --fio: #6f5a9a; --luz: #fff0a8; --papel: #fefcff; --ink: #3d2b73; --mudo: #6f5a9a; --rot: #8a6fcb; --etq: #dccdfa; --pino: #9a6bf0; --pregador: #b49be0; --pl: #35265a; --pl-fg: #f6f1ff; --pl-ac: #cdb6ff; --mesa-ink: #35265a; }
+[data-cor^="pastel-"]   { --bg1: var(--p-bg2); --bg2: var(--p-bg); --fio: var(--p-act); --luz: #ffe28a; --papel: var(--p-papel); --ink: var(--p-ink); --mudo: color-mix(in srgb, var(--p-ink) 60%, var(--p-papel)); --rot: var(--p-act); --etq: color-mix(in srgb, var(--p-ac) 30%, #fff); --pino: var(--p-act); --pregador: var(--p-claro); --pl: var(--p-dk); --pl-fg: var(--p-papel); --pl-ac: var(--p-claro); --mesa-ink: var(--p-ink); }
+
+:root {
+  --xs-marca-cor: var(--mesa-ink);
+  --xs-marca-fundo: var(--bg2);
+  --xs-marca-destaque: var(--rot);
+  --xs-marca-topo-mobile: 8px;
+}
+
+body {
+  background: linear-gradient(180deg, var(--bg1), var(--bg2));
+  color: var(--ink);
+  font-family: "Nunito", system-ui, sans-serif;
+}
+
+.xs-mobile body { background: linear-gradient(180deg, var(--bg1), var(--bg2)); }
+
+.desk { width: 1920px; }
+.mob { width: 390px; }
+
+/* ---------- Fios e luzinhas ---------- */
+
+.fios { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.fio { fill: none; stroke: var(--fio); stroke-width: 2; opacity: .8; }
+.luzes-fio { fill: none; stroke: var(--luz); stroke-width: 2; opacity: .75; }
+.luz-halo { fill: var(--luz); opacity: .28; }
+.luz { fill: var(--luz); }
+
+/* ---------- Polaroids ---------- */
+
+.pol {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 14px 0;
+  background: var(--papel);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .22);
+}
+
+.pol .ft {
+  flex: 1;
+  background-size: cover;
+  background-position: center 25%;
+  background-color: color-mix(in srgb, var(--ink) 15%, var(--papel));
+}
+
+.pol .leg {
+  display: grid;
+  place-items: center;
+  height: 66px;
+  font: 700 25px/1 "Caveat", cursive;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  transform: rotate(-3deg);
+}
+
+/* Pregador de madeira */
+.pol::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -18px;
+  width: 20px;
+  height: 38px;
+  margin-left: -10px;
+  border-radius: 3px;
+  background: var(--pregador);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.pol::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  width: 2px;
+  height: 14px;
+  margin-left: -1px;
+  background: rgba(0, 0, 0, .25);
+}
+
+/* ---------- Bilhete ---------- */
+
+.bilhete {
+  position: absolute;
+  z-index: 3;
+  text-align: center;
+  background-color: var(--papel);
+  background-image: repeating-linear-gradient(180deg, transparent 0 35px, color-mix(in srgb, var(--ink) 9%, transparent) 35px 36px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .25);
+}
+
+.bilhete .pino {
+  position: absolute;
+  left: 50%;
+  top: -24px;
+  width: 20px;
+  height: 52px;
+  margin-left: -10px;
+  border-radius: 5px;
+  background: var(--pino);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12), 0 3px 5px rgba(0, 0, 0, .22);
+}
+
+.bilhete .online {
+  position: absolute;
+  z-index: 2;
+  padding: 4px 13px;
+  border-radius: 99px;
+  background: #3fbf6b;
+  color: #fff;
+  font-weight: 800;
+  transform: rotate(8deg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
+}
+
+.bilhete .online.xs-off { background: #8d8d8d; }
+
+.rotulo {
+  font-weight: 800;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--rot);
+}
+
+.nome {
+  font-family: "Kaushan Script", cursive;
+  line-height: 1.05;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.local {
+  font: italic 500 30px "Cormorant Garamond", serif;
+  color: var(--mudo);
+}
+
+.traco { border-top: 2px dashed color-mix(in srgb, var(--rot) 55%, transparent); }
+
+.frase {
+  font-family: "Caveat", cursive;
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.frase::before { content: "“"; }
+.frase::after { content: "”"; }
+
+.gostos { display: flex; flex-wrap: wrap; justify-content: center; }
+
+.gostos span {
+  border-radius: 99px;
+  background: var(--etq);
+  color: color-mix(in srgb, var(--ink) 85%, #000);
+  font-weight: 800;
+}
+
+.insta {
+  position: absolute;
+  font-family: "Caveat", cursive;
+  font-weight: 700;
+  color: var(--mesa-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.insta:hover { text-decoration: underline; }
+
+/* ---------- Player ---------- */
+
+.player {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  background: var(--pl);
+  color: var(--pl-fg);
+  border-radius: 99px;
+}
+
+.play {
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  background: var(--pl-ac);
+  color: var(--pl);
+}
+
+.player .info { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.player .info b { font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.player .info span { opacity: .75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Progresso da música: fio no pé da pílula */
+.bar { position: absolute; left: 26px; right: 26px; bottom: 6px; height: 2px; background: color-mix(in srgb, var(--pl-fg) 18%, transparent); }
+.bar span { display: block; height: 2px; background: var(--pl-ac); }
+
+/* ---------- Desktop ---------- */
+
+.desk .bilhete { left: 786px; top: 226px; width: 420px; height: 430px; padding: 44px 36px 0; transform: rotate(.6deg); }
+.desk .bilhete .online { right: -26px; top: -10px; font-size: 15px; }
+.desk .rotulo { font-size: 15px; }
+.desk .nome { font-size: 104px; margin-top: 8px; }
+.desk .local { margin-top: 4px; }
+.desk .traco { margin: 14px 4px 12px; }
+.desk .frase { font-size: 30px; -webkit-line-clamp: 4; }
+.desk .gostos { gap: 8px; margin-top: 14px; }
+.desk .gostos span { padding: 7px 16px; font-size: 15px; }
+.desk .insta { max-width: 246px; left: 742px; top: 710px; font-size: 38px; transform: rotate(-3deg); }
+.desk .player { left: 1000px; top: 708px; width: 280px; height: 70px; padding: 0 22px 0 14px; gap: 8px; }
+.desk .play { width: 44px; height: 44px; }
+.desk .play svg { width: 18px; height: 18px; }
+.desk .info b { font-size: 15px; }
+.desk .info span { font-size: 12.5px; }
+
+/* ---------- Mobile ---------- */
+
+.mob .bilhete { left: 28px; top: 298px; width: 334px; height: 246px; padding: 30px 22px 0; transform: rotate(-.6deg); background-image: repeating-linear-gradient(180deg, transparent 0 29px, color-mix(in srgb, var(--ink) 9%, transparent) 29px 30px); }
+.mob .bilhete .pino { top: -20px; width: 16px; height: 44px; margin-left: -8px; }
+.mob .bilhete .online { right: -4px; top: -12px; font-size: 13px; padding: 3px 10px; }
+.mob .rotulo { font-size: 11px; }
+.mob .nome { font-size: 58px; margin-top: 4px; }
+.mob .local { font-size: 19px; margin-top: 0; }
+.mob .traco { margin: 8px 0 6px; }
+.mob .frase { font-size: 20px; -webkit-line-clamp: 2; line-height: 1.08; }
+.mob .gostos { gap: 6px; margin-top: 8px; }
+.mob .gostos span { padding: 4px 12px; font-size: 12px; }
+.mob .insta { max-width: 132px; left: 30px; top: 784px; font-size: 26px; transform: rotate(-3deg); }
+.mob .player { left: 168px; top: 774px; width: 206px; height: 46px; padding: 0 14px 0 8px; gap: 4px; }
+.mob .play { width: 32px; height: 32px; }
+.mob .play svg { width: 13px; height: 13px; }
+.mob .xs-pular { width: 18px; height: 18px; }
+.mob .xs-pular svg { width: 11px; height: 11px; }
+.mob .info b { font-size: 12px; }
+.mob .info span { font-size: 10px; }
+.mob .bar { left: 18px; right: 18px; bottom: 5px; }
+.mob .pol { padding: 10px 10px 0; }
+.mob .pol .leg { height: 42px; font-size: 18px; }
+.mob .pol::before { width: 16px; height: 30px; margin-left: -8px; top: -15px; }

@@ -1,0 +1,171 @@
+/* Modelo 56 · Ursinha do arco-íris (família Fofinhos, tema Ursinhos Carinhosos)
+   Ursinha Carinhosa rosa com arco-íris na barriga, em pé numa nuvem, segurando um pirulito.
+   Cores (nome → rótulo → bolinha(#hex)):
+   original   → rosa, lilás e céu → #e5609a
+   masculino  → céu e menta       → #4a8fd1
+   feminino   → pêssego e rosa    → #e2738a
+   feminino-2 → lilás e rosa      → #9673d6
+   A ursinha é rosa em todas as cores; só o céu muda. */
+
+:root,
+[data-cor="original"]   { --bg: #ffd6e8; --bg2: #f0e2ff; --bg3: #d6ebff; --card: #fffdfe; --ink: #4a2a3f; --ac: #e5609a; --ac2: #fbd3e4; --pegada: #f2b3cf; }
+[data-cor="masculino"]  { --bg: #d4e9ff; --bg2: #e2f4f7; --bg3: #dcf4e4; --card: #fdfeff; --ink: #23384a; --ac: #4a8fd1; --ac2: #cfe4f7; --pegada: #b2d1ee; }
+[data-cor="feminino"]   { --bg: #ffe0cf; --bg2: #ffd8e5; --bg3: #fbe2f3; --card: #fffcfb; --ink: #4d2f30; --ac: #e2738a; --ac2: #f9d6dd; --pegada: #f0bcc4; }
+[data-cor="feminino-2"] { --bg: #e7dbff; --bg2: #f3e0fa; --bg3: #ffdfee; --card: #fefdff; --ink: #3a2b4f; --ac: #9673d6; --ac2: #e3d7f6; --pegada: #cdbbec; }
+
+/* Pelagem da ursinha, o pirulito e as cores do arco-íris */
+:root {
+  --pelo: #f59cc4;
+  --pelo-claro: #f9b6d4;
+  --pelo-luz: #fdd7e8;
+  --contorno: #d9558f;
+  --barriga: #ffffff;
+  --olho: #2b1a26;
+  --boca: #3a1f2e;
+  --lingua: #ff8fab;
+  --coracao: #ef4f6f;
+  --palito: #d9a066;
+  --pirulito: #c9b3ff;
+  --pirulito-borda: #a58be6;
+  --pirulito-espiral: #5cc6d6;
+  --nuvenzinha: #dcecff;
+  --nuvem: #ffffff;
+  --nuvem-sombra: #e6eefc;
+  --arco-1: #ff6b81;
+  --arco-2: #ffa94d;
+  --arco-3: #ffd43b;
+  --arco-4: #69db7c;
+  --arco-5: #4dabf7;
+  --arco-6: #b197fc;
+}
+
+/* ---------- Céu em degradê, com um arco-íris bem clarinho ---------- */
+
+.fundo {
+  background:
+    radial-gradient(circle 1000px at 50% 115%,
+      transparent 0 58%,
+      rgb(255 107 129 / .22) 58% 61%,
+      rgb(255 169 77 / .22) 61% 64%,
+      rgb(255 212 59 / .22) 64% 67%,
+      rgb(105 219 124 / .22) 67% 70%,
+      rgb(77 171 247 / .22) 70% 73%,
+      rgb(177 151 252 / .22) 73% 76%,
+      transparent 76%),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg2) 50%, var(--bg3) 100%);
+}
+
+/* Nuvens passando devagar pelo céu */
+.nuvem {
+  position: absolute;
+  color: var(--nuvem);
+  opacity: .85;
+  pointer-events: none;
+  animation: passar 26s ease-in-out infinite alternate;
+}
+
+.nuvem svg { width: 100%; height: auto; display: block; fill: currentColor; }
+.nuvem.n1 { left: 3%; top: 7%; width: 190px; }
+.nuvem.n2 { right: 5%; top: 14%; width: 150px; animation-duration: 32s; animation-delay: -8s; }
+.nuvem.n3 { left: 9%; bottom: 9%; width: 230px; animation-duration: 30s; animation-delay: -15s; }
+.nuvem.n4 { right: 11%; bottom: 16%; width: 170px; animation-delay: -4s; }
+
+@keyframes passar {
+  from { transform: translateX(-30px); }
+  to { transform: translateX(30px); }
+}
+
+/* Nuvem fofinha onde a ursinha fica em pé */
+.nuvem-chao { position: absolute; pointer-events: none; }
+.nuvem-chao svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+.desk .nuvem-chao { left: 30px; top: 676px; width: 460px; height: 130px; }
+.mob .nuvem-chao { left: 64px; top: 312px; width: 262px; height: 74px; }
+
+/* ---------- A ursinha ---------- */
+
+.pulo-todo,
+.corpo-todo,
+.brilhinho {
+  transform-box: fill-box;
+}
+
+/* Balança de leve, toda contente */
+.pulo-todo { transform-origin: 50% 100%; }
+.bicho:not(.pulo) .pulo-todo { animation: balancar 4.6s ease-in-out infinite; }
+
+@keyframes balancar {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50% { transform: rotate(2.5deg); }
+}
+
+/* Brilho piscando ao lado do arco-íris da barriga */
+.brilhinho { transform-origin: center; animation: cintilar 2.4s ease-in-out infinite; }
+.brilhinho-2 { animation-delay: -1.2s; }
+
+@keyframes cintilar {
+  0%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(45deg); }
+}
+
+/* Corações do carinho nas cores do arco-íris */
+.bicho .coracao:nth-of-type(6n+1) { color: var(--arco-1); }
+.bicho .coracao:nth-of-type(6n+2) { color: var(--arco-2); }
+.bicho .coracao:nth-of-type(6n+3) { color: var(--arco-3); }
+.bicho .coracao:nth-of-type(6n+4) { color: var(--arco-4); }
+.bicho .coracao:nth-of-type(6n+5) { color: var(--arco-5); }
+.bicho .coracao:nth-of-type(6n) { color: var(--arco-6); }
+
+/* ---------- Coraçõezinhos e estrelinhas caindo pela cena ---------- */
+
+.cai {
+  position: absolute;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  opacity: 0;
+  animation: cair 11s linear infinite;
+}
+
+.cai svg { width: 100%; height: 100%; display: block; fill: currentColor; overflow: visible; }
+.cai.c1 { color: var(--arco-1); }
+.cai.c2 { color: var(--arco-3); }
+.cai.c3 { color: var(--arco-5); }
+.cai.c4 { color: var(--arco-6); }
+
+@keyframes cair {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  10% { opacity: .85; }
+  30% { transform: translate(30px, 110px) rotate(40deg); }
+  55% { transform: translate(-10px, 230px) rotate(-20deg); }
+  80% { opacity: .75; transform: translate(26px, 340px) rotate(30deg); }
+  100% { opacity: 0; transform: translate(0, 430px) rotate(-10deg); }
+}
+
+.desk .cai.c1 { left: 40px; top: 270px; animation-delay: 0s; }
+.desk .cai.c2 { left: 440px; top: 300px; animation-delay: -3.5s; animation-duration: 13s; }
+.desk .cai.c3 { left: 110px; top: 250px; animation-delay: -7s; animation-duration: 12s; }
+.desk .cai.c4 { left: 380px; top: 260px; animation-delay: -9.5s; }
+
+.mob .cai { width: 16px; height: 16px; animation-name: cair-mob; }
+.mob .cai.c1 { left: 30px; top: 130px; }
+.mob .cai.c2 { left: 334px; top: 140px; animation-delay: -5s; }
+
+@keyframes cair-mob {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  12% { opacity: .85; }
+  40% { transform: translate(18px, 80px) rotate(40deg); }
+  70% { opacity: .7; transform: translate(-8px, 160px) rotate(-20deg); }
+  100% { opacity: 0; transform: translate(10px, 230px) rotate(30deg); }
+}
+
+/* ---------- Layout próprio ---------- */
+
+/* A ursinha é mais alta que larga: o quadro dela cresce para cima */
+.desk .balao::after { left: 50%; }
+.desk .bicho { top: 275px; height: 455px; }
+
+.mob .bicho { top: 116px; height: 228px; }
+.mob .chao { top: 334px; }
+.mob .nuvem-chao { top: 322px; height: 66px; }

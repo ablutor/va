@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Gatinho</title>
+  <!-- Banner 380×100 do modelo Gatinho (família Fofinhos). Moldura em volta do avatar (84×84 em 15,6) que funciona quadrada e redonda. -->
+  <link rel="stylesheet" href="_base.css">
+  <style>
+    :root,
+    [data-cor="original"] { --bg: #e9e4ff; --bg2: #f3f0ff; --card: #fffdff; --ink: #2f2b45; --ac: #8a6cff; --ac2: #c9baff; --pegada: #b7a9f0; --ceu-a: #e9e4ff; --ceu-b: #dcdfff; --ceu-c: #cfd9ff; --lua-a: #fff0a8; --lua-b: #ffdf70; --lua-c: #ffc94a; --lua-mancha: #ffd365; --lua-linha: #c99128; --halo: #fff6dc; --nuvem-a: #ffffff; --nuvem-b: #f1edff; --banco: #f8f6ff; --banco-linha: #e1dbfa; --brilho-1: #ffd76a; --brilho-2: #ffffff; --brilho-3: #8a6cff; --brilho-4: #ff9ec4; --capa-1: #8a6cff; --capa-2: #5b7bff; --capa-corte: #7d63f2; }
+    [data-cor="masculino"] { --bg: #1d3a4b; --bg2: #2b5265; --card: #f6fbfc; --ink: #1b3340; --ac: #2a8a96; --ac2: #bfe0e4; --pegada: #6fa3b2; --ceu-a: #17303f; --ceu-b: #1f4256; --ceu-c: #2b5b6e; --lua-a: #fff7cf; --lua-b: #ffeaa0; --lua-c: #ffd873; --lua-mancha: #f2cf74; --lua-linha: #b98a2c; --halo: #d8f1f4; --nuvem-a: #7fb1c0; --nuvem-b: #5e93a5; --banco: #a8cbd5; --banco-linha: #8fb7c3; --brilho-1: #ffe28a; --brilho-2: #ffffff; --brilho-3: #7fd6e0; --brilho-4: #ffb3d1; --capa-1: #2a8a96; --capa-2: #2f6fa8; --capa-corte: #2a7f9c; }
+    [data-cor="feminino"] { --bg: #fde4ee; --bg2: #fff1f6; --card: #fffcfd; --ink: #4b2c3a; --ac: #e0678f; --ac2: #f8c9da; --pegada: #efb4ca; --ceu-a: #fde6ef; --ceu-b: #fbd9e8; --ceu-c: #f6cfe4; --lua-a: #fff3b8; --lua-b: #ffe08a; --lua-c: #ffc86a; --lua-mancha: #ffd57a; --lua-linha: #c98a2c; --halo: #fff3e0; --nuvem-a: #ffffff; --nuvem-b: #fff0f6; --banco: #fff7fa; --banco-linha: #f6d3e0; --brilho-1: #ffd76a; --brilho-2: #ffffff; --brilho-3: #e0678f; --brilho-4: #ff9ec4; --capa-1: #e0678f; --capa-2: #c85ab8; --capa-corte: #d462a3; }
+    [data-cor="feminino-2"] { --bg: #dfd0ff; --bg2: #efe6ff; --card: #fefcff; --ink: #32245c; --ac: #7a4fe6; --ac2: #cdb8ff; --pegada: #a98cf0; --ceu-a: #e4d6ff; --ceu-b: #d6c4ff; --ceu-c: #c6b0ff; --lua-a: #fff1b0; --lua-b: #ffdf78; --lua-c: #ffbf5a; --lua-mancha: #ffcf6a; --lua-linha: #c0862a; --halo: #fff3dc; --nuvem-a: #ffffff; --nuvem-b: #f0e8ff; --banco: #f7f1ff; --banco-linha: #dccdfa; --brilho-1: #ffd76a; --brilho-2: #ffffff; --brilho-3: #7a4fe6; --brilho-4: #ff9ec4; --capa-1: #7a4fe6; --capa-2: #4f6bff; --capa-corte: #6a58f0; }
+    html, body { background: var(--bg); }
+    /* fundo: como o dos modelos, um brilho suave sobre a cor de base */
+    .fundo { position: absolute; inset: 0;
+      background: radial-gradient(ellipse 120px 80px at 57px 48px, var(--bg2), transparent 100%), radial-gradient(ellipse 260px 120px at 250px 40px, var(--bg2), transparent 100%), var(--bg); }
+    .pegadas, .deco, .orna { position: absolute; left: 0; top: 0; width: 380px; height: 100px; overflow: visible; }
+    .pegadas use { color: var(--pegada); opacity: .62; }
+    html:not(.redonda) .r, .redonda .q { display: none; }
+    /* moldura: papel do cartão, fio de cor por dentro e aro claro por fora; o interior fica liso */
+    /* cantos: o avatar quadrado do xat tem quina reta, então o cartão arredonda só os 4 px em volta da foto (os aros de fora crescem daí) */
+    .moldura { border-radius: 4px; background: var(--card);
+      box-shadow: inset 0 0 0 2px var(--anel, var(--ac)), 0 0 0 2.5px var(--aro, var(--ac2)), 0 2px 5px color-mix(in srgb, var(--ac) 38%, transparent); }
+    :root { --gato: #2f2b45; --gato-luz: #4b4672; --gato-brilho: #6d679a; --contorno: #15122a; --orelha: #ff9ec4; --orelha-pelo: #ffd0e3;
+      --sino-1: #fff0a8; --sino-2: #ffd24d; --sino-3: #d99a14; --sino-linha: #a8730a;
+      --novelo-1: #ffc6dd; --novelo-2: #ff9ec4; --novelo-3: #e5709f; --fio: #ff9ec4; }
+    .fundo { background: linear-gradient(170deg, var(--ceu-a) 0%, var(--ceu-b) 48%, var(--ceu-c) 78%, var(--banco) 100%); }
+    .pegadas use { color: var(--pegada); opacity: .5; }
+    .moldura { background: var(--card); border-radius: 4px;
+      box-shadow: inset 0 0 0 2px var(--ac), 0 0 0 2.5px var(--ac2), 0 0 9px 2px color-mix(in srgb, var(--halo) 55%, transparent), 0 2px 5px color-mix(in srgb, var(--ac) 40%, transparent); }
+    .nuvem { fill: var(--nuvem-a); stroke: var(--banco-linha); stroke-width: 1; }
+    .nuvem2 { fill: var(--nuvem-b); }
+    .fio { fill: none; stroke: var(--fio); stroke-width: 1.5; stroke-linecap: round; }
+    .novelo-l { fill: none; stroke: var(--novelo-3); stroke-width: .9; stroke-linecap: round; }
+    .orelha-e { fill: var(--gato); stroke: var(--gato-brilho); stroke-width: 1.2; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="fundo"></div>
+    <svg class="pegadas" id="pegadas" viewBox="0 0 380 100"><defs><symbol id="pegada" viewBox="0 0 100 100"><g fill="currentColor"><path d="M50 54C63 54 74 65 72 76C71 84 63 85 57 81C53.5 78.8 46.5 78.8 43 81C37 85 29 84 28 76C26 65 37 54 50 54Z"/><ellipse cx="22" cy="46" rx="8.5" ry="11.5" transform="rotate(-24 22 46)"/><ellipse cx="39" cy="26" rx="9" ry="12.5" transform="rotate(-7 39 26)"/><ellipse cx="61" cy="26" rx="9" ry="12.5" transform="rotate(7 61 26)"/><ellipse cx="78" cy="46" rx="8.5" ry="11.5" transform="rotate(24 78 46)"/></g></symbol>
+      <symbol id="brilho" viewBox="-50 -50 100 100"><path d="M0 -48 C4 -18 18 -4 48 0 C18 4 4 18 0 48 C-4 18 -18 4 -48 0 C-18 -4 -4 -18 0 -48Z" fill="currentColor"/></symbol></defs></svg>
+    <svg class="orna" viewBox="0 0 380 100">
+      <defs>
+        <radialGradient id="lua" cx="38%" cy="32%" r="80%"><stop offset="0" stop-color="var(--lua-a)"/><stop offset=".55" stop-color="var(--lua-b)"/><stop offset="1" stop-color="var(--lua-c)"/></radialGradient>
+        <radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--halo)" stop-opacity=".85"/><stop offset="1" stop-color="var(--halo)" stop-opacity="0"/></radialGradient>
+        <mask id="mc"><rect x="270" y="0" width="100" height="100" fill="#fff"/><circle cx="332" cy="35" r="19" fill="#000"/></mask>
+        <radialGradient id="nov" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="var(--novelo-1)"/><stop offset=".6" stop-color="var(--novelo-2)"/><stop offset="1" stop-color="var(--novelo-3)"/></radialGradient>
+        <radialGradient id="sino" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="var(--sino-1)"/><stop offset=".55" stop-color="var(--sino-2)"/><stop offset="1" stop-color="var(--sino-3)"/></radialGradient>
+        <g id="orelha"><path class="orelha-e" d="M-9 4 C-9 -4 -6 -12 0 -19 C6 -12 9 -4 9 4 Z"/><path d="M-4.4 3 C-4.4 -3 -2.6 -8.5 0 -12.5 C2.6 -8.5 4.4 -3 4.4 3 Z" fill="var(--orelha)"/></g>
+        <g id="novelo"><circle r="6.2" fill="url(#nov)"/><path class="novelo-l" d="M-5 -2 Q0 -5.5 5 -1.5 M-5.5 1.5 Q0 -2.5 5.8 2 M-3 4.6 Q1 1.8 4 5"/></g>
+      </defs>
+      <circle cx="318" cy="42" r="34" fill="url(#halo)"/>
+      <circle cx="312" cy="42" r="21" fill="url(#lua)" mask="url(#mc)" transform="translate(0 0)"/>
+      <use href="#brilho" x="127.5" y="6.5" width="5" height="5" style="color:var(--brilho-1)" transform="rotate(0 130 9)"/><use href="#brilho" x="174.0" y="10.0" width="4" height="4" style="color:var(--brilho-2)" transform="rotate(0 176 12)"/><use href="#brilho" x="208.0" y="28.0" width="4" height="4" style="color:var(--brilho-4)" transform="rotate(0 210 30)"/><use href="#brilho" x="234.5" y="32.5" width="7" height="7" style="color:var(--brilho-3)" transform="rotate(10 238 36)"/><use href="#brilho" x="259.0" y="11.0" width="6" height="6" style="color:var(--brilho-1)" transform="rotate(-8 262 14)"/><use href="#brilho" x="288.0" y="54.0" width="4" height="4" style="color:var(--brilho-2)" transform="rotate(0 290 56)"/><use href="#brilho" x="357.0" y="69.0" width="6" height="6" style="color:var(--brilho-4)" transform="rotate(0 360 72)"/><use href="#brilho" x="351.5" y="13.5" width="5" height="5" style="color:var(--brilho-2)" transform="rotate(0 354 16)"/><use href="#brilho" x="270.5" y="34.5" width="3" height="3" style="color:var(--brilho-2)" transform="rotate(0 272 36)"/>
+      <g>
+        <path class="nuvem" d="M236 101 C232 92 240 86 247 89 C249 82 259 80 264 86 C268 80 279 81 281 89 C288 86 296 91 293 101 Z"/>
+        <path class="nuvem" d="M318 101 C316 94 322 90 328 92 C330 85 340 84 344 90 C350 87 358 92 355 101 Z"/>
+      </g>
+      <g class="q"><path class="fio" d="M105 94 C122 98 132 88 150 92 C166 96 176 90 196 94 C214 98 222 92 244 95"/></g>
+      <g class="r"><path class="fio" d="M93 84 C99 94 108 96 124 94 C140 91 150 96 168 94 C184 92 196 96 214 94 C226 93 236 96 246 95"/></g>
+    </svg>
+    <div class="moldura" id="moldura"></div>
+    <svg class="orna" viewBox="0 0 380 100">
+      <g class="q">
+        <use href="#orelha" transform="translate(16.5 7.5) rotate(-45) scale(.6)"/>
+        <use href="#orelha" transform="translate(97.5 7.5) rotate(45) scale(.6)"/>
+        <use href="#novelo" transform="translate(101 91) scale(.95)"/>
+      </g>
+      <g class="r">
+        <use href="#orelha" transform="translate(57 48) rotate(-42) translate(0 -42) scale(.85)"/>
+        <use href="#orelha" transform="translate(57 48) rotate(42) translate(0 -42) scale(.85)"/>
+        <use href="#novelo" transform="translate(89 80) scale(.95)"/>
+      </g>
+      <rect x="48" y="88.4" width="18" height="3.2" rx="1.6" fill="var(--ac)"/>
+      <circle cx="57" cy="94.2" r="4" fill="url(#sino)" stroke="var(--sino-linha)" stroke-width=".7"/>
+      <path d="M53.8 94.8 H60.2" stroke="var(--sino-linha)" stroke-width=".7"/><circle cx="55.8" cy="92.7" r=".9" fill="#fff" opacity=".8"/>
+    </svg>
+  </div>
+  <script src="_base.js"></script>
+  <script>
+    // trilha de pegadinhas no lado direito e embaixo, longe das etiquetas do xat
+    var P = [[218,76,80],[234,66,72],[250,76,80],[266,65,72],[282,75,80]];
+    document.getElementById("pegadas").insertAdjacentHTML("beforeend", P.map(function (p) {
+      var s = p[3] || 14;
+      return '<use href="#pegada" x="' + (-s / 2) + '" y="' + (-s / 2) + '" width="' + s + '" height="' + s + '" transform="translate(' + p[0] + ' ' + p[1] + ') rotate(' + p[2] + ')"/>';
+    }).join(""));
+    XB.pronto.then(function () { XB.pronto2(); });
+  </script>
+</body>
+</html>

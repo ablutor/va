@@ -1,0 +1,41 @@
+/* Modelo 11 · Coelhinho (família Fofinhos)
+   Cores: original (lilás), masculino (azul-céu), feminino (rosa), feminino-2 (menta). */
+
+:root,
+[data-cor="original"]   { --bg: #efe2f3; --bg2: #f8effa; --card: #fffbfe; --ink: #4a3552; --ac: #b56fc0; --ac2: #ecd5f0; --pegada: #d9bde0; --orelha: #f3c6dc; }
+[data-cor="masculino"]  { --bg: #dde9f4; --bg2: #edf4fa; --card: #fdfeff; --ink: #2a3a4f; --ac: #5f93c9; --ac2: #d2e4f4; --pegada: #b9d0e6; --orelha: #f2cbd4; }
+[data-cor="feminino"]   { --bg: #f9e3e8; --bg2: #fdf1f4; --card: #fffcfc; --ink: #4b2f37; --ac: #e07895; --ac2: #f8d6de; --pegada: #ecc1cb; --orelha: #f6b9c8; }
+[data-cor="feminino-2"] { --bg: #ddf0e8; --bg2: #edf7f3; --card: #fdfffe; --ink: #26443a; --ac: #4fae88; --ac2: #cdebdd; --pegada: #b5dccb; --orelha: #f4c7d3; }
+
+/* Pelagem do coelhinho */
+:root {
+  --pelo: #ffffff;
+  --pelo-sombra: #ece6ef;
+  --bochecha: #f7a8c0;
+  --nariz: #f08aa8;
+  --olho: #3a2a3f;
+}
+
+.pulo-todo,
+.corpo-todo,
+.orelha {
+  transform-box: fill-box;
+}
+
+/* Orelhas mexem de vez em quando, cada uma no seu tempo */
+.orelha { transform-origin: 50% 95%; }
+.orelha-esq { animation: orelha-esq 6s ease-in-out infinite; }
+.orelha-dir { animation: orelha-dir 4.5s ease-in-out infinite 1s; }
+
+@keyframes orelha-esq {
+  0%, 80%, 100% { transform: rotate(-8deg); }
+  86% { transform: rotate(-20deg); }
+  92% { transform: rotate(-4deg); }
+}
+
+@keyframes orelha-dir {
+  0%, 70%, 100% { transform: rotate(8deg); }
+  76% { transform: rotate(24deg); }
+  82% { transform: rotate(4deg); }
+  88% { transform: rotate(18deg); }
+}

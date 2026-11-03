@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Tríptico</title>
+  <!-- Tríptico: fundo branco e três painéis iguais lado a lado; o primeiro é a moldura do avatar, os outros dois ficam vazios -->
+  <link rel="stylesheet" href="_base.css">
+  <style>
+    :root { --bg: #fff; --ink: #161616; --vazio: #ecebe8; }
+    [data-cor="original"] { --bg: #fff; --ink: #161616; --vazio: #ecebe8; }
+    html, body { background: var(--bg); }
+    /* três painéis lado a lado, mesma altura e 10 px de vão; o do avatar tem 84 px, os outros dois acompanham a zona das etiquetas */
+    .painel { position: absolute; top: 6px; height: 84px; background: var(--vazio); border-radius: 0; }
+    .p2 { left: 109px; width: 92px; } .p3 { left: 211px; width: 92px; }
+    .moldura { background: var(--vazio); }
+  </style>
+</head>
+<body>
+  <div class="tudo"><div class="painel p2"></div><div class="painel p3"></div><div class="moldura" id="moldura"></div></div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function (d) {
+      if (XB.redonda) document.getElementById("moldura").classList.add("redonda");
+      XB.pronto2();
+    });
+  </script>
+</body>
+</html>

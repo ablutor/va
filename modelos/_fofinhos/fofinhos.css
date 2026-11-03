@@ -1,0 +1,392 @@
+/* Base da família "Fofinhos" (modelos 11 a 15).
+   Cada modelo define as cores (--bg, --bg2, --card, --ink, --ac, --ac2, --pegada),
+   o desenho do bichinho e a pegada dele. */
+
+:root {
+  --muted: color-mix(in srgb, var(--ink) 55%, transparent);
+  --linha: color-mix(in srgb, var(--ink) 10%, transparent);
+  --sombra: 0 18px 40px color-mix(in srgb, var(--ac) 18%, transparent), 0 2px 6px color-mix(in srgb, var(--ink) 6%, transparent);
+  --xs-capa: var(--card);
+  --xs-marca-cor: var(--ink);
+  --xs-marca-destaque: var(--ac);
+  --xs-marca-fundo: color-mix(in srgb, var(--card) 70%, transparent);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Nunito", system-ui, sans-serif;
+}
+
+.nome { font-family: "Fredoka", "Nunito", sans-serif; font-weight: 600; }
+.cap { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; font-weight: 700; color: var(--muted); }
+ul { list-style: none; }
+
+/* ---------- Fundo com pegadas ---------- */
+
+.fundo {
+  background:
+    radial-gradient(ellipse at 50% 45%, var(--bg2), transparent 70%),
+    var(--bg);
+  overflow: hidden;
+}
+
+.pegadas { position: absolute; inset: 0; }
+
+.rastro { position: absolute; left: 0; top: 0; }
+
+.rastro svg {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  color: var(--pegada);
+  opacity: 0;
+  animation: pisar var(--ciclo, 9s) ease-in-out infinite;
+}
+
+/* Cada pegada aparece, fica um pouco e some, como um bichinho passando */
+@keyframes pisar {
+  0% { opacity: 0; transform: rotate(var(--giro)) scale(.6); }
+  6% { opacity: .55; transform: rotate(var(--giro)) scale(1); }
+  45% { opacity: .55; }
+  70%, 100% { opacity: 0; transform: rotate(var(--giro)) scale(1); }
+}
+
+/* ---------- Cartões ---------- */
+
+.card {
+  background: var(--card);
+  border-radius: 28px;
+  box-shadow: var(--sombra);
+  border: 1px solid color-mix(in srgb, var(--card) 60%, var(--ac2));
+}
+
+.online {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1.5px solid #8fd4a4;
+  color: #3f9a5c;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, #8fd4a4 12%, var(--card));
+}
+
+.online::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4cc06c;
+  animation: piscar 1.6s ease-in-out infinite;
+}
+
+@keyframes piscar { 50% { opacity: .35; } }
+
+.online.xs-off {
+  border-color: var(--linha);
+  color: var(--muted);
+  background: transparent;
+}
+
+.online.xs-off::before {
+  background: currentColor;
+  animation: none;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.chips li {
+  padding: 7px 14px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--ac2) 45%, var(--card));
+  color: color-mix(in srgb, var(--ac) 60%, var(--ink));
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.insta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 16px;
+  background: var(--ink);
+  color: var(--card);
+  font-weight: 700;
+  font-size: 14px;
+  transition: transform 200ms ease;
+}
+
+.insta:hover { transform: translateY(-2px); }
+
+/* ---------- Bichinho ---------- */
+
+.cena { position: absolute; }
+
+.bicho {
+  position: absolute;
+  display: block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bicho svg { width: 100%; height: 100%; overflow: visible; display: block; }
+
+/* Respira devagar o tempo todo */
+.bicho .corpo-todo {
+  transform-origin: 50% 92%;
+  animation: respirar 3.2s ease-in-out infinite;
+}
+
+@keyframes respirar {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  50% { transform: translateY(-10px) scale(1.015, .985); }
+}
+
+/* Pisca de vez em quando */
+.olhos-abertos {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pestanejar 5s infinite;
+}
+
+@keyframes pestanejar {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(.1); }
+}
+
+.olhos-felizes { display: none; }
+.bicho.feliz .olhos-abertos { display: none; }
+.bicho.feliz .olhos-felizes { display: inline; }
+
+/* Pulinho ao receber carinho */
+.bicho.pulo .pulo-todo { animation: pulinho 600ms cubic-bezier(.3, 1.6, .5, 1); }
+
+@keyframes pulinho {
+  0% { transform: translateY(0); }
+  35% { transform: translateY(-46px) rotate(-4deg); }
+  70% { transform: translateY(0) scale(1.06, .92); }
+  100% { transform: none; }
+}
+
+.pulo-todo { transform-origin: 50% 100%; transform-box: fill-box; }
+.bicho .corpo-todo { transform-box: fill-box; }
+
+.chao {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--ink) 18%, transparent), transparent);
+  animation: sombra 3.2s ease-in-out infinite;
+}
+
+@keyframes sombra { 50% { transform: scale(.9); opacity: .75; } }
+
+/* Corações que sobem ao clicar */
+.coracao {
+  position: absolute;
+  pointer-events: none;
+  color: var(--ac);
+  font-size: 28px;
+  animation: subir 1.2s ease-out forwards;
+}
+
+@keyframes subir {
+  from { opacity: 1; transform: translate(0, 0) scale(.6); }
+  to { opacity: 0; transform: translate(var(--dx), -140px) scale(1.2); }
+}
+
+/* Balão de fala com a frase */
+.balao {
+  position: absolute;
+  padding: 22px 28px;
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 600;
+  text-align: center;
+  background: var(--card);
+  border-radius: 30px;
+  box-shadow: var(--sombra);
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+.balao::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  background: var(--card);
+  border-radius: 4px;
+  transform: rotate(45deg);
+}
+
+/* O balão mostra o contador de carinhos: número grande e a legenda ao lado */
+.balao.carinho { display: flex; align-items: center; justify-content: center; gap: 16px; text-align: left; }
+
+@keyframes flutuar { 50% { transform: translateY(-6px); } }
+
+/* ---------- Player ---------- */
+
+.play {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--ac);
+  color: #fff;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--ac) 40%, transparent);
+}
+
+.play svg { width: 16px; height: 16px; }
+
+.player { display: flex; align-items: center; gap: 14px; }
+.player b { display: block; font-weight: 800; font-size: 15px; }
+.player i { font-style: normal; font-size: 12px; color: var(--muted); }
+
+.barra { height: 5px; border-radius: 9px; background: var(--linha); overflow: hidden; }
+.barra span { display: block; height: 100%; border-radius: 9px; background: var(--ac); }
+
+.eq { display: flex; align-items: flex-end; gap: 3px; height: 18px; margin-left: auto; }
+.eq i { width: 3px; height: 100%; border-radius: 3px; background: var(--ac); transform-origin: bottom; }
+
+/* ---------- Desktop (1920×900) ---------- */
+
+/* --topo: altura comum do perfil, do balão e dos cartões, para ficarem alinhados */
+.desk { width: 1920px; --topo: 150px; }
+
+.desk .perfil {
+  position: absolute;
+  left: 170px;
+  top: var(--topo);
+  width: 470px;
+  padding: 40px 40px 36px;
+}
+
+.desk .topo { display: flex; align-items: center; gap: 20px; }
+
+.foto {
+  flex: none;
+  width: 104px;
+  height: 104px;
+  border-radius: 38% 62% 55% 45% / 50% 45% 55% 50%;
+  background-size: cover;
+  background-position: center 25%;
+  border: 4px solid var(--card);
+  box-shadow: 0 0 0 3px var(--ac2);
+}
+
+.desk .nome { font-size: 62px; line-height: .95; }
+.desk .sobrenome { font-size: 22px; color: var(--ac); margin-top: 4px; }
+.desk .linha-online { display: flex; align-items: center; gap: 12px; margin: 26px 0 22px; }
+.desk .local { font-size: 15px; color: var(--muted); margin-bottom: 14px; }
+.desk .chips { margin-bottom: 26px; }
+
+.desk .cena { left: 700px; top: 0; width: 520px; height: 900px; }
+.desk .balao { left: 30px; right: 30px; top: var(--topo); }
+.desk .bicho { left: 70px; top: 330px; width: 380px; height: 400px; }
+.desk .chao { left: 120px; top: 708px; width: 280px; height: 40px; }
+
+.desk .lado {
+  position: absolute;
+  left: 1290px;
+  top: var(--topo);
+  width: 460px;
+  display: grid;
+  gap: 22px;
+}
+
+.desk .lado .card { padding: 28px 32px; }
+
+.carinho { display: flex; align-items: center; gap: 20px; }
+.carinho .num { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 54px; line-height: 1; color: var(--ac); }
+.carinho p { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+.citacao p { font-size: 18px; line-height: 1.5; font-weight: 600; margin: 10px 0 8px; }
+.citacao small { font-size: 13px; color: var(--muted); }
+
+.desk .player { padding: 22px 26px; }
+.desk .player .info { flex: 1; min-width: 0; }
+.desk .player .barra { margin-top: 10px; }
+
+html:not(.xs-mobile) .xs-marca {
+  --xs-marca-direita: 20px;
+  --xs-marca-baixo: 16px;
+  border-radius: 14px;
+}
+
+/* ---------- Mobile (390×844) ---------- */
+
+.mob { width: 390px; }
+
+.mob .cabeca { position: absolute; left: 22px; right: 22px; top: 58px; display: flex; align-items: center; gap: 14px; }
+.mob .foto { width: 64px; height: 64px; border-width: 3px; }
+.mob .nome { font-size: 40px; line-height: .95; }
+.mob .cabeca .online { margin-top: 6px; padding: 3px 9px; font-size: 9px; }
+
+.mob .cena { left: 0; top: 130px; width: 390px; height: 400px; }
+/* Balão e bichinho perto um do outro: o balão desce e o bichinho sobe */
+.mob .balao { left: 26px; right: 26px; top: 34px; padding: 14px 18px; font-size: 14.5px; border-radius: 22px; }
+.mob .balao::after { width: 20px; height: 20px; margin-left: -10px; bottom: -10px; }
+.mob .balao.carinho { gap: 12px; }
+.mob .balao.carinho .num { font-size: 36px; }
+.mob .balao.carinho p { font-size: 12px; margin-top: 2px; }
+.mob .bicho { left: 95px; top: 128px; width: 200px; height: 215px; }
+.mob .chao { left: 120px; top: 330px; width: 150px; height: 22px; }
+
+.mob .perfil {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 488px;
+  padding: 20px 20px 16px;
+  border-radius: 22px;
+}
+
+/* Frase favorita no alto da caixa; os gostos e o Instagram vêm embaixo dela */
+.mob .citacao { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--linha); }
+.mob .citacao p {
+  margin: 6px 0 4px;
+  font-size: 14px;
+  line-height: 1.45;
+  /* No máximo duas linhas, para não encostar no player */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.mob .citacao small { font-size: 11px; }
+
+.mob .chips li { padding: 5px 11px; font-size: 12px; }
+.mob .perfil .rodape { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+.mob .insta { padding: 8px 14px; font-size: 12px; border-radius: 12px; }
+.mob .carinho .num { font-size: 26px; }
+.mob .carinho { gap: 8px; }
+.mob .carinho p { font-size: 11px; margin: 0; }
+
+.mob .player {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  padding: 12px 16px 12px 12px;
+  border-radius: 22px;
+}
+
+.mob .play { width: 40px; height: 40px; }
+.mob .player b { font-size: 13px; }
+.mob .player i { font-size: 11px; }
+.mob .player .info { flex: 1; min-width: 0; }
+.mob .player .barra { margin-top: 7px; height: 4px; }
+
+/* Selo mais para dentro, fora da curva do canto da tela, alinhado à borda das caixas (18px) */
+.xs-mobile .xs-marca { --xs-marca-topo-mobile: 18px; right: 18px; border-radius: 10px; }

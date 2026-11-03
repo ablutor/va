@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Rafael · Garagem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root{ --verm:#ff3b30; --branco:#f2f2f3; --dim:#8d8f96; --linha:rgba(255,255,255,.1) }
+body{ background:#070708; color:var(--branco); font-family:"Inter",sans-serif }
+.fundo-foto{ background-image:url(fotos/carro.jpg); filter:blur(50px) brightness(.25) saturate(.8) }
+.cartao{ position:absolute; left:330px; top:140px; width:1260px; height:620px; border-radius:34px;
+  background:repeating-linear-gradient(135deg, rgba(255,255,255,.018) 0 2px, transparent 2px 7px), linear-gradient(140deg, #18181b, #0b0b0d);
+  border:1px solid var(--linha); box-shadow:0 50px 100px -30px #000, inset 0 1px 0 rgba(255,255,255,.07) }
+.conteudo{ position:absolute; left:64px; top:56px; width:600px }
+.deck{ display:flex; justify-content:space-between; font:500 11.5px "IBM Plex Mono",monospace; letter-spacing:.22em; text-transform:uppercase; color:var(--dim) }
+.deck b{ color:var(--verm); font-weight:500; display:flex; align-items:center; gap:9px }
+.deck b::before{ content:""; width:8px; height:8px; border-radius:2px; background:var(--verm); box-shadow:0 0 10px var(--verm) }
+.quem{ display:flex; align-items:center; gap:26px; margin-top:44px }
+.foto{ width:112px; height:112px; border-radius:50%; position:relative; flex:none }
+.foto img{ width:100%; height:100%; border-radius:50%; object-fit:cover; object-position:50% 25% }
+.foto::after{ content:""; position:absolute; inset:-9px; border-radius:50%; border:2px solid transparent; border-top-color:var(--verm); border-right-color:var(--verm); transform:rotate(20deg) }
+h1{ margin:0; font:700 92px/.9 "Chakra Petch"; letter-spacing:-.02em; font-style:italic; text-transform:uppercase }
+h1 span{ color:var(--verm) }
+.tag{ margin-top:12px; font:400 13px "IBM Plex Mono",monospace; color:var(--dim); display:flex; gap:18px; align-items:center }
+.tag svg{ width:14px; height:14px; display:inline-block; vertical-align:-2px; margin-left:6px }
+.tag .on{ color:#7dffb0 }
+.bio{ margin:30px 0 0; font-size:17.5px; line-height:1.65; color:#c9cbd1; max-width:560px }
+.frase{ margin-top:22px; padding:14px 18px; border-left:3px solid var(--verm); border-radius:4px; font:600 18px/1.5 "Chakra Petch"; color:#fff; background:rgba(255,59,48,.07) }
+
+.console{ position:absolute; left:64px; bottom:50px; width:600px; display:grid; grid-template-columns:auto 1fr; gap:10px 18px; align-items:center }
+.tocar{ grid-row:span 2; width:64px; height:64px; border-radius:18px; background:var(--verm); color:#fff; display:grid; place-items:center; box-shadow:0 12px 30px -6px rgba(255,59,48,.6) }
+.tocar svg{ width:26px; height:26px; margin-left:3px }
+.faixa{ display:flex; justify-content:space-between; font:500 12.5px "IBM Plex Mono",monospace; letter-spacing:.08em; text-transform:uppercase }
+.faixa span{ color:var(--dim) }
+.leds{ display:flex; gap:4px; height:14px }
+.leds b{ flex:1; border-radius:2px; background:rgba(255,255,255,.08); transform:skewX(-20deg) }
+.leds b.on{ background:var(--verm); box-shadow:0 0 8px rgba(255,59,48,.6) }
+.leds b.on.q{ background:#ffb020; box-shadow:0 0 8px rgba(255,176,32,.6) }
+
+.gauge{ position:absolute; left:760px; top:40px; width:540px; height:540px; border-radius:50%; background:radial-gradient(circle, #1a1a1d 60%, #0b0b0d 72%);
+  box-shadow:0 30px 60px -10px rgba(0,0,0,.85), inset 0 0 0 1px rgba(255,255,255,.12), inset 0 2px 8px rgba(255,255,255,.08) }
+.gauge svg{ position:absolute; inset:0 }
+.janela{ position:absolute; inset:74px; border-radius:50%; overflow:hidden; background:url(fotos/carro.jpg) 46% 60%/auto 120%; box-shadow:inset 0 0 40px 8px rgba(0,0,0,.8), 0 0 0 2px #2a2a2e }
+.janela::after{ content:""; position:absolute; inset:0; border-radius:50%; background:linear-gradient(135deg, rgba(255,255,255,.12), transparent 35%) }
+.vel{ position:absolute; left:50%; bottom:42px; transform:translateX(-50%); text-align:center; font:700 30px/1 "Chakra Petch"; font-style:italic }
+.vel small{ display:block; font:500 10px "IBM Plex Mono"; letter-spacing:.24em; color:var(--dim); font-style:normal; margin-top:4px }
+</style>
+</head>
+<body>
+<div class="fundo-foto"></div>
+<div class="cartao">
+  <div class="conteudo">
+    <div class="deck"><b>garagem</b><span>vaga 07 · motor ligado</span></div>
+    <div class="quem">
+      <div class="foto"><img src="../clientes/exemplo/perfil-masculino.jpg" alt=""></div>
+      <div>
+        <h1>Rafael<span>.</span></h1>
+        <div class="tag">piloto 82460885<i data-i="copy"></i><span class="on">● online</span></div>
+      </div>
+    </div>
+    <p class="bio">Apaixonado por carro, estrada vazia e cheiro de gasolina. Domingo bom é track day e lava-jato com os amigos.</p>
+    <div class="frase">Devagar também se chega. Mas eu prefiro chegar antes.</div>
+  </div>
+  <div class="console">
+    <div class="tocar"><i data-i="play"></i></div>
+    <div class="faixa"><b>Kavinsky · Nightcall</b><span>1:58 / 4:18</span></div>
+    <div class="leds" id="leds"></div>
+  </div>
+  <div class="gauge" id="gauge"><div class="janela"></div><div class="vel">280<small>km/h</small></div></div>
+</div>
+<script src="apoio.js"></script>
+<script>
+Apoio.icones();
+document.getElementById("leds").innerHTML = Array.from({ length: 36 }, (_, i) => `<b class="${i < 16 ? "on" : ""}${i >= 12 && i < 16 ? " q" : ""}"></b>`).join("");
+// velocímetro: marcas e números de 0 a 280 em volta da foto
+const g = document.getElementById("gauge"), C = 270, R = 250; let s = "";
+for (let v = 0; v <= 280; v += 10) {
+  const a = (-225 + v / 280 * 270) * Math.PI / 180, grande = v % 40 === 0, r2 = grande ? R - 22 : R - 12, alto = v >= 220;
+  s += `<line x1="${C + Math.cos(a) * R}" y1="${C + Math.sin(a) * R}" x2="${C + Math.cos(a) * r2}" y2="${C + Math.sin(a) * r2}" stroke="${alto ? "#ff3b30" : grande ? "#f2f2f3" : "rgba(242,242,243,.4)"}" stroke-width="${grande ? 3 : 1.5}"/>`;
+  if (grande) s += `<text x="${C + Math.cos(a) * (R - 40)}" y="${C + Math.sin(a) * (R - 40) + 5}" fill="${alto ? "#ff3b30" : "#c9cbd1"}" font-family="Chakra Petch" font-weight="600" font-size="15" text-anchor="middle">${v}</text>`;
+}
+const arco = (a0, a1, r) => { const p = a => [C + Math.cos(a * Math.PI / 180) * r, C + Math.sin(a * Math.PI / 180) * r]; const [x0, y0] = p(a0), [x1, y1] = p(a1); return `M${x0} ${y0} A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1} ${y1}`; };
+s += `<path d="${arco(-225, -225 + 230 / 280 * 270, R + 8)}" stroke="#ff3b30" stroke-width="3" fill="none" stroke-linecap="round" style="filter:drop-shadow(0 0 6px #ff3b30)"/>`;
+g.insertAdjacentHTML("afterbegin", `<svg viewBox="0 0 540 540">${s}</svg>`);
+</script>
+</body>
+</html>

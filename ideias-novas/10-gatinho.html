@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>xatspace · Gatinho da lua</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg1: #e9e4ff; --bg2: #cfd9ff;
+    --gato: #2f2b45; --contorno: #15122a;
+    --lilas: #8a6cff; --lilas2: #c9baff; --rosa: #ff9ec4; --amarelo: #ffd76a;
+    --ink: #2f2b45; --muted: rgba(47,43,69,.58);
+    --card: #fffdff;
+    --sombra: 0 22px 44px rgba(110,88,200,.20), 0 3px 8px rgba(47,43,69,.07);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1920px; height: 900px; overflow: hidden; }
+  body {
+    position: relative;
+    font-family: "Nunito", system-ui, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(165deg, var(--bg1) 0%, #dcdfff 48%, var(--bg2) 100%);
+  }
+  ul { list-style: none; margin: 0; padding: 0; }
+  p { margin: 0; }
+  .nome { font-family: "Fredoka", "Nunito", sans-serif; font-weight: 600; }
+  .cap { text-transform: uppercase; letter-spacing: .18em; font-size: 11.5px; font-weight: 800; color: var(--muted); }
+
+  /* ---------- fundo ---------- */
+  .ceu { position: absolute; inset: 0; }
+  .ceu svg { position: absolute; inset: 0; width: 1920px; height: 900px; }
+  .brilha { transform-box: fill-box; transform-origin: center; animation: cintilar 3.4s ease-in-out infinite; }
+  .b2 { animation-delay: -.8s; animation-duration: 4.1s; }
+  .b3 { animation-delay: -1.7s; animation-duration: 2.9s; }
+  .b4 { animation-delay: -2.4s; animation-duration: 3.7s; }
+  @keyframes cintilar { 0%,100% { transform: scale(1) rotate(0); opacity: .95; } 50% { transform: scale(.62) rotate(12deg); opacity: .55; } }
+
+  .pegadas { position: absolute; inset: 0; pointer-events: none; }
+  .pegadas svg { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; color: #b7a9f0; }
+
+  /* ---------- cartões ---------- */
+  .card {
+    position: absolute;
+    background: var(--card);
+    border-radius: 34px;
+    box-shadow: var(--sombra);
+    border: 1.5px solid rgba(201,186,255,.55);
+  }
+
+  /* Perfil (esquerda) */
+  .perfil { left: 118px; top: 222px; width: 344px; padding: 90px 30px 38px; text-align: center; }
+  .perfil::before, .perfil::after {   /* orelhinhas de gato espiando no cartão */
+    content: ""; position: absolute; top: -26px; width: 50px; height: 50px;
+    background: var(--gato);
+    border: 3px solid var(--contorno);
+    border-bottom: none;
+    border-radius: 14px 14px 0 0;
+  }
+  .perfil::before { left: 40px;  clip-path: polygon(0 100%, 12% 0, 100% 100%); border: none; border-radius: 0; }
+  .perfil::after  { right: 40px; clip-path: polygon(0 100%, 88% 0, 100% 100%); border: none; border-radius: 0; }
+  .orelha { position: absolute; top: -26px; width: 50px; height: 50px; }
+  .orelha svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .orelha.e { left: 38px; } .orelha.d { right: 38px; transform: scaleX(-1); }
+  .perfil::before, .perfil::after { display: none; }
+
+  .avatar {
+    position: absolute; left: 50%; top: -58px; margin-left: -68px;
+    width: 136px; height: 136px; border-radius: 50%;
+    padding: 6px;
+    background: conic-gradient(from 210deg, #8a6cff, #ff9ec4, #ffd76a, #8a6cff);
+    box-shadow: 0 12px 26px rgba(138,108,255,.35);
+  }
+  .avatar i {
+    display: block; width: 100%; height: 100%; border-radius: 50%;
+    border: 5px solid #fff;
+    background: #ddd url("../clientes/exemplo/perfil-feminino.jpg") no-repeat;
+    background-size: 176px auto;
+    background-position: -31px -30px;
+  }
+  .perfil h1 { margin: 0; font-size: 66px; line-height: 1; letter-spacing: -.01em; }
+  .perfil .sob { font-size: 34px; line-height: 1.1; color: var(--lilas); margin-top: 3px; }
+  .online {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 20px;
+    padding: 7px 16px; border-radius: 99px;
+    border: 1.5px solid #8fd4a4; color: #3f9a5c; background: #f1fbf4;
+    font-size: 11.5px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase;
+  }
+  .online::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #4cc06c; box-shadow: 0 0 0 4px rgba(76,192,108,.18); }
+  .local { margin-top: 24px; font-size: 19px; font-weight: 800; color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 7px; }
+  .local svg { width: 20px; height: 20px; }
+  .chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .chips li {
+    padding: 9px 19px; border-radius: 99px; font-weight: 800; font-size: 16px;
+    background: #f1ecff; color: #6a4fd6;
+  }
+  .chips li:nth-child(2) { background: #ffe9f2; color: #d2487f; }
+  .chips li:nth-child(3) { background: #fff3cf; color: #a77a0a; }
+  .insta {
+    display: inline-flex; align-items: center; gap: 9px; margin-top: 32px;
+    padding: 14px 26px; border-radius: 18px; background: var(--gato); color: #fff;
+    font-weight: 800; font-size: 16px;
+    box-shadow: 0 8px 18px rgba(47,43,69,.28);
+  }
+  .insta svg { width: 18px; height: 18px; }
+
+  /* Frase (direita, cima) */
+  .frase { left: 1458px; top: 198px; width: 344px; padding: 28px 30px 30px; }
+  .frase .aspas { position: absolute; right: 26px; top: 14px; font-family: "Fredoka"; font-weight: 600; font-size: 96px; line-height: 1; color: var(--lilas2); }
+  .frase p.t { margin-top: 12px; font-family: "Fredoka"; font-weight: 500; font-size: 29px; line-height: 1.28; color: var(--ink); }
+  .frase .sol { display: flex; align-items: center; gap: 8px; margin-top: 16px; color: var(--rosa); }
+  .frase .sol i { height: 3px; flex: 1; border-radius: 3px; background: repeating-linear-gradient(90deg, #ffc9de 0 8px, transparent 8px 15px); }
+
+  /* Player (direita, baixo) */
+  .player { left: 1458px; top: 454px; width: 344px; padding: 24px 26px 26px; }
+  .player .linha1 { display: flex; align-items: center; gap: 16px; }
+  .capa {
+    flex: none; width: 74px; height: 74px; border-radius: 22px; position: relative; overflow: hidden;
+    background: linear-gradient(150deg, #8a6cff, #5b7bff);
+    border: 3px solid var(--gato);
+    box-shadow: 0 8px 16px rgba(91,123,255,.3);
+  }
+  .capa svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .info b { display: block; font-family: "Fredoka"; font-weight: 600; font-size: 20.5px; line-height: 1.15; }
+  .info span { font-size: 14.5px; font-weight: 700; color: var(--muted); }
+  .eq { margin-left: auto; align-self: flex-end; display: flex; align-items: flex-end; gap: 3px; height: 28px; }
+  .eq i { width: 5px; border-radius: 3px; background: var(--lilas); }
+  .eq i:nth-child(1){height:12px} .eq i:nth-child(2){height:26px} .eq i:nth-child(3){height:17px} .eq i:nth-child(4){height:22px}
+  .barra { margin-top: 22px; position: relative; height: 10px; border-radius: 10px; background: #ece7ff; }
+  .barra b { position: absolute; left: 0; top: 0; bottom: 0; width: 41%; border-radius: 10px; background: linear-gradient(90deg, #b4a0ff, var(--lilas)); }
+  .barra i { position: absolute; left: 41%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #fff; border: 4px solid var(--lilas); box-shadow: 0 3px 8px rgba(138,108,255,.45); }
+  .tempos { display: flex; justify-content: space-between; margin-top: 10px; font-size: 12.5px; font-weight: 800; color: var(--muted); }
+  .ctrl { display: flex; align-items: center; justify-content: center; gap: 22px; margin-top: 14px; }
+  .ctrl .mini { width: 44px; height: 44px; border-radius: 50%; background: #f3efff; display: grid; place-items: center; color: var(--gato); }
+  .ctrl .mini svg { width: 18px; height: 18px; }
+  .ctrl .play {
+    width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; color: #fff;
+    background: linear-gradient(160deg, #a58cff, var(--lilas));
+    box-shadow: 0 10px 22px rgba(138,108,255,.5), inset 0 -4px 0 rgba(0,0,0,.08);
+  }
+  .ctrl .play svg { width: 24px; height: 24px; }
+
+  /* ---------- gatinho ---------- */
+  .cena { position: absolute; left: 0; top: 0; width: 1920px; height: 900px; pointer-events: none; }
+  .balao {
+    position: absolute; left: 735px; top: 80px; width: 450px; padding: 16px 24px 16px 22px;
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    background: var(--card); border-radius: 34px; box-shadow: var(--sombra);
+    border: 1.5px solid rgba(201,186,255,.55);
+    animation: flutuar 4s ease-in-out infinite;
+  }
+  .balao::after {
+    content: ""; position: absolute; left: 50%; bottom: -13px; width: 26px; height: 26px; margin-left: -13px;
+    background: var(--card); border-radius: 5px; transform: rotate(45deg);
+    border-right: 1.5px solid rgba(201,186,255,.55); border-bottom: 1.5px solid rgba(201,186,255,.55);
+  }
+  @keyframes flutuar { 50% { transform: translateY(-6px); } }
+  .balao .num { font-family: "Fredoka"; font-weight: 600; font-size: 56px; line-height: 1; color: var(--lilas); min-width: 38px; text-align: center; }
+  .balao p { font-size: 17px; font-weight: 700; margin-top: 3px; }
+  .balao p em { font-style: normal; color: #ec6aa0; }
+
+  .bicho { position: absolute; left: 735px; top: 270px; width: 468px; height: 486px; cursor: pointer; pointer-events: auto; }
+  .bicho svg { width: 100%; height: 100%; overflow: visible; display: block; }
+  .corpo-todo { transform-box: fill-box; transform-origin: 50% 96%; animation: respirar 3.2s ease-in-out infinite; }
+  @keyframes respirar { 0%,100% { transform: translateY(0) scale(1,1); } 50% { transform: translateY(-5px) scale(1.012,.99); } }
+  .rabo { transform-box: view-box; transform-origin: 372px 478px; animation: abanar 3.4s ease-in-out infinite; }
+  @keyframes abanar { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(5deg); } }
+  .olhos-abertos { transform-box: fill-box; transform-origin: center; animation: pestanejar 5s infinite; }
+  @keyframes pestanejar { 0%,92%,100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+  .bochecha { transform-box: fill-box; transform-origin: center; animation: corar 2.8s ease-in-out infinite; }
+  @keyframes corar { 50% { transform: scale(1.14); opacity: .85; } }
+  .sino { transform-box: view-box; transform-origin: 250px 340px; animation: balancar 2.2s ease-in-out infinite; }
+  @keyframes balancar { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+  .novelo { transform-box: fill-box; transform-origin: center; animation: rolar 3.6s ease-in-out infinite; }
+  @keyframes rolar { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(8deg); } }
+  .olhos-felizes { display: none; }
+  .bicho.feliz .olhos-abertos { display: none; }
+  .bicho.feliz .olhos-felizes { display: inline; }
+  .miau { animation: flutuar 3s ease-in-out infinite; }
+
+  .coracao { position: absolute; pointer-events: none; color: #ff7fb0; font-size: 30px; animation: subir 1.2s ease-out forwards; }
+  @keyframes subir { from { opacity: 1; transform: translate(0,0) scale(.6); } to { opacity: 0; transform: translate(var(--dx), -150px) scale(1.2); } }
+
+  /* ---------- selo ---------- */
+  .selo { position: absolute; right: 12px; bottom: 12px; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(255,255,255,.7); box-shadow: 0 4px 10px rgba(110,88,200,.25); border: 1.5px solid rgba(201,186,255,.8); }
+  .selo svg { width: 16px; height: 16px; }
+</style>
+</head>
+<body>
+
+<!-- desenhos reutilizados -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="pata" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <path d="M50 54C63 54 74 65 72 76C71 84 63 85 57 81C53.5 78.8 46.5 78.8 43 81C37 85 29 84 28 76C26 65 37 54 50 54Z"/>
+        <ellipse cx="22" cy="46" rx="8.5" ry="11.5" transform="rotate(-24 22 46)"/>
+        <ellipse cx="39" cy="26" rx="9" ry="12.5" transform="rotate(-7 39 26)"/>
+        <ellipse cx="61" cy="26" rx="9" ry="12.5" transform="rotate(7 61 26)"/>
+        <ellipse cx="78" cy="46" rx="8.5" ry="11.5" transform="rotate(24 78 46)"/>
+      </g>
+    </symbol>
+    <symbol id="brilho" viewBox="-50 -50 100 100">
+      <path d="M0 -48 C4 -18 18 -4 48 0 C18 4 4 18 0 48 C-4 18 -18 4 -48 0 C-18 -4 -4 -18 0 -48Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Céu: lua, nuvens e estrelinhas -->
+<div class="ceu">
+  <svg viewBox="0 0 1920 900">
+    <defs>
+      <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#ffffff" stop-opacity=".8"/>
+        <stop offset=".55" stop-color="#fff6dc" stop-opacity=".32"/>
+        <stop offset="1" stop-color="#fff6dc" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="lua" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fff0a8"/>
+        <stop offset=".5" stop-color="#ffdf70"/>
+        <stop offset="1" stop-color="#ffc94a"/>
+      </linearGradient>
+      <mask id="corte">
+        <rect width="1920" height="900" fill="#fff"/>
+        <circle cx="1052" cy="418" r="236" fill="#000"/>
+      </mask>
+      <linearGradient id="nuvem" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+        <stop offset="1" stop-color="#f1edff" stop-opacity=".9"/>
+      </linearGradient>
+      <radialGradient id="chaoNuvem" cx="50%" cy="0%" r="90%">
+        <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+        <stop offset="1" stop-color="#e5e3ff" stop-opacity=".7"/>
+      </radialGradient>
+    </defs>
+
+    <!-- brilho em volta da lua -->
+    <circle cx="960" cy="466" r="430" fill="url(#halo)"/>
+
+    <!-- lua crescente -->
+    <g mask="url(#corte)" transform="translate(0 26)">
+      <circle cx="960" cy="448" r="278" fill="url(#lua)"/>
+      <circle cx="800" cy="300" r="38" fill="#ffd365" opacity=".55"/>
+      <circle cx="760" cy="560" r="26" fill="#ffd365" opacity=".5"/>
+      <circle cx="830" cy="640" r="16" fill="#ffd365" opacity=".5"/>
+      <circle cx="740" cy="420" r="12" fill="#ffd365" opacity=".5"/>
+      <circle cx="1010" cy="196" r="14" fill="#ffd365" opacity=".5"/>
+    </g>
+    <!-- carinha dormindo na lua -->
+    <g transform="translate(0 26)"><g fill="none" stroke="#c99128" stroke-width="3.2" stroke-linecap="round" opacity=".8">
+      <path d="M742 452 Q752 462 762 452"/>
+      <path d="M742 430 Q752 440 762 430" opacity="0"/>
+    </g>
+    <ellipse cx="738" cy="476" rx="13" ry="7.5" fill="#ff9ec4" opacity=".55"/></g>
+
+    <!-- nuvenzinhas -->
+    <g fill="url(#nuvem)">
+      <g transform="translate(560 214)">
+        <ellipse cx="0" cy="20" rx="78" ry="22"/><circle cx="-22" cy="4" r="26"/><circle cx="14" cy="-6" r="32"/><circle cx="46" cy="10" r="22"/>
+      </g>
+      <g transform="translate(1388 128) scale(.8)">
+        <ellipse cx="0" cy="20" rx="78" ry="22"/><circle cx="-22" cy="4" r="26"/><circle cx="14" cy="-6" r="32"/><circle cx="46" cy="10" r="22"/>
+      </g>
+      <g transform="translate(1250 760) scale(1.1)" opacity=".9">
+        <ellipse cx="0" cy="20" rx="78" ry="22"/><circle cx="-22" cy="4" r="26"/><circle cx="14" cy="-6" r="32"/><circle cx="46" cy="10" r="22"/>
+      </g>
+      <g transform="translate(300 790) scale(.9)" opacity=".85">
+        <ellipse cx="0" cy="20" rx="78" ry="22"/><circle cx="-22" cy="4" r="26"/><circle cx="14" cy="-6" r="32"/><circle cx="46" cy="10" r="22"/>
+      </g>
+    </g>
+
+    <!-- banco de nuvens onde o gatinho senta -->
+    <g fill="#f8f6ff" style="filter: drop-shadow(0 -8px 16px rgba(138,108,255,.20))">
+      <ellipse cx="960" cy="896" rx="1100" ry="160"/>
+      <circle cx="330" cy="838" r="96"/><circle cx="490" cy="814" r="82"/><circle cx="650" cy="808" r="64"/>
+      <circle cx="1290" cy="810" r="68"/><circle cx="1440" cy="806" r="86"/><circle cx="1610" cy="828" r="90"/>
+      <circle cx="120" cy="866" r="104"/><circle cx="1820" cy="866" r="108"/>
+    </g>
+    <g fill="none" stroke="#e1dbfa" stroke-width="3" stroke-linecap="round">
+      <path d="M200 860 Q250 826 306 850"/><path d="M560 846 Q610 820 668 842"/><path d="M1180 850 Q1236 822 1290 846"/>
+      <path d="M1500 862 Q1560 832 1630 858"/><path d="M820 872 Q880 852 940 870"/><path d="M1040 878 Q1100 860 1160 876"/>
+    </g>
+
+    <!-- cintilâncias -->
+    <g>
+      <use href="#brilho" class="brilha"    x="676" y="118" width="40" height="40" style="color:#ffd76a"/>
+      <use href="#brilho" class="brilha b2" x="1236" y="262" width="30" height="30" style="color:#ffffff"/>
+      <use href="#brilho" class="brilha b3" x="560" y="470" width="26" height="26" style="color:#8a6cff" opacity=".75"/>
+      <use href="#brilho" class="brilha b4" x="1290" y="560" width="44" height="44" style="color:#ffd76a"/>
+      <use href="#brilho" class="brilha b2" x="520" y="660" width="34" height="34" style="color:#ffffff"/>
+      <use href="#brilho" class="brilha"    x="1500" y="94" width="26" height="26" style="color:#ff9ec4"/>
+      <use href="#brilho" class="brilha b3" x="900" y="130" width="22" height="22" style="color:#ffffff"/>
+      <use href="#brilho" class="brilha b4" x="1180" y="90" width="22" height="22" style="color:#ffd76a"/>
+      <use href="#brilho" class="brilha b2" x="62"  y="120" width="34" height="34" style="color:#ffffff"/>
+      <use href="#brilho" class="brilha"    x="1840" y="300" width="36" height="36" style="color:#ffd76a"/>
+      <use href="#brilho" class="brilha b3" x="1860" y="660" width="26" height="26" style="color:#ffffff"/>
+      <use href="#brilho" class="brilha b4" x="36"  y="520" width="26" height="26" style="color:#8a6cff" opacity=".7"/>
+    </g>
+    <!-- bolinhas / estrelas pequenas -->
+    <g fill="#ffffff" opacity=".85">
+      <circle cx="640" cy="330" r="3"/><circle cx="1330" cy="400" r="3.5"/><circle cx="1105" cy="170" r="2.5"/>
+      <circle cx="590" cy="590" r="3"/><circle cx="1380" cy="690" r="3"/><circle cx="800" cy="105" r="2.5"/>
+      <circle cx="1700" cy="120" r="3"/><circle cx="240" cy="110" r="2.5"/><circle cx="1620" cy="840" r="3"/>
+    </g>
+  </svg>
+</div>
+
+<div class="pegadas" id="pegadas"></div>
+
+<!-- Cartão do perfil -->
+<section class="card perfil">
+  <div class="orelha e"><svg viewBox="0 0 50 50"><path d="M3 50 C2 30 6 14 12 3 Q14 0 17 1.5 C28 7 40 18 48 32 L48 50Z" fill="#2f2b45" stroke="#15122a" stroke-width="3" stroke-linejoin="round"/><path d="M12 44 C11 32 14 20 17 12 C24 17 32 25 37 35 L37 44Z" fill="#ff9ec4"/></svg></div>
+  <div class="orelha d"><svg viewBox="0 0 50 50"><path d="M3 50 C2 30 6 14 12 3 Q14 0 17 1.5 C28 7 40 18 48 32 L48 50Z" fill="#2f2b45" stroke="#15122a" stroke-width="3" stroke-linejoin="round"/><path d="M12 44 C11 32 14 20 17 12 C24 17 32 25 37 35 L37 44Z" fill="#ff9ec4"/></svg></div>
+  <div class="avatar"><i></i></div>
+  <h1 class="nome">Marina</h1>
+  <div class="sob nome">Costa</div>
+  <span class="online">online</span>
+  <p class="local"><svg viewBox="0 0 24 24"><path d="M12 22 C6 15.5 4.5 12.5 4.5 9.5 A7.5 7.5 0 0 1 19.5 9.5 C19.5 12.5 18 15.5 12 22Z" fill="#ff9ec4" stroke="#2f2b45" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.8" fill="#fff"/></svg>Recife</p>
+  <ul class="chips"><li>Praia</li><li>Leitura</li><li>Música</li></ul>
+  <a class="insta">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="#fff" stroke="none"/></svg>
+    @marina.costa
+  </a>
+</section>
+
+<!-- Frase -->
+<section class="card frase">
+  <span class="cap">Frase favorita</span>
+  <div class="aspas">”</div>
+  <p class="t">Sou feita de mar, café e dias de sol.</p>
+  <div class="sol">
+    <svg width="26" height="26" viewBox="-50 -50 100 100"><use href="#brilho" x="-50" y="-50" width="100" height="100" style="color:#ffd76a"/></svg>
+    <i></i>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#ff9ec4"><path d="M12 21 C4 14.5 2 11 2 8 A5 5 0 0 1 12 6.2 A5 5 0 0 1 22 8 C22 11 20 14.5 12 21Z"/></svg>
+  </div>
+</section>
+
+<!-- Player -->
+<section class="card player">
+  <div class="linha1">
+    <div class="capa">
+      <svg viewBox="0 0 74 74">
+        <circle cx="46" cy="30" r="20" fill="#ffe083"/><circle cx="54" cy="25" r="18" fill="#7d63f2"/>
+        <use href="#brilho" x="12" y="14" width="12" height="12" style="color:#fff"/>
+        <use href="#brilho" x="26" y="48" width="9" height="9" style="color:#ffd76a"/>
+        <path d="M0 74 L0 58 Q18 48 36 58 T74 54 L74 74Z" fill="#fff" opacity=".35"/>
+      </svg>
+    </div>
+    <div class="info"><b>Distance &amp; Pixelated</b><span>Jeremy Passion</span></div>
+  </div>
+  <div class="barra"><b></b><i></i></div>
+  <div class="tempos"><span>1:24</span><span>3:12</span></div>
+  <div class="ctrl">
+    <span class="mini"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2.4v14H6zM20 5v14L9.5 12z"/></svg></span>
+    <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="4" width="5" height="16" rx="1.6"/><rect x="14" y="4" width="5" height="16" rx="1.6"/></svg></span>
+    <span class="mini"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 5H18v14h-2.4zM4 5v14l10.5-7z"/></svg></span>
+  </div>
+</section>
+
+<!-- Cena com o gatinho -->
+<div class="cena">
+  <div class="balao">
+    <span class="num" id="contador">0</span>
+    <div><span class="cap">Carinhos no mingau</span><p>Clica nele para dar carinho <em>♥</em></p></div>
+  </div>
+
+  <div class="bicho" id="bicho" aria-label="Fazer carinho no gatinho">
+    <svg viewBox="0 0 520 540">
+      <defs>
+        <radialGradient id="pelo" cx="38%" cy="26%" r="80%">
+          <stop offset="0" stop-color="#4b4672"/>
+          <stop offset=".5" stop-color="#2f2b45"/>
+          <stop offset="1" stop-color="#242039"/>
+        </radialGradient>
+        <radialGradient id="peloCorpo" cx="40%" cy="20%" r="85%">
+          <stop offset="0" stop-color="#413c64"/>
+          <stop offset=".55" stop-color="#2f2b45"/>
+          <stop offset="1" stop-color="#221e37"/>
+        </radialGradient>
+        <radialGradient id="branco" cx="45%" cy="25%" r="85%">
+          <stop offset="0" stop-color="#ffffff"/>
+          <stop offset=".65" stop-color="#fbf9ff"/>
+          <stop offset="1" stop-color="#e3dcf6"/>
+        </radialGradient>
+        <linearGradient id="olho" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e79d24"/>
+          <stop offset=".38" stop-color="#ffc94d"/>
+          <stop offset=".8" stop-color="#ffe083"/>
+          <stop offset="1" stop-color="#fff0b0"/>
+        </linearGradient>
+        <radialGradient id="novelo" cx="36%" cy="30%" r="80%">
+          <stop offset="0" stop-color="#ffc6dd"/>
+          <stop offset=".55" stop-color="#ff9ec4"/>
+          <stop offset="1" stop-color="#e5709f"/>
+        </radialGradient>
+        <radialGradient id="ouro" cx="35%" cy="30%" r="80%">
+          <stop offset="0" stop-color="#fff0a8"/>
+          <stop offset=".5" stop-color="#ffd24d"/>
+          <stop offset="1" stop-color="#d99a14"/>
+        </radialGradient>
+        <radialGradient id="sombraChao" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#3b2f78" stop-opacity=".34"/>
+          <stop offset="1" stop-color="#3b2f78" stop-opacity="0"/>
+        </radialGradient>
+
+        <!-- silhueta da cabeça: orelhas + cabeça (usada duas vezes: contorno e pelo) -->
+        <g id="cabeca-forma">
+          <path d="M104 196 C92 142 96 86 112 44 Q118 36 128 40 C162 54 196 78 216 98 L206 210Z"/>
+          <path d="M396 196 C408 142 404 86 388 44 Q382 36 372 40 C338 54 304 78 284 98 L294 210Z"/>
+          <path d="M98 222 C96 140 165 90 250 90 C335 90 404 140 402 222 C404 240 412 248 414 256 L396 257 L404 277 L384 281 C365 312 310 324 250 324 C190 324 135 312 116 281 L96 277 L104 257 L86 256 C88 248 96 240 98 222Z"/>
+        </g>
+        <!-- silhueta do corpo -->
+        <g id="corpo-forma">
+          <path d="M180 300 C140 340 116 410 120 455 C122 486 160 500 250 500 C340 500 378 486 380 455 C384 410 360 340 320 300Z"/>
+          <ellipse cx="146" cy="490" rx="32" ry="14"/>
+          <ellipse cx="354" cy="490" rx="32" ry="14"/>
+        </g>
+        <clipPath id="clipOlhoE"><ellipse cx="192" cy="234" rx="40" ry="45"/></clipPath>
+        <clipPath id="clipOlhoD"><ellipse cx="308" cy="234" rx="40" ry="45"/></clipPath>
+        <clipPath id="clipNovelo"><circle cx="68" cy="466" r="41"/></clipPath>
+        <clipPath id="clipCabeca"><use href="#cabeca-forma"/></clipPath>
+      </defs>
+
+      <!-- sombra no chão -->
+      <ellipse cx="236" cy="506" rx="238" ry="24" fill="url(#sombraChao)"/>
+
+      <g class="corpo-todo">
+        <!-- novelo de lã -->
+        <g class="novelo">
+          <circle cx="68" cy="466" r="41" fill="url(#novelo)"/>
+          <g clip-path="url(#clipNovelo)" fill="none" stroke="#e5709f" stroke-width="3" stroke-linecap="round" opacity=".9">
+            <path d="M22 450 Q60 420 108 452"/>
+            <path d="M20 466 Q62 432 112 470"/>
+            <path d="M24 484 Q64 448 108 488"/>
+            <path d="M34 500 Q70 466 100 504"/>
+            <path d="M44 430 Q50 466 40 506" stroke="#ffc6dd" stroke-width="2.4" opacity=".8"/>
+            <path d="M76 428 Q86 466 78 508" stroke="#ffc6dd" stroke-width="2.4" opacity=".7"/>
+          </g>
+          <ellipse cx="52" cy="448" rx="13" ry="7" fill="#fff" opacity=".55" transform="rotate(-30 52 448)"/>
+          <circle cx="68" cy="466" r="41" fill="none" stroke="#15122a" stroke-width="3"/>
+          <!-- pontinha do fio solta no novelo -->
+          <path d="M44 432 C36 420 28 424 30 434 C32 442 40 438 38 432" fill="none" stroke="#15122a" stroke-width="6.5" stroke-linecap="round"/>
+          <path d="M44 432 C36 420 28 424 30 434 C32 442 40 438 38 432" fill="none" stroke="#ff9ec4" stroke-width="3.2" stroke-linecap="round"/>
+        </g>
+        <!-- risquinhos de movimento -->
+        <g stroke="#a99ae0" stroke-width="3.5" stroke-linecap="round" opacity=".7">
+          <path d="M6 452 H-14"/><path d="M10 470 H-18"/><path d="M8 488 H-8"/>
+        </g>
+
+        <!-- rabinho enrolando -->
+        <g class="rabo">
+          <path d="M368 480 C448 494 494 432 472 374 C458 338 420 342 420 368" fill="none" stroke="#15122a" stroke-width="43" stroke-linecap="round"/>
+          <path d="M368 480 C448 494 494 432 472 374 C458 338 420 342 420 368" fill="none" stroke="#2f2b45" stroke-width="37" stroke-linecap="round"/>
+          <path d="M376 468 C440 480 480 430 464 380" fill="none" stroke="#4b4672" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+          <!-- pontinha branca -->
+          <path d="M432 340 C418 340 410 352 414 366" fill="none" stroke="#ffffff" stroke-width="37" stroke-linecap="round" opacity="0"/>
+        </g>
+
+        <!-- corpo -->
+        <use href="#corpo-forma" fill="#15122a" stroke="#15122a" stroke-width="6.5" stroke-linejoin="round"/>
+        <use href="#corpo-forma" fill="url(#peloCorpo)"/>
+        <!-- luz no ombro -->
+        <path d="M176 322 C150 352 136 398 136 430" fill="none" stroke="#5a5585" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+        <!-- pezinhos de trás -->
+        <ellipse cx="146" cy="490" rx="29" ry="12" fill="url(#branco)"/>
+        <ellipse cx="354" cy="490" rx="29" ry="12" fill="url(#branco)"/>
+        <g stroke="#9d96c0" stroke-width="2.2" stroke-linecap="round"><path d="M132 484 v8 M146 485 v8 M160 484 v8 M340 484 v8 M354 485 v8 M368 484 v8"/></g>
+
+        <!-- barriguinha branca -->
+        <path d="M205 340 Q250 374 295 340 C316 388 322 440 316 484 L184 484 C178 440 184 388 205 340Z" fill="url(#branco)"/>
+        <path d="M250 382 C226 392 214 420 216 452" fill="none" stroke="#e6e0f7" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+
+        <!-- fio de lã até a patinha -->
+        <g fill="none" stroke-linecap="round">
+          <path d="M100 484 C112 524 164 528 196 494" stroke="#15122a" stroke-width="8"/>
+          <path d="M100 484 C112 524 164 528 196 494" stroke="#ff9ec4" stroke-width="4.2"/>
+          <path d="M104 490 C118 516 160 518 186 498" stroke="#ffd0e3" stroke-width="1.6" opacity=".8"/>
+        </g>
+
+        <!-- patinhas da frente -->
+        <g>
+          <rect x="188" y="404" width="52" height="88" rx="26" fill="url(#branco)"/>
+          <rect x="260" y="404" width="52" height="88" rx="26" fill="url(#branco)"/>
+          <path d="M188 440 V466 Q188 492 214 492 Q240 492 240 466 V440" fill="none" stroke="#15122a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M260 440 V466 Q260 492 286 492 Q312 492 312 466 V440" fill="none" stroke="#15122a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <g stroke="#9d96c0" stroke-width="2.4" stroke-linecap="round"><path d="M205 478 v10 M223 478 v10 M277 478 v10 M295 478 v10"/></g>
+        </g>
+
+        <!-- coleirinha lilás com sininho -->
+        <g>
+          <path d="M146 298 Q250 348 354 298 L350 322 Q250 374 150 322Z" fill="#15122a" stroke="#15122a" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M146 298 Q250 348 354 298 L350 322 Q250 374 150 322Z" fill="#8a6cff"/>
+          <path d="M150 304 Q250 354 350 304" fill="none" stroke="#b5a2ff" stroke-width="4" stroke-linecap="round"/>
+          <g fill="#e5dcff"><circle cx="182" cy="325" r="2.8"/><circle cx="216" cy="338" r="2.8"/><circle cx="250" cy="342" r="2.8"/><circle cx="284" cy="338" r="2.8"/><circle cx="318" cy="325" r="2.8"/></g>
+        </g>
+        <g class="sino">
+          <circle cx="250" cy="360" r="19" fill="#15122a"/>
+          <circle cx="250" cy="360" r="16" fill="url(#ouro)"/>
+          <path d="M237 357 Q250 361 263 357" fill="none" stroke="#a8730a" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="250" cy="366" r="3.2" fill="#a8730a"/>
+          <ellipse cx="243" cy="352" rx="5" ry="3" fill="#fff" opacity=".85" transform="rotate(-30 243 352)"/>
+        </g>
+
+        <!-- cabeça -->
+        <use href="#cabeca-forma" fill="#15122a" stroke="#15122a" stroke-width="6.5" stroke-linejoin="round"/>
+        <use href="#cabeca-forma" fill="url(#pelo)"/>
+
+        <!-- interior das orelhas -->
+        <path d="M122 168 C118 130 122 94 132 68 C154 78 176 94 192 112 C176 134 150 156 122 168Z" fill="#ff9ec4"/>
+        <path d="M378 168 C382 130 378 94 368 68 C346 78 324 94 308 112 C324 134 350 156 378 168Z" fill="#ff9ec4"/>
+        <path d="M134 150 C130 124 134 100 140 84 C156 94 170 106 180 118 C168 132 152 144 134 150Z" fill="#ff77ab" opacity=".7"/>
+        <path d="M366 150 C370 124 366 100 360 84 C344 94 330 106 320 118 C332 132 348 144 366 150Z" fill="#ff77ab" opacity=".7"/>
+        <g fill="#fff" opacity=".9">
+          <path d="M138 140 q-4 -8 0 -16 q6 6 0 16Z" opacity=".0"/>
+        </g>
+        <!-- pelinhos nas orelhas -->
+        <g stroke="#ffd0e3" stroke-width="2.2" stroke-linecap="round" fill="none" opacity=".9">
+          <path d="M146 146 q10 -14 24 -24"/><path d="M142 130 q10 -14 22 -24"/>
+          <path d="M354 146 q-10 -14 -24 -24"/><path d="M358 130 q-10 -14 -22 -24"/>
+        </g>
+
+        <g clip-path="url(#clipCabeca)">
+          <!-- luz no topo da cabeça -->
+          <path d="M122 160 C150 118 200 104 250 104" fill="none" stroke="#6d679a" stroke-width="4.5" stroke-linecap="round" opacity=".55"/>
+          <!-- sombrinha embaixo -->
+          <ellipse cx="250" cy="340" rx="190" ry="40" fill="#1a1630" opacity=".22"/>
+          <!-- listrinhas da testa -->
+          <g fill="none" stroke="#4d4875" stroke-width="5" stroke-linecap="round">
+            <path d="M250 98 V126"/><path d="M224 104 Q226 120 231 131"/><path d="M276 104 Q274 120 269 131"/>
+          </g>
+        </g>
+
+        <!-- focinho branco e faixa na testa -->
+        <g>
+          <path d="M241 168 Q250 156 259 168 L269 280 L231 280Z" fill="url(#branco)"/>
+          <ellipse cx="227" cy="299" rx="33" ry="24" fill="url(#branco)"/>
+          <ellipse cx="273" cy="299" rx="33" ry="24" fill="url(#branco)"/>
+          <path d="M231 282 H269 V292 H231Z" fill="#fbf9ff"/>
+        </g>
+
+        <!-- bochechas rosadas -->
+        <ellipse class="bochecha" cx="128" cy="282" rx="25" ry="13.5" fill="#ff9ec4" opacity=".7"/>
+        <ellipse class="bochecha" cx="372" cy="282" rx="25" ry="13.5" fill="#ff9ec4" opacity=".7"/>
+
+        <!-- olhos abertos -->
+        <g class="olhos-abertos">
+          <g>
+            <ellipse cx="192" cy="234" rx="40" ry="45" fill="url(#olho)"/>
+            <g clip-path="url(#clipOlhoE)">
+              <path d="M140 192 Q192 182 244 192 L244 214 Q192 204 140 214Z" fill="#a8610f" opacity=".5"/>
+              <ellipse cx="192" cy="238" rx="12" ry="32" fill="#1b1730"/>
+              <path d="M152 262 Q192 296 232 262" fill="none" stroke="#fff3c0" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+            </g>
+            <circle cx="177" cy="217" r="12.5" fill="#fff"/>
+            <circle cx="205" cy="256" r="5.6" fill="#fff" opacity=".95"/>
+            <ellipse cx="192" cy="234" rx="40" ry="45" fill="none" stroke="#15122a" stroke-width="3.4"/>
+          </g>
+          <g>
+            <ellipse cx="308" cy="234" rx="40" ry="45" fill="url(#olho)"/>
+            <g clip-path="url(#clipOlhoD)">
+              <path d="M256 192 Q308 182 360 192 L360 214 Q308 204 256 214Z" fill="#a8610f" opacity=".5"/>
+              <ellipse cx="308" cy="238" rx="12" ry="32" fill="#1b1730"/>
+              <path d="M268 262 Q308 296 348 262" fill="none" stroke="#fff3c0" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+            </g>
+            <circle cx="293" cy="217" r="12.5" fill="#fff"/>
+            <circle cx="321" cy="256" r="5.6" fill="#fff" opacity=".95"/>
+            <ellipse cx="308" cy="234" rx="40" ry="45" fill="none" stroke="#15122a" stroke-width="3.4"/>
+          </g>
+        </g>
+        <!-- olhos felizes (clique) -->
+        <g class="olhos-felizes" fill="none" stroke="#ffd76a" stroke-width="9" stroke-linecap="round">
+          <path d="M156 246 Q192 196 228 246"/>
+          <path d="M272 246 Q308 196 344 246"/>
+        </g>
+
+        <!-- nariz e boquinha -->
+        <path d="M236 270 Q250 264 264 270 Q260 284 250 289 Q240 284 236 270Z" fill="#ff9ec4" stroke="#15122a" stroke-width="3" stroke-linejoin="round"/>
+        <ellipse cx="245" cy="271" rx="4" ry="2" fill="#fff" opacity=".8"/>
+        <g fill="none" stroke="#15122a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M250 289 V298"/>
+          <path d="M250 298 Q240 311 225 302"/>
+          <path d="M250 298 Q260 311 275 302"/>
+        </g>
+
+        <!-- bigodes -->
+        <g fill="none" stroke="#15122a" stroke-width="2" stroke-linecap="round" opacity=".85">
+          <path d="M206 296 Q140 284 62 278"/><path d="M204 304 Q140 306 54 314"/><path d="M208 311 Q148 328 74 346"/>
+          <path d="M294 296 Q360 284 438 278"/><path d="M296 304 Q360 306 446 314"/><path d="M292 311 Q352 328 426 346"/>
+        </g>
+        <g clip-path="url(#clipCabeca)" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity=".55">
+          <path d="M206 296 Q140 284 62 278"/><path d="M204 304 Q140 306 54 314"/><path d="M208 311 Q148 328 74 346"/>
+          <path d="M294 296 Q360 284 438 278"/><path d="M296 304 Q360 306 446 314"/><path d="M292 311 Q352 328 426 346"/>
+        </g>
+      </g>
+
+      <!-- balãozinho de miau -->
+      <g class="miau">
+        <path d="M410 70 Q410 44 436 44 H474 Q500 44 500 70 Q500 96 474 96 H452 L440 112 L440 96 H436 Q410 96 410 70Z" fill="#fff" stroke="#15122a" stroke-width="3" stroke-linejoin="round"/>
+        <text x="455" y="78" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="23" fill="#8a6cff">miau~</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div class="selo" title=""><svg viewBox="-50 -50 100 100"><use href="#brilho" x="-50" y="-50" width="100" height="100" style="color:#8a6cff"/></svg></div>
+
+<script>
+  // pegadinhas de gato em rastros diagonais
+  (function () {
+    var box = document.getElementById('pegadas');
+    function rastro(x0, y0, x1, y1, n, cor, op) {
+      var dx = x1 - x0, dy = y1 - y0, len = Math.sqrt(dx * dx + dy * dy);
+      var ang = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+      var px = -dy / len, py = dx / len;
+      for (var i = 0; i < n; i++) {
+        var t = i / Math.max(1, n - 1), lado = i % 2 ? 1 : -1;
+        var x = x0 + dx * t + px * 15 * lado, y = y0 + dy * t + py * 15 * lado;
+        var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        s.setAttribute('viewBox', '0 0 100 100');
+        s.style.left = x + 'px'; s.style.top = y + 'px';
+        s.style.transform = 'rotate(' + (ang + lado * 6) + 'deg)';
+        s.style.opacity = (op * (0.45 + 0.55 * t)).toFixed(2);
+        if (cor) s.style.color = cor;
+        s.innerHTML = '<use href="#pata"/>';
+        box.appendChild(s);
+      }
+    }
+    rastro(34, 680, 120, 140, 8, '#b3a4f0', .6);
+    rastro(486, 700, 650, 300, 7, '#b3a4f0', .7);
+    rastro(1250, 240, 1420, 640, 8, '#b3a4f0', .7);
+    rastro(1846, 90, 1888, 660, 9, '#b3a4f0', .7);
+    rastro(340, 70, 700, 40, 6, '#b3a4f0', .55);
+    rastro(1240, 60, 1800, 40, 0, '#b3a4f0', 0);
+  })();
+
+  // carinho no gatinho
+  (function () {
+    var n = 0, el = document.getElementById('bicho'), c = document.getElementById('contador'), t;
+    el.addEventListener('click', function (e) {
+      c.textContent = ++n;
+      el.classList.add('feliz');
+      clearTimeout(t); t = setTimeout(function () { el.classList.remove('feliz'); }, 900);
+      var h = document.createElement('span');
+      h.className = 'coracao'; h.textContent = '♥';
+      h.style.left = (e.clientX - 12) + 'px'; h.style.top = (e.clientY - 20) + 'px';
+      h.style.setProperty('--dx', (Math.random() * 80 - 40) + 'px');
+      document.body.appendChild(h);
+      setTimeout(function () { h.remove(); }, 1250);
+    });
+  })();
+</script>
+</body>
+</html>

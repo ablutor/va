@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino feminino-2">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Chikorita</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../_fofinhos/fofinhos.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Desenhos usados mais de uma vez: a pegada e o bichinho -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Pegada de Chikorita: patinha de dinossauro com três dedinhos pontudos -->
+      <symbol id="pegada" viewBox="0 0 100 100">
+        <g fill="currentColor">
+          <path d="M50 52 C64 52 72 64 70 78 C68 90 58 92 50 90 C42 92 32 90 30 78 C28 64 36 52 50 52 Z"/>
+          <path d="M30 56 C22 46 18 34 20 22 C28 30 36 42 40 52 Z"/>
+          <path d="M44 48 C44 34 46 20 50 8 C54 20 56 34 56 48 Z"/>
+          <path d="M70 56 C78 46 82 34 80 22 C72 30 64 42 60 52 Z"/>
+        </g>
+      </symbol>
+
+      <!-- Pele verde-clarinha, folha e brotinhos do pescoço -->
+      <radialGradient id="ck-pele" cx="40%" cy="30%" r="75%">
+        <stop offset="0" stop-color="var(--pele-luz)"/>
+        <stop offset=".55" stop-color="var(--pele)"/>
+        <stop offset="1" stop-color="var(--pele-sombra)"/>
+      </radialGradient>
+      <linearGradient id="ck-folha" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="var(--folha-sombra)"/>
+        <stop offset=".5" stop-color="var(--folha)"/>
+        <stop offset="1" stop-color="var(--folha-luz)"/>
+      </linearGradient>
+      <radialGradient id="ck-broto" cx="40%" cy="30%" r="80%">
+        <stop offset="0" stop-color="var(--folha-luz)"/>
+        <stop offset="1" stop-color="var(--folha-sombra)"/>
+      </radialGradient>
+      <radialGradient id="ck-olho" cx="50%" cy="65%" r="60%">
+        <stop offset="0" stop-color="var(--olho-luz)"/>
+        <stop offset="1" stop-color="var(--olho)"/>
+      </radialGradient>
+      <!-- Contorno fino: encolhe só a borda de fora da silhueta preta -->
+      <filter id="ck-contorno-fino" x="-5%" y="-5%" width="110%" height="110%">
+        <feMorphology operator="erode" radius="1.7"/>
+      </filter>
+      <!-- A borda da folha é mais fina no desenho, então encolhe menos -->
+      <filter id="ck-contorno-folha" x="-5%" y="-5%" width="110%" height="110%">
+        <feMorphology operator="erode" radius="1.7"/>
+      </filter>
+      <clipPath id="ck-ate-barriga"><rect x="0" y="0" width="420" height="316"/></clipPath>
+    </defs>
+  </svg>
+
+  <!-- O bichinho: o fofinhos.js copia este desenho para dentro de cada .bicho -->
+  <template id="bichinho">
+    <svg viewBox="0 0 380 400">
+        <!-- folhinhas e pétalas caindo devagar (não recebem clique) -->
+        <g class="folhas" pointer-events="none">
+          <g transform="translate(-50 -60)"><g class="folhinha f1"><path d="M0 -14 C10 -8 10 8 0 14 C-10 8 -10 -8 0 -14 Z" fill="var(--cai1)"/><path d="M0 -11 L0 17" stroke="var(--folha-veia)" stroke-width="1.5" stroke-linecap="round"/></g></g>
+          <g transform="translate(60 -130)"><g class="folhinha f2"><ellipse rx="7" ry="10" fill="var(--cai2)"/></g></g>
+          <g transform="translate(340 -110)"><g class="folhinha f3"><path d="M0 -14 C10 -8 10 8 0 14 C-10 8 -10 -8 0 -14 Z" fill="var(--cai1)"/><path d="M0 -11 L0 17" stroke="var(--folha-veia)" stroke-width="1.5" stroke-linecap="round"/></g></g>
+          <g transform="translate(440 -30)"><g class="folhinha f4"><ellipse rx="7" ry="10" fill="var(--cai2)"/></g></g>
+        </g>
+        <g class="pulo-todo">
+          <g class="corpo-todo">
+          <!-- Desenho em estilo animação, com as formas recortadas de uma referência 3D -->
+          <g transform="translate(-44 -30) scale(.72)" stroke="var(--contorno)" stroke-width="4.4" stroke-linejoin="round" stroke-linecap="round">
+            <!-- folha da cabeça, atrás do corpo (balança sozinha) -->
+            <g class="folha-cabeca">
+              <path d="M318.5 52.8Q307.8 52.5 295.2 54Q282.8 55.5 275.5 57.8Q268.2 60 260.5 63.5Q252.8 67 245.2 72.2Q237.8 77.5 230.9 84.6Q224 91.8 218.2 101.5Q212.5 111.2 208.8 122.5Q205 133.8 205 139.5Q205 145.2 207.4 146.4Q209.8 147.5 215.5 147Q221.2 146.5 233 142.2Q244.8 138 246.4 135.6Q248 133.2 246.8 128.2Q245.5 123.2 245.8 119.2Q246 115.2 248.2 110.5Q250.5 105.8 253.9 102.6Q257.2 99.5 261 98Q264.8 96.5 270.8 96.2Q276.8 96 280.8 97Q284.8 98 289.5 100.2Q294.2 102.5 302.2 108.2Q310.2 114 334 136.8Q357.8 159.5 374.8 174Q391.8 188.5 407.2 200Q422.8 211.5 438.6 221.6Q454.5 231.8 476.6 246.6Q498.8 261.5 517.5 280.2Q536.2 299 538.2 299.5Q540.2 300 541.9 298.1Q543.5 296.2 543.8 287.2Q544 278.2 543 269.8Q542 261.2 539 248.5Q536 235.8 532 224Q528 212.2 518.5 192.8Q509 173.2 498 157.8Q487 142.2 475.9 130.6Q464.8 119 455.8 111.5Q446.8 104 434.8 95.8Q422.8 87.5 411.8 81.2Q400.8 75 391 70.5Q381.2 66 365 61Q348.8 56 339 54.5Q329.2 53 318.5 52.8Z" fill="url(#ck-folha)"/>
+            </g>
+            <!-- cabeça e corpo, com sombreado chapado -->
+            <path d="M263.8 135Q248.2 133 246.5 135.5Q244.8 138 235.2 141.8Q225.8 145.5 216.8 146.2Q207.8 147 206.1 145.6Q204.5 144.2 204.1 141.4Q203.8 138.5 194.2 142.2Q184.8 146 178.5 149.5Q172.2 153 164 159Q155.8 165 147.9 173.1Q140 181.2 136.5 186.2Q133 191.2 128.2 201.5Q123.5 211.8 119.8 229.2Q116 246.8 115.5 265.5Q115 284.2 112.5 300Q110 315.8 110.5 326Q111 336.2 115 347.5Q119 358.8 113.8 363Q108.5 367.2 107.5 370Q106.5 372.8 107.2 375.8Q108 378.8 110.9 381.9Q113.8 385 120.2 387.2Q126.8 389.5 127.9 390.6Q129 391.8 124.8 419.8Q120.5 447.8 120.2 463.5Q120 479.2 121 489.5Q122 499.8 125 512.5Q128 525.2 131.5 533Q135 540.8 134.2 546Q133.5 551.2 135.6 553.1Q137.8 555 141.5 553.5Q145.2 552 148.2 547.8Q151.2 543.5 157 549.2Q162.8 555 170.8 554.8Q178.8 554.5 183 552.5Q187.2 550.5 191.2 551.5Q195.2 552.5 196.4 551.9Q197.5 551.2 197.5 547.5Q197.5 543.8 202 538.2Q206.5 532.8 209.5 527.2Q212.5 521.8 214.4 520.6Q216.2 519.5 227.8 524.5Q239.2 529.5 255.5 532.5Q271.8 535.5 272.9 536.9Q274 538.2 274.5 541.8Q275 545.2 278.8 550.5Q282.5 555.8 286.1 559.4Q289.8 563 291.8 563.2Q293.8 563.5 296.2 565.5Q298.8 567.5 301.2 567.2Q303.8 567 307.1 562.6Q310.5 558.2 311.9 557.4Q313.2 556.5 316.4 559.1Q319.5 561.8 319.2 565.2Q319 568.8 319.6 569.4Q320.2 570 331.5 568.5Q342.8 567 354 563Q365.2 559 364.9 557.1Q364.5 555.2 365.8 553.8Q367 552.2 363.6 550.9Q360.2 549.5 359.1 546.6Q358 543.8 364.1 531.6Q370.2 519.5 379.1 531.4Q388 543.2 391.4 544.9Q394.8 546.5 395.9 546.4Q397 546.2 397 544.2Q397 542.2 399.4 539.4Q401.8 536.5 408.8 535.5Q415.8 534.5 421.4 537.4Q427 540.2 427.8 541.5Q428.5 542.8 428.2 546.2Q428 549.8 429.4 550.1Q430.8 550.5 436.2 547.8Q441.8 545 445.4 541.4Q449 537.8 454 528Q459 518.2 460.8 512Q462.5 505.8 463.5 495.8Q464.5 485.8 463.5 466.8Q462.5 447.8 460.8 438.8Q459 429.8 456 420.5Q453 411.2 454 401.8Q455 392.2 454.8 385Q454.5 377.8 453.2 374Q452 370.2 448.6 367.6Q445.2 365 442.5 364.2Q439.8 363.5 431.2 363.5Q422.8 363.5 413.8 356Q404.8 348.5 401.4 343.9Q398 339.2 397.8 338.2Q397.5 337.2 400.5 331.5Q403.5 325.8 403.5 323.5Q403.5 321.2 401.1 317.9Q398.8 314.5 393.2 312.5Q387.8 310.5 386.4 309.1Q385 307.8 381.8 285Q378.5 262.2 374.2 244.2Q370 226.2 365.2 214Q360.5 201.8 353.5 190.2Q346.5 178.8 337.9 169.9Q329.2 161 323 156.8Q316.8 152.5 308.2 148.2Q299.8 144 289.5 140.5Q279.2 137 263.8 135Z" fill="url(#ck-pele)"/>
+            <path d="M258.5 135Q250.8 135 250.8 136.5Q250.8 138 259.5 139.8Q268.2 141.5 276.2 145Q284.2 148.5 288.4 151.6Q292.5 154.8 298 161.5Q303.5 168.2 309 179.5Q314.5 190.8 320 207.2Q325.5 223.8 329.8 247Q334 270.2 333.5 285.2Q333 300.2 330.8 307.8Q328.5 315.2 324.8 321.8Q321 328.2 308.6 341.6Q296.2 355 294 355.8Q291.8 356.5 282.5 364.8Q273.2 373 264.5 378Q255.8 383 253.6 387.1Q251.5 391.2 254.9 397.4Q258.2 403.5 265 398.2Q271.8 393 277.5 393.5Q283.2 394 286.4 397.1Q289.5 400.2 290.8 405Q292 409.8 290.5 414.5Q289 419.2 285.6 422.6Q282.2 426 276.9 427.4Q271.5 428.8 274.6 431.4Q277.8 434 282.8 434.2Q287.8 434.5 291.6 431.6Q295.5 428.8 297.2 424.5Q299 420.2 298.2 411.5Q297.5 402.8 300.4 400.4Q303.2 398 311.5 399Q319.8 400 326.8 403.8Q333.8 407.5 338.9 412.4Q344 417.2 346 421.2Q348 425.2 348.5 434.2Q349 443.2 347 468Q345 492.8 339.2 510.5Q333.5 528.2 329.2 536.5Q325 544.8 319.5 550.2Q314 555.8 316.8 558.8Q319.5 561.8 320.6 565.4Q321.8 569 332.5 567.8Q343.2 566.5 353.2 562.5Q363.2 558.5 363.6 555.9Q364 553.2 361.5 551Q359 548.8 358.5 546Q358 543.2 363.9 531.9Q369.8 520.5 381.2 532.8Q392.8 545 394 545Q395.2 545 399.5 540.2Q403.8 535.5 410.2 535Q416.8 534.5 422.1 537.6Q427.5 540.8 429.1 545.1Q430.8 549.5 436.2 547Q441.8 544.5 446.1 539.9Q450.5 535.2 453.5 529.8Q456.5 524.2 459.8 512.2Q463 500.2 463.5 483Q464 465.8 462 450.8Q460 435.8 456.5 423.8Q453 411.8 453.2 393.2Q453.5 374.8 449.4 370.1Q445.2 365.5 434 364.5Q422.8 363.5 414 356.2Q405.2 349 403.6 349.6Q402 350.2 399.4 354.1Q396.8 358 393 360Q389.2 362 383.8 363Q378.2 364 375.9 362.4Q373.5 360.8 372 355.5Q370.5 350.2 371.8 343.5Q373 336.8 375.4 334.9Q377.8 333 387.2 334.8Q396.8 336.5 399.1 333.4Q401.5 330.2 402.2 326Q403 321.8 401.6 320.4Q400.2 319 395 319.8Q389.8 320.5 388.9 319.4Q388 318.2 380.5 278Q373 237.8 365 216.5Q357 195.2 349 184Q341 172.8 334.9 166.9Q328.8 161 320.8 155.8Q312.8 150.5 298.2 144.5Q283.8 138.5 275 136.8Q266.2 135 258.5 135ZM277.8 205.5Q272.8 205.5 268.2 207.2Q263.8 209 261.2 211.8Q258.8 214.5 264.8 212.5Q270.8 210.5 280.2 212.2Q289.8 214 293.2 216Q296.8 218 301.9 224.4Q307 230.8 309.8 236.8Q312.5 242.8 312.8 241.5Q313 240.2 308.8 231Q304.5 221.8 298.6 216.4Q292.8 211 287.8 208.2Q282.8 205.5 277.8 205.5ZM140.9 215.1Q138.2 214 134.6 217.6Q131 221.2 130.2 224.5Q129.5 227.8 130.8 226.5Q132 225.2 137.8 220.8Q143.5 216.2 140.9 215.1ZM234.1 320.4Q232.2 319.5 226.9 322.6Q221.5 325.8 223.4 326.4Q225.2 327 230.4 325.1Q235.5 323.2 235.8 322.2Q236 321.2 234.1 320.4ZM162.4 328.4Q160.8 328 160.4 329.1Q160 330.2 161.6 331.4Q163.2 332.5 163.6 330.6Q164 328.8 162.4 328.4ZM335 367.5Q338.8 366 344 367.2Q349.2 368.5 352.1 371.6Q355 374.8 356.5 378.8Q358 382.8 357 387.8Q356 392.8 353.1 395.4Q350.2 398 346 399.2Q341.8 400.5 335.8 399.5Q329.8 398.5 326.1 393.1Q322.5 387.8 324 381.2Q325.5 374.8 328.4 371.9Q331.2 369 335 367.5ZM270.9 406.1Q269.2 405.5 268.6 407.1Q268 408.8 269.6 409.6Q271.2 410.5 271.9 408.6Q272.5 406.8 270.9 406.1ZM199.1 416.6Q197.2 415.5 196.1 417.6Q195 419.8 196.9 420.4Q198.8 421 199.9 419.4Q201 417.8 199.1 416.6ZM155.9 418.9Q155.2 417.5 149.8 419.2Q144.2 421 145.1 423.1Q146 425.2 149.6 424.9Q153.2 424.5 154.9 422.4Q156.5 420.2 155.9 418.9ZM221.9 425.1Q221.2 421 217.2 426.5Q213.2 432 206.6 434.6Q200 437.2 201.6 439.1Q203.2 441 207.5 442Q211.8 443 215.6 440.1Q219.5 437.2 221 433.2Q222.5 429.2 221.9 425.1ZM188.2 494Q182.2 492 183.6 501.4Q185 510.8 183.2 517.5Q181.5 524.2 176.6 531.6Q171.8 539 164.6 542.6Q157.5 546.2 159.4 549.9Q161.2 553.5 168.2 554Q175.2 554.5 181 552.5Q186.8 550.5 190.2 551.2Q193.8 552 203.8 536.2Q213.8 520.5 215.8 520.2Q217.8 520 221.4 521.9Q225 523.8 238.4 528.1Q251.8 532.5 261.8 533.5Q271.8 534.5 270.2 515.8Q268.8 497 246.8 498.8Q224.8 500.5 209.5 498.2Q194.2 496 188.2 494Z" fill="var(--pele-sombra)" stroke="none" opacity=".8"/>
+            <!-- divisão das patas -->
+            <path d="M190 498 C205 516 238 520 268 506 M272 500 C266 526 270 548 288 560 M370 520 C374 540 368 556 352 562 M392 520 C402 528 404 540 398 548" fill="none" stroke-width="3.6"/>
+            <!-- unhas -->
+            <g fill="#f6eccb" stroke-width="3.2">
+              <ellipse cx="146" cy="546" rx="11" ry="7"/><ellipse cx="303" cy="562" rx="12" ry="7"/><ellipse cx="412" cy="546" rx="12" ry="7"/>
+            </g>
+            <!-- brotinhos do pescoço -->
+            <path d="M393.2 313.5Q388.8 312 388.1 314.1Q387.5 316.2 388.6 318.9Q389.8 321.5 391 320Q392.2 318.5 394.2 318.5Q396.2 318.5 398.1 318.4Q400 318.2 398.9 316.6Q397.8 315 393.2 313.5ZM385.5 334.2Q378.2 333 376.1 334.4Q374 335.8 372.8 338Q371.5 340.2 371.8 349Q372 357.8 373.6 360.1Q375.2 362.5 377 363.2Q378.8 364 385 362.2Q391.2 360.5 395.9 357.1Q400.5 353.8 401 349.5Q401.5 345.2 400.2 343Q399 340.8 395.9 338.1Q392.8 335.5 385.5 334.2ZM118.8 360.5Q117.8 360.5 113.9 363.4Q110 366.2 108.8 370.8Q107.5 375.2 109.9 379.1Q112.2 383 116.2 385.2Q120.2 387.5 124 388Q127.8 388.5 128.6 387.4Q129.5 386.2 129.2 382.5Q129 378.8 125.8 371.2Q122.5 363.8 121.1 362.1Q119.8 360.5 118.8 360.5ZM342.5 366.2Q339.8 366 335.8 367.5Q331.8 369 329.1 371.4Q326.5 373.8 325 376.2Q323.5 378.8 323 382Q322.5 385.2 323.5 389Q324.5 392.8 326.6 395.1Q328.8 397.5 331.2 398.8Q333.8 400 337.2 400.2Q340.8 400.5 346.8 398.2Q352.8 396 354.9 393.1Q357 390.2 357.5 387Q358 383.8 356.5 379.5Q355 375.2 352.4 372.1Q349.8 369 347.5 367.8Q345.2 366.5 342.5 366.2ZM146.2 390.8Q143.8 390 141.2 391.2Q138.8 392.5 135.9 395.6Q133 398.8 131.8 401.8Q130.5 404.8 130.5 407.5Q130.5 410.2 133.1 413.9Q135.8 417.5 140.8 418.8Q145.8 420 150.5 418.5Q155.2 417 156.9 415.1Q158.5 413.2 158.8 411.2Q159 409.2 156.2 402.5Q153.5 395.8 151.1 393.6Q148.8 391.5 146.2 390.8ZM276.2 393Q272.8 393 270.5 393.8Q268.2 394.5 265.1 397.1Q262 399.8 260.5 403.5Q259 407.2 259 409.8Q259 412.2 260.2 416Q261.5 419.8 263.9 422.4Q266.2 425 269 426.2Q271.8 427.5 274.6 427.4Q277.5 427.2 280.1 426.4Q282.8 425.5 285.1 423.4Q287.5 421.2 289.5 417Q291.5 412.8 291.5 409.5Q291.5 406.2 290.2 403Q289 399.8 287.1 397.6Q285.2 395.5 282.5 394.2Q279.8 393 276.2 393ZM203.5 402.5Q200.2 402.5 198 403.5Q195.8 404.5 193.9 406.6Q192 408.8 190.5 412Q189 415.2 188.5 419.8Q188 424.2 189.5 427.5Q191 430.8 192.9 432.4Q194.8 434 196.8 434.8Q198.8 435.5 202.9 435.1Q207 434.8 210.6 432.9Q214.2 431 216.1 428.6Q218 426.2 219 420.2Q220 414.2 216.4 409.6Q212.8 405 209.8 403.8Q206.8 402.5 203.5 402.5Z" fill="url(#ck-broto)" stroke-width="3.6"/>
+            <!-- boca aberta -->
+            <path d="M192.2 325.2Q185.2 324.5 182.8 326Q180.2 327.5 175 328.2Q169.8 329 168.6 330.6Q167.5 332.2 169.8 339.8Q172 347.2 175.5 354.2Q179 361.2 182.6 365.1Q186.2 369 190.8 371.5Q195.2 374 201.5 374.5Q207.8 375 211 373.8Q214.2 372.5 218.6 369.1Q223 365.8 225.5 361.5Q228 357.2 229.8 351Q231.5 344.8 232 338.2Q232.5 331.8 231.4 330.9Q230.2 330 227 329.8Q223.8 329.5 219.2 330Q214.8 330.5 207 328.2Q199.2 326 192.2 325.2Z" fill="var(--boca)" stroke-width="3.6"/>
+            <path d="M213.8 348.2Q211.2 348 202.8 349Q194.2 350 190.1 352.6Q186 355.2 185.5 357.8Q185 360.2 186.2 362.8Q187.5 365.2 192.6 368.6Q197.8 372 200.8 372.5Q203.8 373 207.2 372.2Q210.8 371.5 213.2 370.2Q215.8 369 218.6 365.6Q221.5 362.2 222.2 359.8Q223 357.2 222.5 354.5Q222 351.8 219.1 350.1Q216.2 348.5 213.8 348.2Z" fill="var(--lingua-luz)" stroke="none"/>
+            <!-- olhos -->
+            <g class="olhos-abertos">
+              <path d="M278 216Q272.2 214 264.4 219.1Q256.5 224.2 254 230.2Q251.5 236.2 249.8 245.5Q248 254.8 249 268.8Q250 282.8 251.2 287.8Q252.5 292.8 255.9 297.4Q259.2 302 266.8 304.2Q274.2 306.5 282.4 305.9Q290.5 305.2 293.6 303.9Q296.8 302.5 299.2 302.5Q301.8 302.5 305.5 300.5Q309.2 298.5 310.6 296.6Q312 294.8 313 282.5Q314 270.2 312.8 260Q311.5 249.8 309 241.8Q306.5 233.8 302.6 228.1Q298.8 222.5 294.2 219.8Q289.8 217 286.8 217.5Q283.8 218 278 216ZM146.6 220.6Q143.2 218 141 218.8Q138.8 219.5 136.4 221.6Q134 223.8 131.2 228.8Q128.5 233.8 126.5 241.2Q124.5 248.8 123.2 258.2Q122 267.8 122.8 282.8Q123.5 297.8 125.4 300.6Q127.2 303.5 131.5 306Q135.8 308.5 139 308.2Q142.2 308 145.9 305.4Q149.5 302.8 151.2 298.5Q153 294.2 154 287.8Q155 281.2 155.2 270.5Q155.5 259.8 155.2 256.8Q155 253.8 153.8 251.8Q152.5 249.8 152.2 239.8Q152 229.8 151 226.5Q150 223.2 146.6 220.6Z" fill="#fff4dc" stroke-width="3.6"/>
+              <path d="M277 215.5Q271.8 214 265.8 217.5Q259.8 221 256.9 224.9Q254 228.8 251 241.8Q248 254.8 248.2 263.2Q248.5 271.8 249.8 279.8Q251 287.8 253.5 293.5Q256 299.2 261.1 302.1Q266.2 305 273.5 305.8Q280.8 306.5 287.2 305.5Q293.8 304.5 296.6 301.6Q299.5 298.8 301.8 292.5Q304 286.2 304 274.8Q304 263.2 301.5 252.5Q299 241.8 295.5 234.2Q292 226.8 287.1 221.9Q282.2 217 277 215.5ZM148.4 222.6Q146.2 221 142.1 223.9Q138 226.8 133.8 236.2Q129.5 245.8 127.8 256.8Q126 267.8 126 278Q126 288.2 127.2 294.5Q128.5 300.8 130.6 304.1Q132.8 307.5 136 308.2Q139.2 309 143.9 306.4Q148.5 303.8 150 301.5Q151.5 299.2 153 293Q154.5 286.8 155 273.2Q155.5 259.8 154.9 255.9Q154.2 252 150.8 255.5Q147.2 259 145.4 257.9Q143.5 256.8 142.5 254.5Q141.5 252.2 141.2 248.8Q141 245.2 142.5 241Q144 236.8 145.4 235.1Q146.8 233.5 149.4 233.1Q152 232.8 151.2 228.5Q150.5 224.2 148.4 222.6Z" fill="url(#ck-olho)" stroke="none"/>
+              <g stroke="none" fill="#fff"><ellipse cx="266" cy="241" rx="9" ry="12"/><ellipse cx="148" cy="245" rx="5" ry="10"/></g>
+            </g>
+            <g class="olhos-felizes" fill="none" stroke-width="5">
+              <path d="M252 266 q24 -24 48 0"/>
+              <path d="M128 270 q13 -18 26 0"/>
+            </g>
+          </g>
+          </g>
+        </g>
+    </svg>
+  </template>
+
+  <!-- Fundo da tela toda, com rastros de pegadas -->
+  <div class="xs-fundo fundo"><div class="pegadas" data-pegadas="6"></div></div>
+
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <section class="perfil card">
+      <div class="topo">
+        <div class="foto" data-xs-bg="fotos.perfil"></div>
+        <div>
+          <h1 class="nome" data-xs="nome">Albert</h1>
+          <div class="sobrenome nome" data-xs="sobrenome">Alves</div>
+        </div>
+      </div>
+      <div class="linha-online">
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+      <p class="local" data-xs-se="local">📍 <span data-xs="local"></span></p>
+      <div class="cap">Meu mundinho</div>
+      <ul class="chips" data-gostos style="margin-top:10px"></ul>
+      <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span> ↗</a>
+    </section>
+
+    <div class="cena">
+      <p class="balao" data-balao></p>
+      <button class="bicho" type="button" aria-label="Fazer carinho na Chikorita"></button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="lado">
+      <div class="card carinho">
+        <span class="num" data-carinhos>0</span>
+        <div><span class="cap">Carinhos na Chikorita</span><p>Clica nela para dar mais um ♥</p></div>
+      </div>
+      <div class="card citacao" data-xs-se="citacao.texto">
+        <span class="cap">Frase favorita</span>
+        <p data-xs="citacao.texto"></p>
+        <small>— <span data-xs="citacao.autor"></span></small>
+      </div>
+      <div class="card player" data-xs-player>
+        <span class="xs-controles">
+          <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+          <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+        </span>
+        <div class="info">
+          <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+          <div class="barra"><span data-xs-barra></span></div>
+        </div>
+        <span class="eq"><i></i><i></i><i></i><i></i></span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <div class="cabeca">
+      <div class="foto" data-xs-bg="fotos.perfil"></div>
+      <div>
+        <h1 class="nome" data-xs="nome">Albert</h1>
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+    </div>
+
+    <div class="cena">
+      <p class="balao" data-balao></p>
+      <button class="bicho" type="button" aria-label="Fazer carinho na Chikorita"></button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="perfil card">
+      <div class="cap" style="margin-bottom:8px">Meu mundinho</div>
+      <ul class="chips" data-gostos></ul>
+      <div class="rodape">
+        <div class="carinho"><span class="num" data-carinhos>0</span><p>carinhos ♥</p></div>
+        <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span></a>
+      </div>
+    </section>
+
+    <div class="card player" data-xs-player>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+      <div class="info">
+        <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+        <div class="barra"><span data-xs-barra></span></div>
+      </div>
+      <span class="eq"><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="../../_fofinhos/fofinhos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

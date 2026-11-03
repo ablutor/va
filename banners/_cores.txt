@@ -1,0 +1,37 @@
+# Cores de cada modelo, como no catálogo do site (config/xatspaces.php): NN-modelo cor cor ...
+40-recorte original masculino feminino
+41-onda original masculino feminino
+42-hora original masculino feminino
+11-coelhinho original masculino feminino feminino-2
+12-pinguim original masculino feminino feminino-2
+13-raposinha original masculino feminino feminino-2
+14-patinho original masculino feminino feminino-2
+15-panda original masculino feminino feminino-2
+54-gatinho original masculino feminino feminino-2
+16-pikachu original
+50-praia original masculino feminino
+51-cafe original masculino feminino
+52-estrada original masculino feminino
+53-rua-noturna original masculino feminino
+01-revista original masculino feminino feminino-2 pastel-rosa
+02-folha-de-contato original masculino feminino feminino-2 pastel-rosa
+03-visor-de-camera original masculino feminino feminino-2 pastel-rosa
+04-livro-aberto masculino feminino feminino-2 pastel-rosa
+05-galeria original masculino feminino feminino-2
+06-cinema original masculino feminino feminino-2 pastel-rosa
+07-jornal original masculino feminino feminino-2 pastel-rosa
+09-grid-suico original masculino feminino feminino-2
+43-verbete original masculino feminino feminino-2 pastel-rosa
+27-passaporte original
+28-windows-98 original
+29-mural-de-cortica original homem mulher
+30-letreiro-neon original masculino masculino-2 feminino feminino-2
+31-quadrinhos original masculino masculino-2 feminino
+32-windows-xp original
+44-zine original masculino feminino feminino-2 pastel-rosa
+45-manga original masculino feminino feminino-2 pastel-rosa
+46-varal original masculino feminino feminino-2 pastel-rosa
+08-capa-de-disco original masculino feminino feminino-2 pastel-rosa
+47-fita-k7 original masculino feminino feminino-2 pastel-rosa
+49-lofi original masculino feminino feminino-2
+55-manga-2 original masculino feminino feminino-2 pastel-rosa

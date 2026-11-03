@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Recorte</title>
+  <!-- Banner do modelo 40 · Recorte: papel liso e a moldura de traço de tinta com marcas de corte na cor de destaque (o "recorte"). -->
+  <link rel="stylesheet" href="_base.css">
+  <style>
+    :root { --bg: #efece6; --ink: #161513; --mudo: #7d776d; --ac: #c8553d; }
+    [data-cor="original"]  { --bg: #efece6; --ink: #161513; --mudo: #7d776d; --ac: #c8553d; }
+    [data-cor="masculino"] { --bg: #e4e8ec; --ink: #0f151b; --mudo: #6b7681; --ac: #2f5fa8; }
+    [data-cor="feminino"]  { --bg: #f4e7e5; --ink: #2a1a1d; --mudo: #8a7378; --ac: #c24a6a; }
+    html, body { background: var(--bg); }
+    .tudo { background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(0,0,0,0) 60%); }
+
+    /* Moldura: traço de tinta fino em volta do avatar, mais as marcas de corte nos cantos de cima-esquerda e baixo-direita */
+    .moldura { background: var(--bg); box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--ink) 78%, transparent) inset; }
+    .moldura svg { position: absolute; left: -6px; top: -6px; width: 96px; height: 96px; overflow: visible; }
+    .moldura .ci { display: none; }
+    .redonda .moldura .qu { display: none; }
+    .redonda .moldura .ci { display: block; }
+    .moldura .mc { stroke: var(--ac); stroke-width: 1.8; fill: none; stroke-linecap: butt; }
+    .moldura .ink { stroke: color-mix(in srgb, var(--ink) 82%, transparent); stroke-width: 1.5; fill: none; }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="moldura" id="moldura">
+      <svg class="qu" viewBox="-6 -6 96 96">
+        <!-- marcas de corte: cantos superior-esquerdo e inferior-direito -->
+        <path class="mc" d="M-5 2 H4 V-5"/>
+        <path class="mc" d="M89 82 H80 V89"/>
+        <path class="mc" d="M89 2 H80 V-5" style="stroke:color-mix(in srgb, var(--ink) 45%, transparent);stroke-width:1.2"/>
+        <path class="mc" d="M-5 82 H4 V89" style="stroke:color-mix(in srgb, var(--ink) 45%, transparent);stroke-width:1.2"/>
+      </svg>
+      <svg class="ci" viewBox="-6 -6 96 96">
+        <!-- no círculo: traço de tinta completo e dois arcos de corte fora dele -->
+        <circle class="ink" cx="42" cy="42" r="41.2"/>
+        <path class="mc" id="arco1" d=""/>
+        <path class="mc" id="arco2" d=""/>
+      </svg>
+    </div>
+  </div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function () {
+      if (XB.redonda) document.getElementById("moldura").classList.add("redonda");
+      // arcos de corte: raio 45, centrados em 42,42, de 200° a 250° e de 20° a 70° (em torno das diagonais)
+      function arco(id, a0, a1) {
+        var r = 45.5, c = 42, p = function (a) { var t = a * Math.PI / 180; return (c + r * Math.cos(t)).toFixed(2) + " " + (c + r * Math.sin(t)).toFixed(2); };
+        document.getElementById(id).setAttribute("d", "M" + p(a0) + " A" + r + " " + r + " 0 0 1 " + p(a1));
+      }
+      arco("arco1", 205, 245); arco("arco2", 25, 65);
+      XB.pronto2();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Windows XP</title>
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../../core/cores.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--
+    Modelo 32 · Windows XP
+    As janelas são HTML e CSS de verdade, com o miolo vazio. Só a foto do cliente entra
+    dentro delas (data-xs-img). Os textos vêm dos dados do cliente e do TEXTOS no topo do script.js.
+  -->
+
+  <!-- Ícones, desenhados uma vez e usados nos dois palcos -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="g-pasta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9a3"/><stop offset="1" stop-color="#f2b33d"/></linearGradient>
+      <linearGradient id="g-globo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd0ff"/><stop offset="1" stop-color="#1b74d6"/></linearGradient>
+      <linearGradient id="g-lixo" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa3ad"/><stop offset=".5" stop-color="#eef1f4"/><stop offset="1" stop-color="#9aa3ad"/></linearGradient>
+      <linearGradient id="g-nota" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9b7bff"/><stop offset="1" stop-color="#5a2fd0"/></linearGradient>
+    </defs>
+    <symbol id="i-pc" viewBox="0 0 48 48"><rect x="5" y="6" width="38" height="27" rx="3" fill="#2b2f36"/><rect x="9" y="10" width="30" height="19" rx="1" fill="#1a1d22"/><path d="M19 33h10l2 6H17z" fill="#3a3f47"/><rect x="13" y="39" width="22" height="3" rx="1.5" fill="#2b2f36"/></symbol>
+    <symbol id="i-pasta" viewBox="0 0 48 48"><path d="M4 12a3 3 0 0 1 3-3h11l4 4h19a3 3 0 0 1 3 3v22a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z" fill="#d99a2b"/><path d="M4 19a3 3 0 0 1 3-3h34a3 3 0 0 1 3 3v19a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z" fill="url(#g-pasta)"/></symbol>
+    <symbol id="i-musica" viewBox="0 0 48 48"><path d="M17 9l24-4v27" fill="none" stroke="#2a1a5e" stroke-width="7" stroke-linejoin="round"/><path d="M17 9v26" stroke="#2a1a5e" stroke-width="7"/><ellipse cx="12" cy="36" rx="7" ry="6" fill="#2a1a5e"/><ellipse cx="36" cy="33" rx="7" ry="6" fill="#2a1a5e"/><path d="M17 9l24-4v27" fill="none" stroke="url(#g-nota)" stroke-width="3.5" stroke-linejoin="round"/><path d="M17 9v26" stroke="url(#g-nota)" stroke-width="3.5"/><ellipse cx="12" cy="36" rx="5" ry="4" fill="url(#g-nota)"/><ellipse cx="36" cy="33" rx="5" ry="4" fill="url(#g-nota)"/></symbol>
+    <symbol id="i-msn" viewBox="0 0 48 48"><path d="M6 10a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H20l-9 8v-8h-1a4 4 0 0 1-4-4z" fill="#fff" stroke="#22252b" stroke-width="3" stroke-linejoin="round"/><circle cx="16" cy="20" r="2.6" fill="#22252b"/><circle cx="24" cy="20" r="2.6" fill="#22252b"/><circle cx="32" cy="20" r="2.6" fill="#22252b"/></symbol>
+    <symbol id="i-ie" viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="url(#g-globo)" stroke="#0f3f86" stroke-width="2.5"/><g fill="none" stroke="#e8f6ff" stroke-width="2"><ellipse cx="24" cy="24" rx="8" ry="19"/><path d="M5 24h38M8 14h32M8 34h32M24 5v38"/></g></symbol>
+    <symbol id="i-lixeira" viewBox="0 0 48 48"><path d="M10 12h28l-3 31H13z" fill="url(#g-lixo)" stroke="#5c6670" stroke-width="2"/><ellipse cx="24" cy="12" rx="14" ry="4" fill="#d5dade" stroke="#5c6670" stroke-width="2"/><path d="M14 18l20 20M34 18L14 38M19 16l-2 26M29 16l2 26M24 16v26" stroke="#7d8790" stroke-width="1.2" opacity=".7"/></symbol>
+    <symbol id="i-foto" viewBox="0 0 16 16"><rect x="1" y="2" width="14" height="12" fill="#fff" stroke="#3a4b5c"/><path d="M2 13l4-5 3 3 2-2 3 4z" fill="#3f9a3a"/><circle cx="11" cy="5.5" r="1.5" fill="#f2b33d"/></symbol>
+    <symbol id="i-bloco" viewBox="0 0 16 16"><path d="M2 1h9l3 3v11H2z" fill="#fff" stroke="#3a4b5c"/><path d="M4 6h8M4 8.5h8M4 11h6" stroke="#5b7fb0"/><path d="M9 9l5-5 1.5 1.5-5 5L8.5 11z" fill="#f2b33d" stroke="#7a5a12" stroke-width=".6"/></symbol>
+    <symbol id="i-wmp" viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#1f5fd6" stroke="#0d2f7a"/><path d="M6 4.5v7l6-3.5z" fill="#fff"/></symbol>
+    <symbol id="i-windows" viewBox="0 0 24 24"><path d="M2 4.5c3-1.5 6-1.5 9 0v7c-3-1.5-6-1.5-9 0z" fill="#f2522e"/><path d="M12.5 4.5c3 1.5 6 1.5 9 0v7c-3 1.5-6 1.5-9 0z" fill="#7cbb26"/><path d="M2 12.5c3-1.5 6-1.5 9 0v7c-3-1.5-6-1.5-9 0z" fill="#1aa1ec"/><path d="M12.5 12.5c3 1.5 6 1.5 9 0v7c-3 1.5-6 1.5-9 0z" fill="#ffbb11"/></symbol>
+    <symbol id="i-som" viewBox="0 0 16 16"><path d="M2 6h3l4-3v10l-4-3H2z" fill="#fff"/><path d="M11 5.5a3.5 3.5 0 0 1 0 5M12.5 4a5.5 5.5 0 0 1 0 8" fill="none" stroke="#fff" stroke-width="1.2"/></symbol>
+    <symbol id="i-balao" viewBox="0 0 16 16"><path d="M1.5 3h13v8H7l-3 3v-3H1.5z" fill="#fff" stroke="#16437f" stroke-width=".8"/><circle cx="5" cy="7" r="1" fill="#16437f"/><circle cx="8" cy="7" r="1" fill="#16437f"/><circle cx="11" cy="7" r="1" fill="#16437f"/></symbol>
+  </svg>
+
+  <!-- O papel de parede cobre a tela inteira, fora do palco -->
+  <div class="xs-fundo papel"></div>
+
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <nav class="icones" data-icones></nav>
+
+    <!-- Visualizador de imagens: a janela existe sozinha, a foto só ocupa o espaço de dentro -->
+    <section class="jan visor">
+      <header class="tit"><svg class="tit-ico"><use href="#i-foto"/></svg><span class="tit-t" data-texto="tituloVisor"></span><span class="tit-bts"><i class="b-min"></i><i class="b-max"></i><i class="b-fec"></i></span></header>
+      <div class="moldura"><img class="foto" data-xs-img="fotos.perfil" alt=""></div>
+      <div class="ferramentas">
+        <i class="bt"><svg viewBox="0 0 16 16"><path d="M11 3v10L4 8z"/></svg></i>
+        <i class="bt"><svg viewBox="0 0 16 16"><path d="M5 3v10l7-5z"/></svg></i>
+        <i class="bt largo"><svg viewBox="0 0 24 16"><circle cx="6.5" cy="6.5" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 9.5l4 4" stroke="currentColor" stroke-width="2"/><path d="M17 8h6M20 5v6" stroke="currentColor" stroke-width="1.4"/></svg></i>
+        <i class="bt largo"><svg viewBox="0 0 24 16"><circle cx="6.5" cy="6.5" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 9.5l4 4" stroke="currentColor" stroke-width="2"/><path d="M17 8h6" stroke="currentColor" stroke-width="1.4"/></svg></i>
+        <i class="bt"><svg viewBox="0 0 16 16"><path d="M12 8a4 4 0 1 1-4-4h2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 1.5l2.5 2.5L9 6.5"  fill="none" stroke="currentColor" stroke-width="1.4"/></svg></i>
+        <i class="bt"><svg viewBox="0 0 16 16"><path d="M4 8a4 4 0 1 0 4-4H6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 1.5L4.5 4 7 6.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></i>
+        <i class="bt"><svg viewBox="0 0 16 16"><rect x="4" y="2" width="8" height="4" fill="none" stroke="currentColor"/><rect x="1.5" y="6" width="13" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="4" y="10" width="8" height="4" fill="#fff" stroke="currentColor"/></svg></i>
+      </div>
+    </section>
+
+    <!-- Bloco de notas: o texto é montado pelo script.js a partir dos dados -->
+    <section class="jan bloco">
+      <header class="tit"><svg class="tit-ico"><use href="#i-bloco"/></svg><span class="tit-t" data-texto="tituloBloco"></span><span class="tit-bts"><i class="b-min"></i><i class="b-max"></i><i class="b-fec"></i></span></header>
+      <div class="menu" data-menu></div>
+      <pre class="texto" data-bloco="completo"></pre>
+    </section>
+
+    <!-- Windows Media Player: é o player de música -->
+    <section class="jan wmp" data-xs-player>
+      <header class="tit"><svg class="tit-ico"><use href="#i-wmp"/></svg><span class="tit-t" data-texto="tituloPlayer"></span><span class="tit-bts"><i class="b-min"></i><i class="b-fec"></i></span></header>
+      <div class="visual"><i></i><i></i><i></i></div>
+      <div class="painel">
+        <b class="faixa" data-xs="musica.titulo"></b>
+        <span class="artista"><span data-xs="musica.artista"></span> · <span data-xs-tempo>0:00</span> / <span data-xs-duracao>0:00</span></span>
+        <span class="trilho"><span data-xs-barra></span></span>
+        <span class="comandos">
+          <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <i class="parar"></i>
+          <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+          <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+          <span class="volume"><svg><use href="#i-som"/></svg><i></i></span>
+        </span>
+      </div>
+    </section>
+
+    <!-- Aviso do MSN no canto -->
+    <aside class="msn">
+      <header><span data-texto="tituloMsn"></span><i class="x"></i></header>
+      <div class="msn-corpo">
+        <span class="avatar"><img data-xs-img="fotos.perfil" alt=""></span>
+        <p><b data-xs="nome"></b> <span data-texto="entrou"></span><br><a class="status" data-xs-se="online" hidden>● online no xat</a></p>
+      </div>
+    </aside>
+
+    <footer class="barra">
+      <span class="iniciar"><svg><use href="#i-windows"/></svg><span data-texto="iniciar"></span></span>
+      <span class="tarefas" data-tarefas></span>
+      <span class="bandeja"><svg><use href="#i-balao"/></svg><svg><use href="#i-som"/></svg><span data-relogio></span></span>
+    </footer>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <section class="jan visor">
+      <header class="tit"><svg class="tit-ico"><use href="#i-foto"/></svg><span class="tit-t" data-texto="tituloVisorCurto"></span><span class="tit-bts"><i class="b-min"></i><i class="b-fec"></i></span></header>
+      <div class="moldura"><img class="foto" data-xs-img="fotos.perfil" alt=""></div>
+    </section>
+
+    <section class="jan bloco">
+      <header class="tit"><svg class="tit-ico"><use href="#i-bloco"/></svg><span class="tit-t" data-texto="tituloBloco"></span><span class="tit-bts"><i class="b-min"></i><i class="b-fec"></i></span></header>
+      <pre class="texto" data-bloco="curto"></pre>
+    </section>
+
+    <section class="jan wmp" data-xs-player>
+      <header class="tit"><svg class="tit-ico"><use href="#i-wmp"/></svg><span class="tit-t" data-texto="tituloPlayer"></span><span class="tit-bts"><i class="b-min"></i><i class="b-fec"></i></span></header>
+      <div class="painel">
+        <span class="comandos">
+          <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+          <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+        </span>
+        <span class="info">
+          <b class="faixa" data-xs="musica.titulo"></b>
+          <span class="artista"><span data-xs="musica.artista"></span> · <span data-xs-tempo>0:00</span> / <span data-xs-duracao>0:00</span></span>
+          <span class="trilho"><span data-xs-barra></span></span>
+        </span>
+      </div>
+    </section>
+
+    <aside class="msn">
+      <header><span data-texto="tituloMsn"></span><i class="x"></i></header>
+      <div class="msn-corpo">
+        <span class="avatar"><img data-xs-img="fotos.perfil" alt=""></span>
+        <p><b data-xs="nome"></b> <span data-texto="entrou"></span><br><a class="status" data-xs-se="online" hidden>● online no xat</a></p>
+      </div>
+    </aside>
+
+    <footer class="barra">
+      <span class="iniciar"><svg><use href="#i-windows"/></svg><span data-texto="iniciar"></span></span>
+      <span class="tarefas" data-tarefas="1"></span>
+      <span class="bandeja"><span data-relogio></span></span>
+    </footer>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

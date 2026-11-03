@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Saudade 2005 · Marina Costa</title>
+<meta name="viewport" content="width=1920">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cinza:#c0c0c0; --claro:#fff; --medio:#808080; --escuro:#0a0a0a; --cinza2:#dfdfdf;
+    --azul1:#0a3d9e; --azul2:#2f7be0; --azul3:#8fc0f5;
+    --link:#0000ee;
+    --ui:Tahoma,Verdana,"DejaVu Sans",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;width:1920px;height:900px;overflow:hidden}
+  body{position:relative;font:12px/1.35 var(--ui);color:#000;background:#2fb7c9;cursor:default}
+  .abs{position:absolute}
+
+  .raised{box-shadow:inset -1px -1px var(--escuro),inset 1px 1px var(--claro),inset -2px -2px var(--medio),inset 2px 2px var(--cinza2)}
+  .sunken{box-shadow:inset -1px -1px var(--claro),inset 1px 1px var(--medio),inset -2px -2px var(--cinza2),inset 2px 2px var(--escuro)}
+  .flat{box-shadow:inset -1px -1px var(--claro),inset 1px 1px var(--medio)}
+
+  /* ---------- Papel de parede ---------- */
+  #papel{position:absolute;left:0;top:0;width:1920px;height:856px}
+  .trama{position:absolute;inset:0;background:
+      radial-gradient(circle at 1px 1px,rgba(255,255,255,.22) 1px,transparent 1.5px) 0 0/14px 14px,
+      linear-gradient(135deg,rgba(255,255,255,.05) 25%,transparent 25% 50%,rgba(255,255,255,.05) 50% 75%,transparent 75%) 0 0/28px 28px;}
+
+  /* ---------- Ícones ---------- */
+  .ico{position:absolute;left:22px;width:96px;text-align:center;color:#fff;font-size:12px;text-shadow:1px 1px 0 #000,0 0 3px rgba(0,0,0,.6);line-height:1.2}
+  .ico svg{display:block;margin:0 auto 5px;filter:drop-shadow(2px 3px 2px rgba(0,0,0,.45))}
+  .ico span{display:inline-block;padding:1px 3px}
+  .ico.sel span{background:#0a246a;outline:1px dotted #ffe;text-shadow:none}
+  .ico.sel svg{filter:drop-shadow(2px 3px 2px rgba(0,0,0,.45)) brightness(.8) sepia(1) hue-rotate(180deg) saturate(2.5)}
+
+  /* ---------- Janelas ---------- */
+  .win{position:absolute;background:var(--cinza);padding:3px;
+    box-shadow:inset -1px -1px var(--escuro),inset 1px 1px var(--cinza2),inset -2px -2px var(--medio),inset 2px 2px var(--claro),6px 8px 0 rgba(0,40,70,.28),10px 14px 22px rgba(0,30,60,.35)}
+  .tb{height:24px;display:flex;align-items:center;gap:6px;padding:0 3px 0 5px;color:#fff;font-weight:bold;font-size:13px;letter-spacing:.2px;
+      background:linear-gradient(90deg,#0a2a8a 0%,#1f60d0 45%,#8cbcf2 100%);text-shadow:1px 1px 0 rgba(0,0,40,.55)}
+  .tb.off{background:linear-gradient(90deg,#7a8190,#b9c0cc)}
+  .tb .t{flex:1;white-space:nowrap;overflow:hidden}
+  .tb .ic{width:16px;height:16px;flex:none}
+  .bts{display:flex;gap:2px}
+  .bts i{width:18px;height:16px;background:var(--cinza);color:#000;font:bold 11px/14px var(--ui);text-align:center;font-style:normal;text-shadow:none;
+      box-shadow:inset -1px -1px var(--escuro),inset 1px 1px var(--claro),inset -2px -2px var(--medio)}
+  .bts i.x{margin-left:3px}
+  .menu{display:flex;gap:14px;padding:3px 6px 3px;font-size:12px;border-bottom:1px solid var(--medio);box-shadow:0 1px 0 #fff}
+  .menu u{text-decoration:underline}
+  .barra{display:flex;align-items:center;gap:6px;padding:4px 4px;border-bottom:1px solid var(--medio);box-shadow:0 1px 0 #fff}
+  .btn{background:var(--cinza);padding:4px 12px;font:12px var(--ui);color:#000;text-align:center;white-space:nowrap;
+      box-shadow:inset -1px -1px var(--escuro),inset 1px 1px var(--claro),inset -2px -2px var(--medio),inset 2px 2px var(--cinza2);display:inline-block}
+  .btn.mini{padding:2px 9px}
+  .btn.def{outline:1px solid #000;outline-offset:-1px;box-shadow:inset -1px -1px var(--escuro),inset 1px 1px var(--claro),inset -2px -2px var(--medio),inset 2px 2px var(--cinza2),0 0 0 1px #000}
+  .tbtn{display:flex;align-items:center;gap:5px;padding:2px 7px;font-size:12px}
+  .sep{width:2px;height:24px;background:var(--medio);box-shadow:1px 0 #fff;margin:0 2px}
+  .campo{flex:1;background:#fff;height:24px;display:flex;align-items:center;padding:0 6px;font-size:12px}
+  .status{display:flex;gap:3px;padding-top:3px;font-size:11.5px}
+  .status div{padding:2px 8px;box-shadow:inset -1px -1px var(--claro),inset 1px 1px var(--medio)}
+  .status .g{flex:1}
+
+  /* ---------- Perfil ---------- */
+  #perfil{left:196px;top:26px;width:808px;height:812px}
+  #perfil .corpo{position:absolute;left:3px;right:3px;top:128px;bottom:31px;background:#fff;overflow:hidden}
+  .banner{height:104px;position:relative;overflow:hidden;
+      background:
+        repeating-linear-gradient(135deg,rgba(255,255,255,.12) 0 14px,transparent 14px 28px),
+        linear-gradient(100deg,#0f9bbd 0%,#35c8d8 40%,#ff9fbd 100%)}
+  .banner h1{position:absolute;left:28px;top:12px;margin:0;font:italic bold 54px/1 "Trebuchet MS",Tahoma,sans-serif;color:#fff;letter-spacing:-.5px;
+      text-shadow:3px 3px 0 #0a5f86,5px 5px 0 rgba(0,40,80,.25)}
+  .banner .sub{position:absolute;left:32px;bottom:12px;font:bold 13px var(--ui);color:#fff;text-shadow:1px 1px 0 #0a5f86;letter-spacing:.5px}
+  .banner .sub b{background:#fff700;color:#8a0050;padding:1px 6px;margin-right:8px;text-shadow:none;border:1px solid #8a0050}
+  .estrela{position:absolute}
+  .cols{display:flex;gap:22px;padding:18px 22px 0}
+  .esq{width:326px;flex:none}
+  .moldura{position:relative;padding:10px;background:linear-gradient(135deg,#fff,#d8e9f4);border:1px solid #6a8aa0;box-shadow:3px 4px 0 rgba(0,60,100,.3)}
+  .moldura .in{position:relative;border:3px double #e0408a;padding:3px;background:#fff}
+  .moldura .foto{position:relative;width:292px;height:366px;overflow:hidden;background:#ccc}
+  .moldura .foto img{position:absolute;display:block;width:420px;left:-60px;top:-22px;filter:saturate(1.08) contrast(1.03)}
+  .moldura .canto{position:absolute;font-size:20px;line-height:1;color:#ffcf00;text-shadow:1px 1px 0 #b0006a}
+  .moldura .leg{position:absolute;left:10px;right:10px;bottom:-1px}
+  .legenda{margin-top:10px;text-align:center;font-size:11px;color:#444}
+  .legenda b{color:#000}
+  .acoes{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
+  .acoes .btn{padding:6px 4px;font-size:11.5px}
+  .dir{flex:1;min-width:0}
+  fieldset{margin:0 0 12px;padding:8px 12px 10px;border:1px solid var(--medio);box-shadow:1px 1px 0 #fff,inset 1px 1px 0 #fff;background:#f7f7f2}
+  legend{font:bold 12px var(--ui);color:#0a2a8a;padding:0 5px}
+  .frase{font:italic 18px/1.3 Georgia,"Times New Roman",serif;color:#1a2a5a;margin:2px 0 0}
+  .frase:before{content:"\201C";font-size:34px;line-height:0;vertical-align:-12px;color:#e0408a;margin-right:3px}
+  table.info{border-collapse:collapse;width:100%}
+  table.info td{padding:4px 4px;font-size:13px;border-bottom:1px dotted #b8b8b0}
+  table.info tr:last-child td{border:0}
+  table.info td:first-child{width:90px;color:#6a6a60}
+  .on{color:#009a1a;font-weight:bold}
+  .led{display:inline-block;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d6ffd6,#2fd22f 55%,#0a7a0a);margin-right:5px;vertical-align:-1px;box-shadow:0 0 5px #4f4}
+  a.l{color:var(--link);text-decoration:underline}
+  .gostos{display:flex;gap:10px;flex-wrap:wrap}
+  .gosto{display:flex;align-items:center;gap:7px;background:#fff;padding:5px 10px 5px 7px;font-size:13px;box-shadow:inset -1px -1px var(--claro),inset 1px 1px var(--medio),inset -2px -2px var(--cinza2),inset 2px 2px #404040}
+  .ck{width:13px;height:13px;background:#fff;box-shadow:inset 1px 1px var(--medio),inset -1px -1px var(--claro),inset 2px 2px #404040;position:relative}
+  .ck:after{content:"";position:absolute;left:3px;top:0px;width:4px;height:8px;border:solid #000;border-width:0 2px 2px 0;transform:rotate(40deg)}
+  .contador{display:flex;align-items:center;gap:12px}
+  .dig{display:flex;gap:2px;background:#000;padding:4px;box-shadow:inset 1px 1px #666,inset -1px -1px #333}
+  .dig b{font:normal 28px/24px "VT323",monospace;color:#ff3b2b;background:#1a0000;padding:0 3px;text-shadow:0 0 5px rgba(255,60,40,.8)}
+  .stats{display:flex;gap:16px;font-size:12px;color:#444}
+  .stats b{display:block;font-size:16px;color:#0a2a8a}
+
+  /* ---------- Recados ---------- */
+  #recados{left:1036px;top:26px;width:520px;height:530px}
+  #recados .lista{position:absolute;left:3px;right:3px;top:58px;height:308px;background:#fff;overflow:hidden}
+  .rec{display:flex;gap:12px;padding:12px 30px 11px 12px;border-bottom:1px dotted #9aa;}
+  .rec:nth-child(odd){background:#f3f9ff}
+  .av{width:50px;height:50px;flex:none;display:grid;place-items:center;font-size:26px;color:#fff;border:2px solid #fff;outline:1px solid #6a7a8a;text-shadow:1px 1px 0 rgba(0,0,0,.3)}
+  .rec .cab{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .rec .cab b{color:#0a2a8a;font-size:13px;text-decoration:underline}
+  .rec .cab span{font-size:11px;color:#777}
+  .rec p{margin:4px 0 4px;font-size:13px;line-height:1.35}
+  .rec .acao{font-size:11px;color:var(--link);text-decoration:underline}
+  .rola{position:absolute;right:0;top:0;bottom:0;width:17px;background:
+      conic-gradient(#fff 25%,#c0c0c0 0 50%,#fff 0 75%,#c0c0c0 0) 0 0/2px 2px}
+  .rola i{position:absolute;left:0;width:17px;height:17px;background:var(--cinza);font-style:normal;font-size:8px;text-align:center;line-height:17px;box-shadow:inset -1px -1px var(--escuro),inset 1px 1px var(--claro),inset -2px -2px var(--medio)}
+  .rola .polegar{top:17px;height:196px;background:var(--cinza);box-shadow:inset -1px -1px var(--escuro),inset 1px 1px var(--claro),inset -2px -2px var(--medio),inset 2px 2px var(--cinza2)}
+  .escreve{position:absolute;left:3px;right:3px;bottom:31px;top:372px;padding:8px 8px 0;font-size:12px}
+  .escreve .ta{height:50px;background:#fff;margin:5px 0 7px;padding:5px 7px;color:#555;font-size:12.5px}
+  .escreve .ta:after{content:"";display:inline-block;width:1px;height:13px;background:#000;vertical-align:-2px;margin-left:1px}
+
+  /* ---------- Player ---------- */
+  #player{left:1578px;top:26px;width:320px;height:318px}
+  .pl{padding:6px 4px 0}
+  .lcd{background:#071407;padding:8px 10px 6px;position:relative;height:122px;overflow:hidden;
+      box-shadow:inset 1px 1px #000,inset 2px 2px #223,inset -1px -1px #fff,inset -2px -2px #bbb}
+  .lcd:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px)}
+  .lcd{font-family:"VT323",monospace;color:#7dff4a;text-shadow:0 0 6px rgba(120,255,70,.7)}
+  .lcd .l1{display:flex;justify-content:space-between;align-items:flex-start}
+  .lcd .tempo{font-size:44px;line-height:.9;letter-spacing:2px}
+  .lcd .tempo small{font-size:18px;opacity:.8;margin-left:2px}
+  .lcd .st{font-size:16px;opacity:.85;line-height:1;margin-top:4px}
+  .lcd .tit{margin-top:6px;font-size:19px;white-space:nowrap;line-height:1;overflow:hidden}
+  .eq{position:absolute;right:10px;top:10px;width:118px;height:40px;display:flex;gap:2px;align-items:flex-end}
+  .eq b{flex:1;display:block;background:linear-gradient(0deg,#46ff3a 0 55%,#f6ff3a 55% 80%,#ff4a3a 80%);
+      -webkit-mask-image:repeating-linear-gradient(0deg,#000 0 2px,transparent 2px 3px);mask-image:repeating-linear-gradient(0deg,#000 0 2px,transparent 2px 3px)}
+  .lcd .tag{font-size:14px;margin-top:4px;opacity:.8;line-height:1}
+  .seek{margin:10px 6px 0;height:12px;position:relative;background:#7b7b7b;box-shadow:inset 1px 1px #404040,inset -1px -1px #fff;}
+  .seek i{position:absolute;left:0;top:0;bottom:0;width:49%;background:linear-gradient(180deg,#5f9bff,#1c3fa8)}
+  .seek em{position:absolute;left:49%;top:-4px;width:12px;height:20px;margin-left:-6px;background:var(--cinza);box-shadow:inset -1px -1px var(--escuro),inset 1px 1px var(--claro),inset -2px -2px var(--medio)}
+  .ctl{display:flex;align-items:center;gap:3px;margin:12px 6px 0}
+  .ctl .btn{padding:0;width:34px;height:28px;display:grid;place-items:center}
+  .ctl .btn.p{width:44px}
+  .ctl .btn.act{box-shadow:inset 1px 1px var(--escuro),inset -1px -1px var(--claro),inset 2px 2px var(--medio);background:#d4d4d4}
+  .vol{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px}
+  .vol .tr{width:62px;height:6px;background:#808080;position:relative;box-shadow:inset 1px 1px #404040,inset -1px -1px #fff}
+  .vol .tr em{position:absolute;left:70%;top:-7px;width:8px;height:18px;background:var(--cinza);margin-left:-4px;box-shadow:inset -1px -1px var(--escuro),inset 1px 1px var(--claro),inset -2px -2px var(--medio)}
+  .lista-mp3{margin:10px 6px 0;background:#fff;height:62px;font-size:11.5px;padding:2px 0;overflow:hidden;box-shadow:inset 1px 1px var(--medio),inset -1px -1px var(--claro),inset 2px 2px #404040}
+  .lista-mp3 div{display:flex;justify-content:space-between;padding:1px 6px}
+  .lista-mp3 .a{background:#0a246a;color:#fff}
+
+  /* ---------- Diálogo ---------- */
+  #dlg{left:1578px;top:372px;width:320px;height:160px}
+  #dlg .corpo{display:flex;gap:16px;align-items:center;padding:20px 20px 0 22px;font-size:13px}
+  #dlg .corpo b{font-size:14px}
+  #dlg .ok{position:absolute;left:0;right:0;bottom:14px;text-align:center}
+  #dlg .btn{width:86px;padding:5px 0}
+  #dlg .btn span{outline:1px dotted #000;outline-offset:3px;display:inline-block;padding:0 8px}
+
+  /* ---------- Fotos ---------- */
+  #fotos{left:1036px;top:572px;width:862px;height:266px}
+  .xp{position:absolute;left:3px;top:96px;bottom:31px;width:164px;padding:8px 8px;background:linear-gradient(180deg,#6d97e8,#3e68c8);font-size:11.5px;color:#fff}
+  .xp h5{margin:0 0 6px;padding:3px 8px;font-size:11.5px;background:linear-gradient(90deg,#fff,#c6d8ff);color:#1a3a98;border-radius:3px 3px 0 0}
+  .xp .it{padding:3px 10px 3px 20px;background:#e8efff;color:#1a3a98;text-decoration:underline;position:relative}
+  .xp .it:before{content:"";position:absolute;left:6px;top:7px;width:8px;height:8px;background:#46a050;border-radius:2px}
+  .xp .bloco{margin-bottom:10px}
+  .thumbs{position:absolute;left:170px;right:3px;top:96px;bottom:31px;background:#fff;display:flex;gap:16px;padding:12px 14px 0;overflow:hidden}
+  .th{width:124px;text-align:center;font-size:11.5px}
+  .th .im{width:124px;height:94px;border:1px solid #888;padding:3px;background:#fff;box-shadow:2px 2px 0 rgba(0,0,0,.2);overflow:hidden;position:relative}
+  .th .im span{display:block;width:100%;height:100%;background-size:cover}
+  .th.s .im{outline:2px solid #0a246a}
+  .th.s div.n{background:#0a246a;color:#fff}
+  .th .n{margin-top:6px;padding:1px 2px;display:inline-block;max-width:124px}
+
+  /* ---------- Barra de tarefas ---------- */
+  #tarefas{position:absolute;left:0;bottom:0;width:1920px;height:44px;
+      background:linear-gradient(180deg,#3f7eea 0,#245edb 10%,#2057c8 55%,#1c4bb5 90%,#17409a 100%);
+      box-shadow:0 -1px 0 #0b3aa0,0 -2px 0 rgba(255,255,255,.22) inset}
+  #iniciar{position:absolute;left:0;top:0;height:44px;width:156px;border-radius:0 16px 16px 0;
+      background:linear-gradient(180deg,#5fd35f 0,#3aa83a 14%,#2a8e2a 60%,#237c23 100%);
+      box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset -2px 0 4px rgba(0,60,0,.45),3px 0 6px rgba(0,0,0,.35);
+      display:flex;align-items:center;gap:8px;padding-left:14px;color:#fff;font:italic bold 22px/1 "Trebuchet MS",Tahoma,sans-serif;text-shadow:2px 2px 2px rgba(0,40,0,.7)}
+  .tk{position:absolute;top:6px;height:32px;width:206px;border-radius:4px;color:#fff;font-size:12.5px;display:flex;align-items:center;gap:7px;padding:0 10px;
+      background:linear-gradient(180deg,#5b8ff0,#3a6fdc 40%,#2f5fc8);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(0,0,40,.4),1px 1px 2px rgba(0,0,40,.4);white-space:nowrap;overflow:hidden}
+  .tk.on{background:linear-gradient(180deg,#1a3f9c,#2450b8);box-shadow:inset 1px 2px 4px rgba(0,0,40,.6),inset 0 0 0 1px rgba(0,0,40,.3)}
+  .tk i{width:14px;height:14px;border-radius:3px;flex:none}
+  #bandeja{position:absolute;right:0;top:0;height:44px;width:236px;padding:0 60px 0 14px;display:flex;align-items:center;gap:14px;color:#fff;font-size:13px;
+      background:linear-gradient(180deg,#27b0f0,#118ad8 14%,#0f7bd0 60%,#0d6ec0);box-shadow:inset 2px 0 0 rgba(0,40,100,.55),inset 3px 0 0 rgba(255,255,255,.25)}
+  .rel{margin-left:auto}
+
+  /* cursor */
+  #cursor{position:absolute;z-index:40;filter:drop-shadow(2px 3px 1px rgba(0,0,0,.45))}
+
+  .selo{position:absolute;right:10px;bottom:5px;width:34px;height:34px;border-radius:50%;z-index:60;display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.18);color:rgba(255,255,255,.9);font:16px/1 system-ui,sans-serif}
+</style>
+</head>
+<body>
+
+<!-- Papel de parede: mar de Recife -->
+<div id="papel">
+  <svg width="1920" height="856" viewBox="0 0 1920 856" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="ceu" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1fa6d2"/><stop offset=".45" stop-color="#5fd0e2"/><stop offset=".72" stop-color="#c4f2ee"/><stop offset=".74" stop-color="#7fe0e4"/><stop offset="1" stop-color="#1a9fb8"/>
+      </linearGradient>
+      <radialGradient id="sol" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fffbe0"/><stop offset=".25" stop-color="#fff2a8" stop-opacity=".9"/><stop offset="1" stop-color="#fff2a8" stop-opacity="0"/></radialGradient>
+      <linearGradient id="mar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fe6e4"/><stop offset="1" stop-color="#0f8aa8"/></linearGradient>
+      <linearGradient id="areia" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9b8"/><stop offset="1" stop-color="#f3c987"/></linearGradient>
+    </defs>
+    <rect width="1920" height="856" fill="url(#ceu)"/>
+    <circle cx="150" cy="600" r="260" fill="url(#sol)"/>
+    <circle cx="150" cy="598" r="42" fill="#fffbe6"/>
+    <!-- nuvens -->
+    <g fill="#fff" opacity=".9">
+      <ellipse cx="176" cy="470" rx="26" ry="8" opacity=".8"/><ellipse cx="160" cy="464" rx="18" ry="9" opacity=".8"/>
+      <ellipse cx="900" cy="140" rx="90" ry="18" opacity=".7"/><ellipse cx="1500" cy="90" rx="110" ry="18" opacity=".6"/>
+    </g>
+    <!-- mar -->
+    <rect y="610" width="1920" height="246" fill="url(#mar)"/>
+    <g stroke="#e8ffff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55">
+      <path d="M20 650 q20 -10 40 0 t40 0 t40 0"/><path d="M60 700 q20 -10 40 0 t40 0 t40 0"/>
+      <path d="M0 760 q20 -10 40 0 t40 0 t40 0 t40 0"/><path d="M90 810 q20 -10 40 0 t40 0 t40 0"/>
+      <path d="M900 640 q20 -10 40 0 t40 0 t40 0"/><path d="M1300 700 q20 -10 40 0 t40 0 t40 0"/>
+    </g>
+    <!-- areia + coqueiro -->
+    <path d="M0 790 Q160 750 330 800 L330 856 L0 856Z" fill="url(#areia)"/>
+    <path d="M0 810 Q150 780 300 830" stroke="#fff" stroke-width="5" fill="none" opacity=".6"/>
+    <g transform="translate(78,800)">
+      <path d="M0 0 C6 -90 20 -170 54 -250" stroke="#6b4a2a" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M0 0 C6 -90 20 -170 54 -250" stroke="#8a6238" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="6 10"/>
+      <g fill="#1d8a3c" stroke="#0f5a26" stroke-width="2">
+        <path d="M54 -250 C20 -290 -40 -270 -70 -230 C-30 -262 20 -266 54 -250Z"/>
+        <path d="M54 -250 C80 -300 140 -300 176 -258 C130 -282 90 -276 54 -250Z"/>
+        <path d="M54 -250 C110 -250 150 -220 160 -180 C128 -218 92 -230 54 -250Z"/>
+        <path d="M54 -250 C0 -240 -30 -200 -34 -160 C-14 -204 20 -226 54 -250Z"/>
+        <path d="M54 -250 C60 -310 40 -330 20 -346 C52 -320 62 -290 54 -250Z"/>
+      </g>
+      <circle cx="50" cy="-244" r="8" fill="#4a3018"/><circle cx="64" cy="-240" r="8" fill="#4a3018"/>
+    </g>
+    <!-- jangada -->
+    <g transform="translate(1600,640)" opacity=".9"><path d="M0 0 L90 0 L78 14 L12 14Z" fill="#8a5a2a"/><path d="M45 0 L45 -70 L90 -6Z" fill="#fff"/><path d="M45 -70 L45 -4 L8 -4Z" fill="#ffd34a"/></g>
+  </svg>
+  <div class="trama"></div>
+</div>
+
+<!-- Ícones da área de trabalho -->
+<div class="ico" style="top:22px">
+  <svg width="52" height="52" viewBox="0 0 52 52">
+    <rect x="6" y="4" width="34" height="26" rx="2" fill="#d8d8d8" stroke="#555"/><rect x="9" y="7" width="28" height="20" fill="#3fa9f5"/>
+    <path d="M9 7h28v9L9 22z" fill="#8fd4ff" opacity=".6"/><rect x="16" y="30" width="14" height="4" fill="#aaa" stroke="#555"/><rect x="10" y="34" width="26" height="4" rx="1" fill="#cfcfcf" stroke="#555"/>
+    <rect x="38" y="16" width="10" height="26" rx="1" fill="#cfcfcf" stroke="#555"/><rect x="40" y="19" width="6" height="2" fill="#555"/><circle cx="43" cy="37" r="1.6" fill="#3c3"/>
+  </svg><span>Meu Computador</span></div>
+<div class="ico" style="top:134px">
+  <svg width="52" height="52" viewBox="0 0 52 52">
+    <path d="M3 12 h16 l4 5 h26 v28 H3z" fill="#f2c94c" stroke="#8a6a10"/><path d="M3 20 h46 v25 H3z" fill="#ffe27a" stroke="#8a6a10"/>
+    <rect x="14" y="14" width="24" height="18" fill="#fff" stroke="#888" transform="rotate(-6 26 23)"/><rect x="16" y="16" width="20" height="12" fill="#6cc8ea" transform="rotate(-6 26 23)"/>
+    <path d="M16 28 l6-7 5 5 4-4 5 6z" fill="#3c9a4a" transform="rotate(-6 26 23)"/>
+  </svg><span>Fotos</span></div>
+<div class="ico" style="top:246px">
+  <svg width="52" height="52" viewBox="0 0 52 52">
+    <path d="M11 14 h30 l-3 32 a3 3 0 0 1 -3 3 h-18 a3 3 0 0 1 -3 -3z" fill="#e4eef4" stroke="#556"/><rect x="8" y="9" width="36" height="6" rx="2" fill="#cdd9e0" stroke="#556"/><rect x="20" y="5" width="12" height="5" rx="1" fill="#cdd9e0" stroke="#556"/>
+    <path d="M18 20v24M26 20v24M34 20v24" stroke="#8aa" stroke-width="2"/>
+  </svg><span>Lixeira</span></div>
+<div class="ico sel" style="top:358px">
+  <svg width="52" height="52" viewBox="0 0 52 52">
+    <circle cx="26" cy="26" r="21" fill="#e9eef5" stroke="#667"/><circle cx="26" cy="26" r="21" fill="url(#cd)"/>
+    <defs><linearGradient id="cd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7ac8" stop-opacity=".55"/><stop offset=".5" stop-color="#7ae0ff" stop-opacity=".55"/><stop offset="1" stop-color="#ffe27a" stop-opacity=".55"/></linearGradient></defs>
+    <circle cx="26" cy="26" r="6" fill="#fff" stroke="#667"/><circle cx="26" cy="26" r="2" fill="#667"/>
+    <path d="M30 12v16a4 4 0 1 1 -2 -3.5V15l10 -3v13a4 4 0 1 1 -2 -3.5V9z" fill="#333" transform="translate(-4 4) scale(.85)" opacity=".85"/>
+  </svg><span>Músicas</span></div>
+
+<!-- ===== Janela: perfil ===== -->
+<div class="win" id="perfil">
+  <div class="tb">
+    <svg class="ic" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#ffe27a" stroke="#8a5a00"/><circle cx="6" cy="6.5" r="1.1" fill="#333"/><circle cx="10" cy="6.5" r="1.1" fill="#333"/><path d="M4.5 9.5q3.5 3.5 7 0" stroke="#333" fill="none"/></svg>
+    <span class="t">meu_perfil.exe &nbsp;&ndash;&nbsp; Marina Costa</span>
+    <div class="bts"><i>_</i><i>&#9633;</i><i class="x">&#10005;</i></div>
+  </div>
+  <div class="menu"><span><u>A</u>rquivo</span><span><u>E</u>ditar</span><span><u>E</u>xibir</span><span>Fa<u>v</u>oritos</span><span>Ferramen<u>t</u>as</span><span>A<u>j</u>uda</span></div>
+  <div class="barra">
+    <div class="btn tbtn">&#9664; Voltar</div><div class="btn tbtn">&#9654;</div><div class="btn tbtn">&#10227; Atualizar</div><div class="btn tbtn">&#9733; Favoritos</div><div class="sep"></div>
+    <div class="btn tbtn">&#9993; Recados</div><div class="btn tbtn">&#9834; Player</div>
+  </div>
+  <div class="barra" style="padding-bottom:5px"><span style="font-size:12px;color:#222">Endereço</span>
+    <div class="campo sunken">C:\Meus Documentos\Perfis\marina_costa.exe</div><div class="btn tbtn" style="padding:3px 14px">Ir</div>
+  </div>
+
+  <div class="corpo sunken">
+    <div class="banner">
+      <h1>Marina Costa</h1>
+      <div class="sub"><b>PERFIL</b>Recife &middot; Pernambuco &middot; Brasil</div>
+      <svg class="estrela" style="right:24px;top:10px" width="120" height="84" viewBox="0 0 120 84">
+        <g fill="#fff700" stroke="#b0006a" stroke-width="1.5" stroke-linejoin="round">
+          <path d="M30 6l5.5 12 13 1.4-9.7 8.7 2.8 12.8L30 34l-11.6 6.9 2.8-12.8-9.7-8.7 13-1.4z" transform="translate(0 4)"/>
+          <path d="M88 20l7 15 16 1.8-12 10.8 3.5 15.8L88 54.4 74 63.4l3.5-15.8-12-10.8 16-1.8z" transform="scale(.8) translate(30 -4)"/>
+        </g>
+        <g fill="#fff"><circle cx="66" cy="14" r="3"/><circle cx="104" cy="14" r="2"/><circle cx="52" cy="62" r="2.4"/></g>
+      </svg>
+    </div>
+    <div class="cols">
+      <div class="esq">
+        <div class="moldura">
+          <div class="in">
+            <div class="foto"><img src="../clientes/exemplo/perfil-feminino.jpg" alt="Marina"></div>
+          </div>
+          <span class="canto" style="left:-8px;top:-10px">&#10022;</span><span class="canto" style="right:-8px;top:-10px">&#10022;</span>
+          <span class="canto" style="left:-8px;bottom:-10px">&#10022;</span><span class="canto" style="right:-8px;bottom:-10px">&#10022;</span>
+        </div>
+        <div class="legenda"><b>marina_costa.jpg</b> &middot; 1024 &times; 1536 &middot; atualizada em 12/03/2005</div>
+        <div class="acoes">
+          <div class="btn">&#9733; adicionar aos amigos</div><div class="btn">&#9993; enviar recado</div>
+          <div class="btn">&#9834; mandar uma música</div><div class="btn">&#9786; ver álbuns</div>
+        </div>
+      </div>
+      <div class="dir">
+        <fieldset><legend>sobre mim</legend><p class="frase">Sou feita de mar, café e dias de sol.</p></fieldset>
+        <fieldset><legend>informações</legend>
+          <table class="info">
+            <tr><td>humor:</td><td>&#9728; sol de Recife</td></tr>
+            <tr><td>status:</td><td class="on"><span class="led"></span>online</td></tr>
+            <tr><td>cidade:</td><td>Recife &ndash; PE</td></tr>
+            <tr><td>instagram:</td><td><a class="l">@marina.costa</a></td></tr>
+          </table>
+        </fieldset>
+        <fieldset><legend>interesses</legend>
+          <div class="gostos">
+            <div class="gosto"><div class="ck"></div>Praia</div>
+            <div class="gosto"><div class="ck"></div>Leitura</div>
+            <div class="gosto"><div class="ck"></div>Música</div>
+          </div>
+        </fieldset>
+        <fieldset><legend>comunidades</legend>
+          <table class="info">
+            <tr><td style="width:auto"><a class="l">Eu amo praia &#9728;</a></td><td style="text-align:right;color:#777">12.403 membros</td></tr>
+            <tr><td style="width:auto"><a class="l">Café é vida &#9749;</a></td><td style="text-align:right;color:#777">48.911 membros</td></tr>
+            <tr><td style="width:auto"><a class="l">Livros que eu li</a></td><td style="text-align:right;color:#777">7.250 membros</td></tr>
+          </table>
+        </fieldset>
+        <fieldset><legend>visitas ao perfil</legend>
+          <div class="contador">
+            <div class="dig"><b>0</b><b>0</b><b>4</b><b>5</b><b>2</b><b>1</b></div>
+            <div class="stats"><div><b>187</b>amigos</div><div><b>3</b>recados</div><div><b>24</b>fotos</div></div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <div class="status" style="position:absolute;left:3px;right:3px;bottom:3px"><div class="g">Concluído</div><div style="width:130px"><span class="led" style="width:8px;height:8px"></span>online no xat</div><div style="width:110px">Zona: Internet</div></div>
+</div>
+
+<!-- ===== Janela: recados ===== -->
+<div class="win" id="recados">
+  <div class="tb off" style="background:linear-gradient(90deg,#0a2a8a 0%,#1f60d0 45%,#8cbcf2 100%)">
+    <svg class="ic" viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" fill="#fff" stroke="#556"/><path d="M1 3l7 6 7-6" fill="none" stroke="#556"/></svg>
+    <span class="t">recados (3)</span>
+    <div class="bts"><i>_</i><i>&#9633;</i><i class="x">&#10005;</i></div>
+  </div>
+  <div class="barra" style="justify-content:space-between;padding:6px 8px"><span>Mostrando <b>3</b> de <b>3</b> recados</span><span style="color:#444">ordenar: <u>mais recentes</u> &#9662;</span></div>
+  <div class="lista sunken">
+    <div class="rec">
+      <div class="av" style="background:linear-gradient(135deg,#ff7ac8,#ff4f9a)">&#10047;</div>
+      <div style="flex:1"><div class="cab"><b>Carol Menezes</b><span>12/03/2005 às 22:41</span></div>
+        <p>Mari, que saudade de você! Quando vem pra Olinda de novo? Já separei o biscoito e o café. Beijos! &hearts;</p><span class="acao">responder</span> &nbsp;<span class="acao">apagar</span></div>
+    </div>
+    <div class="rec">
+      <div class="av" style="background:linear-gradient(135deg,#46b8ff,#1f6fe0)">&#9835;</div>
+      <div style="flex:1"><div class="cab"><b>Bruninho_PE</b><span>10/03/2005 às 19:07</span></div>
+        <p>Valeu pela música que você mandou, não paro de ouvir! Abração e bom fim de semana :)</p><span class="acao">responder</span> &nbsp;<span class="acao">apagar</span></div>
+    </div>
+    <div class="rec">
+      <div class="av" style="background:linear-gradient(135deg,#ffc83a,#ff8a1f)">&#9728;</div>
+      <div style="flex:1"><div class="cab"><b>Dani ~ Praia Boa Viagem</b><span>08/03/2005 às 16:23</span></div>
+        <p>Amiga, o domingo na praia foi demais! Já quero repetir, só falta combinar o dia. Bjs!</p><span class="acao">responder</span> &nbsp;<span class="acao">apagar</span></div>
+    </div>
+    <div class="rola"><i>&#9650;</i><div class="polegar abs" style="left:0;width:17px"></div><i style="bottom:0">&#9660;</i></div>
+  </div>
+  <div class="escreve">
+    <b>deixe seu recado para Marina:</b>
+    <div class="ta sunken">Oi, Mari! Passei aqui só pra dizer que</div>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:11.5px;color:#444"><span class="ck" style="display:inline-block;vertical-align:-3px;margin-right:4px"></span>recado particular</span>
+      <span><span class="btn def">Enviar</span> &nbsp;<span class="btn">Limpar</span></span>
+    </div>
+  </div>
+  <div class="status" style="position:absolute;left:3px;right:3px;bottom:3px"><div class="g">Página 1 de 1</div><div style="width:120px">3 recados</div></div>
+</div>
+
+<!-- ===== Janela: player ===== -->
+<div class="win" id="player">
+  <div class="tb">
+    <svg class="ic" viewBox="0 0 16 16"><rect x="1" y="2" width="14" height="12" rx="2" fill="#333" stroke="#000"/><rect x="3" y="4" width="10" height="4" fill="#7dff4a"/><circle cx="5" cy="11" r="1.3" fill="#ccc"/><circle cx="11" cy="11" r="1.3" fill="#ccc"/></svg>
+    <span class="t">leitor_mp3.exe</span>
+    <div class="bts"><i>_</i><i class="x">&#10005;</i></div>
+  </div>
+  <div class="pl">
+    <div class="lcd">
+      <div class="l1"><div class="tempo">01:42<small>/03:28</small></div></div>
+      <div class="eq" id="eq"></div>
+      <div class="st">&#9654; TOCANDO &middot; 192 kbps &middot; 44 kHz</div>
+      <div class="tit">Distance &amp; Pixelated &mdash; Jeremy Passion</div>
+      <div class="tag">&#9835; faixa 1 de 12 &middot; modo: repetir</div>
+    </div>
+    <div class="seek"><i></i><em></em></div>
+    <div class="ctl">
+      <div class="btn"><svg width="14" height="12" viewBox="0 0 14 12"><rect x="0" y="0" width="2" height="12"/><path d="M13 0v12L3 6z"/></svg></div>
+      <div class="btn p act"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 0l11 7-11 7z"/></svg></div>
+      <div class="btn"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="0" y="0" width="4" height="12"/><rect x="8" y="0" width="4" height="12"/></svg></div>
+      <div class="btn"><svg width="12" height="12" viewBox="0 0 12 12"><rect width="12" height="12"/></svg></div>
+      <div class="btn"><svg width="14" height="12" viewBox="0 0 14 12"><rect x="12" y="0" width="2" height="12"/><path d="M1 0v12l10-6z"/></svg></div>
+      <div class="vol"><span>VOL</span><div class="tr"><em></em></div></div>
+    </div>
+    <div class="lista-mp3">
+      <div class="a"><span>1. Jeremy Passion &ndash; Distance &amp; Pixelated</span><span>3:28</span></div>
+      <div><span>2. Mar de Dentro (faixa bônus)</span><span>4:02</span></div>
+      <div><span>3. Tarde de Domingo</span><span>3:15</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Janela: aviso ===== -->
+<div class="win" id="dlg">
+  <div class="tb"><span class="t">Aviso</span><div class="bts"><i class="x" style="margin:0">&#10005;</i></div></div>
+  <div class="corpo">
+    <svg width="40" height="40" viewBox="0 0 40 40" style="flex:none"><circle cx="20" cy="20" r="18" fill="url(#ig)" stroke="#0a2a8a" stroke-width="2"/>
+      <defs><radialGradient id="ig" cx=".35" cy=".3"><stop offset="0" stop-color="#9fd0ff"/><stop offset="1" stop-color="#1f5fd0"/></radialGradient></defs>
+      <rect x="17.5" y="17" width="5" height="14" rx="1" fill="#fff"/><circle cx="20" cy="11.5" r="3" fill="#fff"/></svg>
+    <div><b>Você tem 3 recados novos!</b><div style="font-size:12px;color:#333;margin-top:3px">Clique em OK para ler.</div></div>
+  </div>
+  <div class="ok"><div class="btn def"><span>OK</span></div></div>
+</div>
+
+<!-- ===== Janela: fotos ===== -->
+<div class="win" id="fotos">
+  <div class="tb">
+    <svg class="ic" viewBox="0 0 16 16"><path d="M1 3h5l2 2h7v9H1z" fill="#f2c94c" stroke="#8a6a10"/></svg>
+    <span class="t">Fotos &nbsp;&ndash;&nbsp; verão_2005</span>
+    <div class="bts"><i>_</i><i>&#9633;</i><i class="x">&#10005;</i></div>
+  </div>
+  <div class="menu"><span><u>A</u>rquivo</span><span><u>E</u>ditar</span><span><u>E</u>xibir</span><span>Fa<u>v</u>oritos</span><span>A<u>j</u>uda</span></div>
+  <div class="barra" style="padding-bottom:5px"><span style="font-size:12px">Endereço</span><div class="campo sunken" style="height:22px">C:\Meus Documentos\Fotos\verão_2005</div></div>
+  <div class="xp">
+    <div class="bloco"><h5>Tarefas de imagem</h5><div class="it">Ver apresentação</div><div class="it" style="margin-top:2px">Enviar por e-mail</div><div class="it" style="margin-top:2px">Imprimir foto</div></div>
+  </div>
+  <div class="thumbs sunken">
+    <div class="th s"><div class="im"><span style="background-image:url(../clientes/exemplo/em-pe-feminina.jpg);background-position:50% 12%;background-size:150%"></span></div><div class="n">IMG_0412.jpg</div></div>
+    <div class="th"><div class="im"><span style="background-image:url(../clientes/exemplo/em-pe-feminina-2.jpg);background-position:50% 8%;background-size:150%"></span></div><div class="n">IMG_0413.jpg</div></div>
+    <div class="th"><div class="im"><span style="background-image:url(../clientes/exemplo/montanhas.jpg)"></span></div><div class="n">viagem_serra.jpg</div></div>
+    <div class="th"><div class="im"><span style="background-image:url(../clientes/exemplo/estrada.jpg)"></span></div><div class="n">estrada.jpg</div></div>
+    <div class="th"><div class="im"><span style="background-image:url(../clientes/exemplo/floresta.jpg)"></span></div><div class="n">passeio.jpg</div></div>
+  </div>
+  <div class="status" style="position:absolute;left:3px;right:3px;bottom:3px"><div class="g">1 objeto selecionado (96,4 KB)</div><div style="width:120px">5 objetos</div><div style="width:140px">Meu Computador</div></div>
+</div>
+
+<!-- cursor clássico -->
+<svg id="cursor" style="left:1752px;top:506px" width="24" height="34" viewBox="0 0 12 17" shape-rendering="crispEdges">
+  <path d="M0 0v13l3-3 2 5 2-1-2-5h4z" fill="#000"/><path d="M1 2v9l2-2 3 6 0-.5-3-6.5h6z" fill="#fff" transform="translate(0 0)"/>
+</svg>
+
+<!-- Barra de tarefas -->
+<div id="tarefas">
+  <div id="iniciar"><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#fff" opacity=".95"/><path d="M13 4l2.6 6.2 6.7.6-5 4.4 1.5 6.6L13 18.4 7.2 21.8l1.5-6.6-5-4.4 6.7-.6z" fill="#2a8e2a"/></svg>iniciar</div>
+  <div class="tk on" style="left:176px"><i style="background:#ffe27a"></i>meu_perfil.exe</div>
+  <div class="tk" style="left:392px"><i style="background:#fff"></i>recados (3)</div>
+  <div class="tk" style="left:608px"><i style="background:#3a3"></i>leitor_mp3.exe</div>
+  <div class="tk" style="left:824px"><i style="background:#f2c94c"></i>Fotos</div>
+  <div id="bandeja">
+    <svg width="18" height="16" viewBox="0 0 18 16"><path d="M1 5h4l5-4v14l-5-4H1z" fill="#fff"/><path d="M12 5q3 3 0 6M14 3q5 5 0 10" stroke="#fff" fill="none" stroke-width="1.5"/></svg>
+    <svg width="16" height="16" viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" rx="1" fill="#fff" opacity=".9"/><path d="M1 4l7 5 7-5" stroke="#1f60d0" fill="none"/></svg>
+    <span class="rel">22:41</span>
+  </div>
+</div>
+
+<div class="selo">&#10022;</div>
+
+<script>
+  // equalizador congelado
+  const alt=[.5,.8,.62,.95,.7,.4,.88,.58,.76,.45,.9,.66,.52,.84,.38,.72];
+  document.getElementById('eq').innerHTML=alt.map(a=>`<b style="height:${Math.round(a*40)}px"></b>`).join('');
+</script>
+</body>
+</html>

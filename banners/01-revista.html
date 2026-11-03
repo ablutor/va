@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Revista</title>
+  <!-- Banner da Revista: capa escura, filetes finos, tarja de código de barras e a foto do perfil com moldura de papel e filete de destaque -->
+  <link rel="stylesheet" href="_base.css">
+  <link rel="stylesheet" href="../core/cores.css">
+  <style>
+    /* Mesmas cores do modelo (style.css): --bg fundo, --ink papel/texto, --ac destaque */
+    :root, [data-cor="original"]   { --bg: #0e0e10; --ink: #f2efe9; --ac: #d9b48a; }
+    [data-cor="masculino"]  { --bg: #0b1320; --ink: #e8eef5; --ac: #7fb2e5; }
+    [data-cor="feminino"]   { --bg: #1a0f12; --ink: #f6e9ea; --ac: #e8a0b0; }
+    [data-cor="feminino-2"] { --bg: #15111d; --ink: #efe9f7; --ac: #b9a2e8; }
+    [data-cor^="pastel-"]   { --bg: var(--p-bg); --ink: var(--p-ink); --ac: var(--p-act); }
+    :root { --linha: color-mix(in srgb, var(--ink) 22%, transparent); --brilho: color-mix(in srgb, var(--ink) 7%, var(--bg)); }
+
+    html, body { background: var(--bg); }
+    .tudo { background: radial-gradient(ellipse 55% 130% at 78% 45%, var(--brilho), var(--bg) 100%); }
+
+    /* filetes de página, como no cabeçalho e no rodapé de uma revista */
+    .filete { position: absolute; left: 112px; right: 0; height: 1px; background: var(--linha); }
+    .filete.a { top: 9px; } .filete.b { bottom: 9px; }
+    .filete.a::after { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 3px; background: var(--ac); }
+
+    /* lado direito: a tarja de código de barras da capa e um traço de destaque */
+    .barras { position: absolute; left: 318px; top: 58px; width: 40px; height: 26px; opacity: .3;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 3px, var(--ink) 3px 5px, transparent 5px 6px, var(--ink) 6px 7px, transparent 7px 9px, var(--ink) 9px 10px, transparent 10px 11px); }
+    .traco { position: absolute; left: 318px; top: 46px; width: 40px; height: 2px; background: var(--ac); }
+    .coluna { position: absolute; left: 306px; top: 20px; width: 1px; height: 60px; background: var(--linha); }
+
+    /* moldura: papel (cor do texto) de 4 px em volta do avatar e um filete de destaque 3 px fora */
+    .moldura { background: var(--ink); box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--ac), 0 3px 10px rgba(0, 0, 0, .35); }
+    /* no pastel o papel é o branco do modelo (o texto escuro ficaria pesado em volta da foto) */
+    [data-cor^="pastel-"] .moldura { background: var(--p-papel); box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--ac), 0 3px 9px rgba(60, 50, 70, .2); }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="filete a"></div><div class="filete b"></div>
+    <div class="coluna"></div><div class="traco"></div><div class="barras"></div>
+    <div class="moldura" id="moldura"></div>
+  </div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function (d) { XB.pronto2(); });
+  </script>
+</body>
+</html>

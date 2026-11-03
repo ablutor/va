@@ -1,0 +1,323 @@
+/* Modelo 30 · Letreiro neon
+   Parede de azulejos escuros no escuro, o nome escrito em neon, a cidade em outra cor,
+   o selo de online, a frase e a foto numa moldura de dois tubos de neon com um enfeite no canto.
+   O brilho é todo em CSS (text-shadow e box-shadow); só a foto do cliente é imagem.
+   Cores (nome → rótulo):
+   original    → rosa-neon
+   masculino   → azul elétrico
+   masculino-2 → vermelho
+   feminino    → lilás
+   feminino-2  → turquesa */
+
+:root,
+[data-cor="original"] {
+  --parede: #1e1317;                     /* azulejos */
+  --junta: rgba(8, 4, 6, .75);           /* rejunte entre os azulejos */
+  --brilho-1: rgba(255, 50, 150, .2);    /* luz do letreiro na parede, em cima à esquerda */
+  --brilho-2: rgba(120, 20, 70, .18);    /* luz embaixo à direita */
+  --nome: #ffe0f4;                       /* miolo do tubo do nome */
+  --nome-brilho: #ff3fa8;
+  --cidade: #d9eeff;
+  --cidade-brilho: #3c9dff;
+  --tubo-fora: #5cb8ff;                  /* tubo de fora da moldura */
+  --tubo-dentro: #ff4fb4;                /* tubo de dentro */
+  --quadro-fundo: rgba(60, 10, 40, .55);
+  --enfeite: #ff7ccc;
+  --enfeite-forma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.5s-9-5.6-9-12A5 5 0 0 1 12 6.6a5 5 0 0 1 9 2.9c0 6.4-9 12-9 12z'/%3E%3C/svg%3E");
+  --enfeite-escala: 1;                   /* tamanho do enfeite (o raio é maior que o coração) */
+  --player: #a8dcff;
+  --player-brilho: #3c9dff;
+  --online: #dcffe6;                     /* selo de online, verde em todas as cores */
+  --online-brilho: #39e46e;
+  --frase: #ffe1b3;
+  --frase-brilho: #ff9a2e;
+}
+
+[data-cor="masculino"] {
+  --parede: #17161b;
+  --junta: rgba(4, 4, 8, .75);
+  --brilho-1: rgba(40, 140, 255, .16);
+  --brilho-2: rgba(255, 140, 40, .2);
+  --nome: #e2f3ff;
+  --nome-brilho: #2a9dff;
+  --cidade: #ffe6c8;
+  --cidade-brilho: #ff8a2a;
+  --tubo-fora: #ffb36b;
+  --tubo-dentro: #3fa9ff;
+  --quadro-fundo: rgba(10, 25, 50, .55);
+  --enfeite: #ffd23a;
+  --enfeite-escala: 1.6;
+  --enfeite-forma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.5 1.5 3.5 13.5h7l-2.5 9 12-13h-7.2z'/%3E%3C/svg%3E");
+  --player: #ffd2a0;
+  --player-brilho: #ff8a2a;
+}
+
+[data-cor="masculino-2"] {
+  --parede: #1c1214;
+  --junta: rgba(8, 3, 4, .75);
+  --brilho-1: rgba(255, 40, 50, .22);
+  --brilho-2: rgba(60, 140, 255, .08);
+  --nome: #ffd9d9;
+  --nome-brilho: #ff2a3a;
+  --cidade: #d9eeff;
+  --cidade-brilho: #3c9dff;
+  --tubo-fora: #7cc8ff;
+  --tubo-dentro: #ff3b47;
+  --quadro-fundo: rgba(60, 8, 12, .55);
+  --enfeite: #ff7d93;
+  --enfeite-escala: 1.15;
+  --enfeite-forma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m12 1.5 3.1 7 7.6.6-5.8 5 1.8 7.4L12 17.6l-6.7 3.9 1.8-7.4-5.8-5 7.6-.6z'/%3E%3C/svg%3E");
+  --player: #a8dcff;
+  --player-brilho: #3c9dff;
+}
+
+[data-cor="feminino"] {
+  --parede: #1d1319;
+  --junta: rgba(6, 3, 6, .75);
+  --brilho-1: rgba(170, 80, 255, .2);
+  --brilho-2: rgba(255, 60, 170, .16);
+  --nome: #f3e1ff;
+  --nome-brilho: #a64dff;
+  --cidade: #ffe0f3;
+  --cidade-brilho: #ff4fb4;
+  --tubo-fora: #ff62c4;
+  --tubo-dentro: #b77bff;
+  --quadro-fundo: rgba(45, 15, 60, .55);
+  --enfeite: #c9a0ff;
+  --player: #ffc3ea;
+  --player-brilho: #ff4fb4;
+}
+
+[data-cor="feminino-2"] {
+  --parede: #151817;
+  --junta: rgba(3, 6, 5, .75);
+  --brilho-1: rgba(30, 220, 180, .13);
+  --brilho-2: rgba(255, 60, 170, .17);
+  --nome: #dafff4;
+  --nome-brilho: #19e0b5;
+  --cidade: #ffe0f3;
+  --cidade-brilho: #ff4fb4;
+  --tubo-fora: #ff7ad0;
+  --tubo-dentro: #2de0b9;
+  --quadro-fundo: rgba(8, 40, 35, .55);
+  --enfeite: #4ff0c8;
+  --player: #ffc3ea;
+  --player-brilho: #ff4fb4;
+}
+
+:root {
+  --xs-marca-cor: var(--nome);
+  --xs-marca-fundo: var(--parede);
+  --xs-marca-destaque: var(--nome-brilho);
+  --azulejo: 64px;
+}
+
+.xs-mobile { --azulejo: 41px; }
+
+body {
+  background: var(--parede);
+  color: var(--nome);
+  font-family: "Lexend", system-ui, sans-serif;
+}
+
+.desk { width: 1920px; }
+.mob { width: 390px; }
+
+/* ---------- Parede de azulejos ---------- */
+
+/* Rejunte em grade e a luz colorida dos letreiros batendo na parede */
+.parede {
+  background-color: var(--parede);
+  background-image:
+    linear-gradient(180deg, var(--junta) 3px, transparent 3px),
+    linear-gradient(90deg, var(--junta) 3px, transparent 3px),
+    radial-gradient(ellipse 60% 70% at 22% 28%, var(--brilho-1), transparent 70%),
+    radial-gradient(ellipse 55% 60% at 85% 85%, var(--brilho-2), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(0, 0, 0, .25));
+  background-size: var(--azulejo) var(--azulejo), var(--azulejo) var(--azulejo), 100% 100%, 100% 100%, 100% 100%;
+  background-position: 0 0;
+}
+
+/* ---------- Letreiro com o nome ---------- */
+
+/* O tubo é o texto: miolo claro e várias camadas de brilho na cor do neon */
+.nome {
+  position: absolute;
+  font-family: "Yellowtail", cursive;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--nome);
+  text-shadow:
+    0 0 2px #fff,
+    0 0 8px var(--nome-brilho),
+    0 0 22px var(--nome-brilho),
+    0 0 48px color-mix(in srgb, var(--nome-brilho) 60%, transparent);
+}
+
+.cidade {
+  position: absolute;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--cidade);
+  text-shadow: 0 0 4px var(--cidade-brilho), 0 0 12px var(--cidade-brilho), 0 0 24px var(--cidade-brilho);
+}
+
+/* ---------- Selo online ---------- */
+
+.online {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 3px solid color-mix(in srgb, var(--online-brilho) 55%, #fff);
+  border-radius: 16px;
+  color: var(--online);
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 0 4px var(--online-brilho), 0 0 12px var(--online-brilho);
+  box-shadow: 0 0 6px var(--online-brilho), 0 0 18px var(--online-brilho), inset 0 0 6px var(--online-brilho), inset 0 0 16px color-mix(in srgb, var(--online-brilho) 50%, transparent);
+}
+
+/* Offline: o mesmo selo, apagado */
+.online.xs-off {
+  --online: #c9c9c9;
+  --online-brilho: #6b6b6b;
+}
+
+/* ---------- Frase ---------- */
+
+.frase {
+  position: absolute;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--frase);
+  text-shadow: 0 0 4px var(--frase-brilho), 0 0 12px color-mix(in srgb, var(--frase-brilho) 60%, transparent);
+}
+
+/* ---------- Moldura de neon ---------- */
+
+/* Dois tubos arredondados, um dentro do outro; o miolo fica vazio para a foto */
+.quadro,
+.tubo-dentro {
+  border-style: solid;
+}
+
+.quadro {
+  position: absolute;
+  border-color: color-mix(in srgb, var(--tubo-fora) 55%, #fff);
+  border-radius: 28px;
+  box-shadow:
+    0 0 5px var(--tubo-fora),
+    0 0 16px var(--tubo-fora),
+    0 0 40px color-mix(in srgb, var(--tubo-fora) 60%, transparent),
+    inset 0 0 6px var(--tubo-fora),
+    inset 0 0 18px color-mix(in srgb, var(--tubo-fora) 50%, transparent);
+}
+
+.tubo-dentro {
+  position: absolute;
+  border-color: color-mix(in srgb, var(--tubo-dentro) 55%, #fff);
+  border-radius: 20px;
+  background: var(--quadro-fundo);
+  box-shadow:
+    0 0 5px var(--tubo-dentro),
+    0 0 16px var(--tubo-dentro),
+    inset 0 0 6px var(--tubo-dentro),
+    inset 0 0 18px color-mix(in srgb, var(--tubo-dentro) 50%, transparent);
+}
+
+.foto {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, .4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .5);
+}
+
+.foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+/* Enfeite de neon no canto (coração, raio ou estrela: a forma vem da cor) */
+.enfeite {
+  position: absolute;
+  transform: scale(var(--enfeite-escala));
+  filter: drop-shadow(0 0 4px var(--enfeite)) drop-shadow(0 0 12px var(--enfeite));
+}
+
+.enfeite::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--enfeite) 75%, #fff);
+  -webkit-mask: var(--enfeite-forma) center / contain no-repeat;
+  mask: var(--enfeite-forma) center / contain no-repeat;
+}
+
+/* ---------- Player ---------- */
+
+.player {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: visible;
+  color: var(--player);
+  white-space: nowrap;
+}
+
+.player .xs-pular {
+  color: var(--player);
+  opacity: .9;
+}
+
+.player .xs-pular svg { width: 12px; height: 12px; }
+
+.player .play {
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--player);
+  border-radius: 50%;
+  color: var(--player);
+  box-shadow: 0 0 6px var(--player-brilho), 0 0 14px var(--player-brilho), inset 0 0 6px var(--player-brilho);
+}
+
+.player .faixa {
+  text-shadow: 0 0 4px var(--player-brilho), 0 0 10px var(--player-brilho);
+}
+
+/* ---------- Desktop (1920×900) ---------- */
+
+.desk .nome { left: 130px; top: 70px; font-size: 230px; padding: 0 30px 0 10px; transform: rotate(-4deg); transform-origin: left center; }
+.desk .cidade { left: 220px; top: 372px; font-size: 42px; letter-spacing: .36em; }
+.desk .online { left: 150px; top: 520px; width: 332px; height: 82px; font-size: 30px; }
+.desk .frase { left: 150px; top: 662px; width: 730px; font-size: 27px; }
+
+.desk .quadro { left: 1112px; top: 92px; width: 596px; height: 672px; border-width: 4px; transform: rotate(2.6deg); }
+.desk .tubo-dentro { inset: 16px; border-width: 4px; }
+.desk .foto { inset: 22px; }
+.desk .enfeite { right: -30px; top: -34px; width: 56px; height: 56px; }
+
+.desk .player { left: 1180px; top: 810px; max-width: 560px; }
+.desk .player .play { width: 46px; height: 46px; }
+.desk .player .faixa { margin-left: 10px; font-size: 20px; }
+
+/* ---------- Mobile (390×844) ---------- */
+
+.mob .nome { left: 50%; top: 34px; font-size: 104px; padding: 0 16px 0 6px; transform: translateX(-50%) rotate(-4deg); }
+.mob .cidade { left: 0; right: 0; top: 165px; font-size: 21px; letter-spacing: .3em; text-align: center; text-indent: .3em; }
+.mob .quadro { left: 55px; top: 226px; width: 282px; height: 351px; border-width: 3px; border-radius: 18px; transform: rotate(3deg); }
+.mob .tubo-dentro { inset: 8px; border-width: 3px; border-radius: 13px; }
+.mob .foto { inset: 13px; border-radius: 8px; }
+.mob .enfeite { right: -20px; top: -18px; width: 34px; height: 34px; }
+.mob .online { left: 105px; top: 612px; width: 180px; height: 46px; border-width: 2.5px; border-radius: 11px; font-size: 16.5px; }
+.mob .frase { left: 20px; right: 20px; top: 685px; font-size: 14.5px; text-align: center; }
+.mob .player { left: 0; right: 0; top: 782px; justify-content: center; gap: 10px; }
+.mob .player .play { width: 32px; height: 32px; border-width: 2.5px; }
+.mob .player .faixa { margin-left: 8px; font-size: 13px; }

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino feminino-2">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Madrugada lo-fi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../../core/cores.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <!-- Parede, janela e mesa -->
+    <svg class="layer" viewBox="0 0 1920 900" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="d-wall" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="w1"/><stop offset=".6" class="w2"/><stop offset="1" class="w3"/>
+        </linearGradient>
+        <pattern id="d-stripes" width="64" height="10" patternUnits="userSpaceOnUse">
+          <rect width="32" height="10" style="fill:var(--stripe)"/>
+        </pattern>
+        <pattern id="d-dots" width="48" height="48" patternUnits="userSpaceOnUse">
+          <circle cx="12" cy="12" r="1.6" style="fill:var(--dots)"/><circle cx="36" cy="36" r="1.6" style="fill:var(--dots)"/>
+        </pattern>
+        <linearGradient id="d-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="s1"/><stop offset=".45" class="s2"/><stop offset=".78" class="s3"/><stop offset="1" class="s4"/>
+        </linearGradient>
+        <linearGradient id="d-wood" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="wd1"/><stop offset=".5" class="wd2"/><stop offset="1" class="wd3"/>
+        </linearGradient>
+        <linearGradient id="d-woodFront" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="wf1"/><stop offset="1" class="wf2"/>
+        </linearGradient>
+        <linearGradient id="d-frame" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" class="fr1"/><stop offset="1" class="fr2"/>
+        </linearGradient>
+        <radialGradient id="d-moonGlow"><stop offset="0" stop-color="#fff2c8" stop-opacity=".55"/><stop offset=".4" stop-color="#ffe6a8" stop-opacity=".14"/><stop offset="1" stop-color="#ffe6a8" stop-opacity="0"/></radialGradient>
+        <radialGradient id="d-horizon" cx=".5" cy="1" r=".7"><stop offset="0" class="hz" stop-opacity=".5"/><stop offset="1" class="hz" stop-opacity="0"/></radialGradient>
+        <radialGradient id="d-drop" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".3" stop-color="#cfd9ff" stop-opacity=".18"/><stop offset="1" stop-color="#9fb0ff" stop-opacity=".12"/></radialGradient>
+        <clipPath id="d-glass"><rect x="1114" y="74" width="702" height="562" rx="4"/></clipPath>
+        <mask id="d-crescent">
+          <rect x="1500" y="80" width="300" height="200" fill="#000"/>
+          <circle cx="1690" cy="176" r="40" fill="#fff"/>
+          <circle cx="1710" cy="164" r="36" fill="#000"/>
+        </mask>
+        <filter id="d-blur6"><feGaussianBlur stdDeviation="6"/></filter>
+        <filter id="d-blur2"><feGaussianBlur stdDeviation="2"/></filter>
+      </defs>
+
+      <!-- parede -->
+      <rect width="1920" height="900" fill="url(#d-wall)"/>
+      <rect width="1920" height="720" fill="url(#d-stripes)"/>
+      <rect width="1920" height="720" fill="url(#d-dots)"/>
+      <!-- rodapé / lambri -->
+      <rect y="660" width="1920" height="50" style="fill:var(--rodape)"/>
+
+      <!-- janela: céu -->
+      <g clip-path="url(#d-glass)">
+        <rect x="1114" y="74" width="702" height="562" fill="url(#d-sky)"/>
+        <g id="d-stars"></g>
+        <circle cx="1690" cy="176" r="130" fill="url(#d-moonGlow)"/>
+        <g mask="url(#d-crescent)"><circle cx="1690" cy="176" r="40" fill="#fff6d8"/></g>
+        <circle cx="1675" cy="170" r="3" fill="rgba(0,0,0,.06)"/>
+        <!-- nuvens -->
+        <g style="fill:var(--nuv)" opacity=".35" filter="url(#d-blur6)">
+          <ellipse cx="1330" cy="250" rx="120" ry="16"/><ellipse cx="1420" cy="238" rx="80" ry="14"/>
+          <ellipse cx="1620" cy="330" rx="140" ry="14"/><ellipse cx="1220" cy="360" rx="100" ry="12"/>
+        </g>
+        <rect x="1114" y="360" width="702" height="276" fill="url(#d-horizon)"/>
+        <g id="d-city"></g>
+        <g id="d-rain"></g>
+        <!-- gotas no vidro -->
+        <g id="d-drops"></g>
+        <!-- reflexos -->
+        <polygon points="1150,74 1250,74 1114,300 1114,200" fill="#fff" opacity=".07"/>
+        <polygon points="1290,74 1330,74 1114,520 1114,470" fill="#fff" opacity=".05"/>
+        <polygon points="1620,636 1700,636 1816,420 1816,330" fill="#fff" opacity=".05"/>
+        <!-- reflexo quente da luminária -->
+        <rect x="1114" y="74" width="702" height="562" fill="rgba(255,170,80,.06)"/>
+      </g>
+
+      <!-- moldura -->
+      <g>
+        <rect x="1090" y="50" width="750" height="24" fill="url(#d-frame)"/>
+        <rect x="1090" y="636" width="750" height="24" fill="url(#d-frame)"/>
+        <rect x="1090" y="50" width="24" height="610" fill="url(#d-frame)"/>
+        <rect x="1816" y="50" width="24" height="610" fill="url(#d-frame)"/>
+        <rect x="1458" y="74" width="14" height="562" fill="url(#d-frame)"/>
+        <rect x="1114" y="348" width="702" height="14" fill="url(#d-frame)"/>
+        <path d="M1090 50H1840M1090 74H1840M1090 636H1840" style="stroke:var(--frl)" stroke-width="1.2" fill="none"/>
+        <path d="M1114 74V636M1816 74V636M1458 74V636M1472 74V636" style="stroke:var(--frl);opacity:.65" stroke-width="1" fill="none"/>
+        <!-- peitoril -->
+        <rect x="1070" y="658" width="790" height="16" rx="3" style="fill:var(--sill)"/>
+        <rect x="1070" y="658" width="790" height="3" fill="rgba(255,255,255,.22)"/>
+        <rect x="1070" y="674" width="790" height="10" fill="rgba(0,0,0,.35)"/>
+      </g>
+
+      <!-- mesa: tampo -->
+      <rect x="0" y="684" width="1920" height="40" fill="url(#d-wood)"/>
+      <g stroke="rgba(30,15,10,.25)" stroke-width="1" fill="none">
+        <path d="M0 696C300 693 700 700 1100 695S1700 699 1920 696"/>
+        <path d="M0 706C400 709 800 703 1200 707S1700 704 1920 708"/>
+        <path d="M0 715C250 713 650 717 1000 714S1600 716 1920 715"/>
+      </g>
+      <rect x="0" y="684" width="1920" height="3" fill="rgba(255,210,160,.28)"/>
+      <rect x="0" y="722" width="1920" height="8" style="fill:var(--wtop)"/>
+      <rect x="0" y="722" width="1920" height="2" fill="rgba(255,220,180,.35)"/>
+      <!-- mesa: frente -->
+      <rect x="0" y="730" width="1920" height="170" fill="url(#d-woodFront)"/>
+      <rect x="0" y="730" width="1920" height="22" fill="rgba(0,0,0,.35)"/>
+      <g style="fill:var(--gaveta)" stroke="rgba(255,200,150,.25)" stroke-width="1.5">
+        <rect x="36" y="752" width="910" height="136" rx="6"/>
+        <rect x="974" y="752" width="910" height="136" rx="6"/>
+      </g>
+      <g fill="none" stroke="rgba(0,0,0,.25)" stroke-width="2">
+        <rect x="52" y="766" width="878" height="108" rx="3"/>
+        <rect x="990" y="766" width="878" height="108" rx="3"/>
+      </g>
+      <g>
+        <circle cx="491" cy="820" r="13" fill="#d8b46c"/><circle cx="487" cy="816" r="5" fill="#f6e2ae"/>
+        <circle cx="1429" cy="820" r="13" fill="#d8b46c"/><circle cx="1425" cy="816" r="5" fill="#f6e2ae"/>
+        <ellipse cx="491" cy="835" rx="14" ry="3" fill="rgba(0,0,0,.4)"/><ellipse cx="1429" cy="835" rx="14" ry="3" fill="rgba(0,0,0,.4)"/>
+      </g>
+    </svg>
+    <!-- Varal de luzes -->
+    <svg class="layer" viewBox="0 0 1920 900" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="d-bulb"><stop offset="0" stop-color="#fff3c9"/><stop offset=".35" stop-color="#ffd27a"/><stop offset="1" stop-color="#ffb04a" stop-opacity="0"/></radialGradient>
+        <radialGradient id="d-bulbP"><stop offset="0" stop-color="var(--bb1)"/><stop offset=".35" stop-color="var(--bb2)"/><stop offset="1" stop-color="var(--bb3)" stop-opacity="0"/></radialGradient>
+      </defs>
+      <g id="d-wireG"></g>
+    </svg>
+    <div class="abs pill"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="#ffe3a8"/></svg><span class="hr"><span class="loc" data-xs-se="local"><span class="lt" data-xs="local"></span><i>·</i></span><b>03:12</b></span></div>
+    <div class="abs neon" data-xs-se="nome">
+      <span class="t off" data-xs="nome"></span><span class="t" data-xs="nome"></span><i class="linha"></i>
+    </div>
+    <div class="abs postit"><span data-texto="frase"></span></div>
+    <div class="quadro">
+      <div class="luz"></div>
+      <svg class="lamp" viewBox="0 0 210 44"><defs><linearGradient id="d-brassL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5e1b0"/><stop offset="1" stop-color="#a9803f"/></linearGradient></defs><path d="M105 0V12M105 12C70 12 52 20 44 34M105 12C140 12 158 20 166 34" stroke="#b58d52" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="30" y="30" width="150" height="9" rx="4.5" fill="url(#d-brassL)"/><ellipse cx="105" cy="40" rx="62" ry="2.5" fill="#ffe3a8" opacity=".9"/></svg>
+      <div class="mat">
+        <div class="foto"><img data-retrato alt=""></div>
+        <div class="nome"><span data-xs="nomeCompleto"></span><small data-xs-se="local" data-xs="local"></small></div>
+      </div>
+      <div class="vidro"></div>
+    </div>
+    <!-- Objetos da mesa -->
+    <svg class="layer" viewBox="0 0 1920 900" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="d-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--scr1)"/><stop offset=".55" stop-color="var(--scr2)"/><stop offset="1" stop-color="var(--scr3)"/></linearGradient>
+        <linearGradient id="d-clay" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c26a4a"/><stop offset=".5" stop-color="#e08a62"/><stop offset="1" stop-color="#9c4e38"/></linearGradient>
+        <linearGradient id="d-mug" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f1e7d6"/><stop offset=".6" stop-color="#d8c8ae"/><stop offset="1" stop-color="#a8977e"/></linearGradient>
+        <linearGradient id="d-brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d9b57a"/><stop offset=".5" stop-color="#f5e1b0"/><stop offset="1" stop-color="#b58d52"/></linearGradient>
+        <radialGradient id="d-bulbGlow"><stop offset="0" stop-color="#fff6d0"/><stop offset=".3" stop-color="#ffd37a"/><stop offset="1" stop-color="#ff9a30" stop-opacity="0"/></radialGradient>
+        <filter id="d-soft"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="d-steamBlur"><feGaussianBlur stdDeviation="2.4"/></filter>
+        <linearGradient id="d-vinyl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18122e"/><stop offset=".5" stop-color="#2e2556"/><stop offset="1" stop-color="#120d28"/></linearGradient>
+      </defs>
+
+      <!-- sombras de contato -->
+      <g fill="rgba(10,4,22,.55)" filter="url(#d-soft)">
+        <ellipse cx="1040" cy="708" rx="130" ry="9"/>
+        <ellipse cx="1393" cy="708" rx="140" ry="8"/>
+        <ellipse cx="1197" cy="708" rx="42" ry="6"/>
+        <ellipse cx="740" cy="708" rx="50" ry="6"/>
+        <ellipse cx="605" cy="709" rx="92" ry="7"/>
+        <ellipse cx="1660" cy="708" rx="118" ry="8"/>
+        <ellipse cx="1850" cy="710" rx="70" ry="8"/>
+      </g>
+
+      <!-- livros -->
+      <g id="d-books">
+        <rect x="520" y="676" width="170" height="30" rx="3" fill="#2f5b73"/>
+        <rect x="520" y="676" width="170" height="5" fill="rgba(255,255,255,.18)"/>
+        <rect x="526" y="690" width="158" height="4" fill="#e8d9b5" opacity=".85"/>
+        <rect x="534" y="648" width="150" height="28" rx="3" fill="#b0486a"/>
+        <rect x="534" y="648" width="150" height="5" fill="rgba(255,255,255,.2)"/>
+        <rect x="548" y="660" width="26" height="3" fill="#ffd9a0" opacity=".8"/>
+        <rect x="514" y="622" width="160" height="26" rx="3" fill="#d9a95b"/>
+        <rect x="514" y="622" width="160" height="5" fill="rgba(255,255,255,.28)"/>
+        <rect x="522" y="636" width="146" height="3" fill="#6c4a22" opacity=".5"/>
+        <rect x="540" y="598" width="124" height="24" rx="3" fill="#5d4aa3"/>
+        <rect x="540" y="598" width="124" height="5" fill="rgba(255,255,255,.22)"/>
+        <rect x="552" y="609" width="90" height="3" fill="#e2d4ff" opacity=".6"/>
+        <!-- xícara pequena de chá sobre os livros? marcador de página -->
+        <path d="M660 676 l18 0 l0 20 l-9 -7 l-9 7z" fill="#ff7aa8" opacity=".9"/>
+      </g>
+
+      <!-- planta pequena (jiboia) -->
+      <g id="d-plant1"></g>
+      <path d="M706 660h68l-9 46h-50z" fill="url(#d-clay)"/>
+      <rect x="702" y="652" width="76" height="14" rx="3" fill="#d27a56"/>
+      <rect x="702" y="652" width="76" height="3" fill="rgba(255,255,255,.3)"/>
+
+      <!-- laptop -->
+      <g id="d-laptop">
+        <path d="M806 668H1026L1054 706H778z" fill="var(--lap1)"/>
+        <path d="M806 668H1026L1030 673H802z" fill="rgba(255,255,255,.18)"/>
+        <path d="M815 680H1017L1030 696H802z" fill="var(--lap3)"/>
+        <g stroke="rgba(180,160,255,.25)" stroke-width="1.5"><path d="M822 684H1010M818 689H1014M814 694H1018"/></g>
+        <rect x="800" y="536" width="232" height="134" rx="8" fill="var(--lap2)"/>
+        <rect x="800" y="536" width="232" height="134" rx="8" fill="none" stroke="rgba(190,170,255,.4)" stroke-width="1.5"/>
+        <rect x="808" y="544" width="216" height="118" rx="4" fill="#0e0a26"/>
+        <!-- tela: vídeo lo-fi -->
+        <rect x="808" y="544" width="216" height="118" rx="4" fill="url(#d-screen)" opacity=".9"/>
+        <rect x="808" y="544" width="216" height="118" rx="4" fill="rgba(20,10,60,.35)"/>
+        <circle cx="975" cy="578" r="12" fill="#fff6d8" opacity=".95"/>
+        <path d="M808 640 L850 612 L885 630 L930 600 L1024 645 V662 H808z" fill="rgba(25,14,70,.85)"/>
+        <path d="M808 650 L860 630 L910 648 L970 625 L1024 655 V662 H808z" fill="rgba(14,8,44,.9)"/>
+        <g fill="#ffd27a"><rect x="868" y="640" width="3" height="4"/><rect x="874" y="644" width="3" height="4"/><rect x="934" y="635" width="3" height="4"/><rect x="990" y="645" width="3" height="4"/></g>
+        <!-- barra de player na tela -->
+        <rect x="818" y="651" width="196" height="3" rx="2" fill="rgba(255,255,255,.35)"/><rect x="818" y="651" width="70" height="3" rx="2" fill="#fff"/>
+        <text x="818" y="566" font-family="Quicksand" font-weight="700" font-size="9" fill="#fff" opacity=".9" letter-spacing="1">lofi beats to relax/study to</text>
+        <circle cx="916" cy="540" r="1.8" fill="#6a5aa0"/>
+        <!-- adesivos na tampa -->
+      </g>
+
+      <!-- caneca -->
+      <g id="d-mugG">
+        <path d="M1166 654h60l-4 52h-52z" fill="url(#d-mug)"/>
+        <ellipse cx="1196" cy="654" rx="30" ry="6" fill="#4a2a1c"/>
+        <ellipse cx="1196" cy="654" rx="30" ry="6" fill="none" stroke="#efe2cb" stroke-width="2"/>
+        <path d="M1226 664c20 -4 22 26 -2 30" fill="none" stroke="#d8c8ae" stroke-width="6" stroke-linecap="round"/>
+        <path d="M1172 676h48" stroke="#e86a8f" stroke-width="5" opacity=".85"/>
+        <path d="M1170 688h50" stroke="#e86a8f" stroke-width="3" opacity=".6"/>
+        <g fill="none" stroke="rgba(240,230,255,.5)" stroke-width="5" stroke-linecap="round" filter="url(#d-steamBlur)">
+          <path class="vapor" d="M1186 640c-12 -14 12 -22 0 -38s12 -26 2 -44"/>
+          <path class="vapor v2" d="M1204 642c10 -12 -10 -22 2 -34s-8 -24 0 -40"/>
+        </g>
+      </g>
+
+      <!-- gato dormindo -->
+      <g transform="translate(1262 632)"><g class="gato">
+        <!-- cauda -->
+        <path d="M222 62C262 72 256 22 218 30" fill="none" stroke="#c5774a" stroke-width="15" stroke-linecap="round"/>
+        <path d="M222 62C262 72 256 22 218 30" fill="none" stroke="#8c4f2d" stroke-width="15" stroke-linecap="butt" stroke-dasharray="4 11" opacity=".75"/>
+        <!-- corpo -->
+        <path d="M12 74C-6 40 30 6 100 4C180 0 244 28 234 70C230 76 20 80 12 74z" fill="#d68b55"/>
+        <path d="M14 70C0 44 36 12 100 9C176 6 238 32 230 68C170 74 70 76 14 70z" fill="#e39a62"/>
+        <g stroke="#a65f36" stroke-width="7" stroke-linecap="round" fill="none" opacity=".8">
+          <path d="M112 8c-2 14 -2 26 2 36"/><path d="M142 6c0 16 2 28 8 38"/><path d="M172 8c2 14 6 26 14 34"/><path d="M202 16c4 12 10 22 20 28"/><path d="M82 12c-4 12 -6 22 -4 32"/>
+        </g>
+        <!-- luz da lua no dorso -->
+        <path d="M60 14C110 0 190 0 232 36C190 18 120 14 60 14z" fill="rgba(180,200,255,.35)"/>
+        <!-- patinhas -->
+        <ellipse cx="46" cy="72" rx="20" ry="8" fill="#f2c9a0"/>
+        <ellipse cx="82" cy="74" rx="18" ry="7" fill="#f2c9a0"/>
+        <!-- cabeça -->
+        <g transform="translate(18 14)">
+          <path d="M2 18L8 -10L30 6z" fill="#d68b55"/><path d="M60 8L74 -12L82 14z" fill="#d68b55"/>
+          <path d="M8 14L11 -2L24 8z" fill="#f4b4a4"/><path d="M66 8L72 -3L75 10z" fill="#f4b4a4"/>
+          <ellipse cx="40" cy="34" rx="42" ry="30" fill="#e39a62"/>
+          <path d="M32 6c-1 8 0 14 2 18M44 5c0 8 0 14 -1 18M20 8c1 6 3 11 6 15" stroke="#a65f36" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <ellipse cx="46" cy="44" rx="18" ry="13" fill="#f6d3ae"/>
+          <path d="M16 36q8 7 16 0M50 36q8 7 16 0" stroke="#4a2a22" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <path d="M38 44l5 0-2.5 3.5z" fill="#e88aa0"/>
+          <path d="M41 47.5q-3 4 -7 2M41 47.5q3 4 7 2" stroke="#7a4a3a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <g stroke="rgba(255,240,230,.7)" stroke-width="1.2" fill="none"><path d="M24 46l-22 -3M24 50l-22 4M60 46l22 -3M60 50l22 4"/></g>
+        </g>
+        <!-- zzz -->
+        <g class="zzz" font-family="Quicksand" font-weight="700" fill="#cdbbff" style="filter:drop-shadow(0 0 6px rgba(190,160,255,.8))">
+          <text x="-8" y="-16" font-size="16">z</text><text x="6" y="-34" font-size="22">z</text><text x="24" y="-58" font-size="28">Z</text>
+        </g>
+      </g></g>
+
+      <!-- vitrola -->
+      <g id="d-turn">
+        <path d="M1546 686H1774L1790 706H1530z" fill="var(--tt1)"/>
+        <path d="M1546 686H1774L1776 690H1544z" fill="rgba(255,255,255,.25)"/>
+        <rect x="1530" y="700" width="260" height="8" fill="var(--tt4)"/>
+        <rect x="1548" y="650" width="224" height="38" rx="4" fill="var(--tt2)" transform="skewX(0)"/>
+        <path d="M1548 650H1772L1790 668H1530z" fill="var(--tt3)"/>
+        <ellipse cx="1650" cy="664" rx="86" ry="14" fill="#1a1236"/>
+        <ellipse cx="1650" cy="663" rx="80" ry="12" fill="url(#d-vinyl)"/>
+        <g fill="none" stroke="rgba(180,160,255,.18)" stroke-width="1"><ellipse cx="1650" cy="663" rx="70" ry="10"/><ellipse cx="1650" cy="663" rx="58" ry="8"/><ellipse cx="1650" cy="663" rx="46" ry="6.5"/></g>
+        <ellipse cx="1650" cy="663" rx="22" ry="3.8" fill="var(--vinil)"/><circle cx="1650" cy="663" r="1.6" fill="#1a1236"/>
+        <path d="M1690 640C1720 640 1740 650 1740 664" stroke="#ccb6ff" stroke-width="0" fill="none"/>
+        <!-- braço -->
+        <circle cx="1744" cy="660" r="8" fill="var(--arm)"/>
+        <path d="M1744 660L1692 658L1678 664" stroke="#d8c8ff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="1672" y="662" width="10" height="5" rx="1.5" fill="#ffc46b"/>
+        <circle cx="1560" cy="676" r="4" fill="#ffc46b"/><circle cx="1574" cy="676" r="4" fill="var(--vinil)"/>
+      </g>
+
+      <!-- planta grande -->
+      <g id="d-plant2"></g>
+      <path d="M1814 640h84l-8 66h-68z" fill="#e9dcc9"/>
+      <path d="M1814 640h84l-1 8h-82z" fill="#fff3e0"/>
+      <path d="M1822 668h68" stroke="var(--tt3)" stroke-width="5" opacity=".7"/>
+
+      <!-- luminária -->
+      <g id="d-lamp">
+        <ellipse cx="1106" cy="704" rx="42" ry="9" fill="var(--lap3)"/>
+        <path d="M1068 704C1068 686 1086 676 1106 676S1144 686 1144 704z" fill="url(#d-brass)"/>
+        <path d="M1074 698C1080 686 1094 681 1106 681" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none"/>
+        <path d="M1104 680L1056 566" stroke="var(--arm)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M1104 680L1056 566" stroke="var(--arm2)" stroke-width="2" stroke-linecap="round" transform="translate(-1.5 0)"/>
+        <path d="M1056 566L1008 392" stroke="var(--arm)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M1056 566L1008 392" stroke="var(--arm2)" stroke-width="2" stroke-linecap="round" transform="translate(-1.5 0)"/>
+        <circle cx="1104" cy="680" r="8" fill="url(#d-brass)"/><circle cx="1056" cy="566" r="9" fill="url(#d-brass)"/><circle cx="1008" cy="392" r="9" fill="url(#d-brass)"/>
+        <g transform="translate(1008 392) rotate(20)">
+          <path d="M-15 -12H15L50 50H-50z" fill="#f0d9c0"/>
+          <path d="M-15 -12H15L50 50H-50z" fill="url(#d-brass)" opacity=".5"/>
+          <path d="M-12 -8L-44 46" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="0" cy="50" rx="50" ry="8" fill="#ffd886"/>
+          <ellipse cx="0" cy="51" rx="34" ry="5" fill="#fff6d0"/>
+        </g>
+        <circle cx="982" cy="441" r="60" fill="url(#d-bulbGlow)" opacity=".8"/>
+      </g>
+    </svg>
+    <div class="abs radio" data-xs-player>
+      <div class="top"><span>lofi radio · ao vivo 24/7</span><span class="live"><i></i><span class="l-on">ao vivo</span><span class="l-off">em pausa</span></span></div>
+      <div class="row">
+        <div class="grille"></div>
+        <div class="visor">
+          <div class="ti"><span data-xs="musica.titulo"></span></div>
+          <div class="ar"><span data-xs="musica.artista"></span></div>
+          <div class="eq"><i style="height:10px"></i><i style="height:18px"></i><i style="height:26px"></i><i style="height:14px"></i><i style="height:30px"></i><i style="height:22px"></i><i style="height:12px"></i><i style="height:24px"></i><i style="height:16px"></i><i style="height:28px"></i><i style="height:8px"></i><i style="height:20px"></i></div>
+          <div class="prog"><span data-xs-tempo>0:00</span><div class="bar"><i data-xs-barra></i></div><span data-xs-duracao>0:00</span></div>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="btn pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h3v14H6zM20 5v14L10 12z"/></svg></button>
+        <button class="btn play" type="button" data-xs-tocar aria-label="Tocar música"><svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg></button>
+        <button class="btn pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 5h-3v14h3zM4 5v14l10-7z"/></svg></button>
+        <div class="sp"></div>
+        <div class="knob"></div>
+        <div class="knob" style="transform:rotate(-50deg)"></div>
+      </div>
+    </div>
+    <!-- Gostos: adesivos nas gavetas -->
+    <div class="abs gostos ga"></div>
+    <div class="abs gostos gb"></div>
+    <svg class="abs deco" style="left:770px;top:772px" width="150" height="100" viewBox="0 0 150 100">
+      <g stroke="#fff" stroke-width="6" stroke-linejoin="round" paint-order="stroke">
+        <path d="M30 14a28 28 0 1 0 28 40A24 24 0 0 1 30 14z" fill="#ffd36e" transform="rotate(-12 40 40)"/>
+        <path d="M104 20l7 17 18 2-14 12 5 18-16-10-16 10 5-18-14-12 18-2z" fill="#ff8fb4" transform="rotate(10 104 44)"/>
+      </g>
+      <circle cx="22" cy="40" r="2" fill="#b58a2a"/>
+    </svg>
+    <svg class="abs deco" style="left:1500px;top:770px" width="360" height="100" viewBox="0 0 360 100">
+      <g stroke="#fff" stroke-width="6" stroke-linejoin="round" paint-order="stroke">
+        <path d="M30 78c-18 0-22-24-6-28 0-18 26-24 36-8 14-6 28 6 22 20 12 2 12 16-4 16z" fill="#bfe9f5" transform="rotate(-4 50 60)"/>
+        <path d="M150 80C100 50 112 18 140 22c8 1 10 8 10 8s2-7 10-8c28-4 40 28-10 58z" fill="#ff7aa8" transform="rotate(6 150 50)"/>
+        <g transform="rotate(-8 240 50)"><ellipse cx="240" cy="62" rx="20" ry="17" fill="#c5a8ff"/><ellipse cx="212" cy="40" rx="8" ry="10" fill="#c5a8ff"/><ellipse cx="232" cy="30" rx="8" ry="10" fill="#c5a8ff"/><ellipse cx="252" cy="30" rx="8" ry="10" fill="#c5a8ff"/><ellipse cx="270" cy="40" rx="8" ry="10" fill="#c5a8ff"/></g>
+        <path d="M326 12l7 18 18 2-14 12 5 18-16-10-16 10 5-18-14-12 18-2z" fill="#ffd36e" transform="rotate(14 326 38)"/>
+      </g>
+    </svg>
+    <div class="abs plate">
+      <i class="scr" style="left:7px;top:7px"></i><i class="scr" style="right:7px;top:7px"></i><i class="scr" style="left:7px;bottom:7px"></i><i class="scr" style="right:7px;bottom:7px"></i>
+      <div class="nm" data-xs="nomeCompleto"></div>
+      <a class="ig" data-xs-se="instagram" data-xs-link="instagramUrl"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b2810" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#3b2810"/></svg><span class="at">@<span data-xs="instagram"></span></span></a>
+      <div class="on" data-xs-se="online"><i></i>online no xat</div>
+    </div>
+    <!-- Luz, vinheta e grão -->
+    <svg class="layer" viewBox="0 0 1920 900" xmlns="http://www.w3.org/2000/svg" style="pointer-events:none">
+      <defs>
+        <linearGradient id="d-cone" x1=".5" y1="0" x2=".5" y2="1">
+          <stop offset="0" stop-color="#ffd17a" stop-opacity=".62"/><stop offset=".6" stop-color="#ffb457" stop-opacity=".2"/><stop offset="1" stop-color="#ff9a40" stop-opacity=".10"/>
+        </linearGradient>
+        <radialGradient id="d-wallGlow" cx="960" cy="440" r="520" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffb35a" stop-opacity=".34"/><stop offset=".5" stop-color="#ff8f48" stop-opacity=".10"/><stop offset="1" stop-color="#ff8f48" stop-opacity="0"/></radialGradient>
+        <radialGradient id="d-deskGlow" cx="900" cy="706" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(900 706) scale(300 40) translate(-900 -706)"><stop offset="0" stop-color="#ffd48a" stop-opacity=".6"/><stop offset="1" stop-color="#ffb05a" stop-opacity="0"/></radialGradient>
+        <radialGradient id="d-lapGlow" cx="916" cy="610" r="190" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7fd9ff" stop-opacity=".30"/><stop offset="1" stop-color="#7fd9ff" stop-opacity="0"/></radialGradient>
+        <radialGradient id="d-moonSpill" cx="1560" cy="300" r="620" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="var(--msp)" stop-opacity=".16"/><stop offset="1" stop-color="var(--msp)" stop-opacity="0"/></radialGradient>
+        <radialGradient id="d-vig" cx="960" cy="450" r="1100" gradientUnits="userSpaceOnUse"><stop offset=".55" class="vgc" stop-opacity="0"/><stop offset="1" class="vgc" stop-opacity=".72"/></radialGradient>
+        <filter id="d-grain" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="7" stitchTiles="stitch"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.2 -.3"/>
+        </filter>
+        <filter id="d-blurC"><feGaussianBlur stdDeviation="8"/></filter>
+        <linearGradient id="d-dim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0526" stop-opacity=".25"/><stop offset="1" stop-color="#0a0526" stop-opacity=".1"/></linearGradient>
+      </defs>
+      <rect width="1920" height="900" fill="url(#d-dim)" style="opacity:var(--dimo)"/>
+      <g style="mix-blend-mode:screen;opacity:var(--glowo)">
+        <rect width="1920" height="900" fill="url(#d-moonSpill)"/>
+        <rect width="1920" height="900" fill="url(#d-wallGlow)"/>
+        <polygon points="980,432 996,432 1120,706 690,706" fill="url(#d-cone)" filter="url(#d-blurC)"/>
+        <polygon points="976,438 990,438 1080,706 730,706" fill="url(#d-cone)" opacity=".55"/>
+        <ellipse cx="900" cy="708" rx="300" ry="40" fill="url(#d-deskGlow)"/>
+        <rect width="1920" height="900" fill="url(#d-lapGlow)"/>
+      </g>
+      <rect width="1920" height="900" fill="url(#d-vig)" style="opacity:var(--vigo)"/>
+      <rect width="1920" height="900" filter="url(#d-grain)" opacity=".16" style="mix-blend-mode:overlay"/>
+    </svg>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <svg class="layer" viewBox="0 0 390 844" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="m-wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="w1"/><stop offset=".6" class="w2"/><stop offset="1" class="w3"/></linearGradient>
+        <pattern id="m-stripes" width="40" height="10" patternUnits="userSpaceOnUse"><rect width="20" height="10" style="fill:var(--stripe)"/></pattern>
+        <pattern id="m-dots" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="1.1" style="fill:var(--dots)"/><circle cx="23" cy="23" r="1.1" style="fill:var(--dots)"/></pattern>
+        <linearGradient id="m-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s1"/><stop offset=".45" class="s2"/><stop offset=".78" class="s3"/><stop offset="1" class="s4"/></linearGradient>
+        <linearGradient id="m-wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="wd2"/><stop offset=".6" class="wd1"/><stop offset="1" class="wd2"/></linearGradient>
+        <linearGradient id="m-woodFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="wf1"/><stop offset="1" class="wf2"/></linearGradient>
+        <linearGradient id="m-frame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="fr1"/><stop offset="1" class="fr2"/></linearGradient>
+        <radialGradient id="m-moonGlow"><stop offset="0" stop-color="#fff2c8" stop-opacity=".55"/><stop offset=".4" stop-color="#ffe6a8" stop-opacity=".14"/><stop offset="1" stop-color="#ffe6a8" stop-opacity="0"/></radialGradient>
+        <radialGradient id="m-horizon" cx=".5" cy="1" r=".7"><stop offset="0" class="hz" stop-opacity=".5"/><stop offset="1" class="hz" stop-opacity="0"/></radialGradient>
+        <radialGradient id="m-drop" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".3" stop-color="#cfd9ff" stop-opacity=".18"/><stop offset="1" stop-color="#9fb0ff" stop-opacity=".12"/></radialGradient>
+        <clipPath id="m-glass"><rect x="24" y="22" width="342" height="178" rx="3"/></clipPath>
+        <mask id="m-crescent"><rect x="260" y="20" width="120" height="100" fill="#000"/><circle cx="326" cy="62" r="19" fill="#fff"/><circle cx="334" cy="56" r="17" fill="#000"/></mask>
+        <filter id="m-blur4"><feGaussianBlur stdDeviation="4"/></filter>
+        <filter id="m-blur1"><feGaussianBlur stdDeviation="1.2"/></filter>
+      </defs>
+
+      <rect width="390" height="844" fill="url(#m-wall)"/>
+      <rect width="390" height="620" fill="url(#m-stripes)"/>
+      <rect width="390" height="620" fill="url(#m-dots)"/>
+
+      <!-- janela -->
+      <g clip-path="url(#m-glass)">
+        <rect x="24" y="22" width="342" height="178" fill="url(#m-sky)"/>
+        <g id="m-stars"></g>
+        <circle cx="326" cy="62" r="64" fill="url(#m-moonGlow)"/>
+        <g mask="url(#m-crescent)"><circle cx="326" cy="62" r="19" fill="#fff6d8"/></g>
+        <g style="fill:var(--nuv)" opacity=".35" filter="url(#m-blur4)"><ellipse cx="120" cy="96" rx="60" ry="8"/><ellipse cx="270" cy="120" rx="70" ry="7"/></g>
+        <rect x="24" y="90" width="342" height="110" fill="url(#m-horizon)"/>
+        <g id="m-city"></g>
+        <g id="m-rain"></g>
+        <g id="m-drops"></g>
+        <polygon points="44,22 84,22 24,120 24,84" fill="#fff" opacity=".07"/>
+        <polygon points="110,22 126,22 24,170 24,150" fill="#fff" opacity=".05"/>
+        <polygon points="300,200 330,200 366,130 366,98" fill="#fff" opacity=".05"/>
+        <rect x="24" y="22" width="342" height="178" fill="rgba(255,170,80,.05)"/>
+      </g>
+      <g>
+        <rect x="10" y="8" width="370" height="14" fill="url(#m-frame)"/>
+        <rect x="10" y="200" width="370" height="14" fill="url(#m-frame)"/>
+        <rect x="10" y="8" width="14" height="206" fill="url(#m-frame)"/>
+        <rect x="366" y="8" width="14" height="206" fill="url(#m-frame)"/>
+        <rect x="186" y="22" width="8" height="178" fill="url(#m-frame)"/>
+        <rect x="24" y="106" width="342" height="8" fill="url(#m-frame)"/>
+        <path d="M10 8H380M10 22H380M10 200H380" style="stroke:var(--frl)" stroke-width="1" fill="none"/>
+        <rect x="2" y="212" width="386" height="10" rx="2" style="fill:var(--sill)"/>
+        <rect x="2" y="212" width="386" height="2" fill="rgba(255,255,255,.22)"/>
+        <rect x="2" y="222" width="386" height="6" fill="rgba(0,0,0,.3)"/>
+      </g>
+
+      <!-- mesa -->
+      <rect x="0" y="596" width="390" height="48" fill="url(#m-wood)"/>
+      <g stroke="rgba(30,15,10,.25)" stroke-width=".8" fill="none"><path d="M0 608C100 606 200 611 390 607"/><path d="M0 620C120 623 250 618 390 621"/><path d="M0 632C90 630 220 634 390 631"/></g>
+      <rect x="0" y="596" width="390" height="2" fill="rgba(255,210,160,.28)"/>
+      <rect x="0" y="644" width="390" height="7" style="fill:var(--wtop)"/>
+      <rect x="0" y="644" width="390" height="1.5" fill="rgba(255,220,180,.35)"/>
+      <rect x="0" y="651" width="390" height="193" fill="url(#m-woodFront)"/>
+      <rect x="0" y="651" width="390" height="14" fill="rgba(0,0,0,.35)"/>
+      <rect x="6" y="668" width="378" height="168" rx="5" style="fill:var(--gaveta)" stroke="rgba(255,200,150,.25)" stroke-width="1"/>
+      <rect x="14" y="676" width="362" height="152" rx="3" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.5"/>
+    </svg>
+    <svg class="layer" viewBox="0 0 390 844" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="m-bulb"><stop offset="0" stop-color="#fff3c9"/><stop offset=".35" stop-color="#ffd27a"/><stop offset="1" stop-color="#ffb04a" stop-opacity="0"/></radialGradient>
+        <radialGradient id="m-bulbP"><stop offset="0" stop-color="var(--bb1)"/><stop offset=".35" stop-color="var(--bb2)"/><stop offset="1" stop-color="var(--bb3)" stop-opacity="0"/></radialGradient>
+      </defs>
+      <g id="m-wireG"></g>
+    </svg>
+    <div class="abs pill"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="#ffe3a8"/></svg><span class="hr"><span class="loc" data-xs-se="local"><span class="lt" data-xs="local"></span><i>·</i></span><b>03:12</b></span></div>
+    <div class="abs neon" data-xs-se="nome">
+      <span class="t off" data-xs="nome"></span><span class="t" data-xs="nome"></span><i class="linha"></i>
+    </div>
+    <div class="abs postit"><span data-texto="frase"></span></div>
+    <div class="quadro">
+      <div class="luz"></div>
+      <svg class="lamp" viewBox="0 0 210 44"><defs><linearGradient id="m-brassL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5e1b0"/><stop offset="1" stop-color="#a9803f"/></linearGradient></defs><path d="M105 0V12M105 12C70 12 52 20 44 34M105 12C140 12 158 20 166 34" stroke="#b58d52" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="30" y="30" width="150" height="9" rx="4.5" fill="url(#m-brassL)"/><ellipse cx="105" cy="40" rx="62" ry="2.5" fill="#ffe3a8" opacity=".9"/></svg>
+      <div class="mat">
+        <div class="foto"><img data-retrato alt=""></div>
+        <div class="nome"><span data-xs="nomeCompleto"></span></div>
+      </div>
+      <div class="vidro"></div>
+    </div>
+    <svg class="layer" viewBox="0 0 390 844" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="m-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--scr1)"/><stop offset=".55" stop-color="var(--scr2)"/><stop offset="1" stop-color="var(--scr3)"/></linearGradient>
+        <linearGradient id="m-clay" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c26a4a"/><stop offset=".5" stop-color="#e08a62"/><stop offset="1" stop-color="#9c4e38"/></linearGradient>
+        <linearGradient id="m-mug" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f1e7d6"/><stop offset=".6" stop-color="#d8c8ae"/><stop offset="1" stop-color="#a8977e"/></linearGradient>
+        <linearGradient id="m-brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d9b57a"/><stop offset=".5" stop-color="#f5e1b0"/><stop offset="1" stop-color="#b58d52"/></linearGradient>
+        <radialGradient id="m-bulbGlow"><stop offset="0" stop-color="#fff6d0"/><stop offset=".3" stop-color="#ffd37a"/><stop offset="1" stop-color="#ff9a30" stop-opacity="0"/></radialGradient>
+        <filter id="m-soft"><feGaussianBlur stdDeviation="2"/></filter>
+        <filter id="m-steamBlur"><feGaussianBlur stdDeviation="1.4"/></filter>
+      </defs>
+
+      <g fill="rgba(10,4,22,.55)" filter="url(#m-soft)">
+        <ellipse cx="164" cy="600" rx="62" ry="5"/><ellipse cx="330" cy="601" rx="62" ry="5"/><ellipse cx="262" cy="600" rx="14" ry="3"/><ellipse cx="40" cy="600" rx="40" ry="4"/><ellipse cx="94" cy="600" rx="18" ry="3"/>
+      </g>
+
+      <!-- livros -->
+      <g>
+        <rect x="6" y="584" width="70" height="14" rx="2" fill="#2f5b73"/><rect x="6" y="584" width="70" height="2" fill="rgba(255,255,255,.18)"/><rect x="9" y="591" width="64" height="2" fill="#e8d9b5" opacity=".85"/>
+        <rect x="12" y="570" width="62" height="14" rx="2" fill="#b0486a"/><rect x="12" y="570" width="62" height="2" fill="rgba(255,255,255,.2)"/><rect x="20" y="576" width="12" height="2" fill="#ffd9a0" opacity=".8"/>
+        <rect x="4" y="557" width="64" height="13" rx="2" fill="#d9a95b"/><rect x="4" y="557" width="64" height="2" fill="rgba(255,255,255,.28)"/>
+        <rect x="16" y="545" width="48" height="12" rx="2" fill="#5d4aa3"/><rect x="16" y="545" width="48" height="2" fill="rgba(255,255,255,.22)"/>
+        <path d="M62 584l8 0 0 10 -4 -3 -4 3z" fill="#ff7aa8" opacity=".9"/>
+      </g>
+      <g id="m-plant1"></g>
+      <path d="M84 580h28l-4 18H88z" fill="url(#m-clay)"/><rect x="82" y="576" width="32" height="6" rx="2" fill="#d27a56"/>
+
+      <!-- laptop -->
+      <g>
+        <path d="M130 588H214L224 600H120z" fill="var(--lap1)"/><path d="M134 592H210L216 598H128z" fill="var(--lap3)"/>
+        <rect x="124" y="536" width="96" height="54" rx="4" fill="var(--lap2)"/>
+        <rect x="124" y="536" width="96" height="54" rx="4" fill="none" stroke="rgba(190,170,255,.4)" stroke-width="1"/>
+        <rect x="128" y="540" width="88" height="46" rx="2" fill="url(#m-screen)" opacity=".92"/>
+        <rect x="128" y="540" width="88" height="46" rx="2" fill="rgba(20,10,60,.35)"/>
+        <circle cx="198" cy="552" r="5" fill="#fff6d8"/>
+        <path d="M128 574 L146 563 L160 570 L178 560 L216 575 V586 H128z" fill="rgba(25,14,70,.85)"/>
+        <path d="M128 579 L150 571 L170 578 L192 569 L216 580 V586 H128z" fill="rgba(14,8,44,.9)"/>
+        <rect x="133" y="580" width="78" height="2" rx="1" fill="rgba(255,255,255,.35)"/><rect x="133" y="580" width="28" height="2" rx="1" fill="#fff"/>
+        <text x="133" y="548" font-family="Quicksand" font-weight="700" font-size="5" fill="#fff" opacity=".9" letter-spacing=".4">lofi beats to relax/study to</text>
+      </g>
+
+      <!-- caneca -->
+      <g>
+        <path d="M254 578h24l-2 20h-20z" fill="url(#m-mug)"/><ellipse cx="266" cy="578" rx="12" ry="2.6" fill="#4a2a1c"/><ellipse cx="266" cy="578" rx="12" ry="2.6" fill="none" stroke="#efe2cb" stroke-width="1.2"/>
+        <path d="M278 583c8 -2 9 10 -1 12" fill="none" stroke="#d8c8ae" stroke-width="3" stroke-linecap="round"/>
+        <path d="M257 586h18" stroke="#e86a8f" stroke-width="2.4" opacity=".85"/>
+        <g fill="none" stroke="rgba(240,230,255,.5)" stroke-width="3" stroke-linecap="round" filter="url(#m-steamBlur)">
+          <path class="vapor" d="M262 572c-5 -6 5 -9 0 -16s5 -11 1 -18"/><path class="vapor v2" d="M270 573c4 -5 -4 -9 1 -14s-3 -10 0 -16"/>
+        </g>
+      </g>
+
+      <!-- gato -->
+      <g transform="translate(284 569) scale(.38)"><g class="gato">
+        <path d="M222 62C262 72 256 22 218 30" fill="none" stroke="#c5774a" stroke-width="15" stroke-linecap="round"/>
+        <path d="M222 62C262 72 256 22 218 30" fill="none" stroke="#8c4f2d" stroke-width="15" stroke-dasharray="4 11" opacity=".75"/>
+        <path d="M12 74C-6 40 30 6 100 4C180 0 244 28 234 70C230 76 20 80 12 74z" fill="#d68b55"/>
+        <path d="M14 70C0 44 36 12 100 9C176 6 238 32 230 68C170 74 70 76 14 70z" fill="#e39a62"/>
+        <g stroke="#a65f36" stroke-width="7" stroke-linecap="round" fill="none" opacity=".8"><path d="M112 8c-2 14 -2 26 2 36"/><path d="M142 6c0 16 2 28 8 38"/><path d="M172 8c2 14 6 26 14 34"/><path d="M202 16c4 12 10 22 20 28"/><path d="M82 12c-4 12 -6 22 -4 32"/></g>
+        <path d="M60 14C110 0 190 0 232 36C190 18 120 14 60 14z" fill="rgba(180,200,255,.35)"/>
+        <ellipse cx="46" cy="72" rx="20" ry="8" fill="#f2c9a0"/><ellipse cx="82" cy="74" rx="18" ry="7" fill="#f2c9a0"/>
+        <g transform="translate(18 14)">
+          <path d="M2 18L8 -10L30 6z" fill="#d68b55"/><path d="M60 8L74 -12L82 14z" fill="#d68b55"/>
+          <path d="M8 14L11 -2L24 8z" fill="#f4b4a4"/><path d="M66 8L72 -3L75 10z" fill="#f4b4a4"/>
+          <ellipse cx="40" cy="34" rx="42" ry="30" fill="#e39a62"/>
+          <path d="M32 6c-1 8 0 14 2 18M44 5c0 8 0 14 -1 18M20 8c1 6 3 11 6 15" stroke="#a65f36" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <ellipse cx="46" cy="44" rx="18" ry="13" fill="#f6d3ae"/>
+          <path d="M16 36q8 7 16 0M50 36q8 7 16 0" stroke="#4a2a22" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M38 44l5 0-2.5 3.5z" fill="#e88aa0"/>
+          <path d="M41 47.5q-3 4 -7 2M41 47.5q3 4 7 2" stroke="#7a4a3a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        </g>
+      </g></g>
+
+      <!-- luminária -->
+      <g>
+        <ellipse cx="236" cy="598" rx="20" ry="4.5" fill="var(--lap3)"/>
+        <path d="M218 598C218 590 226 585 236 585S254 590 254 598z" fill="url(#m-brass)"/>
+        <path d="M236 587L222 552" stroke="var(--arm)" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M222 552L204 510" stroke="var(--arm)" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="236" cy="587" r="4" fill="url(#m-brass)"/><circle cx="222" cy="552" r="4.2" fill="url(#m-brass)"/><circle cx="204" cy="510" r="4.2" fill="url(#m-brass)"/>
+        <g transform="translate(204 510) rotate(20)">
+          <path d="M-8 -6H8L26 26H-26z" fill="#f0d9c0"/><path d="M-8 -6H8L26 26H-26z" fill="url(#m-brass)" opacity=".5"/>
+          <path d="M-6 -4L-22 24" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round"/>
+          <ellipse cx="0" cy="26" rx="26" ry="4.4" fill="#ffd886"/><ellipse cx="0" cy="26.5" rx="17" ry="2.8" fill="#fff6d0"/>
+        </g>
+        <circle cx="194" cy="534" r="34" fill="url(#m-bulbGlow)" opacity=".8"/>
+      </g>
+    </svg>
+    <div class="abs radio" data-xs-player>
+      <div class="top"><span>lofi radio · ao vivo 24/7</span><span class="live"><i></i><span class="l-on">ao vivo</span><span class="l-off">em pausa</span></span></div>
+      <div class="row">
+        <div class="grille"></div>
+        <div class="visor">
+          <div class="ti"><span data-xs="musica.titulo"></span></div>
+          <div class="ar"><span data-xs="musica.artista"></span></div>
+          <div class="eq"><i style="height:6px"></i><i style="height:11px"></i><i style="height:16px"></i><i style="height:9px"></i><i style="height:18px"></i><i style="height:13px"></i><i style="height:7px"></i><i style="height:14px"></i><i style="height:10px"></i><i style="height:17px"></i><i style="height:5px"></i><i style="height:12px"></i></div>
+          <div class="prog"><span data-xs-tempo>0:00</span><div class="bar"><i data-xs-barra></i></div><span data-xs-duracao>0:00</span></div>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="btn pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h3v14H6zM20 5v14L10 12z"/></svg></button>
+        <button class="btn play" type="button" data-xs-tocar aria-label="Tocar música"><svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg></button>
+        <button class="btn pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 5h-3v14h3zM4 5v14l10-7z"/></svg></button>
+        <div class="sp"></div>
+        <div class="knob"></div>
+        <div class="knob" style="transform:rotate(-50deg)"></div>
+      </div>
+    </div>
+    <div class="abs gostos"></div>
+    <svg class="abs deco" style="left:332px;top:770px" width="40" height="34" viewBox="0 0 40 34"><g stroke="#fff" stroke-width="3" stroke-linejoin="round" paint-order="stroke"><path d="M20 4l3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1z" fill="#ff8fb4"/></g></svg>
+    <div class="abs info">
+      <a class="tag" data-xs-se="instagram" data-xs-link="instagramUrl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b2810" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#3b2810"/></svg><span class="at">@<span data-xs="instagram"></span></span></a>
+      <div class="on" data-xs-se="online"><i></i>online no xat</div>
+    </div>
+    <svg class="layer" viewBox="0 0 390 844" xmlns="http://www.w3.org/2000/svg" style="pointer-events:none">
+      <defs>
+        <linearGradient id="m-cone" x1=".5" y1="0" x2=".5" y2="1"><stop offset="0" stop-color="#ffd17a" stop-opacity=".6"/><stop offset=".6" stop-color="#ffb457" stop-opacity=".2"/><stop offset="1" stop-color="#ff9a40" stop-opacity=".1"/></linearGradient>
+        <radialGradient id="m-wallGlow" cx="190" cy="520" r="220" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffb35a" stop-opacity=".3"/><stop offset="1" stop-color="#ff8f48" stop-opacity="0"/></radialGradient>
+        <radialGradient id="m-lapGlow" cx="172" cy="565" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7fd9ff" stop-opacity=".28"/><stop offset="1" stop-color="#7fd9ff" stop-opacity="0"/></radialGradient>
+        <radialGradient id="m-moonSpill" cx="200" cy="100" r="360" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="var(--msp)" stop-opacity=".16"/><stop offset="1" stop-color="var(--msp)" stop-opacity="0"/></radialGradient>
+        <radialGradient id="m-vig" cx="195" cy="422" r="560" gradientUnits="userSpaceOnUse"><stop offset=".55" class="vgc" stop-opacity="0"/><stop offset="1" class="vgc" stop-opacity=".7"/></radialGradient>
+        <filter id="m-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="7" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.2 -.3"/></filter>
+        <filter id="m-blurC"><feGaussianBlur stdDeviation="5"/></filter>
+      </defs>
+      <rect width="390" height="844" fill="rgba(10,5,38,.16)" style="opacity:var(--dimo)"/>
+      <g style="mix-blend-mode:screen;opacity:var(--glowo)">
+        <rect width="390" height="844" fill="url(#m-moonSpill)"/>
+        <rect width="390" height="844" fill="url(#m-wallGlow)"/>
+        <polygon points="194,536 214,536 292,598 96,598" fill="url(#m-cone)" filter="url(#m-blurC)"/>
+        <ellipse cx="190" cy="600" rx="130" ry="14" fill="rgba(255,200,120,.35)" filter="url(#m-blurC)"/>
+        <rect width="390" height="844" fill="url(#m-lapGlow)"/>
+      </g>
+      <rect width="390" height="844" fill="url(#m-vig)" style="opacity:var(--vigo)"/>
+      <rect width="390" height="844" filter="url(#m-grain)" opacity=".16" style="mix-blend-mode:overlay"/>
+    </svg>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

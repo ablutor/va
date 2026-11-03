@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino feminino-2 pastel-rosa">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Folha de contato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../../core/cores.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <div class="lbl mono">FOLHA DE CONTATO · ROLO 04 · <span data-xs="nomeCompleto"></span> · 36 EXP</div>
+
+    <!-- Tira de filme com as 5 fotos da galeria -->
+    <div class="strip">
+      <div class="holes t"></div><div class="holes b"></div>
+      <div class="edge t mono"><span>▸ 11</span><span>▸ 12</span><span>▸ 13</span><span>▸ 14</span><span>▸ 15</span></div>
+      <div class="edge b mono"><span>11A</span><span>12A</span><span>13A</span><span>14A</span><span>15A</span></div>
+      <div class="frames">
+        <div class="f ph bw" data-xs-bg="fotos.galeria.0"></div>
+        <div class="f ph escolhida" data-xs-bg="fotos.galeria.1"></div>
+        <div class="f ph bw" data-xs-bg="fotos.galeria.2"></div>
+        <div class="f ph" data-xs-bg="fotos.galeria.3"></div>
+        <div class="f ph bw" data-xs-bg="fotos.galeria.4"></div>
+      </div>
+    </div>
+    <!-- Anotações de caneta: mesma posição e giro da tira, mas fora dela
+         para não serem cortadas pelo esmaecimento das pontas -->
+    <div class="strip anot">
+      <div class="mark"></div>
+      <div class="x x1">✕</div>
+      <div class="x x2">esta! ✓</div>
+    </div>
+
+    <div class="info">
+      <h1 class="serif"><span data-xs="nome">Albert</span><br><em data-xs="sobrenome"></em></h1>
+      <div class="cols">
+        <div>
+          <p class="q serif">“<span data-xs="frase"></span>”</p>
+          <div class="player mono" data-xs-player>
+            <span class="xs-controles">
+              <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+              <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+                <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+                <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+              </button>
+              <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+            </span>
+            <span class="faixa"><span data-xs="musica.titulo"></span> — <span data-xs="musica.artista"></span></span>
+            <span class="wave eq"><i style="height:8px"></i><i style="height:18px"></i><i style="height:12px"></i><i style="height:22px"></i><i style="height:9px"></i><i style="height:16px"></i><i style="height:6px"></i><i style="height:14px"></i></span>
+            <i class="tempo" data-xs-tempo>0:00</i>
+            <span class="bar"><span data-xs-barra></span></span>
+          </div>
+        </div>
+        <div class="meta mono">
+          <div>LOCAL ........ <b data-xs="local"></b></div>
+          <div>GOSTA DE ..... <b data-xs-lista="gostos" data-xs-sep=" / "></b></div>
+          <div data-xs-se="instagram">INSTAGRAM .... <a data-xs-link="instagramUrl"><b>@<span data-xs="instagram"></span> ↗</b></a></div>
+          <div data-xs-se="online">STATUS ....... <b class="on">● online no xat</b></div>
+          <div>ISO 400 · f/2.0 · 1/125</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <div class="lbl mono">FOLHA DE CONTATO · ROLO 04</div>
+
+    <!-- Tira de filme em pé com as 3 primeiras fotos da galeria -->
+    <div class="strip">
+      <div class="holes l"></div><div class="holes r"></div>
+      <div class="f ph bw" data-xs-bg="fotos.galeria.0"></div>
+      <div class="f ph escolhida" data-xs-bg="fotos.galeria.1"></div>
+      <div class="f ph bw" data-xs-bg="fotos.galeria.2"></div>
+      <span class="num mono" style="top:60px">▸ 11A</span><span class="num mono" style="top:210px">▸ 12A</span><span class="num mono" style="top:360px">▸ 13A</span>
+      <div class="mark"></div>
+    </div>
+    <div class="x x1">esta! ✓</div>
+    <div class="x x2">✕</div>
+
+    <h1 class="serif"><span data-xs="nome">Albert</span><br><em data-xs="sobrenome"></em></h1>
+    <p class="q serif">“<span data-xs="destaque"></span>”</p>
+    <div class="meta mono">
+      <div>LOCAL ...... <b data-xs="local"></b></div>
+      <div>GOSTA DE ... <b data-xs-lista="gostos" data-xs-sep=" / "></b></div>
+      <div data-xs-se="instagram">INSTA ...... <a data-xs-link="instagramUrl"><b>@<span data-xs="instagram"></span> ↗</b></a></div>
+      <div data-xs-se="online">STATUS ..... <b class="on">● online no xat</b></div>
+    </div>
+
+    <div class="player mono" data-xs-player>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+      <span class="faixa" data-xs="musica.titulo"></span>
+      <span class="wave eq"><i style="height:8px"></i><i style="height:16px"></i><i style="height:11px"></i><i style="height:19px"></i><i style="height:8px"></i><i style="height:14px"></i></span>
+      <span class="bar"><span data-xs-barra></span></span>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

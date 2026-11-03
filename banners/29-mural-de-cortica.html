@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Mural de cortiça</title>
+  <!-- Quadro de cortiça com moldura de madeira: a moldura do avatar é uma polaroide presa com tachinha, ligada por um
+       barbante ao post-it e a uma ficha pautada. Sem textos. -->
+  <link rel="stylesheet" href="_base.css">
+  <style>
+    :root,
+    [data-cor="original"] {
+      --madeira: #6b4a2e; --madeira-borda: #4a321e;
+      --cortica: #b47c4b; --cortica-claro: #c38d5a; --cortica-escuro: #9a6639;
+      --tacha: #e0333f; --tacha-claro: #ff8a8f; --barbante: #c4202c;
+      --postit: #f9e27c; --papel: #fbf9f4; --tinta: #2b2440; --fita: rgba(244, 230, 160, .78);
+    }
+    [data-cor="homem"] {
+      --madeira: #2e2018; --madeira-borda: #1c130e;
+      --cortica: #9c6239; --cortica-claro: #ab6f44; --cortica-escuro: #82502c;
+      --tacha: #3d7fd6; --tacha-claro: #9cc8ff; --barbante: #2f62b8;
+      --postit: #a9d5f2; --papel: #fbf9f4; --tinta: #1d2238; --fita: rgba(205, 175, 125, .85);
+    }
+    [data-cor="mulher"] {
+      --madeira: #f1e7dd; --madeira-borda: #d9c5b4;
+      --cortica: #ac7a6d; --cortica-claro: #b98a7d; --cortica-escuro: #946559;
+      --tacha: #f0b737; --tacha-claro: #ffe9a0; --barbante: #d4609c;
+      --postit: #f8c2db; --papel: #fbf9f4; --tinta: #4a1d35; --fita: rgba(248, 168, 200, .8);
+    }
+    html, body { background: var(--madeira); }
+    /* cortiça: furinhos escuros, pontinhos claros e luz no meio (como no modelo) */
+    .tudo { background-color: var(--cortica);
+      background-image:
+        radial-gradient(circle, rgba(40, 20, 5, .18) 0 .8px, transparent 1.3px),
+        radial-gradient(circle, rgba(255, 235, 200, .14) 0 .8px, transparent 1.3px),
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, .05) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, .05) 0 1px, transparent 1px 3px),
+        radial-gradient(ellipse at 50% 45%, var(--cortica-claro), var(--cortica) 55%, var(--cortica-escuro));
+      background-size: 4px 4px, 4px 4px, auto, auto, 100% 100%;
+      background-position: 0 0, 2px 2px, 0 0, 0 0, 0 0; }
+    .tudo::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 22px rgba(0, 0, 0, .28); pointer-events: none; }
+    /* moldura de madeira em cima e embaixo */
+    .madeira { position: absolute; left: 0; right: 0; height: 3px; background: var(--madeira); z-index: 20; }
+    .madeira.c { top: 0; border-bottom: 1px solid var(--madeira-borda); }
+    .madeira.b { bottom: 0; border-top: 1px solid var(--madeira-borda); }
+
+    svg.fio { position: absolute; left: 0; top: 0; width: 380px; height: 100px; z-index: 6; pointer-events: none; overflow: visible; }
+    svg.fio path { fill: none; stroke: var(--barbante); stroke-width: 1.3; filter: drop-shadow(0 1px .6px rgba(0, 0, 0, .35)); }
+    .tacha { position: absolute; z-index: 25; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, var(--tacha-claro), var(--tacha) 45%, color-mix(in srgb, var(--tacha) 65%, #000));
+      box-shadow: 1px 2px 2px rgba(0, 0, 0, .4); }
+
+    /* ---- Moldura: polaroide ---- */
+    .moldura { z-index: 7; border-radius: 1px; }
+    .moldura .papel { position: absolute; inset: 0; border-radius: inherit; background: var(--papel);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .18), 2px 4px 6px rgba(0, 0, 0, .4); }
+    /* o papel da polaroide é plano (o avatar cobre o miolo); só a margem tem um leve degradê de luz */
+    .moldura .papel::after { content: ""; position: absolute; inset: 0; border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .5), rgba(0, 0, 0, .03) 70%, rgba(0, 0, 0, .06)); }
+    .moldura .furo { position: absolute; left: 4px; top: 4px; width: 76px; height: 76px; background: var(--papel); border-radius: 0; box-shadow: 0 0 0 .5px rgba(0, 0, 0, .12); }
+    .redonda .moldura .furo { border-radius: 50%; box-shadow: 0 0 0 .5px rgba(0, 0, 0, .12), inset 0 0 0 100px var(--papel); }
+    .redonda .moldura .papel::after { border-radius: 50%; }
+
+    /* ---- Post-it ---- */
+    .postit { position: absolute; left: 236px; top: 13px; width: 70px; height: 62px; background: var(--postit); transform: rotate(2.5deg);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .12), 2px 4px 6px rgba(0, 0, 0, .35); z-index: 5; }
+    .postit::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 255, 255, .22), transparent 30%, rgba(0, 0, 0, .06)); }
+    .postit i { position: absolute; left: 8px; height: 2px; border-radius: 1px; background: var(--tinta); opacity: .55; }
+    /* ---- Ficha pautada ---- */
+    .ficha { position: absolute; left: 322px; top: 34px; width: 62px; height: 54px; background: var(--papel); transform: rotate(-3.5deg); z-index: 5;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .12), 2px 4px 6px rgba(0, 0, 0, .35);
+      background-image: linear-gradient(180deg, transparent 0 9px, rgba(224, 85, 100, .7) 9px 10px, transparent 10px),
+        repeating-linear-gradient(180deg, transparent 0 7px, rgba(120, 150, 210, .6) 7px 8px); background-position: 0 0, 0 4px; }
+    .ficha i { position: absolute; left: 7px; right: 7px; height: 2px; border-radius: 1px; background: var(--tinta); opacity: .5; }
+    /* fita adesiva na ficha */
+    .fita { position: absolute; left: 332px; top: 28px; width: 24px; height: 9px; background: var(--fita); transform: rotate(5deg); z-index: 6; box-shadow: 0 1px 1px rgba(0, 0, 0, .15); }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <svg class="fio" viewBox="0 0 380 100"><path d="M57 5.5 Q150 20 255 14"/></svg>
+    <div class="postit"></div>
+    <div class="ficha"></div>
+    <div class="fita"></div>
+    <div class="tacha" style="left:255px;top:14px"></div>
+    <div class="moldura" id="moldura"><div class="papel"></div><div class="furo"></div></div>
+    <div class="tacha" style="left:57px;top:5.5px"></div>
+    <div class="madeira c"></div><div class="madeira b"></div>
+  </div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function () { XB.pronto2(); });
+  </script>
+</body>
+</html>

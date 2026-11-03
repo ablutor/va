@@ -1,0 +1,317 @@
+/* Modelo 42 · Hora
+   A foto no centro, num disco com um anel.
+   Cores neutras: original (areia), masculino (grafite) e feminino (nude).
+   Este modelo não tem versões pastel. */
+
+:root,
+[data-cor="original"]  { --bg: #e8e2d6; --ink: #2b2824; --mudo: #8a8478; --ac: #a3896a; }
+[data-cor="masculino"] { --bg: #2a2c2e; --ink: #eceae6; --mudo: #9a9b9c; --ac: #b8b2a4; }
+[data-cor="feminino"]  { --bg: #ecdcd6; --ink: #3b2a28; --mudo: #96807b; --ac: #b98a80; }
+
+/* Escala do palco desktop, para prender a marca d'água num ponto do desenho */
+:root {
+  --esc: min(100vw / 1920, 100vh / 900);
+  --xs-marca-cor: var(--ink);
+  --xs-marca-fundo: var(--bg);
+  --xs-marca-destaque: var(--ac);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.topo {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--mudo);
+}
+
+.topo > span { display: flex; align-items: center; }
+.topo .on { color: var(--ink); margin-right: 18px; }
+.topo .on::first-letter { color: var(--ac); }
+.topo a:hover { color: var(--ink); }
+
+/* Relógio: hora, foto e minuto numa linha (no celular, numa coluna) */
+.relogio {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.relogio b {
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -.045em;
+  font-variant-numeric: tabular-nums;
+  line-height: .74;
+}
+
+.disco {
+  position: relative;
+  flex: none;
+}
+
+.disco svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.disco circle {
+  fill: none;
+  stroke-width: 3;
+}
+
+.disco .trilho { stroke: color-mix(in srgb, var(--ink) 55%, transparent); }
+
+.disco .foto {
+  position: absolute;
+  border-radius: 50%;
+  background-position: center 22%;
+}
+
+.data {
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--mudo);
+}
+
+/* A hora, logo abaixo da data (o script atualiza a cada minuto; ?hora=10:09 deixa parada) */
+.hora {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.hora b { font-weight: inherit; }
+
+.hora i {
+  font-style: normal;
+  margin: 0 .06em;
+  color: var(--ac);
+  animation: dois-pontos 2s steps(1, end) infinite;
+}
+
+@keyframes dois-pontos { 50% { opacity: .25; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hora i { animation: none; }
+}
+
+.nome {
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-weight: 600;
+}
+
+
+.gostos {
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--mudo);
+}
+
+.gostos a { color: var(--ink); }
+
+.player {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.play {
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.player .info { display: flex; flex-direction: column; align-items: center; max-width: 100%; min-width: 0; }
+.player .info span { order: -1; }
+.player .xs-controles { order: 1; }
+
+.player b {
+  display: block;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player .info span { color: var(--mudo); }
+
+/* ---------- Desktop ---------- */
+
+.desk { width: 1920px; }
+
+.desk .topo {
+  left: 60px;
+  right: 60px;
+  top: 40px;
+  font-size: 13px;
+  letter-spacing: .14em;
+}
+
+.desk .relogio {
+  left: 0;
+  right: 0;
+  top: 130px;
+  height: 450px;
+  gap: 60px;
+}
+
+.desk .disco { width: 440px; height: 440px; }
+.desk .disco .foto { inset: 22px; }
+
+.desk .data {
+  left: 0;
+  right: 0;
+  top: 626px;
+  font-size: 14px;
+  letter-spacing: .32em;
+  text-indent: .32em;
+}
+
+.desk .hora {
+  top: 652px;
+  font-size: 46px;
+}
+
+.desk .nome {
+  left: 0;
+  right: 0;
+  top: 722px;
+  font-size: 22px;
+  letter-spacing: .34em;
+  text-indent: .34em;
+}
+
+
+.desk .gostos {
+  left: 0;
+  right: 0;
+  bottom: 44px;
+  font-size: 13px;
+  letter-spacing: .16em;
+}
+
+.desk .player {
+  left: 780px;
+  bottom: 28px;
+  width: 360px;
+  gap: 10px;
+}
+
+.desk .play { width: 40px; height: 40px; }
+.desk .play svg { width: 16px; height: 16px; }
+.desk .player b { font-size: 14px; }
+.desk .player .info span { font-size: 12px; }
+
+html:not(.xs-mobile) .xs-marca {
+  --xs-marca-direita: calc((100vw - 1920 * var(--esc)) / 2 + 60 * var(--esc));
+  --xs-marca-baixo: calc((100vh - 900 * var(--esc)) / 2 + 32 * var(--esc));
+}
+
+/* ---------- Mobile ---------- */
+
+.mob { width: 390px; }
+
+.mob .topo {
+  left: 20px;
+  right: 20px;
+  top: 24px;
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.mob .topo .on { margin-right: 10px; }
+
+.mob .relogio {
+  left: 0;
+  right: 0;
+  top: 80px;
+  height: 420px;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mob .disco { width: 300px; height: 300px; }
+.mob .disco .foto { inset: 16px; }
+.mob .disco circle { stroke-width: 4; }
+
+.mob .data {
+  left: 0;
+  right: 0;
+  top: 520px;
+  font-size: 10.5px;
+  letter-spacing: .28em;
+  text-indent: .28em;
+}
+
+.mob .hora {
+  top: 542px;
+  font-size: 34px;
+}
+
+.mob .nome {
+  left: 20px;
+  right: 20px;
+  top: 594px;
+  font-size: 16px;
+  letter-spacing: .3em;
+  text-indent: .3em;
+}
+
+
+.mob .gostos {
+  left: 20px;
+  right: 20px;
+  top: 640px;
+  font-size: 10px;
+  letter-spacing: .14em;
+}
+
+.mob .gostos a { display: block; margin-top: 7px; }
+
+.mob .player {
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  gap: 8px;
+}
+
+.mob .play { width: 36px; height: 36px; }
+.mob .play svg { width: 14px; height: 14px; }
+.mob .player b { font-size: 13px; }
+.mob .player .info span { font-size: 11px; }
+
+/* No celular a marca fica no alto, à direita da linha do local */
+.xs-mobile { --xs-marca-topo-mobile: calc(14 * 100vw / 390); }
+.xs-mobile .xs-marca { right: calc(20 * 100vw / 390); }

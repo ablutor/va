@@ -1,0 +1,119 @@
+/* Modelo 13 · Raposinha (família Fofinhos)
+   Cores: original (pêssego de outono), masculino (verde-floresta e ferrugem), feminino (coral), feminino-2 (lavanda). */
+
+:root,
+[data-cor="original"]   { --bg: #fbeee2; --bg2: #fffaf4; --card: #fffcf8; --ink: #4a3226; --ac: #d4693a; --ac2: #f6d8c3; --pegada: #e4c1a7; --folha1: #e8843a; --folha2: #cf5a2e; --folha3: #f0b23e; }
+[data-cor="masculino"]  { --bg: #e8efe4; --bg2: #f8fbf5; --card: #fdfefb; --ink: #25382a; --ac: #3d7a52; --ac2: #d1e4d2; --pegada: #b6cbb5; --folha1: #b5562b; --folha2: #8e3f22; --folha3: #c98a2e; }
+[data-cor="feminino"]   { --bg: #fdeae6; --bg2: #fff9f7; --card: #fffcfb; --ink: #4d2b2b; --ac: #e46a64; --ac2: #f9d3cf; --pegada: #edbdb7; --folha1: #f08a7c; --folha2: #e0645e; --folha3: #f5b37a; }
+[data-cor="feminino-2"] { --bg: #f0ebf8; --bg2: #fbf9fe; --card: #fdfcff; --ink: #3b3052; --ac: #8c72c4; --ac2: #e0d6f3; --pegada: #cabedf; --folha1: #b39ade; --folha2: #e79a77; --folha3: #f1c46b; }
+
+/* Pelagem da raposinha */
+:root {
+  --pelo: #f28a43;
+  --pelo-luz: #f9a865;
+  --pelo-sombra: #d9682c;
+  --branco: #fffaf3;
+  --branco-sombra: #f0e0d0;
+  --escuro: #4b302a;
+  --dedos: #2c1b17;
+  --orelha-dentro: #ffd8c0;
+  --bochecha: #ff9a9e;
+  --nariz: #3a2622;
+  --olho: #2d201d;
+  --folha-veia: color-mix(in srgb, var(--ink) 25%, transparent);
+}
+
+.pulo-todo,
+.corpo-todo {
+  transform-box: fill-box;
+}
+
+/* ---------- Rabo abanando atrás dela ---------- */
+
+.rabo {
+  transform-box: view-box;
+  transform-origin: 246px 360px;
+  animation: abanar 2.2s ease-in-out infinite;
+}
+
+@keyframes abanar {
+  0%, 100% { transform: rotate(-4deg); }
+  25% { transform: rotate(9deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(12deg); }
+}
+
+/* ---------- Orelhas tremelicam de vez em quando ---------- */
+
+.orelha { transform-box: view-box; }
+.orelha-esq { transform-origin: 132px 150px; animation: orelha-esq 5.5s ease-in-out infinite; }
+.orelha-dir { transform-origin: 248px 150px; animation: orelha-dir 7s ease-in-out infinite 1.5s; }
+
+@keyframes orelha-esq {
+  0%, 84%, 100% { transform: rotate(0); }
+  87% { transform: rotate(-12deg); }
+  90% { transform: rotate(3deg); }
+  93% { transform: rotate(-9deg); }
+  96% { transform: rotate(0); }
+}
+
+@keyframes orelha-dir {
+  0%, 78%, 100% { transform: rotate(0); }
+  81% { transform: rotate(13deg); }
+  84% { transform: rotate(-2deg); }
+  87% { transform: rotate(8deg); }
+  90% { transform: rotate(0); }
+}
+
+/* ---------- Folhinhas caindo devagar ---------- */
+
+.folha {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: cair 10s linear infinite;
+}
+
+.folhas .f1 { animation-duration: 11s; animation-delay: -2s; }
+.folhas .f2 { animation-duration: 13s; animation-delay: -8s; }
+.folhas .f3 { animation-duration: 9.5s; animation-delay: -5s; }
+.folhas .f4 { animation-duration: 12s; animation-delay: -10s; }
+
+/* Folhas paradas no chão não caem */
+.folha:not(.folhas .folha) { animation: none; opacity: .9; }
+
+@keyframes cair {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0); }
+  12% { opacity: .95; }
+  25% { transform: translate(34px, 120px) rotate(70deg); }
+  50% { transform: translate(-8px, 240px) rotate(150deg); }
+  75% { transform: translate(28px, 360px) rotate(230deg); }
+  88% { opacity: .95; }
+  100% { opacity: 0; transform: translate(6px, 470px) rotate(300deg); }
+}
+
+/* Folhinha presa no cantinho do cartão do perfil */
+.perfil::after {
+  content: "";
+  position: absolute;
+  right: 26px;
+  top: -14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 0 100% 0 100%;
+  background:
+    linear-gradient(45deg, transparent 47%, color-mix(in srgb, var(--ink) 22%, transparent) 48% 52%, transparent 53%),
+    linear-gradient(135deg, var(--folha3), var(--folha1));
+  transform: rotate(-12deg);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--folha2) 25%, transparent);
+}
+
+/* ---------- Desktop: o perfil vai para a direita e os cartões para a esquerda ---------- */
+
+.desk .perfil { left: 1280px; }
+.desk .lado { left: 170px; }
+.desk .cena { left: 690px; }
+
+/* ---------- Mobile ---------- */
+
+.mob .perfil::after { right: 20px; top: -11px; width: 26px; height: 26px; }

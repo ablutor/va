@@ -1,0 +1,196 @@
+/* Modelo 41 · Onda
+   A foto aparece só dentro de barras arredondadas, como uma onda de áudio.
+   Cores: original (grafite), masculino (azul-noite) e feminino (vinho).
+   Este modelo não tem versões pastel. */
+
+:root,
+[data-cor="original"]  { --bg: #131313; --ink: #eee8de; --mudo: #8d877d; --ac: #d9c7a0; }
+[data-cor="masculino"] { --bg: #0c1521; --ink: #e7eef7; --mudo: #7f93aa; --ac: #8fb7ee; }
+[data-cor="feminino"]  { --bg: #1f1017; --ink: #f6e8ea; --mudo: #a38890; --ac: #ee9db0; }
+
+/* Escala do palco desktop, para prender a marca d'água num ponto do desenho */
+:root {
+  --esc: min(100vw / 1920, 100vh / 900);
+  --xs-marca-cor: var(--ink);
+  --xs-marca-fundo: var(--bg);
+  --xs-marca-destaque: var(--ac);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.onda {
+  position: absolute;
+}
+
+.onda .foto,
+.onda .sombra {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* Barras-fantasma atrás da foto: o desenho da onda aparece mesmo onde a foto é escura */
+.onda .sombra { background: color-mix(in srgb, var(--ink) 9%, transparent); }
+
+/* Linha que anda pela onda enquanto a música toca */
+.cursor {
+  position: absolute;
+  top: -16px;
+  bottom: -16px;
+  width: 2px;
+  margin-left: -1px;
+  left: var(--xs-progresso, 0%);
+  background: var(--ac);
+  opacity: 0;
+  transition: opacity 300ms ease, left 500ms linear;
+}
+
+.xs-tocando .cursor { opacity: 1; }
+
+.topo {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--mudo);
+}
+
+.topo .on { color: var(--ink); }
+.topo .on::first-letter { color: var(--ac); }
+
+h1 {
+  position: absolute;
+  font-family: "Outfit", system-ui, sans-serif;
+  font-weight: 200;
+  letter-spacing: -.035em;
+  line-height: .95;
+  white-space: nowrap;
+}
+
+h1 .n1 { color: var(--ink); }
+h1 .n2 { color: var(--ac); }
+
+
+
+.meta a::before { content: " · "; color: var(--mudo); }
+
+.player {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+
+.play {
+  display: grid;
+  place-items: center;
+  flex: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+}
+
+.player .info { min-width: 0; margin-right: auto; }
+
+.player b {
+  display: block;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player .info span { color: var(--mudo); }
+.player .tempo { color: var(--mudo); font-variant-numeric: tabular-nums; }
+
+/* ---------- Desktop ---------- */
+
+.desk { width: 1920px; }
+
+.desk .onda { left: 150px; top: 130px; width: 816px; height: 640px; }
+
+.desk .topo {
+  left: 1150px;
+  top: 130px;
+  font-size: 13px;
+  letter-spacing: .14em;
+}
+
+.desk h1 {
+  left: 1142px;
+  top: 214px;
+  width: 660px;
+  font-size: 150px;
+  /* Nome e sobrenome em duas linhas, cada um do tamanho do próprio texto (para o ajuste de largura medir certo) */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+
+
+
+.desk .player {
+  left: 1150px;
+  top: 712px;
+  width: 650px;
+  gap: 16px;
+  padding: 0 0 16px;
+}
+
+.desk .play { width: 54px; height: 54px; }
+.desk .play svg { width: 18px; height: 18px; }
+.desk .player b { font-size: 15px; }
+.desk .player .info span { font-size: 12.5px; }
+.desk .player .tempo { font-size: 12.5px; }
+
+html:not(.xs-mobile) .xs-marca {
+  --xs-marca-direita: calc((100vw - 1920 * var(--esc)) / 2 + 60 * var(--esc));
+  --xs-marca-baixo: calc((100vh - 900 * var(--esc)) / 2 + 32 * var(--esc));
+}
+
+/* ---------- Mobile ---------- */
+
+.mob { width: 390px; }
+
+.mob .onda { left: 20px; top: 76px; width: 350px; height: 430px; }
+
+.mob .topo {
+  left: 20px;
+  top: 24px;
+  font-size: 10px;
+  letter-spacing: .12em;
+  gap: 10px;
+}
+
+.mob h1 {
+  left: 18px;
+  top: 532px;
+  width: 354px;
+  font-size: 66px;
+}
+
+
+
+.mob .player {
+  left: 20px;
+  right: 20px;
+  bottom: 26px;
+  gap: 12px;
+  padding: 0 0 12px;
+}
+
+.mob .play { width: 44px; height: 44px; }
+.mob .play svg { width: 15px; height: 15px; }
+.mob .player b { font-size: 13px; }
+.mob .player .info span { font-size: 11px; }
+
+/* No celular a marca fica no alto, à direita da linha do local */
+.xs-mobile { --xs-marca-topo-mobile: calc(14 * 100vw / 390); }
+.xs-mobile .xs-marca { right: calc(20 * 100vw / 390); }

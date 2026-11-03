@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Verbete</title>
+  <!-- Página de dicionário sobre a mesa: papel com pontinhos, aba de índice na cor de destaque, palavras-guia e
+       definições em "texto falso"; a moldura é uma gravura com filete duplo. -->
+  <link rel="stylesheet" href="_base.css">
+  <link rel="stylesheet" href="../core/cores.css">
+  <style>
+    :root, [data-cor="original"] { --mesa: #cdbfa6; --mesa2: #b3a384; --papel: #f6efdd; --ink: #241c14; --mudo: #7a6a52; --ac: #7a1f1f; }
+    [data-cor="masculino"]  { --mesa: #aab7c9; --mesa2: #8795ab; --papel: #edf0f3; --ink: #162234; --mudo: #5f6f86; --ac: #1f3a6b; }
+    [data-cor="feminino"]   { --mesa: #e3c6cb; --mesa2: #c9a0a8; --papel: #fbf0f0; --ink: #3a1f28; --mudo: #8a6670; --ac: #a8385a; }
+    [data-cor="feminino-2"] { --mesa: #d2c7e0; --mesa2: #b3a3cc; --papel: #f7f2fb; --ink: #2e2340; --mudo: #7a6b90; --ac: #6a4aa3; }
+    [data-cor^="pastel-"]   { --mesa: var(--p-bg); --mesa2: var(--p-claro); --papel: var(--p-papel); --ink: var(--p-ink); --mudo: color-mix(in srgb, var(--p-ink) 58%, var(--p-papel)); --ac: var(--p-act); }
+    html, body { background: radial-gradient(ellipse at 50% 40%, var(--mesa), var(--mesa2)); }
+
+    /* a página: do canto esquerdo (cortado) até a mesa, à direita */
+    .pag { position: absolute; left: -10px; top: -6px; width: 362px; height: 112px; background-color: var(--papel);
+      background-image: radial-gradient(color-mix(in srgb, var(--ac) 9%, transparent) 1px, transparent 1.5px); background-size: 5px 5px;
+      box-shadow: 0 6px 14px color-mix(in srgb, var(--ink) 38%, transparent); }
+    /* sombra da dobra no miolo, junto à lombada (corte do xat) */
+    .pag::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--ink) 10%, transparent), transparent 26px); }
+    .aba { position: absolute; left: 352px; top: 22px; width: 26px; height: 50px; background: var(--ac); border-radius: 0 6px 6px 0; box-shadow: 2px 2px 4px color-mix(in srgb, var(--ink) 38%, transparent); }
+    .aba::after { content: ""; position: absolute; left: 7px; top: 22px; width: 10px; height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--papel) 70%, transparent); }
+
+    /* palavras-guia: fio fino e dois traços itálicos, no alto, à direita da moldura */
+    .run { position: absolute; left: 112px; right: 36px; top: 10px; height: 10px; border-bottom: 1px solid color-mix(in srgb, var(--ink) 33%, transparent); }
+    .run i { position: absolute; top: 2px; height: 3px; border-radius: 2px; background: var(--mudo); opacity: .55; }
+    .rod { position: absolute; left: 112px; right: 36px; bottom: 8px; border-top: 1px solid color-mix(in srgb, var(--ink) 33%, transparent); }
+
+    /* verbete em "texto falso" à direita: palavra de entrada, pronúncia, definições numeradas, fio duplo */
+    .hw { position: absolute; left: 226px; top: 28px; width: 76px; height: 11px; border-radius: 2px; background: var(--ink); opacity: .8; }
+    .pr { position: absolute; left: 226px; top: 43px; width: 40px; height: 3px; border-radius: 2px; background: var(--ac); opacity: .85; }
+    .df { position: absolute; left: 226px; width: 116px; height: 2px; background: color-mix(in srgb, var(--ink) 28%, transparent); }
+    .nn { position: absolute; left: 226px; width: 5px; height: 3px; background: var(--ac); border-radius: 1px; }
+    .sep { position: absolute; left: 226px; width: 116px; top: 80px; border-top: 3px double color-mix(in srgb, var(--ink) 55%, transparent); }
+
+    /* moldura: gravura com filete duplo, no quadrado e no círculo */
+    .moldura { background: var(--papel); border: 1.5px solid var(--ink); box-shadow: 0 3px 7px color-mix(in srgb, var(--ink) 35%, transparent); border-radius: 1px; }
+    .moldura::before { content: ""; position: absolute; inset: 1.5px; border: 1px solid var(--ink); border-radius: inherit; opacity: .9; }
+    .moldura::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background-image: repeating-linear-gradient(0deg, transparent 0 3px, color-mix(in srgb, var(--ink) 0%, transparent) 3px); }
+    .redonda .moldura, .moldura.redonda { border-radius: 50%; }
+    /* cantoneiras e ornamento da gravura, na cor de destaque */
+    .moldura .cant { position: absolute; width: 8px; height: 8px; border: 2px solid var(--ac); }
+    .moldura .cant.a { left: -5px; top: -5px; border-right: 0; border-bottom: 0; }
+    .moldura .cant.b { right: -5px; top: -5px; border-left: 0; border-bottom: 0; }
+    .moldura .cant.c { left: -5px; bottom: -5px; border-right: 0; border-top: 0; }
+    .moldura .cant.d { right: -5px; bottom: -5px; border-left: 0; border-top: 0; }
+    .redonda .moldura .cant { display: none; }
+    .moldura .anel { display: none; position: absolute; inset: -4px; border: 1.5px solid var(--ac); border-radius: 50%; clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%); }
+    .redonda .moldura .anel { display: block; clip-path: none; border-style: dotted; border-width: 2px; opacity: .85; }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="pag"></div>
+    <div class="aba"></div>
+    <div class="run"><i style="left:0; width:46px"></i><i style="right:0; width:34px"></i></div>
+    <div class="rod"></div>
+    <div class="hw"></div><div class="pr"></div>
+    <i class="nn" style="top:55px"></i><i class="df" style="top:56px; left:236px; width:106px"></i><i class="df" style="top:63px; left:236px; width:84px"></i>
+    <i class="nn" style="top:71px"></i><i class="df" style="top:72px; left:236px; width:100px"></i>
+    <div class="moldura" id="moldura"><i class="cant a"></i><i class="cant b"></i><i class="cant c"></i><i class="cant d"></i><i class="anel"></i></div>
+  </div>
+  <script src="_base.js"></script>
+  <script>XB.pronto.then(function () { XB.pronto2(); });</script>
+</body>
+</html>

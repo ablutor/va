@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Passe-partout</title>
+  <!-- Passe-partout: o cartão do quadro e uma janela recortada, com o chanfro do corte em volta do avatar -->
+  <link rel="stylesheet" href="_base.css">
+  <style>
+    :root { --bg: #f4f1ec; --ink: #1f1c19; --mudo: #8b8680; --janela: #1a1816; --luz: #fffdf9; --sombra: rgba(60, 40, 20, .26); }
+    [data-cor="original"] { --bg: #f4f1ec; --ink: #1f1c19; --mudo: #8b8680; --janela: #1a1816; --luz: #fffdf9; --sombra: rgba(60, 40, 20, .26); }
+    [data-cor="salvia"]   { --bg: #e5e8df; --ink: #1d221d; --mudo: #81877e; --janela: #181a17; --luz: #f6f8f2; --sombra: rgba(30, 45, 25, .26); }
+    [data-cor="grafite"]  { --bg: #2c2b29; --ink: #f6f1e8; --mudo: #ab9f92; --janela: #141312; --luz: #4a4845; --sombra: rgba(0, 0, 0, .5); }
+    html, body { background: var(--bg); }
+    /* fibra do cartão, quase invisível */
+    .tudo { background:
+      radial-gradient(120% 140% at 30% 0%, color-mix(in srgb, var(--bg) 88%, #fff), var(--bg) 60%, color-mix(in srgb, var(--bg) 93%, #000)); }
+    /* o corte em bisel: aro de 4 px, claro em cima e à esquerda, sombreado embaixo e à direita */
+    .moldura { background: linear-gradient(135deg, var(--luz) 0%, var(--bg) 42%, color-mix(in srgb, var(--bg) 78%, #000) 100%); border-radius: 0;
+      box-shadow: 0 0 0 .6px var(--sombra), 0 1px 3px var(--sombra); }
+    .moldura.redonda, .redonda .moldura { border-radius: 50%; }
+    /* janela recortada: plana, na cor do vazio do modelo */
+    .moldura::before { content: ""; position: absolute; inset: 4px; border-radius: inherit; background: var(--janela); box-shadow: inset 0 0 0 .6px rgba(0, 0, 0, .35); }
+    /* fio de lápis do passe-partout e um traço de legenda, à direita */
+    .fio { position: absolute; left: 218px; right: 14px; top: 49.5px; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--mudo) 55%, transparent) 30%, color-mix(in srgb, var(--mudo) 55%, transparent) 70%, transparent); }
+    .quadro { position: absolute; inset: 5px 9px; border: .8px solid color-mix(in srgb, var(--mudo) 28%, transparent); pointer-events: none; opacity: 0; }
+  </style>
+</head>
+<body>
+  <div class="tudo"><div class="fio"></div><div class="moldura" id="moldura"></div></div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function (d) {
+      if (XB.redonda) document.getElementById("moldura").classList.add("redonda");
+      XB.pronto2();
+    });
+  </script>
+</body>
+</html>

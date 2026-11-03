@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Windows 98</title>
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../../core/cores.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--
+    Modelo 28 · Windows 98
+    Primo do 32 · Windows XP. As janelas, a barra de tarefas e os ícones são HTML, CSS e SVG
+    de verdade, com o miolo vazio. Só a foto do cliente entra no Visualizador (data-xs-img).
+    Os textos vêm dos dados do cliente e do TEXTOS no topo do script.js.
+  -->
+
+  <!-- Ícones, desenhados uma vez e usados nos dois palcos -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="g-eq" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2fd82f"/><stop offset=".55" stop-color="#e8e020"/><stop offset="1" stop-color="#ff3b1f"/></linearGradient>
+    </defs>
+    <symbol id="i-pc" viewBox="0 0 32 32"><rect x="3" y="2" width="26" height="20" rx="1" fill="#c0c0c0" stroke="#000"/><rect x="6" y="5" width="20" height="14" fill="#1a1a1a"/><rect x="7" y="6" width="18" height="12" fill="#202428"/><path d="M12 22h8v3h-8z" fill="#808080" stroke="#000"/><rect x="7" y="25" width="18" height="4" fill="#c0c0c0" stroke="#000"/></symbol>
+    <symbol id="i-pasta" viewBox="0 0 32 32"><path d="M2 8h10l3 3h15v17H2z" fill="#c99a1b" stroke="#000"/><path d="M2 12h28l-2 16H2z" fill="#ffd84a" stroke="#000"/><path d="M3 13h26" stroke="#fff4b0"/></symbol>
+    <symbol id="i-musica" viewBox="0 0 32 32"><path d="M11 6l17-4v19" fill="none" stroke="#000" stroke-width="5" stroke-linejoin="round"/><path d="M11 6v19" stroke="#000" stroke-width="5"/><ellipse cx="7" cy="25" rx="5.5" ry="4.5" fill="#000"/><ellipse cx="24" cy="22" rx="5.5" ry="4.5" fill="#000"/><path d="M11 6l17-4v19" fill="none" stroke="#7a52d6" stroke-width="2.6" stroke-linejoin="round"/><path d="M11 6v19" stroke="#7a52d6" stroke-width="2.6"/><ellipse cx="7" cy="25" rx="4" ry="3" fill="#7a52d6"/><ellipse cx="24" cy="22" rx="4" ry="3" fill="#7a52d6"/></symbol>
+    <symbol id="i-treino" viewBox="0 0 32 32"><path d="M2 6h28" stroke="#000" stroke-width="3"/><rect x="1" y="2" width="5" height="9" fill="#d62a2a" stroke="#000"/><rect x="26" y="2" width="5" height="9" fill="#d62a2a" stroke="#000"/><path d="M9 7l4 6M23 7l-4 6" stroke="#e8b23a" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="12" r="3.5" fill="#e8b23a" stroke="#000"/><path d="M11 15h10l-2 9h-6z" fill="#d62a2a" stroke="#000"/><path d="M13 24l-2 6M19 24l2 6" stroke="#e8b23a" stroke-width="3" stroke-linecap="round"/><path d="M14 18l2 3 2-3" fill="none" stroke="#ffd84a" stroke-width="1.5"/></symbol>
+    <symbol id="i-xat" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="#2b8ff0" stroke="#000"/><g fill="none" stroke="#e8f6ff" stroke-width="1.5"><ellipse cx="16" cy="16" rx="5.5" ry="13"/><path d="M3 16h26M5 9.5h22M5 22.5h22M16 3v26"/></g></symbol>
+    <symbol id="i-lixeira" viewBox="0 0 32 32"><path d="M6 7h20l-2 22H8z" fill="#c8c8c8" stroke="#000"/><ellipse cx="16" cy="7" rx="10" ry="3" fill="#e4e4e4" stroke="#000"/><path d="M9 11l14 14M23 11L9 25M12 10l-1 18M20 10l1 18M16 10v19M7 15h18M7.5 21h17" stroke="#5a5a5a" stroke-width=".8"/></symbol>
+    <symbol id="i-foto" viewBox="0 0 16 16"><rect x="1" y="2" width="14" height="12" fill="#c0c0c0" stroke="#000"/><rect x="3" y="4" width="10" height="8" fill="#7fc4ff"/><path d="M3 12l3-4 2 2 2-3 3 5z" fill="#2f8a2f"/><circle cx="11" cy="6" r="1.2" fill="#ffd84a"/></symbol>
+    <symbol id="i-bloco" viewBox="0 0 16 16"><path d="M2 1h9l3 3v11H2z" fill="#fff" stroke="#000"/><path d="M4 6h7M4 8.5h7M4 11h5" stroke="#000080" stroke-width=".8"/><path d="M9 10l5-6 1.5 1.3-5 6-2 .8z" fill="#ffd84a" stroke="#000" stroke-width=".6"/></symbol>
+    <symbol id="i-fones" viewBox="0 0 16 16"><path d="M2.5 10V8a5.5 5.5 0 0 1 11 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="1.5" y="9" width="3.5" height="6" rx="1" fill="currentColor"/><rect x="11" y="9" width="3.5" height="6" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-disquete" viewBox="0 0 16 16"><path d="M1 1h12l2 2v12H1z" fill="#c0c0c0" stroke="#000"/><rect x="4" y="1.5" width="7" height="4.5" fill="#fff" stroke="#000" stroke-width=".6"/><rect x="3" y="9" width="10" height="6" fill="#d62a2a" stroke="#000" stroke-width=".6"/></symbol>
+    <symbol id="i-windows" viewBox="0 0 16 16"><path d="M2 3.5c2-1 4-1 6 0v4.5c-2-1-4-1-6 0z" fill="#f2522e"/><path d="M8.6 3.5c2 1 4 1 6 0v4.5c-2 1-4 1-6 0z" fill="#3fa63f"/><path d="M2 8.7c2-1 4-1 6 0v4.5c-2-1-4-1-6 0z" fill="#1f6fe0"/><path d="M8.6 8.7c2 1 4 1 6 0v4.5c-2 1-4 1-6 0z" fill="#f2c81b"/></symbol>
+    <symbol id="i-som" viewBox="0 0 16 16"><path d="M2 6h3l4-3.5v11L5 10H2z" fill="#c0c0c0" stroke="#000"/><path d="M11 5a4 4 0 0 1 0 6M13 3.5a6 6 0 0 1 0 9" fill="none" stroke="#000" stroke-width="1.2"/></symbol>
+  </svg>
+
+  <!-- A área de trabalho verde-água cobre a tela inteira, fora do palco -->
+  <div class="xs-fundo papel"></div>
+
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <nav class="icones" data-icones></nav>
+
+    <!-- Visualizador de imagens: a janela existe sozinha, a foto só ocupa o espaço de dentro -->
+    <section class="jan visor">
+      <header class="tit"><svg class="tit-ico"><use href="#i-foto"/></svg><span class="tit-t" data-texto="tituloVisor"></span><span class="tit-bts"><i class="b-min"></i><i class="b-max"></i><i class="b-fec"></i></span></header>
+      <div class="menu" data-menu="visor"></div>
+      <div class="moldura"><img class="foto" data-xs-img="fotos.perfil" alt=""></div>
+      <div class="status-barra"><span data-texto="tamanhoFoto"></span><span data-texto="pesoFoto"></span><span data-texto="zoom"></span></div>
+    </section>
+
+    <!-- Bloco de notas: o texto é montado pelo script.js a partir dos dados -->
+    <section class="jan bloco">
+      <header class="tit"><svg class="tit-ico"><use href="#i-bloco"/></svg><span class="tit-t" data-texto="tituloBloco"></span><span class="tit-bts"><i class="b-min"></i><i class="b-max"></i><i class="b-fec"></i></span></header>
+      <div class="menu" data-menu="bloco"></div>
+      <pre class="texto" data-bloco="12"></pre>
+    </section>
+
+    <!-- Xatamp: é o player de música -->
+    <section class="jan xatamp" data-xs-player>
+      <header class="tit"><svg class="tit-ico fones"><use href="#i-fones"/></svg><span class="tit-t" data-texto="tituloPlayer"></span><span class="tit-bts"><i class="b-min"></i><i class="b-fec"></i></span></header>
+      <div class="tela">
+        <span class="tela-topo"><i class="seta"></i><span class="tempo" data-xs-tempo>0:00</span></span>
+        <span class="letreiro"><span class="rolar"><span><span data-texto="faixaNumero"></span><span data-xs="musica.artista"></span> - <span data-xs="musica.titulo"></span> *** </span><span><span data-texto="faixaNumero"></span><span data-xs="musica.artista"></span> - <span data-xs="musica.titulo"></span> *** </span></span></span>
+        <span class="eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="comandos">
+        <button class="bt98 xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 16 16"><path d="M3 4h1.5v8H3zM9 4v8L4.5 8zM13.5 4v8L9 8z"/></svg></button>
+        <button class="bt98 play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 16 16"><path d="M5 4h2v8H5zM9 4h2v8H9z"/></svg>
+        </button>
+        <button class="bt98" type="button" data-xs-tocar aria-label="Pausar música"><svg viewBox="0 0 16 16"><path d="M6 5h1.5v6H6zM8.5 5H10v6H8.5z"/></svg></button>
+        <i class="bt98"><svg viewBox="0 0 16 16"><path d="M4.5 4.5h7v7h-7z"/></svg></i>
+        <button class="bt98 xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 16 16"><path d="M2.5 4v8L7 8zM7 4v8l4.5-4zM11.5 4H13v8h-1.5z"/></svg></button>
+        <i class="bt98 aleatorio"><svg viewBox="0 0 16 16"><path d="M2 5h3l6 6h3M2 11h3l6-6h3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M12 3l2.5 2L12 7zM12 9l2.5 2L12 13z"/></svg></i>
+      </div>
+    </section>
+
+    <!-- Janela de cópia de arquivos, com a barra de progresso em blocos -->
+    <section class="jan copia inativa">
+      <header class="tit"><svg class="tit-ico"><use href="#i-disquete"/></svg><span class="tit-t" data-texto="tituloCopia"></span><span class="tit-bts"><i class="b-fec"></i></span></header>
+      <div class="copia-corpo">
+        <p data-texto="arquivoCopia"></p>
+        <p class="de" data-texto="deOndeCopia"></p>
+        <span class="progresso"><i></i></span>
+        <span class="copia-baixo"><span data-texto="tempoRestante"></span><i class="bt98 cancelar" data-texto="cancelar"></i></span>
+      </div>
+    </section>
+
+    <footer class="barra">
+      <span class="iniciar bt98"><svg><use href="#i-windows"/></svg><span data-texto="iniciar"></span></span>
+      <span class="tarefas" data-tarefas></span>
+      <span class="bandeja"><svg><use href="#i-som"/></svg><span data-relogio></span></span>
+    </footer>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <section class="jan visor">
+      <header class="tit"><svg class="tit-ico"><use href="#i-foto"/></svg><span class="tit-t" data-texto="tituloVisorCurto"></span><span class="tit-bts"><i class="b-min"></i><i class="b-max"></i><i class="b-fec"></i></span></header>
+      <div class="menu" data-menu="visorCurto"></div>
+      <div class="moldura"><img class="foto" data-xs-img="fotos.perfil" alt=""></div>
+    </section>
+
+    <section class="jan bloco">
+      <header class="tit"><svg class="tit-ico"><use href="#i-bloco"/></svg><span class="tit-t" data-texto="tituloBloco"></span><span class="tit-bts"><i class="b-min"></i><i class="b-fec"></i></span></header>
+      <pre class="texto" data-bloco="9"></pre>
+    </section>
+
+    <section class="jan xatamp" data-xs-player>
+      <header class="tit"><svg class="tit-ico fones"><use href="#i-fones"/></svg><span class="tit-t" data-texto="tituloPlayer"></span><span class="tit-bts"><i class="b-min"></i><i class="b-fec"></i></span></header>
+      <div class="tela">
+        <i class="seta"></i><span class="tempo" data-xs-tempo>0:00</span>
+        <span class="letreiro"><span data-xs="musica.artista"></span> - <span data-xs="musica.titulo"></span></span>
+      </div>
+      <div class="comandos">
+        <button class="bt98 xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 16 16"><path d="M3 4h1.5v8H3zM9 4v8L4.5 8zM13.5 4v8L9 8z"/></svg></button>
+        <button class="bt98 play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 16 16"><path d="M5 4h2v8H5zM9 4h2v8H9z"/></svg>
+        </button>
+        <button class="bt98" type="button" data-xs-tocar aria-label="Pausar música"><svg viewBox="0 0 16 16"><path d="M6 5h1.5v6H6zM8.5 5H10v6H8.5z"/></svg></button>
+        <i class="bt98"><svg viewBox="0 0 16 16"><path d="M4.5 4.5h7v7h-7z"/></svg></i>
+        <button class="bt98 xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 16 16"><path d="M2.5 4v8L7 8zM7 4v8l4.5-4zM11.5 4H13v8h-1.5z"/></svg></button>
+      </div>
+    </section>
+
+    <footer class="barra">
+      <span class="iniciar bt98"><svg><use href="#i-windows"/></svg><span data-texto="iniciar"></span></span>
+      <span class="tarefas" data-tarefas="2"></span>
+      <span class="bandeja"><span data-relogio></span></span>
+    </footer>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

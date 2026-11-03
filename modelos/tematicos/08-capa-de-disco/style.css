@@ -1,0 +1,368 @@
+/* Modelo 08 · Capa de disco
+   Cores: original (vermelho), masculino (azul), feminino (pink),
+   feminino-2 (lilás) e as 6 pastel.
+   As escuras usam foto em preto e branco com o destaque por cima (multiply).
+   As pastel têm fundo claro, texto escuro e foto quase natural.
+   Com ?foto=pb, ?foto=sepia ou ?foto=normal (ou "foto" nos dados) a foto não muda com a cor:
+   fica em preto e branco, sépia ou com as cores de verdade, e só o nome na capa leva a cor principal. */
+
+:root,
+[data-cor="original"]   { --bg: #14100f; --bg2: #3a1714; --ink: #f4ece4; --ac: #e8342a; }
+[data-cor="masculino"]  { --bg: #0d1117; --bg2: #13284a; --ink: #e8eef7; --ac: #2f7fe8; }
+[data-cor="feminino"]   { --bg: #140d11; --bg2: #3d1530; --ink: #fbe9f1; --ac: #ff4f9a; }
+[data-cor="feminino-2"] { --bg: #100d16; --bg2: #2a1c47; --ink: #efe8fb; --ac: #9b6bff; }
+
+/* Visual escuro (padrão) */
+:root {
+  --tint: var(--ac);
+  --tint-forca: 1;
+  --foto-filtro: grayscale(1) contrast(1.3) brightness(1.25);
+  --capa-ink: var(--ink);
+  --capa-sombra: none;
+  --vinil: #111;
+  --vinil-2: #1c1c1c;
+  --selo: var(--ac);
+  --selo-ink: var(--bg);
+  --sombra: rgba(0, 0, 0, .6);
+  --k: var(--ac);
+  --on: var(--ac);
+  --play-bg: var(--ac);
+  --play-ink: var(--bg);
+  --barra: var(--ink);
+
+  --muted: color-mix(in srgb, var(--ink) 60%, transparent);
+  --line: color-mix(in srgb, var(--ink) 15%, transparent);
+  --xs-capa: var(--bg);
+  --xs-marca-cor: var(--ink);
+  --xs-marca-destaque: var(--k);
+}
+
+/* Visual pastel: fundo claro, vinil escuro e foto quase natural */
+[data-cor^="pastel-"] {
+  --bg: var(--p-bg);
+  --bg2: var(--p-bg2);
+  --ink: var(--p-ink);
+  --ac: var(--p-ac);
+  --tint: color-mix(in srgb, var(--p-ac) 60%, #fff);
+  --tint-forca: .4;
+  --foto-filtro: saturate(.55) brightness(1.12) contrast(.95);
+  --capa-ink: #fff;
+  --capa-sombra: 0 2px 20px rgba(0, 0, 0, .18);
+  --vinil: var(--p-dk);
+  --vinil-2: color-mix(in srgb, var(--p-dk) 85%, #fff);
+  --selo: var(--tint);
+  --selo-ink: var(--p-ink);
+  --sombra: rgba(0, 0, 0, .18);
+  --k: var(--p-act);
+  --on: var(--p-act);
+  --play-bg: var(--p-ink);
+  --play-ink: var(--p-bg2);
+  --barra: var(--p-ac);
+  --line: color-mix(in srgb, var(--ink) 15%, transparent);
+}
+
+/* Foto neutra: igual em todas as cores, o nome na capa é que leva a cor */
+[data-foto="pb"]    { --foto-filtro: grayscale(1) contrast(1.15) brightness(1.05); }
+[data-foto="sepia"] { --foto-filtro: grayscale(1) sepia(.7) contrast(1.05) brightness(1.02); }
+[data-foto="normal"] { --foto-filtro: none; }
+
+[data-foto] .cover { background: #1b1918; }
+
+/* Sombra suave no alto da foto para o nome colorido aparecer */
+[data-foto] .cover .tint {
+  background: linear-gradient(rgba(0, 0, 0, .4), transparent 45%);
+  mix-blend-mode: normal;
+  opacity: 1;
+}
+
+[data-foto] .cover h2 { color: var(--ac); text-shadow: 0 2px 16px rgba(0, 0, 0, .3); }
+[data-foto] .cover small { color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .4); }
+
+body {
+  background: var(--bg) radial-gradient(ellipse at 30% 50%, var(--bg2), var(--bg) 65%) no-repeat;
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.serif { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; }
+ol { list-style: none; }
+
+/* ---------- Disco, capa e lista (iguais nos dois palcos) ---------- */
+
+.vinyl {
+  position: absolute;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, var(--vinil) 0 2px, var(--vinil-2) 2px 4px);
+  box-shadow: 0 20px 50px var(--sombra);
+}
+
+/* Selo do meio do disco, com o furinho */
+.vinyl::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  background: var(--selo) radial-gradient(circle, var(--bg) 0 6px, transparent 7px);
+}
+
+.vinyl span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%) translateY(50px);
+  font-size: 9px;
+  letter-spacing: .2em;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--selo-ink);
+}
+
+.cover {
+  position: absolute;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--tint);
+  box-shadow: 0 30px 60px var(--sombra);
+}
+
+.cover .img {
+  position: absolute;
+  inset: 0;
+  background-position: center 22%;
+  filter: var(--foto-filtro);
+}
+
+.cover .tint {
+  position: absolute;
+  inset: 0;
+  background: var(--tint);
+  mix-blend-mode: multiply;
+  opacity: var(--tint-forca);
+}
+
+.cover h2 {
+  position: absolute;
+  z-index: 2;
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: .85;
+  text-transform: uppercase;
+  color: var(--capa-ink);
+  text-shadow: var(--capa-sombra);
+}
+
+/* Nome e sobrenome em linhas separadas */
+.cover h2 span { display: block; }
+
+.cover small {
+  position: absolute;
+  z-index: 2;
+  font-size: 12px;
+  letter-spacing: .3em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--capa-ink);
+}
+
+.k {
+  text-transform: uppercase;
+  letter-spacing: .3em;
+  font-weight: 600;
+  color: var(--k);
+}
+
+.side h1 { line-height: 1; }
+.by { color: var(--muted); }
+
+ol { border-top: 1px solid var(--line); }
+
+li {
+  display: flex;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+}
+
+li .n { flex: none; color: color-mix(in srgb, var(--ink) 45%, transparent); }
+
+li .t {
+  flex: none;
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+li.on { color: var(--on); font-weight: 500; }
+li.on i { font-style: normal; font-weight: 400; opacity: .6; }
+
+.player {
+  display: flex;
+  align-items: center;
+}
+
+.play {
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  background: var(--play-bg);
+  color: var(--play-ink);
+}
+
+.tempo {
+  font-style: normal;
+  color: var(--muted);
+}
+
+.bar {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--ink) 15%, transparent);
+}
+
+.bar span {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--barra);
+}
+
+/* ---------- Desktop ---------- */
+
+.desk { width: 1920px; }
+
+.desk .vinyl {
+  left: 560px;
+  top: 150px;
+  width: 600px;
+  height: 600px;
+}
+
+.desk .vinyl::after {
+  width: 200px;
+  height: 200px;
+  margin: -100px;
+}
+
+.desk .cover {
+  left: 180px;
+  top: 150px;
+  width: 600px;
+  height: 600px;
+}
+
+.desk .cover h2 {
+  left: 30px;
+  top: 24px;
+  font-size: 90px;
+}
+
+.desk .cover small {
+  right: 28px;
+  bottom: 24px;
+}
+
+.desk .side {
+  position: absolute;
+  left: 1260px;
+  top: 150px;
+  width: 520px;
+}
+
+.desk .k { font-size: 11px; }
+.desk .side h1 { font-size: 72px; margin: 10px 0 6px; }
+.desk .by { font-size: 16px; }
+.desk ol { margin-top: 36px; }
+
+.desk li {
+  gap: 18px;
+  padding: 13px 0;
+  font-size: 15px;
+}
+
+.desk li .n { width: 28px; font-size: 12px; }
+.desk li .t { width: 110px; font-size: 12px; }
+
+.desk .player {
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.desk .play { width: 52px; height: 52px; }
+.desk .play svg { width: 20px; height: 20px; }
+.desk .tempo { font-size: 12px; }
+
+/* ---------- Mobile ---------- */
+
+.mob { width: 390px; }
+
+.xs-mobile body {
+  background-image: radial-gradient(ellipse at 50% 25%, var(--bg2), var(--bg) 70%);
+}
+
+.mob .vinyl {
+  left: 100px;
+  top: 56px;
+  width: 300px;
+  height: 300px;
+  box-shadow: 0 14px 30px var(--sombra);
+}
+
+.mob .vinyl::after {
+  width: 94px;
+  height: 94px;
+  margin: -47px;
+  background: var(--selo) radial-gradient(circle, var(--bg) 0 4px, transparent 5px);
+}
+
+.mob .cover {
+  left: 20px;
+  top: 46px;
+  width: 310px;
+  height: 310px;
+  box-shadow: 0 20px 40px var(--sombra);
+}
+
+.mob .cover h2 {
+  left: 16px;
+  top: 14px;
+  font-size: 44px;
+}
+
+.mob .side {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 386px;
+}
+
+.mob .k { font-size: 9px; }
+.mob .side h1 { font-size: 44px; margin: 6px 0 2px; }
+.mob .by { font-size: 13px; }
+.mob ol { margin-top: 16px; }
+
+.mob li {
+  gap: 12px;
+  padding: 12px 0;
+  font-size: 12.5px;
+}
+
+.mob li .n { width: 20px; font-size: 10px; }
+.mob li .t { width: 80px; font-size: 9.5px; }
+
+.mob .player {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  gap: 12px;
+}
+
+.mob .play { width: 46px; height: 46px; }
+.mob .play svg { width: 18px; height: 18px; }
+.mob .tempo { font-size: 11px; }
+
+/* No celular a marca fica no topo, acima do disco */
+.xs-mobile { --xs-marca-topo-mobile: 8px; }

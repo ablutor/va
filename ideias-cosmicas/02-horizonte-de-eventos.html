@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Rafael · Horizonte de Eventos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=Inter:wght@400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root{ --ambar:#ffb24a; --fogo:#ff6a1a; --txt:#f6efe6; --dim:#a8988a }
+body{ background:#000; color:var(--txt); font-family:"Inter",sans-serif }
+.hud{ position:absolute; font:400 11px/1.8 "Space Mono",monospace; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,220,180,.5) }
+.hud b{ color:var(--ambar); font-weight:400 }
+.hud.e{ left:80px; top:64px } .hud.d{ right:80px; top:64px; text-align:right }
+.canto{ position:absolute; width:26px; height:26px; border-color:rgba(255,190,120,.35); border-style:solid; border-width:0 }
+.canto.a{ left:56px; top:44px; border-left-width:1px; border-top-width:1px } .canto.b{ right:56px; top:44px; border-right-width:1px; border-top-width:1px }
+.canto.c{ left:56px; bottom:44px; border-left-width:1px; border-bottom-width:1px } .canto.d{ right:56px; bottom:44px; border-right-width:1px; border-bottom-width:1px }
+.frase{ position:absolute; right:80px; top:150px; width:260px; text-align:right; font:300 15px/1.6 "Unbounded",sans-serif; color:#e9d7c2 }
+.frase::before{ content:""; display:block; margin:0 0 14px auto; width:40px; height:1px; background:var(--ambar) }
+
+.foto{ position:absolute; left:860px; top:226px; width:200px; height:200px; border-radius:50%; overflow:hidden; z-index:3;
+  box-shadow:0 0 0 2px rgba(255,214,150,.85), 0 0 22px 4px rgba(255,150,60,.55), inset 0 0 40px rgba(0,0,0,.6) }
+.foto img{ width:100%; height:100%; object-fit:cover; object-position:50% 30%; filter:grayscale(.15) contrast(1.05) }
+.foto::after{ content:""; position:absolute; inset:0; border-radius:50%; box-shadow:inset 0 0 30px 6px rgba(0,0,0,.75) }
+
+.nome{ position:absolute; left:0; right:0; top:540px; text-align:center }
+h1{ margin:0; font:700 66px/1 "Unbounded",sans-serif; letter-spacing:.32em; padding-left:.32em; color:#fff6ea; text-shadow:0 0 36px rgba(255,140,40,.45) }
+.meta{ margin-top:18px; display:flex; justify-content:center; gap:26px; font:400 12.5px "Space Mono",monospace; letter-spacing:.14em; color:var(--dim) }
+.meta span{ display:flex; align-items:center; gap:8px } .meta svg{ width:14px; height:14px }
+.meta .on{ width:7px; height:7px; border-radius:50%; background:#7dffb0; box-shadow:0 0 8px #7dffb0 }
+.bio{ margin:20px auto 0; width:620px; font-size:16.5px; line-height:1.65; color:#cdbfb1 }
+
+.player{ position:absolute; left:550px; width:820px; top:762px; height:76px; border-radius:20px; display:flex; align-items:center; gap:22px; padding:0 26px 0 14px;
+  background:linear-gradient(90deg, rgba(255,150,60,.07), rgba(255,255,255,.035)); border:1px solid rgba(255,190,120,.18); backdrop-filter:blur(10px) }
+.tocar{ width:50px; height:50px; border-radius:15px; background:linear-gradient(140deg, #ffd28a, var(--fogo)); color:#1a0700; display:grid; place-items:center; box-shadow:0 0 24px rgba(255,120,30,.45) }
+.tocar svg{ width:22px; height:22px; margin-left:2px }
+.faixa{ width:220px } .faixa b{ display:block; font-weight:600; font-size:14.5px } .faixa span{ font-size:12px; color:var(--dim) }
+.barra{ flex:1; position:relative; height:3px; border-radius:3px; background:rgba(255,255,255,.12) }
+.barra i{ position:absolute; left:0; top:0; bottom:0; width:58%; border-radius:3px; background:linear-gradient(90deg, rgba(255,106,26,.2), var(--ambar)) }
+.barra i::after{ content:""; position:absolute; right:-6px; top:-4.5px; width:12px; height:12px; border-radius:50%; background:#fff3dc; box-shadow:0 0 14px 3px var(--fogo) }
+.tempo{ font:400 12px "Space Mono",monospace; color:var(--dim) }
+.player > svg{ width:20px; height:20px; color:var(--dim) }
+</style>
+</head>
+<body>
+<canvas id="ceu" class="fundo"></canvas>
+<div class="canto a"></div><div class="canto b"></div><div class="canto c"></div><div class="canto d"></div>
+<div class="hud e"><b>● Horizonte de eventos</b><br>massa · 4,3 milhões de sóis<br>distância · desconhecida</div>
+<div class="hud d">singularidade<br><b>nº 82460885</b></div>
+<div class="frase">Tudo que chega perto demais não volta. Nem a saudade.</div>
+
+<div class="foto"><img src="../clientes/exemplo/perfil-masculino.jpg" alt=""></div>
+
+<div class="nome">
+  <h1>RAFAEL</h1>
+  <div class="meta"><span><i class="on"></i>online agora</span><span>ID 82460885 <i data-i="copy"></i></span><span><i data-i="pin"></i>São Paulo</span></div>
+  <p class="bio">Gosto do silêncio das madrugadas, de filmes longos e de gente que fala pouco e sente muito.</p>
+</div>
+
+<div class="player">
+  <div class="tocar"><i data-i="play"></i></div>
+  <div class="faixa"><b>Hans Zimmer · Day One</b><span>trilha de Interestelar</span></div>
+  <div class="tempo">2:04</div>
+  <div class="barra"><i></i></div>
+  <div class="tempo">3:19</div>
+  <i data-i="volume"></i>
+</div>
+
+<script src="cosmos.js"></script>
+<script>
+const C = Cosmos; C.icones();
+const { ctx, w, h } = C.tela("#ceu");
+ctx.fillStyle = "#000"; ctx.fillRect(0, 0, w, h);
+C.nebulosa(ctx, w, h, { semente: 8, freq: 1 / 800, limiar: .55, suave: .4, forca: .28, cores: [[0, "#120500"], [.7, "#5a2208"], [1, "#a8501c"]],
+  mascara: (x, y) => C.ss(1000, 200, Math.hypot(x - 960, (y - 330) * 1.8)) });
+C.estrelas(ctx, w, h, { n: 900, semente: 2, max: 1.4, cores: ["#ffffff", "#ffe6cc", "#ffd6a8", "#e8eeff"], densidade: (x, y) => Math.abs(x - 960) < 560 && y > 520 && y < 850 ? .08 : 1 });
+C.buracoNegro(ctx, { x: 960, y: 326, r: 100, disco: 6.2, achatamento: .15, angulo: -.07, semente: 5 });
+C.graos(ctx, w, h, { n: 70, semente: 11, max: 2.6, cores: ["#ffb24a", "#ffe2b8"], alfa: .45, densidade: (x, y) => C.ss(700, 100, Math.hypot(x - 960, y - 330)) });
+</script>
+</body>
+</html>

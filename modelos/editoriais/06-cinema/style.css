@@ -1,0 +1,283 @@
+/* Modelo 06 · Cinema
+   Cores: original (floresta quente), masculino (noir, cena em preto e branco),
+   feminino (rosé), feminino-2 (violeta) e as 6 pastel. */
+
+:root,
+[data-cor="original"]   { --bg: #050505; --ink: #f2efe9; --leg: #fff4c2; --barra: var(--ink); --online: #7ed29a; }
+[data-cor="masculino"]  { --leg: #ffffff; }
+[data-cor="feminino"]   { --leg: #ffd6e2; }
+[data-cor="feminino-2"] { --leg: #e6dcff; }
+[data-cor^="pastel-"]   { --bg: var(--p-bg); --ink: var(--p-ink); --barra: var(--p-act); --online: #3f8f5c; }
+
+:root {
+  --xs-capa: var(--bg);
+  --xs-marca-cor: var(--ink);
+  --xs-marca-destaque: var(--ink);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.serif { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; }
+
+/* ---------- Cena (faixa de cinema) ---------- */
+
+.scope {
+  background-size: cover;
+  background-position: center 60%;
+}
+
+/* Vinheta escura nas bordas da cena */
+.scope::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, .55));
+}
+
+/* Tons de cada cor sobre a cena */
+[data-cor="masculino"] .scope { filter: grayscale(1) contrast(1.15); }
+
+[data-cor="feminino"] .scope::before,
+[data-cor="feminino-2"] .scope::before,
+[data-cor^="pastel-"] .scope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: soft-light;
+}
+
+[data-cor="feminino"] .scope::before   { background: rgba(255, 110, 160, .35); }
+[data-cor="feminino-2"] .scope::before { background: rgba(120, 80, 255, .4); }
+
+/* Pastel: cena mais clara, vinheta leve e tinta da cor por cima */
+[data-cor^="pastel-"] .scope { filter: brightness(1.3) saturate(.9); }
+[data-cor^="pastel-"] .scope::before { background: var(--p-ac); opacity: .35; }
+[data-cor^="pastel-"] .scope::after { background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, .25)); }
+[data-cor^="pastel-"] .title,
+[data-cor^="pastel-"] .title small { color: #fff; }
+
+/* A faixa do desktop fica no fundo, na largura toda da tela.
+   --s é a escala do palco, para a faixa ficar na mesma altura dele. */
+.xs-fundo {
+  --s: min(100vw / 1920, 100vh / 900);
+}
+
+.xs-fundo .scope {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50vh - 340 * var(--s));
+  height: calc(560 * var(--s));
+}
+
+/* No celular a cena fica dentro do palco */
+.xs-mobile .xs-fundo { display: none; }
+
+/* ---------- Partes comuns ---------- */
+
+.pre {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+}
+
+.title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  text-align: center;
+}
+
+.title small {
+  display: block;
+  text-transform: uppercase;
+  text-shadow: 0 1px 6px #000;
+}
+
+.title h1 { text-shadow: 0 4px 30px rgba(0, 0, 0, .6); text-wrap: balance; }
+
+.sub {
+  position: absolute;
+  z-index: 2;
+  text-align: center;
+  font-weight: 500;
+  color: var(--leg);
+  text-shadow: 0 2px 4px #000, 0 0 2px #000;
+}
+
+.credits { position: absolute; text-align: center; }
+
+.credits div > span {
+  display: block;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 45%, transparent);
+}
+
+.credits b { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; }
+.credits a:hover { text-decoration: underline; }
+
+.player {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 70%, transparent);
+}
+
+.player .play {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border: 1px solid color-mix(in srgb, var(--ink) 50%, transparent);
+  border-radius: 50%;
+  color: var(--ink);
+}
+
+.line { height: 1px; background: color-mix(in srgb, var(--ink) 20%, transparent); }
+.line span { display: block; height: 1px; background: var(--barra); }
+
+/* ---------- Desktop ---------- */
+
+.desk { width: 1920px; }
+
+.desk .pre { top: 40px; font-size: 12px; letter-spacing: .5em; }
+
+.desk .rate {
+  position: absolute;
+  right: 60px;
+  top: 36px;
+  padding: 4px 8px;
+  border: 1px solid color-mix(in srgb, var(--ink) 40%, transparent);
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+
+[data-cor^="pastel-"] .desk .rate { border-color: color-mix(in srgb, var(--ink) 33%, transparent); }
+
+.desk .title { top: 250px; }
+.desk .title small { font-size: 13px; letter-spacing: .6em; margin-bottom: 14px; }
+.desk .title h1 { font-size: 150px; line-height: .9; }
+
+/* Legenda: o pé dela fica 44px acima do fim da cena (110 + 560 − 44 = 626) */
+.desk .sub {
+  left: 160px;
+  right: 160px;
+  bottom: 274px;
+  font-size: 30px;
+  line-height: 1.25;
+}
+
+.desk .credits {
+  left: 0;
+  right: 0;
+  top: 700px;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  font-size: 13px;
+}
+
+.desk .credits div > span { font-size: 10px; letter-spacing: .35em; margin-bottom: 8px; }
+.desk .credits b { font-size: 24px; white-space: nowrap; }
+
+.desk .player {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  gap: 16px;
+  padding: 2px 4px;
+  font-size: 12px;
+  letter-spacing: .2em;
+  white-space: nowrap;
+}
+
+.desk .line { width: 280px; }
+
+/* A marca d'água fica no canto de baixo, à direita (padrão do núcleo) */
+
+/* ---------- Mobile ---------- */
+
+.mob { width: 390px; background: var(--bg); }
+
+.mob .pre { top: 24px; font-size: 9px; letter-spacing: .4em; }
+
+.mob .scope {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 60px;
+  height: 470px;
+  background-position: 50% 60%;
+}
+
+.mob .scope::after { background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, .6)); }
+[data-cor^="pastel-"] .mob .scope::after { background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, .25)); }
+
+.mob .title { left: 16px; right: 16px; top: 170px; }
+.mob .title small { font-size: 10px; letter-spacing: .5em; margin-bottom: 10px; }
+.mob .title h1 { font-size: 62px; line-height: .92; text-shadow: 0 4px 24px rgba(0, 0, 0, .6); }
+
+.mob .sub {
+  left: 24px;
+  right: 24px;
+  bottom: 22px;
+  font-size: 15px;
+  line-height: 1.35;
+  text-shadow: 0 2px 4px #000;
+}
+
+.mob .credits {
+  left: 24px;
+  right: 24px;
+  top: 570px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 10px;
+}
+
+.mob .credits div > span { font-size: 8.5px; letter-spacing: .3em; margin-bottom: 5px; }
+.mob .credits b { font-size: 19px; }
+.mob .credits .status { grid-column: span 2; }
+.mob .credits .status b { color: var(--online); }
+.mob .credits .status.xs-off b { color: inherit; }
+
+.mob .player {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 14px;
+  gap: 12px;
+  padding-bottom: 8px;
+  font-size: 9.5px;
+  letter-spacing: .15em;
+}
+
+.mob .play { width: 32px; height: 32px; }
+.mob .play svg { width: 13px; height: 13px; }
+.mob .player .info b { font-weight: 400; color: var(--ink); }
+
+.mob .line {
+  position: absolute;
+  left: 44px;
+  right: 0;
+  bottom: 0;
+}
+
+/* No celular a marca fica entre os créditos e a trilha sonora,
+   porque o alto da tela já tem o letreiro do filme */
+.xs-mobile .xs-marca {
+  top: auto;
+  bottom: 74px;
+  right: 50%;
+  transform: translateX(50%);
+}

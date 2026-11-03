@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Hora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../../core/cores.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <div class="topo">
+      <span><span class="on" data-xs-se="online">● Online no xat</span><span data-xs="local"></span></span>
+      <span data-xs-se="instagram"><a data-xs-link="instagramUrl">@<span data-xs="instagram"></span> ↗</a></span>
+    </div>
+    <!-- A foto, dentro de um anel -->
+    <div class="relogio">
+      <span class="disco">
+        <svg viewBox="0 0 360 360" aria-hidden="true"><circle class="trilho" cx="180" cy="180" r="175"/></svg>
+        <span class="foto ph" data-xs-bg="fotos.perfil"></span>
+      </span>
+    </div>
+    <p class="data" data-data></p>
+    <p class="hora" aria-label="Hora"><b data-hora>00</b><i>:</i><b data-minuto>00</b></p>
+    <p class="nome"><span class="nm"><span data-xs="nome">Albert</span> <span data-xs="sobrenome">Alves</span></span></p>
+    <div class="player" data-xs-player>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+      <div class="info"><b data-xs="musica.titulo"></b><span data-xs="musica.artista"></span></div>
+    </div>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <div class="topo">
+      <span><span class="on" data-xs-se="online">● online</span><span data-xs="local"></span></span>
+    </div>
+    <div class="relogio">
+      <span class="disco">
+        <svg viewBox="0 0 360 360" aria-hidden="true"><circle class="trilho" cx="180" cy="180" r="175"/></svg>
+        <span class="foto ph" data-xs-bg="fotos.perfil"></span>
+      </span>
+    </div>
+    <p class="data" data-data></p>
+    <p class="hora" aria-label="Hora"><b data-hora>00</b><i>:</i><b data-minuto>00</b></p>
+    <p class="nome"><span class="nm"><span data-xs="nome">Albert</span> <span data-xs="sobrenome">Alves</span></span></p>
+    <p class="gostos"><a data-xs-se="instagram" data-xs-link="instagramUrl">@<span data-xs="instagram"></span> ↗</a></p>
+    <div class="player" data-xs-player>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+      <div class="info"><b data-xs="musica.titulo"></b><span data-xs="musica.artista"></span></div>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

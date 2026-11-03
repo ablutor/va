@@ -1,0 +1,626 @@
+/* Modelo 32 · Windows XP
+   A área de trabalho do XP: papel de parede Bliss, janelas do Visualizador de imagens,
+   do Bloco de notas e do Windows Media Player, aviso do MSN e barra de tarefas.
+   As janelas são desenhadas aqui, vazias por dentro; só a foto do cliente entra nelas.
+   Cor: original (azul Luna e verde Bliss). Para outra cor, troque as variáveis abaixo. */
+
+:root,
+[data-cor="original"] {
+  --papel-de-parede: url("bliss.webp");
+  --papel-cor: #4f8ed8;
+  --tit-1: #0a5fe8;       /* faixa do título, de cima para baixo */
+  --tit-2: #0058e6;
+  --tit-3: #3a8cff;
+  --borda-jan: #0831d9;
+  --corpo-jan: #ece9d8;   /* cinza-bege das janelas */
+  --tinta: #000;
+  --barra-1: #245edb;     /* barra de tarefas */
+  --barra-2: #3f8cf3;
+  --iniciar-1: #5eac56;
+  --iniciar-2: #2f8a2f;
+  --bandeja: #0f8ee9;
+  --wmp-1: #2a4b8e;
+  --wmp-2: #142a5c;
+  --progresso: linear-gradient(90deg, #3ec3ff, #7bf1a8);
+  --msn-fundo: #eef3fd;
+  --msn-borda: #8eb0e6;
+  --online: #1c5bd8;
+}
+
+:root {
+  --xs-marca-cor: #fff;
+  --xs-marca-fundo: var(--barra-1);
+  --xs-marca-destaque: var(--iniciar-1);
+}
+
+body {
+  background: var(--papel-cor);
+  color: var(--tinta);
+  font-family: Tahoma, Verdana, "DejaVu Sans", sans-serif;
+}
+
+.papel {
+  background-color: var(--papel-cor);
+  background-image: var(--papel-de-parede);
+}
+
+/* ---------- Ícones da área de trabalho ---------- */
+
+.icones {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100px;
+}
+
+.icone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #000, 0 0 2px #000;
+}
+
+.icone svg {
+  width: 48px;
+  height: 48px;
+  filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, .35));
+}
+
+/* ---------- Janela ---------- */
+
+.jan {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: var(--corpo-jan);
+  border: 3px solid var(--borda-jan);
+  border-top: 0;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, .35);
+}
+
+.tit {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  height: 30px;
+  margin: 0 -3px;
+  padding: 0 6px 0 9px;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(180deg, var(--tit-3) 0%, var(--tit-1) 12%, var(--tit-2) 50%, var(--tit-1) 88%, var(--tit-3) 100%);
+  color: #fff;
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, .45);
+}
+
+.tit-ico {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.tit-t {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tit-bts {
+  display: flex;
+  gap: 3px;
+}
+
+/* Minimizar, maximizar e fechar, desenhados em CSS */
+.tit-bts i {
+  position: relative;
+  width: 21px;
+  height: 21px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #5c9bff, #1f5fe0);
+}
+
+.tit-bts .b-min::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  bottom: 4px;
+  width: 7px;
+  height: 3px;
+  background: #fff;
+}
+
+.tit-bts .b-max::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1.5px solid #fff;
+  border-top-width: 3px;
+}
+
+.tit-bts .b-fec {
+  background: linear-gradient(135deg, #f19a7c, #d8401c);
+}
+
+.tit-bts .b-fec::before,
+.tit-bts .b-fec::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 3px;
+  width: 2px;
+  height: 13px;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+.tit-bts .b-fec::after { transform: rotate(-45deg); }
+
+/* ---------- Visualizador de imagens ---------- */
+
+/* O espaço de dentro existe sem a foto: fundo escuro e moldura afundada */
+.moldura {
+  position: relative;
+  flex: 1;
+  margin: 5px 5px 0;
+  background: #1c1c1c;
+  border: 2px solid;
+  border-color: #808080 #fff #fff #808080;
+  overflow: hidden;
+}
+
+.foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ferramentas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  height: 44px;
+}
+
+.bt {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 24px;
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  background: linear-gradient(#fff, #ece9d8 85%, #d6d0c0);
+  color: #000;
+}
+
+.bt.largo { width: 60px; }
+
+.bt svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.bt.largo svg { width: 24px; }
+
+/* ---------- Bloco de notas ---------- */
+
+.menu {
+  display: flex;
+  gap: 16px;
+  flex: none;
+  padding: 3px 8px 4px;
+  font-size: 12px;
+  border-bottom: 1px solid #c9c5b5;
+}
+
+.texto {
+  flex: 1;
+  margin: 3px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid;
+  border-color: #808080 #e3e3e3 #e3e3e3 #808080;
+  font-family: "Lucida Console", "DejaVu Sans Mono", "Courier New", monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: #000;
+  animation: piscar 1s steps(1) infinite;
+}
+
+@keyframes piscar {
+  50% { opacity: 0; }
+}
+
+/* ---------- Windows Media Player ---------- */
+
+.wmp {
+  background: var(--wmp-1);
+  border-color: var(--wmp-1);
+}
+
+.wmp .tit {
+  background: linear-gradient(180deg, #3b5fae, var(--wmp-1) 40%, var(--wmp-2));
+}
+
+/* Visualização: manchas de cor que giram enquanto a música toca */
+.visual {
+  position: relative;
+  flex: none;
+  margin: 4px 4px 0;
+  background: #000;
+  border: 2px solid #9fb4d9;
+  overflow: hidden;
+}
+
+.visual i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  translate: -50% -50%;
+  filter: blur(28px);
+  mix-blend-mode: screen;
+  animation: girar 12s linear infinite;
+  animation-play-state: paused;
+}
+
+.visual i:nth-child(1) { background: conic-gradient(#ff3d7f, #ffd23d, #3dff8a, #3db5ff, #b23dff, #ff3d7f); }
+.visual i:nth-child(2) { width: 35%; background: radial-gradient(#3dffb8, transparent 70%); animation-duration: 7s; animation-direction: reverse; }
+.visual i:nth-child(3) { width: 50%; background: radial-gradient(#5b7bff, transparent 70%); animation-duration: 9s; translate: -20% -60%; }
+
+.xs-tocando .visual i { animation-play-state: running; }
+
+@keyframes girar {
+  to { rotate: 360deg; }
+}
+
+.painel {
+  position: relative;
+  flex: 1;
+  margin: 4px;
+  padding: 14px 12px 10px;
+  background: linear-gradient(180deg, #2c4f95, var(--wmp-2));
+  border: 1px solid #5a78b8;
+  color: #fff;
+}
+
+.faixa {
+  display: block;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artista {
+  display: block;
+  font-size: 12px;
+  opacity: .9;
+}
+
+.trilho {
+  display: block;
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 2px;
+  background: #0b1a3d;
+  overflow: hidden;
+}
+
+.trilho [data-xs-barra] {
+  display: block;
+  height: 100%;
+  background: var(--progresso);
+}
+
+.comandos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.wmp .play {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #b6d3ff;
+  background: radial-gradient(circle at 40% 30%, #9fd0ff, #2a78e0 60%, #164fa8);
+  color: #fff;
+  box-shadow: 0 0 6px rgba(120, 190, 255, .6);
+}
+
+.wmp .play svg {
+  width: 18px;
+  height: 18px;
+}
+
+.parar {
+  width: 9px;
+  height: 9px;
+  background: #fff;
+}
+
+.wmp .xs-pular {
+  width: 18px;
+  opacity: .9;
+}
+
+.wmp .xs-pular svg {
+  width: 11px;
+  height: 11px;
+}
+
+.volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.volume svg {
+  width: 14px;
+  height: 14px;
+}
+
+.volume i {
+  position: relative;
+  width: 50px;
+  height: 2px;
+  background: #fff;
+}
+
+.volume i::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: -4px;
+  width: 7px;
+  height: 9px;
+  border: 1px solid #fff;
+  background: var(--wmp-2);
+}
+
+/* ---------- Aviso do MSN ---------- */
+
+.msn {
+  position: absolute;
+  background: var(--msn-fundo);
+  border: 1px solid var(--msn-borda);
+  border-radius: 4px 4px 0 0;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, .3);
+  font-size: 12px;
+}
+
+.msn header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  background: linear-gradient(#cfe0fb, #b3cbf2);
+  color: #1b2f57;
+  font-size: 11px;
+}
+
+.msn .x {
+  position: relative;
+  width: 9px;
+  height: 9px;
+}
+
+.msn .x::before,
+.msn .x::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: -1px;
+  width: 1.2px;
+  height: 11px;
+  background: #1b2f57;
+  transform: rotate(45deg);
+}
+
+.msn .x::after { transform: rotate(-45deg); }
+
+.msn-corpo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+/* Quadradinho do avatar: existe vazio, a foto entra por cima */
+.avatar {
+  position: relative;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border: 2px solid #6fb83f;
+  border-radius: 3px;
+  background: #d9e3f2;
+  overflow: hidden;
+}
+
+.avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.msn p { line-height: 1.4; }
+
+.status {
+  color: var(--online);
+  text-decoration: underline;
+}
+
+.status.xs-off { color: #7a7a7a; }
+
+/* ---------- Barra de tarefas ---------- */
+
+.barra {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, var(--barra-2) 0%, var(--barra-1) 10%, var(--barra-1) 90%, #1941a5 100%);
+  color: #fff;
+}
+
+.iniciar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  height: 100%;
+  padding: 0 22px 0 10px;
+  border-radius: 0 12px 12px 0;
+  background: linear-gradient(180deg, #7cc26f 0%, var(--iniciar-1) 15%, var(--iniciar-2) 90%);
+  box-shadow: inset -2px 0 4px rgba(0, 0, 0, .25);
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+}
+
+.iniciar svg {
+  width: 22px;
+  height: 22px;
+}
+
+.tarefas {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  padding: 0 8px;
+}
+
+.tarefa {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 3px;
+  background: #3c81f3;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.tarefa.ativa {
+  background: #1e52b7;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .45);
+}
+
+.tarefa svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.tarefa span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bandeja {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  height: 100%;
+  padding: 0 14px;
+  background: linear-gradient(180deg, #19b9f3, var(--bandeja));
+  border-left: 1px solid #0a5dad;
+  font-size: 12px;
+}
+
+.bandeja svg {
+  width: 14px;
+  height: 14px;
+}
+
+.bandeja span::before { content: "✦ "; }
+
+/* ---------- Desktop (1920×900) ---------- */
+
+.desk {
+  width: 1920px;
+}
+
+.desk .visor { left: 190px; top: 34px; width: 560px; height: 680px; }
+.desk .bloco { left: 810px; top: 70px; width: 570px; height: 334px; }
+.desk .wmp { left: 1440px; top: 110px; width: 420px; height: 360px; }
+.desk .wmp .visual { height: 204px; }
+.desk .msn { left: 1656px; top: 757px; width: 248px; }
+.desk .barra { height: 36px; }
+.desk .tarefas .tarefa { width: 200px; }
+
+/* ---------- Mobile (390×844) ---------- */
+
+.mob {
+  width: 390px;
+}
+
+.mob .tit { height: 26px; font-size: 11.5px; }
+.mob .tit-bts i { width: 19px; height: 19px; }
+
+.mob .visor { left: 10px; top: 12px; width: 370px; height: 364px; }
+.mob .visor .moldura { margin: 5px; }
+
+.mob .bloco { left: 10px; top: 390px; width: 370px; height: 184px; }
+.mob .texto { font-size: 11px; padding: 8px 9px; line-height: 1.55; }
+
+.mob .wmp { left: 10px; top: 590px; width: 370px; height: 88px; }
+.mob .painel { display: flex; align-items: center; gap: 14px; padding: 6px 10px; }
+.mob .comandos { margin: 0; gap: 4px; }
+.mob .wmp .play { width: 40px; height: 40px; }
+.mob .info { flex: 1; min-width: 0; }
+.mob .faixa { font-size: 11.5px; }
+.mob .artista { font-size: 10px; }
+.mob .trilho { margin-top: 6px; }
+
+.mob .msn { left: 172px; top: 726px; width: 210px; font-size: 11px; }
+.mob .msn-corpo { padding: 8px 10px; }
+.mob .avatar { width: 38px; height: 38px; }
+
+.mob .barra { height: 32px; }
+.mob .iniciar { padding-right: 14px; font-size: 15px; }
+.mob .tarefas .tarefa { flex: 1; }

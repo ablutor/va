@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Zine</title>
+  <!-- Banner de 380×100: colagem de xerox em papel pontilhado; a moldura é um recorte de papel com fita adesiva e uma camada de cor atrás; faixa preta com estrelas embaixo. -->
+  <link rel="stylesheet" href="_base.css">
+  <link rel="stylesheet" href="../core/cores.css">
+  <style>
+    :root,
+    [data-cor="original"] {
+      --bg: #d9d6cf; --pontos: rgba(0, 0, 0, .13); --ink: #111; --papel: #fff;
+      --ac: #ff2e93; --ac2: #ffe600; --faixa: #111; --faixa-em: #ff2e93; --fita: rgba(244, 230, 160, .82);
+    }
+    [data-cor="masculino"] {
+      --bg: #1b1b1b; --pontos: rgba(255, 255, 255, .08); --ink: #111; --papel: #f4f4ee;
+      --ac: #b6f000; --ac2: #ffe600; --faixa: #b6f000; --faixa-em: #111; --fita: rgba(244, 230, 160, .85);
+    }
+    [data-cor="feminino"] {
+      --bg: #f6c9dc; --pontos: rgba(160, 50, 110, .14); --ink: #2a0f3a; --papel: #fff;
+      --ac: #8f5cff; --ac2: #ffe45e; --faixa: #2a0f3a; --faixa-em: #ff7ab8; --fita: rgba(255, 240, 168, .85);
+    }
+    [data-cor="feminino-2"] {
+      --bg: #d8cdf3; --pontos: rgba(90, 60, 170, .14); --ink: #1f1236; --papel: #fff;
+      --ac: #7c4dff; --ac2: #7dffd1; --faixa: #1f1236; --faixa-em: #7dffd1; --fita: rgba(255, 240, 168, .85);
+    }
+    [data-cor^="pastel-"] {
+      --bg: var(--p-bg); --pontos: color-mix(in srgb, var(--p-ink) 12%, transparent); --ink: var(--p-ink); --papel: var(--p-papel);
+      --ac: var(--p-ac); --ac2: var(--p-claro); --faixa: var(--p-dk); --faixa-em: var(--p-claro); --fita: rgba(255, 243, 184, .85);
+    }
+
+    html, body { background: var(--bg); }
+    .tudo { background: radial-gradient(var(--pontos) 1px, transparent 1px) 0 0 / 5px 5px, var(--bg); }
+
+    /* Faixa preta com estrelas, levemente torta, como a do modelo */
+    .faixa { position: absolute; left: -12px; width: 404px; top: 88px; height: 12px; background: var(--faixa); transform: rotate(-.9deg); transform-origin: 50% 50%; box-shadow: 0 -2px 0 rgba(0, 0, 0, .12); }
+    .faixa svg { position: absolute; width: 8px; height: 8px; top: 2px; overflow: visible; fill: var(--faixa-em); }
+
+    /* Moldura: recorte de papel branco, camada de cor deslocada atrás, duas fitas adesivas */
+    .moldura { z-index: 5; }
+    .moldura::before { content: ""; position: absolute; inset: 0; background: var(--ac); border-radius: inherit; transform: translate(1px, 3px) rotate(3.6deg); }
+    .moldura::after { content: ""; position: absolute; inset: 0; background: var(--papel); border-radius: inherit; box-shadow: 3px 5px 0 rgba(0, 0, 0, .22); }
+    .redonda .moldura::before, .moldura.redonda::before { transform: translate(3px, 3px); }
+    .moldura .fita { position: absolute; width: 24px; height: 9px; background: var(--fita); box-shadow: 0 1px 2px rgba(0, 0, 0, .25); z-index: 2; }
+    .fita.a { left: 77px; top: 1px; transform: rotate(38deg); }
+    .fita.b { left: 7px; top: 75px; transform: rotate(38deg); }
+    .moldura.redonda .fita.a { left: 69px; top: 9px; }
+    .moldura.redonda .fita.b { left: 14px; top: 66px; }
+
+    /* Recorte de xerox à direita (sem foto): papel com retícula, fita e uma estrela adesiva */
+    .xerox { position: absolute; left: 238px; top: 15px; width: 66px; height: 54px; padding: 4px; background: var(--papel); transform: rotate(3deg); box-shadow: 2px 3px 0 rgba(0, 0, 0, .2); }
+    .xerox .img { width: 100%; height: 100%; background: #bdbab3; position: relative; overflow: hidden; }
+    .xerox .img::before { content: ""; position: absolute; inset: -4px; background: radial-gradient(circle at 72% 40%, #111 0 14px, transparent 15px), linear-gradient(160deg, #888, #222); }
+    .xerox .img::after { content: ""; position: absolute; inset: 0; background: radial-gradient(#fff 30%, transparent 31%) 0 0 / 3px 3px; opacity: .45; }
+    .xerox .fita { position: absolute; left: 18px; top: -7px; width: 30px; height: 11px; background: var(--fita); box-shadow: 0 1px 2px rgba(0, 0, 0, .25); transform: rotate(-4deg); }
+    .sticker { position: absolute; left: 298px; top: 36px; width: 44px; height: 44px; overflow: visible; transform: rotate(14deg); filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, .25)); }
+    .sticker polygon { fill: var(--ac2); stroke: #111; stroke-width: 1.2; stroke-linejoin: miter; }
+    .sticker .x { stroke: var(--ac); stroke-width: 3.2; stroke-linecap: butt; fill: none; }
+    .xx { position: absolute; left: 212px; top: 62px; width: 22px; height: 22px; overflow: visible; transform: rotate(-8deg); opacity: .9; }
+    .xx path { stroke: var(--ac); stroke-width: 5; stroke-linecap: butt; fill: none; }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="faixa" id="faixa"></div>
+    <div class="xerox"><div class="img"></div><i class="fita"></i></div>
+    <svg class="sticker" viewBox="-22 -22 44 44" id="sticker"><path class="x" d="M-7 -7 L7 7 M7 -7 L-7 7"/></svg>
+    <svg class="xx" viewBox="-11 -11 22 22"><path d="M-8 -8 L8 8 M8 -8 L-8 8"/></svg>
+    <div class="moldura" id="moldura"><i class="fita a"></i><i class="fita b"></i></div>
+  </div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function (d) {
+      if (XB.redonda) document.getElementById("moldura").classList.add("redonda");
+      var NS = "http://www.w3.org/2000/svg", f = document.getElementById("faixa"), h = "";
+      for (var x = 6; x < 404; x += 34) h += '<svg viewBox="-4 -4 8 8" style="left:' + x + 'px"><polygon points="0,-4 1.1,-1.2 4,-1.2 1.7,0.7 2.5,3.6 0,1.9 -2.5,3.6 -1.7,0.7 -4,-1.2 -1.1,-1.2"/></svg>';
+      f.innerHTML = h;
+      var p = [], n = 12; for (var i = 0; i < n * 2; i++) { var a = Math.PI * i / n, r = i % 2 ? 15 : 21; p.push((r * Math.cos(a)).toFixed(1) + "," + (r * Math.sin(a)).toFixed(1)); }
+      document.getElementById("sticker").insertAdjacentHTML("afterbegin", '<polygon points="' + p.join(" ") + '"/>');
+      XB.pronto2();
+    });
+  </script>
+</body>
+</html>

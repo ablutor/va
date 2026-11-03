@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proposta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- O fundo: padrão do tema e o que passa por ele -->
+  <div class="ceu"><div class="decor"></div><div class="passando"></div></div>
+
+  <!-- Tela 1: o cartão com o botão de entrar -->
+  <section class="entrada">
+    <div class="cartao">
+      <div class="arte"></div>
+      <p class="cartao-nome"></p>
+      <button class="entrar" type="button"></button>
+    </div>
+  </section>
+
+  <!-- Tela 2: o palco desenhado em 1280×720, que cabe na tela -->
+  <main class="palco">
+    <div class="janela">
+      <nav class="abas"></nav>
+      <div class="janela-corpo">
+        <div class="painel painel-inicio ativo">
+          <div class="cena"></div>
+          <div class="bicho"></div>
+          <div class="chao"></div>
+          <p class="fala"></p>
+        </div>
+        <div class="painel painel-perfil">
+          <img class="perfil-foto" alt="">
+          <div class="perfil-texto">
+            <h2 class="perfil-nome"></h2>
+            <p class="perfil-frase"></p>
+            <ul class="perfil-gostos"></ul>
+          </div>
+        </div>
+        <div class="painel painel-sobre">
+          <h2>Sobre mim</h2>
+          <p class="sobre-texto"></p>
+        </div>
+        <div class="painel painel-video">
+          <div class="video"><span class="play"></span><small>vídeo do YouTube aqui</small></div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="lado">
+      <div class="relogio">
+        <div class="hora"><b class="hh"></b><b class="sep">:</b><b class="mm"></b><span class="ss"></span></div>
+        <p class="data"></p>
+      </div>
+      <div class="cracha">
+        <img class="cracha-foto" alt="">
+        <p class="logo"></p>
+        <p class="cracha-frase"></p>
+        <span class="status">online</span>
+      </div>
+      <div class="mini"></div>
+    </aside>
+  </main>
+
+  <script src="motor.js"></script>
+</body>
+</html>

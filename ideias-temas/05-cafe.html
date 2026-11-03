@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Marina · Café</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root{ --creme:#f6ebdd; --dim:#a8907c; --caramelo:#d99a5b; --linha:rgba(246,235,221,.12) }
+body{ background:#1a120d; color:var(--creme); font-family:"Inter",sans-serif }
+.fundo-foto{ background-image:url(fotos/cafe.jpg); filter:blur(46px) brightness(.35) saturate(1.1) }
+.cartao{ position:absolute; left:400px; top:110px; width:1120px; height:680px; border-radius:30px; background:linear-gradient(180deg, #2a1d16, #1c140f);
+  border:1px solid var(--linha); box-shadow:0 50px 100px -30px #000, inset 0 1px 0 rgba(255,255,255,.06) }
+.vista{ position:absolute; left:16px; top:16px; right:16px; height:350px; border-radius:20px; overflow:hidden; background:url(fotos/cafe.jpg) center 52%/cover }
+.vista::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.35), transparent 30%, transparent 65%, rgba(0,0,0,.5)) }
+.mono{ font:500 11px/1 "IBM Plex Mono",monospace; letter-spacing:.2em; text-transform:uppercase }
+.vista .mono{ position:absolute; z-index:2; color:rgba(255,248,240,.9) }
+.vista .a{ left:24px; top:24px; display:flex; gap:9px; align-items:center }
+.vista .a::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--caramelo); box-shadow:0 0 8px var(--caramelo) }
+.vista .b{ right:24px; top:24px } .vista .c{ left:24px; bottom:22px } .vista .d{ right:24px; bottom:22px; color:#ffd6a8 }
+
+.linha3{ position:absolute; left:16px; right:16px; top:366px; bottom:0; display:grid; grid-template-columns:1fr 1fr 1fr }
+.col{ padding:38px 40px 0; position:relative }
+.col + .col::before{ content:""; position:absolute; left:0; top:40px; bottom:46px; width:1px; background:var(--linha) }
+.quem{ display:flex; gap:18px; align-items:center }
+.foto{ width:84px; height:84px; border-radius:50%; overflow:hidden; box-shadow:0 0 0 2px var(--caramelo), 0 0 0 7px rgba(217,154,91,.12) }
+.foto img{ width:100%; height:100%; object-fit:cover; object-position:50% 22% }
+.cap{ color:var(--dim) }
+h1{ margin:16px 0 0; font:400 92px/.85 "Instrument Serif",serif; letter-spacing:-.02em; color:#fff6ec }
+h1 i{ color:var(--caramelo) }
+.id{ margin-top:20px; display:flex; gap:14px; color:var(--dim) } .id svg{ width:13px; height:13px; display:inline; vertical-align:-2px; margin-left:4px }
+.id .on{ color:#a8f0c0 }
+.bio{ margin:16px 0 0; font-size:16px; line-height:1.7; color:#dccbbb }
+.citacao{ margin-top:20px; font:italic 400 25px/1.25 "Instrument Serif",serif; color:#fff3e6 }
+.citacao::before{ content:"“"; display:block; height:22px; font-size:56px; line-height:.9; color:var(--caramelo) }
+.tocando{ display:flex; justify-content:space-between; color:var(--dim) }
+.musica{ margin-top:16px; font-size:17px; font-weight:600 } .musica span{ display:block; margin-top:4px; font-size:13px; font-weight:400; color:var(--dim) }
+.relogio{ margin-top:22px; display:flex; align-items:baseline; gap:8px; font:400 13px "IBM Plex Mono",monospace; color:var(--dim) }
+.relogio b{ font:400 34px "IBM Plex Mono",monospace; color:#fff6ec; letter-spacing:-.02em }
+.barra{ margin-top:12px; height:3px; border-radius:3px; background:rgba(255,255,255,.12); position:relative }
+.barra i{ position:absolute; left:0; top:0; height:3px; width:34%; border-radius:3px; background:var(--caramelo) }
+.botoes{ margin-top:20px; display:flex; gap:18px; align-items:center }
+.botoes svg{ width:20px; height:20px; color:var(--dim) }
+.botoes .tocar{ width:52px; height:52px; border-radius:50%; background:var(--creme); display:grid; place-items:center }
+.botoes .tocar svg{ width:22px; height:22px; color:#2a1d16; margin-left:3px }
+</style>
+</head>
+<body>
+<div class="fundo-foto"></div>
+<div class="cartao">
+  <div class="vista">
+    <span class="mono a">café da esquina · mesa 4</span>
+    <span class="mono b">15h30 · garoa lá fora</span>
+    <span class="mono c">dois cappuccinos, por favor</span>
+    <span class="mono d">aberto até as 22h</span>
+  </div>
+  <div class="linha3">
+    <div class="col">
+      <div class="quem"><div class="foto"><img src="../clientes/exemplo/perfil-feminino.jpg" alt=""></div><div class="mono cap">cliente da casa<br><br>desde 2019</div></div>
+      <h1>Marina<i>.</i></h1>
+      <div class="mono id"><span>ID 82460885<i data-i="copy"></i></span><span class="on">● online</span></div>
+    </div>
+    <div class="col">
+      <div class="mono cap">cardápio de mim</div>
+      <p class="bio">Sou feita de mar, café e dias de sol. Topo qualquer conversa longa, desde que tenha café no meio.</p>
+      <div class="citacao">Café quente e conversa boa resolvem quase tudo.</div>
+    </div>
+    <div class="col">
+      <div class="mono tocando"><span>tocando no café</span><span>♪</span></div>
+      <div class="musica">Norah Jones · Don't Know Why<span>do álbum Come Away With Me</span></div>
+      <div class="relogio"><b>1:12</b>/ 3:06</div>
+      <div class="barra"><i></i></div>
+      <div class="botoes"><i data-i="shuffle"></i><i data-i="prev"></i><span class="tocar"><i data-i="play"></i></span><i data-i="next"></i><i data-i="heart"></i></div>
+    </div>
+  </div>
+</div>
+<script src="apoio.js"></script>
+<script>Apoio.icones();</script>
+</body>
+</html>

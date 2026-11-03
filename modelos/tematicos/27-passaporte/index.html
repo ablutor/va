@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Passaporte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../../core/cores.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--
+    Modelo 27 · Passaporte
+    As páginas, os campos, os carimbos e a zona de leitura (MRZ) são HTML e CSS de verdade.
+    Só a foto do cliente entra no espaço da foto 3x4 (data-xs-img).
+    Os rótulos ficam no TEXTOS, no topo do script.js; os valores vêm dos dados do cliente.
+  -->
+
+  <div class="xs-fundo fundo"></div>
+
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <div class="livro">
+      <!-- Página da identificação -->
+      <section class="pagina esq">
+        <header class="cab"><span data-texto="cabecalho"></span><span class="num" data-texto="numero"></span></header>
+
+        <div class="ident">
+          <div class="foto34"><img data-xs-img="fotos.perfil" alt=""></div>
+          <dl class="campos">
+            <div><dt data-texto="rotuloTipo"></dt><dd data-texto="tipo"></dd></div>
+            <div><dt data-texto="rotuloPais"></dt><dd data-texto="pais"></dd></div>
+            <div class="largo"><dt data-texto="rotuloSobrenome"></dt><dd data-xs="sobrenome"></dd></div>
+            <div class="largo"><dt data-texto="rotuloNome"></dt><dd data-xs="nome"></dd></div>
+            <div><dt data-texto="rotuloNacionalidade"></dt><dd data-texto="nacionalidade"></dd></div>
+            <div><dt data-texto="rotuloNascimento"></dt><dd data-texto="nascimento"></dd></div>
+            <div><dt data-texto="rotuloNaturalidade"></dt><dd data-xs="local"></dd></div>
+            <div><dt data-texto="rotuloValidade"></dt><dd data-texto="validade"></dd></div>
+            <div class="largo assinatura"><dt data-texto="rotuloAssinatura"></dt><dd data-xs="nomeCompleto"></dd></div>
+          </dl>
+        </div>
+
+        <pre class="mrz" data-mrz="44"></pre>
+      </section>
+
+      <!-- Página dos vistos: carimbos, frase e player -->
+      <section class="pagina dir">
+        <header class="cab"><span data-texto="tituloVistos"></span><span class="num" data-texto="pagina"></span></header>
+
+        <div class="carimbo redondo vermelho c-xat">
+          <span class="c-topo" data-texto="carimboXat"></span>
+          <b data-texto="carimboEntrada"></b>
+          <span class="c-baixo"><span data-hoje></span><br><span data-texto="carimboOnline"></span></span>
+        </div>
+        <div class="carimbo quadrado azul c-cidade">
+          <span data-xs="local"></span>
+          <b><svg class="aviao" viewBox="0 0 24 24"><path d="M21 14.5v-2l-8-5V2.5a1.5 1.5 0 0 0-3 0v5l-8 5v2l8-2.5v5l-2 1.5V20l3.5-1 3.5 1v-1.5l-2-1.5v-5z" transform="rotate(90 12 12)"/></svg><span data-texto="aeroporto"></span></b>
+          <span data-texto="admitido"></span>
+        </div>
+        <div class="carimbo quadrado roxo c-visto">
+          <span data-texto="vistoPermanente"></span>
+          <b data-texto="gosto1"></b>
+        </div>
+        <div class="carimbo redondo verde c-clube">
+          <span class="c-topo" data-texto="clube"></span>
+          <b data-texto="gosto2"></b>
+          <span class="c-baixo" data-texto="diario"></span>
+        </div>
+
+        <p class="citacao" data-texto="citacao"></p>
+
+        <div class="player" data-xs-player>
+          <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+          <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+          <span class="faixa"><b data-xs="musica.titulo"></b><span><span data-xs="musica.artista"></span> · <span data-texto="trilha"></span></span></span>
+          <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram"><span data-texto="instagram"></span> ↗</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <div class="livro">
+      <section class="pagina esq">
+        <header class="cab"><span data-texto="cabecalhoCurto"></span><span class="num" data-texto="numeroCurto"></span></header>
+
+        <div class="ident">
+          <div class="foto34"><img data-xs-img="fotos.perfil" alt=""></div>
+          <dl class="campos">
+            <div><dt data-texto="rotuloTipoCurto"></dt><dd data-texto="tipo"></dd></div>
+            <div><dt data-texto="rotuloPaisCurto"></dt><dd data-texto="pais"></dd></div>
+            <div class="largo"><dt data-texto="rotuloSobrenomeCurto"></dt><dd data-xs="sobrenome"></dd></div>
+            <div class="largo"><dt data-texto="rotuloNomeCurto"></dt><dd data-xs="nome"></dd></div>
+            <div><dt data-texto="rotuloNascimento"></dt><dd data-texto="nascimento"></dd></div>
+            <div><dt data-texto="rotuloValidade"></dt><dd data-texto="validadeCurta"></dd></div>
+            <div class="largo"><dt data-texto="rotuloNaturalidade"></dt><dd data-xs="local"></dd></div>
+          </dl>
+        </div>
+        <p class="assinatura-solta" data-xs="nomeCompleto"></p>
+
+        <pre class="mrz" data-mrz="36"></pre>
+      </section>
+
+      <section class="pagina dir">
+        <header class="cab"><span data-texto="tituloVistos"></span><span class="num" data-texto="pagina"></span></header>
+
+        <div class="carimbo redondo vermelho c-xat">
+          <span class="c-topo" data-texto="carimboXat"></span>
+          <b data-texto="carimboEntrada"></b>
+          <span class="c-baixo"><span data-hoje></span><br><span data-texto="carimboOnline"></span></span>
+        </div>
+        <div class="carimbo quadrado azul c-cidade">
+          <span data-xs="local"></span>
+          <b><svg class="aviao" viewBox="0 0 24 24"><path d="M21 14.5v-2l-8-5V2.5a1.5 1.5 0 0 0-3 0v5l-8 5v2l8-2.5v5l-2 1.5V20l3.5-1 3.5 1v-1.5l-2-1.5v-5z" transform="rotate(90 12 12)"/></svg><span data-texto="aeroporto"></span></b>
+          <span data-texto="admitido"></span>
+        </div>
+        <div class="carimbo quadrado roxo c-visto">
+          <span data-texto="vistoPermanente"></span>
+          <b data-texto="gosto1"></b>
+        </div>
+        <div class="carimbo redondo verde c-clube">
+          <span class="c-topo" data-texto="clube"></span>
+          <b data-texto="gosto2"></b>
+          <span class="c-baixo" data-texto="diario"></span>
+        </div>
+
+        <p class="citacao" data-texto="citacao"></p>
+
+        <div class="player" data-xs-player>
+          <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+          <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+          <span class="faixa"><b data-xs="musica.titulo"></b><span><span data-xs="musica.artista"></span> · <span data-texto="trilha"></span></span></span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

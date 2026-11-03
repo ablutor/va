@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino feminino-2">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Psyduck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../_fofinhos/fofinhos.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fan-art de uso pessoal (Psyduck é personagem da Nintendo / The Pokémon Company) -->
+  <!-- Desenhos usados mais de uma vez: a pegada e o Psyduck -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Pegada de pato: três dedos com a membrana entre eles -->
+      <symbol id="pegada" viewBox="0 0 100 100">
+        <g fill="currentColor">
+          <path d="M50 94 C44 80 26 52 12 30 C24 32 32 36 38 42 C40 28 44 16 50 6 C56 16 60 28 62 42 C68 36 76 32 88 30 C74 52 56 80 50 94Z"/>
+        </g>
+      </symbol>
+
+      <!-- Penas amarelas, com luz no alto -->
+      <radialGradient id="pena" cx="38%" cy="28%" r="80%">
+        <stop offset="0" stop-color="var(--pena-luz)"/>
+        <stop offset=".55" stop-color="var(--pena)"/>
+        <stop offset="1" stop-color="var(--pena-sombra)"/>
+      </radialGradient>
+
+      <!-- Bico e pés cor de creme -->
+      <linearGradient id="bico" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--bico-luz)"/>
+        <stop offset="1" stop-color="var(--bico)"/>
+      </linearGradient>
+
+      <!-- Estrelinha da confusão -->
+      <path id="estrelinha" d="M0 -12 L3.5 -4 L12 -3.5 L5.5 2.5 L7.5 11 L0 6.5 L-7.5 11 L-5.5 2.5 L-12 -3.5 L-3.5 -4Z"/>
+    </defs>
+  </svg>
+
+  <!-- O bichinho: o fofinhos.js copia este desenho para dentro de cada .bicho -->
+  <template id="bichinho">
+    <svg viewBox="0 0 380 400">
+        <!-- laguinho com ondinhas embaixo dele -->
+        <ellipse cx="190" cy="386" rx="176" ry="22" fill="var(--agua)" opacity=".55"/>
+        <ellipse class="onda" cx="190" cy="386" rx="150" ry="18" fill="none" stroke="var(--agua-forte)" stroke-width="3"/>
+        <ellipse class="onda onda-2" cx="190" cy="386" rx="150" ry="18" fill="none" stroke="var(--agua-forte)" stroke-width="3"/>
+        <g class="pulo-todo">
+          <g class="corpo-todo">
+            <!-- pés de pato -->
+            <path d="M140 362 C118 368 98 384 102 394 C116 390 124 396 140 392 C156 396 164 390 178 394 C182 384 162 368 140 362Z" fill="url(#bico)"/>
+            <path d="M240 362 C218 368 198 384 202 394 C216 390 224 396 240 392 C256 396 264 390 278 394 C282 384 262 368 240 362Z" fill="url(#bico)"/>
+            <!-- corpinho -->
+            <path d="M318 330 Q350 336 346 300 Q330 318 300 312Z" fill="url(#pena)"/>
+            <ellipse cx="190" cy="318" rx="100" ry="68" fill="url(#pena)"/>
+            <ellipse cx="190" cy="336" rx="56" ry="38" fill="#fff" opacity=".22"/>
+            <!-- cabeça, que balança confusa -->
+            <g class="cabeca">
+              <!-- estrelinhas girando em volta da cabeça -->
+              <g class="estrelas">
+                <use href="#estrelinha" fill="var(--estrela)" stroke="var(--pena-sombra)" stroke-width="1.5">
+                  <animateMotion dur="1.8s" begin="0s" repeatCount="indefinite" path="M262 24 A72 20 0 1 1 118 24 A72 20 0 1 1 262 24"/>
+                </use>
+                <use href="#estrelinha" fill="var(--estrela)" stroke="var(--pena-sombra)" stroke-width="1.5">
+                  <animateMotion dur="1.8s" begin="-0.6s" repeatCount="indefinite" path="M262 24 A72 20 0 1 1 118 24 A72 20 0 1 1 262 24"/>
+                </use>
+                <use href="#estrelinha" fill="var(--estrela)" stroke="var(--pena-sombra)" stroke-width="1.5">
+                  <animateMotion dur="1.8s" begin="-1.2s" repeatCount="indefinite" path="M262 24 A72 20 0 1 1 118 24 A72 20 0 1 1 262 24"/>
+                </use>
+              </g>
+              <!-- três fiozinhos de cabelo -->
+              <g fill="none" stroke="var(--olho)" stroke-width="6" stroke-linecap="round">
+                <path d="M176 66 Q166 38 146 30"/>
+                <path d="M190 64 Q194 34 184 14"/>
+                <path d="M204 66 Q218 40 238 36"/>
+              </g>
+              <!-- bracinhos segurando a cabeça -->
+              <path d="M126 296 Q36 286 64 204" fill="none" stroke="var(--pena-sombra)" stroke-width="31" stroke-linecap="round"/>
+              <path d="M126 296 Q36 286 64 204" fill="none" stroke="var(--pena)" stroke-width="26" stroke-linecap="round"/>
+              <path d="M254 296 Q344 286 316 204" fill="none" stroke="var(--pena-sombra)" stroke-width="31" stroke-linecap="round"/>
+              <path d="M254 296 Q344 286 316 204" fill="none" stroke="var(--pena)" stroke-width="26" stroke-linecap="round"/>
+              <ellipse cx="190" cy="168" rx="124" ry="106" fill="url(#pena)"/>
+              <ellipse cx="140" cy="102" rx="50" ry="22" transform="rotate(-20 140 102)" fill="#fff" opacity=".45"/>
+              <!-- bochechas -->
+              <ellipse cx="104" cy="214" rx="20" ry="11" fill="var(--bochecha)" opacity=".55"/>
+              <ellipse cx="276" cy="214" rx="20" ry="11" fill="var(--bochecha)" opacity=".55"/>
+              <!-- olhos vazios, de quem não entendeu nada -->
+              <g class="olhos-abertos">
+                <ellipse cx="144" cy="152" rx="27" ry="25" fill="#fff" stroke="var(--olho)" stroke-width="3.5"/>
+                <ellipse cx="236" cy="152" rx="27" ry="25" fill="#fff" stroke="var(--olho)" stroke-width="3.5"/>
+                <circle cx="146" cy="154" r="5" fill="var(--olho)"/>
+                <circle cx="234" cy="154" r="5" fill="var(--olho)"/>
+                <ellipse cx="134" cy="142" rx="8" ry="5" fill="var(--pena-luz)" opacity=".7"/>
+                <ellipse cx="226" cy="142" rx="8" ry="5" fill="var(--pena-luz)" opacity=".7"/>
+              </g>
+              <g class="olhos-felizes" fill="none" stroke="var(--olho)" stroke-width="6" stroke-linecap="round">
+                <path d="M128 158 q16 -18 32 0"/>
+                <path d="M220 158 q16 -18 32 0"/>
+              </g>
+              <!-- bico largo -->
+              <path d="M126 224 Q190 250 254 224 Q250 252 190 258 Q130 252 126 224Z" fill="var(--bico-sombra)"/>
+              <path d="M118 210 Q122 186 190 184 Q258 186 262 210 Q258 232 190 236 Q122 232 118 210Z" fill="url(#bico)"/>
+              <ellipse cx="166" cy="198" rx="26" ry="7" fill="#fff" opacity=".5"/>
+              <ellipse cx="176" cy="206" rx="3.5" ry="2.5" fill="var(--bico-sombra)"/>
+              <ellipse cx="204" cy="206" rx="3.5" ry="2.5" fill="var(--bico-sombra)"/>
+              <g class="mao">
+                <ellipse cx="74" cy="180" rx="28" ry="34" transform="rotate(-14 74 180)" fill="url(#pena)"/>
+                <path d="M78 156 q14 4 20 14 M80 176 q14 2 20 12 M80 196 q12 0 18 10" fill="none" stroke="var(--pena-sombra)" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <g class="mao">
+                <ellipse cx="306" cy="180" rx="28" ry="34" transform="rotate(14 306 180)" fill="url(#pena)"/>
+                <path d="M302 156 q-14 4 -20 14 M300 176 q-14 2 -20 12 M300 196 q-12 0 -18 10" fill="none" stroke="var(--pena-sombra)" stroke-width="3" stroke-linecap="round"/>
+              </g>
+            </g>
+          </g>
+        </g>
+    </svg>
+  </template>
+
+  <!-- Fundo da tela toda, com rastros de pegadas -->
+  <div class="xs-fundo fundo"><div class="pegadas" data-pegadas="6"></div></div>
+
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <section class="perfil card">
+      <div class="topo">
+        <div class="foto" data-xs-bg="fotos.perfil"></div>
+        <div>
+          <h1 class="nome" data-xs="nome">Albert</h1>
+          <div class="sobrenome nome" data-xs="sobrenome">Alves</div>
+        </div>
+      </div>
+      <div class="linha-online">
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+      <p class="local" data-xs-se="local">📍 <span data-xs="local"></span></p>
+      <div class="cap">Meu mundinho</div>
+      <ul class="chips" data-gostos style="margin-top:10px"></ul>
+      <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span> ↗</a>
+    </section>
+
+    <div class="cena">
+      <p class="balao" data-balao></p>
+      <!-- Interrogações e redemoinhos flutuando: ele nunca entende nada -->
+      <span class="duvida d1" aria-hidden="true">?</span>
+      <span class="duvida d2" aria-hidden="true">?</span>
+      <span class="duvida d3" aria-hidden="true">?</span>
+      <span class="redemoinho r1" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 20 m0 -3 a3 3 0 1 1 -3 3 a6 6 0 0 1 6 -6 a9 9 0 0 1 9 9 a12 12 0 0 1 -12 12 a15 15 0 0 1 -15 -15"/></svg></span>
+      <span class="redemoinho r2" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 20 m0 -3 a3 3 0 1 1 -3 3 a6 6 0 0 1 6 -6 a9 9 0 0 1 9 9 a12 12 0 0 1 -12 12 a15 15 0 0 1 -15 -15"/></svg></span>
+      <button class="bicho" type="button" aria-label="Fazer carinho no Psyduck">
+
+      </button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="lado">
+      <div class="card carinho">
+        <span class="num" data-carinhos>0</span>
+        <div><span class="cap">Carinhos no Psyduck</span><p>Clica nele para dar mais um ♥</p></div>
+      </div>
+      <div class="card citacao" data-xs-se="citacao.texto">
+        <span class="cap">Frase favorita</span>
+        <p data-xs="citacao.texto"></p>
+        <small>— <span data-xs="citacao.autor"></span></small>
+      </div>
+      <div class="card player" data-xs-player>
+        <span class="xs-controles">
+          <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+          <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+        </span>
+        <div class="info">
+          <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+          <div class="barra"><span data-xs-barra></span></div>
+        </div>
+        <span class="eq"><i></i><i></i><i></i><i></i></span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <div class="cabeca">
+      <div class="foto" data-xs-bg="fotos.perfil"></div>
+      <div>
+        <h1 class="nome" data-xs="nome">Albert</h1>
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+    </div>
+
+    <div class="cena">
+      <p class="balao" data-balao></p>
+      <span class="duvida d1" aria-hidden="true">?</span>
+      <span class="duvida d2" aria-hidden="true">?</span>
+      <span class="redemoinho r1" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 20 m0 -3 a3 3 0 1 1 -3 3 a6 6 0 0 1 6 -6 a9 9 0 0 1 9 9 a12 12 0 0 1 -12 12 a15 15 0 0 1 -15 -15"/></svg></span>
+      <button class="bicho" type="button" aria-label="Fazer carinho no Psyduck">
+
+      </button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="perfil card">
+      <div class="cap" style="margin-bottom:8px">Meu mundinho</div>
+      <ul class="chips" data-gostos></ul>
+      <div class="rodape">
+        <div class="carinho"><span class="num" data-carinhos>0</span><p>carinhos ♥</p></div>
+        <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span></a>
+      </div>
+    </section>
+
+    <div class="card player" data-xs-player>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+      <div class="info">
+        <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+        <div class="barra"><span data-xs-barra></span></div>
+      </div>
+      <span class="eq"><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="../../_fofinhos/fofinhos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

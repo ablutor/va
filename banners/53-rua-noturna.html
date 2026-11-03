@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Rua noturna</title>
+  <!-- Banner do modelo 53 · Rua noturna: faixa da avenida com neon, escurecida do lado das etiquetas, e moldura de tubo de neon
+       (duas cores, como o modelo: --ac e --ac2) em volta do avatar. -->
+  <link rel="stylesheet" href="_base.css">
+  <style>
+    :root { --ac: #45e3ef; --ac2: #ff9a4a; --escuro: #04121a; --tinta: transparent; --tinta-op: 0; }
+    [data-cor="original"]  { --ac: #45e3ef; --ac2: #ff9a4a; --escuro: #04121a; --tinta: #45e3ef; --tinta-op: 0; }
+    [data-cor="masculino"] { --ac: #ffc93c; --ac2: #5aa0ff; --escuro: #070c18; --tinta: #1d4fa8; --tinta-op: .45; }
+    [data-cor="feminino"]  { --ac: #ff63ad; --ac2: #5fe3ef; --escuro: #14061a; --tinta: #b0338a; --tinta-op: .5; }
+    html, body { background: var(--escuro); }
+    .tudo { background: var(--escuro); }
+    .foto { position: absolute; inset: 0; background: url(../modelos/cenarios/53-rua-noturna/rua.jpg) -10px -615px / 560px auto no-repeat; }
+    .tinta { position: absolute; inset: 0; background: var(--tinta); opacity: var(--tinta-op); mix-blend-mode: color; }
+    .veu { position: absolute; inset: 0; background:
+      linear-gradient(90deg, color-mix(in srgb, var(--escuro) 88%, transparent) 0, color-mix(in srgb, var(--escuro) 80%, transparent) 200px, color-mix(in srgb, var(--escuro) 25%, transparent) 280px, transparent 330px),
+      linear-gradient(180deg, color-mix(in srgb, var(--escuro) 40%, transparent), transparent 35%, transparent 65%, color-mix(in srgb, var(--escuro) 50%, transparent)); }
+    /* tubo de neon: aro da cor principal com brilho e um segundo fio da cor secundária por fora */
+    .moldura { border-radius: 7px; background: var(--escuro);
+      border: 2px solid var(--ac);
+      box-shadow: 0 0 5px var(--ac), 0 0 12px color-mix(in srgb, var(--ac) 60%, transparent), inset 0 0 5px color-mix(in srgb, var(--ac) 70%, transparent); }
+    .moldura::before { content: ""; position: absolute; inset: -5.5px; border-radius: 11px; border: 2px solid var(--ac2);
+      box-shadow: 0 0 5px var(--ac2), inset 0 0 4px color-mix(in srgb, var(--ac2) 60%, transparent); opacity: .9;
+      -webkit-mask: conic-gradient(#000 0 17%, transparent 17% 21%, #000 21% 66%, transparent 66% 70%, #000 70% 100%); mask: conic-gradient(#000 0 17%, transparent 17% 21%, #000 21% 66%, transparent 66% 70%, #000 70% 100%); }
+    .moldura.redonda, .redonda .moldura { border-radius: 50%; }
+    .redonda .moldura::before { border-radius: 50%; }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="foto"></div><div class="tinta"></div><div class="veu"></div>
+    <div class="moldura" id="moldura"></div>
+  </div>
+  <script src="_base.js"></script>
+  <script>XB.pronto.then(function () { XB.pronto2(); });</script>
+</body>
+</html>

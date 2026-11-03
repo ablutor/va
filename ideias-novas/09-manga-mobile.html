@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>xatspace · Página de mangá (mobile)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Patrick+Hand&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --papel: #fbf8f0; --verm: #e5242b; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 390px; height: 844px; overflow: hidden; }
+  body { position: relative; background: var(--papel); color: #0d0d0d; font-family: "Patrick Hand", "Comic Sans MS", cursive; }
+  body::before { content: ""; position: absolute; inset: 0; z-index: 50; pointer-events: none; mix-blend-mode: multiply; opacity: .55;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .38  0 0 0 .55 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>"); }
+  body::after { content: ""; position: absolute; inset: 0; z-index: 51; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 65%, rgba(150,120,50,.16) 100%); }
+
+  .painel { position: absolute; overflow: hidden; background: var(--papel); isolation: isolate; }
+  .moldura { position: absolute; overflow: visible; pointer-events: none; z-index: 20; }
+  .abs { position: absolute; }
+  .tela { background:
+      radial-gradient(circle, #111 1px, transparent 1.4px) 0 0 / 6px 6px,
+      radial-gradient(circle, #111 1px, transparent 1.4px) 3px 3px / 6px 6px; }
+  .jp { font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif; font-weight: 900; }
+
+  /* ===== 1 · herói ===== */
+  #p1 { background: #0b0b0b; }
+  #p1 .linhas { position: absolute; inset: 0;
+    background:
+      repeating-conic-gradient(from 0deg at 74.5% 36%, #fff 0deg .5deg, transparent .5deg 2.1deg),
+      repeating-conic-gradient(from .8deg at 74.5% 36%, #fff 0deg 1.3deg, transparent 1.3deg 5.4deg),
+      repeating-conic-gradient(from 2.3deg at 74.5% 36%, #fff 0deg .28deg, transparent .28deg 3.1deg);
+    -webkit-mask-image: radial-gradient(ellipse 170px 210px at 74.5% 36%, transparent 55%, #000 84%);
+            mask-image: radial-gradient(ellipse 170px 210px at 74.5% 36%, transparent 55%, #000 84%); }
+  #p1 .foto { position: absolute; left: 70px; top: -140px; width: 400px; height: 600px; object-fit: cover; filter: grayscale(1) contrast(1.35) brightness(1.45); mix-blend-mode: lighten; }
+  #p1 .ht { position: absolute; left: 70px; top: -140px; width: 400px; height: 600px; mix-blend-mode: multiply;
+    background: radial-gradient(circle, #000 1.3px, transparent 1.7px) 0 0 / 4.5px 4.5px, radial-gradient(circle, #000 1.3px, transparent 1.7px) 2.25px 2.25px / 4.5px 4.5px;
+    -webkit-mask-image: linear-gradient(98deg, transparent 38%, rgba(0,0,0,.55) 60%, #000 82%); mask-image: linear-gradient(98deg, transparent 38%, rgba(0,0,0,.55) 60%, #000 82%); }
+  #p1 .escuro { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 56%, rgba(0,0,0,.85) 76%, #000 100%); }
+  .logo { position: absolute; left: 4px; top: 228px; transform: rotate(-4deg); transform-origin: 0 100%; z-index: 6;
+    font-family: "Anton", Impact, sans-serif; font-size: 104px; line-height: .92; white-space: nowrap; }
+  .logo span { display: block; color: #fff; -webkit-text-stroke: 9px #050505; paint-order: stroke fill; text-shadow: 5px 5px 0 var(--verm); }
+  .lima { position: absolute; left: 244px; top: 262px; z-index: 7; transform: rotate(-4deg) skewX(-8deg); background: #fff; color: #050505; border: 3.5px solid #050505;
+    box-shadow: 4px 4px 0 var(--verm), 0 0 0 2px #fff; font-family: "Anton", Impact, sans-serif; font-size: 34px; line-height: 1; padding: 3px 12px 1px; letter-spacing: .1em; }
+  .balao-fala { position: absolute; left: 6px; top: 8px; width: 214px; height: 134px; z-index: 8; }
+  .balao-fala svg { position: absolute; inset: 0; overflow: visible; }
+  .balao-fala p { position: absolute; left: 30px; top: 20px; width: 148px; margin: 0; text-align: center; font-size: 15px; line-height: 1.1; color: #111; }
+  .balao-fala p b { font-weight: 400; background: linear-gradient(transparent 62%, rgba(229,36,43,.55) 62% 88%, transparent 88%); }
+  .pensa { position: absolute; left: 296px; top: 8px; width: 62px; height: 56px; z-index: 8; } .pensa svg { position: absolute; inset: 0; overflow: visible; }
+  .sfx-don { position: absolute; left: 2px; top: 124px; z-index: 5; transform: rotate(-9deg); line-height: 1; }
+  .sfx-don span { display: block; font-size: 88px; letter-spacing: -.04em; }
+  .sfx-don .f { position: absolute; inset: 0; color: var(--verm); -webkit-text-stroke: 6px #050505; paint-order: stroke fill; }
+  .sfx-don .b { color: #fff; -webkit-text-stroke: 17px #fff; }
+  .sfx-vert { position: absolute; right: 8px; top: 76px; writing-mode: vertical-rl; z-index: 5; transform: rotate(3deg);
+    font-family: "Bangers", Impact, sans-serif; font-size: 30px; letter-spacing: .06em; line-height: 1; color: #fff; -webkit-text-stroke: 5px #050505; paint-order: stroke fill; text-shadow: 3px 3px 0 var(--verm); }
+  .sfx-vert i { font-style: normal; color: var(--verm); }
+
+  /* ===== 2 · paisagem ===== */
+  #p2 img { position: absolute; left: -10px; top: -14px; width: 250px; height: 150px; object-fit: cover; object-position: 45% 12%; filter: grayscale(1) contrast(1.2) brightness(1.6); }
+  #p2 .hach { position: absolute; inset: 0; mix-blend-mode: multiply; background: repeating-linear-gradient(118deg, rgba(0,0,0,.9) 0 1px, transparent 1px 4.5px);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 28%, transparent 55%); mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 28%, transparent 55%); }
+  .legenda { position: absolute; left: 12px; top: 16px; z-index: 6; background: #fffdf5; border: 3px solid #050505; padding: 4px 8px 3px 6px; display: flex; align-items: center; gap: 6px; box-shadow: 3px 3px 0 #050505; }
+  .legenda b { font-family: "Anton"; font-weight: 400; font-size: 11px; background: var(--verm); color: #fff; padding: 3px 5px 1px; letter-spacing: .06em; }
+  .legenda span { font-family: "Anton"; font-size: 12px; letter-spacing: .06em; line-height: 1.12; text-transform: uppercase; }
+  .sfx-fuwa { position: absolute; right: 22px; bottom: 8px; z-index: 6; font-size: 26px; transform: rotate(-8deg); color: #fff; -webkit-text-stroke: 5px #050505; paint-order: stroke fill; }
+
+  /* ===== 3 · capítulo ===== */
+  #p3 { background: #efeadc; }
+  #p3 .tela-fundo { position: absolute; inset: 0; opacity: .3; }
+  #p3 .grande { position: absolute; left: 24px; top: 22px; font-family: "Anton"; font-size: 92px; line-height: 1; letter-spacing: -.02em; color: #0b0b0b; text-shadow: 5px 5px 0 var(--verm); }
+  #p3 .grande::after { content: "01"; position: absolute; left: 0; top: 0; color: #0b0b0b; text-shadow: none; }
+  #p3 .fita { position: absolute; right: 8px; top: 10px; bottom: 14px; width: 48px; background: #fffdf5; border: 3px solid #050505; box-shadow: -3px 3px 0 #050505; display: flex; align-items: center; justify-content: center; }
+  #p3 .fita span { writing-mode: vertical-rl; font-family: "Anton"; font-size: 13px; letter-spacing: .04em; line-height: 1.25; white-space: nowrap; }
+  #p3 .fita span em { font-style: normal; color: var(--verm); }
+  #p3 .cap { position: absolute; left: 22px; top: 8px; font-family: "Anton"; font-size: 11px; letter-spacing: .24em; background: #050505; color: #fff; padding: 2px 6px 1px; z-index: 3; }
+  .selo-jp { position: absolute; left: 10px; bottom: 10px; width: 36px; height: 36px; background: var(--verm); color: #fff; z-index: 3; display: grid; place-items: center; font-size: 13px; line-height: 1.05; text-align: center; border: 2px solid #050505; transform: rotate(-5deg); box-shadow: 2px 2px 0 #050505; }
+
+  /* ===== 4 · habilidades ===== */
+  #p4 .foco { position: absolute; inset: 0;
+    background: repeating-conic-gradient(from 0deg at 50% 52%, #0d0d0d 0deg .6deg, transparent .6deg 2.6deg), repeating-conic-gradient(from 1deg at 50% 52%, #0d0d0d 0deg 1.2deg, transparent 1.2deg 7deg);
+    -webkit-mask-image: radial-gradient(ellipse 230px 70px at 50% 52%, transparent 35%, #000 100%); mask-image: radial-gradient(ellipse 230px 70px at 50% 52%, transparent 35%, #000 100%); }
+  #p4 .titulo { position: absolute; left: 14px; top: 16px; z-index: 2; transform: rotate(-1.5deg) skewX(-10deg); background: #0b0b0b; color: #fff; font-family: "Anton"; font-size: 14.5px; letter-spacing: .08em; padding: 4px 14px 2px 12px; box-shadow: 3px 3px 0 var(--verm); }
+  #p4 .titulo b { color: var(--verm); font-weight: 400; }
+  .hab { position: absolute; z-index: 5; top: 53px; width: 112px; height: 44px; background: #fffdf5; border: 3px solid #050505; box-shadow: 3px 3px 0 #050505; padding: 3px 6px; display: flex; align-items: center; gap: 6px; }
+  .hab .ic { flex: none; width: 28px; height: 28px; border-radius: 50%; background: #0b0b0b; display: grid; place-items: center; } .hab .ic svg { width: 18px; height: 18px; }
+  .hab h3 { margin: 0; font-family: "Anton"; font-weight: 400; font-size: 18px; line-height: 1; letter-spacing: .03em; text-transform: uppercase; }
+  .hab h3 small { display: block; font-family: "Zen Kaku Gothic New"; font-weight: 900; font-size: 11px; letter-spacing: .12em; color: var(--verm); margin-top: 2px; line-height: 1; }
+  .hab .nv { position: absolute; right: 4px; top: -15px; font-size: 10px; color: var(--verm); letter-spacing: 1px; background: #0b0b0b; padding: 2px 4px 1px 5px; line-height: 1.1; }
+
+  /* ===== 5 · trilha sonora ===== */
+  #p5 { background: #f3efe2; }
+  #p5 .tela-fundo { position: absolute; inset: 0; opacity: .16; -webkit-mask-image: linear-gradient(110deg, transparent 30%, #000); mask-image: linear-gradient(110deg, transparent 30%, #000); }
+  .tag { position: absolute; left: 14px; top: 16px; background: #0b0b0b; color: #fff; font-family: "Anton"; font-size: 13px; letter-spacing: .14em; padding: 3px 10px 1px 9px; transform: skewX(-12deg); box-shadow: 3px 3px 0 var(--verm); z-index: 4; }
+  .tag span { display: inline-block; transform: skewX(12deg); } .tag i { font-style: normal; color: var(--verm); }
+  #p5 .titulo-m { position: absolute; left: 14px; top: 40px; font-family: "Anton"; font-size: 22px; letter-spacing: .02em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+  #p5 .artista { position: absolute; left: 15px; top: 66px; font-size: 16px; line-height: 1; color: #222; }
+  #p5 .artista b { font-weight: 400; background: #0b0b0b; color: #fff; padding: 1px 5px 0; margin-right: 5px; font-size: 12px; }
+  .ctl { position: absolute; width: 38px; height: 38px; top: 52px; border: 3px solid #050505; background: #fffdf5; display: grid; place-items: center; box-shadow: 3px 3px 0 #050505; transform: rotate(-2deg); }
+  .ctl svg { width: 16px; height: 16px; }
+  .ctl.play { width: 46px; height: 46px; top: 46px; background: var(--verm); transform: rotate(2deg); } .ctl.play svg { width: 20px; height: 20px; }
+  .acao { position: absolute; left: 46px; top: 90px; width: 124px; height: 14px; } .acao svg { position: absolute; inset: 0; overflow: visible; }
+  .tempo { position: absolute; font-family: "Anton"; font-size: 11px; letter-spacing: .08em; }
+  .nota-s { position: absolute; }
+
+  /* ===== 6 · instagram + online ===== */
+  #p6 { background: #0b0b0b; }
+  #p6 .linhas { position: absolute; inset: 0;
+    background: repeating-conic-gradient(from 0deg at 76% 50%, #fff 0deg .6deg, transparent .6deg 2.4deg), repeating-conic-gradient(from .9deg at 76% 50%, #fff 0deg 1.3deg, transparent 1.3deg 6deg);
+    -webkit-mask-image: radial-gradient(ellipse 80px 50px at 76% 50%, transparent 30%, #000 100%); mask-image: radial-gradient(ellipse 80px 50px at 76% 50%, transparent 30%, #000 100%); }
+  .ig { position: absolute; left: 12px; top: 22px; background: #fffdf5; border: 3px solid #050505; box-shadow: 4px 4px 0 var(--verm); transform: rotate(-3deg); padding: 5px 12px 4px 8px; display: flex; align-items: center; gap: 8px; z-index: 3; }
+  .ig svg { width: 26px; height: 26px; }
+  .ig small { display: block; font-family: "Anton"; font-size: 11px; letter-spacing: .2em; color: var(--verm); line-height: 1.1; }
+  .ig b { display: block; font-family: "Anton"; font-weight: 400; font-size: 21px; letter-spacing: .02em; line-height: 1.05; }
+  .burst { position: absolute; left: 192px; top: 4px; width: 168px; height: 92px; z-index: 4; } .burst svg { position: absolute; inset: 0; overflow: visible; }
+  .burst span { position: absolute; inset: 0; display: grid; place-items: center; font-family: "Bangers"; font-size: 27px; letter-spacing: .04em; color: #fff; -webkit-text-stroke: 4px #050505; paint-order: stroke fill; transform: rotate(-9deg); }
+  .sfx-ping { position: absolute; left: 16px; bottom: 10px; font-size: 18px; color: #fff; -webkit-text-stroke: 4px #050505; paint-order: stroke fill; text-shadow: 2px 2px 0 var(--verm); transform: rotate(-4deg); z-index: 3; }
+
+  .num-pag { position: absolute; left: 0; width: 390px; top: 806px; text-align: center; font-family: "Anton"; font-size: 14px; letter-spacing: .4em; z-index: 10; }
+  .num-pag i { font-style: normal; color: var(--verm); }
+  .marcas { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+  .selo { position: absolute; right: 8px; bottom: 6px; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: #fffdf5; border: 3px solid #0b0b0b; z-index: 60; }
+  .selo svg { width: 16px; height: 16px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="brilho" viewBox="-50 -50 100 100"><path d="M0 -48 C4 -18 18 -4 48 0 C18 4 4 18 0 48 C-4 18 -18 4 -48 0 C-18 -4 -4 -18 0 -48Z" fill="currentColor"/></symbol>
+    <symbol id="nota" viewBox="0 0 40 52"><path d="M14 40 V9 L36 4 V35" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><ellipse cx="9" cy="41" rx="8.5" ry="6.5" fill="currentColor" transform="rotate(-18 9 41)"/><ellipse cx="31" cy="36" rx="8.5" ry="6.5" fill="currentColor" transform="rotate(-18 31 36)"/></symbol>
+  </defs>
+</svg>
+
+<!-- 1 · herói -->
+<div class="painel" id="p1" data-poly="14,14 376,14 376,334 14,346">
+  <div class="linhas"></div>
+  <img class="foto" src="../clientes/exemplo/perfil-masculino.jpg" alt="">
+  <div class="ht"></div>
+  <div class="escuro"></div>
+  <div class="sfx-don jp"><span class="b">ドン</span><span class="f">ドン</span></div>
+  <div class="sfx-vert">SEM PRESSA<i>…</i></div>
+  <div class="balao-fala">
+    <svg viewBox="0 0 214 134" width="214" height="134">
+      <defs><g id="forma-fala"><ellipse cx="104" cy="52" rx="100" ry="46"/><path d="M134 90 C150 100 168 112 200 124 C178 112 162 96 160 80Z"/></g></defs>
+      <use href="#forma-fala" fill="#050505" stroke="#050505" stroke-width="7" stroke-linejoin="round"/>
+      <use href="#forma-fala" fill="#fffdf5"/>
+    </svg>
+    <p>Devagar também é caminho. O importante é <b>não parar.</b></p>
+  </div>
+  <div class="pensa">
+    <svg viewBox="0 0 168 150" width="62" height="56">
+      <defs><g id="forma-pensa"><circle cx="40" cy="62" r="30"/><circle cx="76" cy="40" r="36"/><circle cx="118" cy="52" r="32"/><circle cx="130" cy="86" r="22"/><circle cx="62" cy="86" r="26"/><circle cx="96" cy="88" r="26"/><circle cx="40" cy="122" r="10"/><circle cx="18" cy="142" r="6"/></g></defs>
+      <use href="#forma-pensa" fill="#050505" stroke="#050505" stroke-width="12" stroke-linejoin="round"/>
+      <use href="#forma-pensa" fill="#fffdf5"/>
+      <g transform="translate(40 40) scale(1.1)" fill="none" stroke="#0b0b0b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 24 H34 V36 C34 46 27 52 18 52 C9 52 2 46 2 36Z" fill="#0b0b0b"/><path d="M34 28 H40 C46 28 46 42 38 42 H33"/><path d="M9 14 C5 10 13 8 9 3"/><path d="M19 14 C15 10 23 8 19 3"/>
+      </g>
+      <g fill="#0b0b0b"><circle cx="110" cy="92" r="6"/><circle cx="130" cy="92" r="6"/></g>
+    </svg>
+  </div>
+  <div class="logo"><span>RAFAEL</span></div>
+  <div class="lima">LIMA</div>
+</div>
+
+<!-- 2 · paisagem -->
+<div class="painel" id="p2" data-poly="14,357 216,350 204,463 14,469">
+  <img src="../clientes/exemplo/montanhas.jpg" alt="">
+  <div class="hach"></div>
+  <div class="legenda"><b>02</b><span>Belo Horizonte,<br>Minas Gerais</span></div>
+  <div class="sfx-fuwa jp">ふわ〜</div>
+</div>
+
+<!-- 3 · capítulo -->
+<div class="painel" id="p3" data-poly="227,350 376,345 376,457 215,462">
+  <div class="tela tela-fundo"></div>
+  <div class="cap">CAP.</div>
+  <div class="grande">01</div>
+  <div class="selo-jp jp">第一<br>話</div>
+  <div class="fita"><span>CAPÍTULO 01<br><em>—</em> SEM PRESSA</span></div>
+</div>
+
+<!-- 4 · habilidades -->
+<div class="painel" id="p4" data-poly="14,480 376,468 376,564 14,576">
+  <div class="foco"></div>
+  <div class="titulo">HABILIDADES <b>ESPECIAIS</b></div>
+  <div class="hab" style="left:7px; transform:rotate(-1.4deg)"><span class="nv">★★★★★</span>
+    <div class="ic"><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 H28 V25 C28 31 24 35 17.5 35 C11 35 7 31 7 25Z" fill="#fff"/><path d="M28 19.5 H31 C36 19.5 36 29 30 29 H27.5"/><path d="M13 12 C10 9 16 7 13 3"/><path d="M21 12 C18 9 24 7 21 3"/></svg></div>
+    <h3>Café<small>コーヒー</small></h3></div>
+  <div class="hab" style="left:125px; top:55px; transform:rotate(1deg)"><span class="nv">★★★★★</span>
+    <div class="ic"><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 33 L15 11 L22 22 L26 16 L37 33Z" fill="#fff"/><circle cx="30" cy="8" r="3" fill="#fff"/></svg></div>
+    <h3>Trilhas<small>トレイル</small></h3></div>
+  <div class="hab" style="left:243px; top:49px; transform:rotate(-1deg)"><span class="nv">★★★★★</span>
+    <div class="ic"><svg viewBox="0 0 40 52" style="width:14px;height:19px;color:#fff"><use href="#nota" width="40" height="52"/></svg></div>
+    <h3>Música<small>音楽</small></h3></div>
+</div>
+
+<!-- 5 · trilha sonora -->
+<div class="painel" id="p5" data-poly="14,587 376,575 376,687 14,699">
+  <div class="tela tela-fundo"></div>
+  <div class="tag"><span>TRILHA SONORA <i>♪</i></span></div>
+  <svg class="nota-s" style="left:156px;top:12px;width:17px;height:22px;color:#0b0b0b;transform:rotate(12deg)" viewBox="0 0 40 52"><use href="#nota" width="40" height="52"/></svg>
+  <svg class="nota-s" style="left:178px;top:20px;width:13px;height:17px;color:#e5242b;transform:rotate(-10deg)" viewBox="0 0 40 52"><use href="#nota" width="40" height="52"/></svg>
+  <div class="titulo-m">Distance &amp; Pixelated</div>
+  <div class="artista"><b>ARTISTA</b>Jeremy Passion</div>
+  <div class="ctl" style="left:208px"><svg viewBox="0 0 24 24" fill="#0b0b0b"><path d="M4 4h3v16H4zM21 4v16L9 12z"/></svg></div>
+  <div class="ctl play" style="left:254px"><svg viewBox="0 0 24 24" fill="#fff" stroke="#050505" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="3" width="6" height="18"/><rect x="14" y="3" width="6" height="18"/></svg></div>
+  <div class="ctl" style="left:308px"><svg viewBox="0 0 24 24" fill="#0b0b0b"><path d="M17 4h3v16h-3zM3 4v16l12-8z"/></svg></div>
+  <div class="acao"><svg viewBox="0 0 124 14" width="124" height="14">
+    <g stroke="#0b0b0b" stroke-linecap="round"><path d="M0 7 H124" stroke-width="2" opacity=".25"/><path d="M0 7 H50" stroke-width="5"/><path d="M4 3 H40 M10 11 H46" stroke-width="1.6"/></g>
+    <path d="M48 0 L68 7 L48 14 L53 7Z" fill="#e5242b" stroke="#050505" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M80 7 h6 M94 7 h6 M108 7 h6" stroke="#0b0b0b" stroke-width="2" opacity=".35" stroke-linecap="round"/></svg></div>
+  <div class="tempo" style="left:14px; top:89px">1:24</div>
+  <div class="tempo" style="left:176px; top:89px; opacity:.6">3:12</div>
+</div>
+
+<!-- 6 · instagram + online -->
+<div class="painel" id="p6" data-poly="14,710 376,698 376,794 14,794">
+  <div class="linhas"></div>
+  <div class="ig">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0b" stroke-width="2.4" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="#0b0b0b" stroke="none"/></svg>
+    <div><small>INSTAGRAM</small><b>@rafael.lima</b></div>
+  </div>
+  <div class="sfx-ping jp">ピコン!</div>
+  <div class="burst">
+    <svg viewBox="0 0 168 92" width="168" height="92"><path id="estrela-w" fill="#fff"/><path id="estrela" fill="#e5242b" stroke="#050505" stroke-width="4" stroke-linejoin="miter"/></svg>
+    <span>ONLINE!</span>
+  </div>
+</div>
+
+<div class="num-pag">— <i>01</i> —</div>
+<svg class="marcas" viewBox="0 0 390 844" width="390" height="844" fill="none" stroke="#0b0b0b" stroke-width="1.2">
+  <path d="M3 14 H10 M14 3 V10 M387 14 H380 M376 3 V10 M3 794 H10 M14 804 V811 M387 794 H380 M376 804 V811" opacity=".7"/>
+</svg>
+<div class="selo"><svg viewBox="-50 -50 100 100"><use href="#brilho" x="-50" y="-50" width="100" height="100" style="color:#e5242b"/></svg></div>
+
+<script>
+  document.querySelectorAll('.painel').forEach(function (el) {
+    var pts = el.dataset.poly.trim().split(/\s+/).map(function (p) { return p.split(',').map(Number); });
+    var xs = pts.map(function (p) { return p[0]; }), ys = pts.map(function (p) { return p[1]; });
+    var x0 = Math.min.apply(null, xs), y0 = Math.min.apply(null, ys), x1 = Math.max.apply(null, xs), y1 = Math.max.apply(null, ys);
+    el.style.left = x0 + 'px'; el.style.top = y0 + 'px'; el.style.width = (x1 - x0) + 'px'; el.style.height = (y1 - y0) + 'px';
+    var loc = pts.map(function (p) { return (p[0] - x0) + ',' + (p[1] - y0); });
+    el.style.clipPath = 'polygon(' + loc.map(function (l) { return l.split(',').map(function (n) { return n + 'px'; }).join(' '); }).join(',') + ')';
+    var ns = 'http://www.w3.org/2000/svg', s = document.createElementNS(ns, 'svg');
+    s.setAttribute('class', 'moldura'); s.setAttribute('width', x1 - x0); s.setAttribute('height', y1 - y0);
+    s.style.left = x0 + 'px'; s.style.top = y0 + 'px';
+    var pg = document.createElementNS(ns, 'polygon');
+    pg.setAttribute('points', loc.join(' ')); pg.setAttribute('fill', 'none'); pg.setAttribute('stroke', '#080808'); pg.setAttribute('stroke-width', '6'); pg.setAttribute('stroke-linejoin', 'miter');
+    s.appendChild(pg); el.parentNode.insertBefore(s, el.nextSibling);
+  });
+  (function () {
+    function estrela(cx, cy, rx, ry, n, rot) {
+      var d = '';
+      for (var i = 0; i < n * 2; i++) {
+        var a = Math.PI * i / n + rot, base = i % 2 ? .72 : 1, j = i % 2 ? 1 : (1 + ((i * 7) % 5) * .035);
+        d += (i ? 'L' : 'M') + (cx + Math.cos(a) * rx * base * j).toFixed(1) + ' ' + (cy + Math.sin(a) * ry * base * j).toFixed(1);
+      }
+      return d + 'Z';
+    }
+    document.getElementById('estrela').setAttribute('d', estrela(84, 46, 78, 42, 14, .2));
+    var w = document.getElementById('estrela-w'); w.setAttribute('d', estrela(84, 46, 83, 46, 14, .2)); w.setAttribute('stroke', '#fff'); w.setAttribute('stroke-width', '5');
+  })();
+</script>
+</body>
+</html>

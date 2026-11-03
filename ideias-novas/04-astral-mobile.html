@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Marina Costa · Mapa astral (mobile)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Sans+Symbols&family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#d9b36a;--gold2:#f6e2ad;--gold3:#9c7430;--lil:#b9a1ff;--bg:#0d0820;--ink:#efe8ff}
+  html,body{margin:0;width:390px;height:844px;overflow:hidden;background:var(--bg)}
+  *{box-sizing:border-box}
+  body{position:relative;color:var(--ink);font-family:"Cormorant Garamond",Georgia,serif;
+    background:radial-gradient(ellipse 520px 560px at 50% 28%,#241658 0%,#150d3a 45%,#0d0820 80%,#070413 100%)}
+  svg.stage{position:absolute;left:0;top:0;width:390px;height:844px;display:block}
+  .abs{position:absolute}
+  .gt{background:linear-gradient(180deg,var(--gold2) 0%,var(--gold) 52%,var(--gold3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  .top{left:0;right:0;top:13px;display:flex;align-items:center;justify-content:center;gap:9px;font-family:"Cinzel",serif;font-weight:600;font-size:11.5px;letter-spacing:.2em;color:var(--lil);text-transform:uppercase}
+  .top b{font-weight:600;color:var(--gold2)}
+
+  /* carta */
+  .card{left:79px;top:46px;width:232px;height:384px;padding:5px;border-radius:13px;
+    background:linear-gradient(145deg,#f6e2ad 0%,#d9b36a 22%,#8d6528 48%,#e7c783 72%,#a37a36 100%);
+    box-shadow:0 0 0 1px rgba(255,235,180,.5),0 0 30px rgba(217,179,106,.4),0 0 90px rgba(140,100,255,.4),0 24px 40px rgba(0,0,0,.6)}
+  .card .in{position:absolute;inset:5px;border-radius:9px;overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 38%,rgba(120,80,230,.42) 0%,rgba(40,20,100,0) 62%),
+      repeating-conic-gradient(from 0deg at 50% 38%,rgba(217,179,106,.10) 0 1.6deg,transparent 1.6deg 7.5deg),
+      linear-gradient(180deg,#20125a 0%,#150b3e 55%,#0e0730 100%)}
+  .card .in::before{content:"";position:absolute;inset:6px;border:1px solid rgba(217,179,106,.7);border-radius:5px;pointer-events:none;z-index:6}
+  .card .in::after{content:"";position:absolute;inset:10px;border:1px solid rgba(217,179,106,.28);border-radius:3px;pointer-events:none;z-index:6}
+  .corner{position:absolute;width:40px;height:40px;z-index:7;filter:drop-shadow(0 0 3px rgba(217,179,106,.6))}
+  .num{position:absolute;left:0;right:0;top:15px;text-align:center;font-family:"Cinzel",serif;font-weight:600;font-size:18px;letter-spacing:.22em;padding-left:.22em}
+  .arch{position:absolute;left:23px;top:50px;width:176px;height:212px;border-radius:88px 88px 3px 3px;overflow:hidden;
+    border:2px solid var(--gold);box-shadow:0 0 0 3px #150b3e,0 0 0 4px rgba(217,179,106,.7),0 0 24px rgba(185,161,255,.5),inset 0 0 20px rgba(20,8,60,.6);background:#2a1a66;z-index:3}
+  .arch img{position:absolute;width:244px;left:-36px;top:-6px;display:block;filter:saturate(.9) contrast(1.05) brightness(.96)}
+  .arch .tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(150,110,255,.38) 0%,rgba(120,70,200,.08) 45%,rgba(217,179,106,.30) 100%);mix-blend-mode:soft-light}
+  .arch .tint2{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(255,255,255,0) 40%,rgba(30,10,80,.55) 100%),linear-gradient(0deg,rgba(21,11,62,.95) 0%,rgba(21,11,62,0) 24%)}
+  .arch .stars{position:absolute;inset:0;width:100%;height:100%}
+  .title{position:absolute;left:0;right:0;top:296px;text-align:center;font-family:"Cinzel",serif;font-weight:700;font-size:19px;letter-spacing:.12em;padding-left:.12em;z-index:4;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
+  .sub{position:absolute;left:0;right:0;top:324px;text-align:center;font-style:italic;font-weight:600;font-size:22px;color:#d6c8ff;letter-spacing:.03em;z-index:4;text-shadow:0 0 10px rgba(185,161,255,.7)}
+  .tdiv{position:absolute;left:46px;width:130px;top:280px;height:10px;z-index:4}
+  .tbot{position:absolute;left:0;right:0;top:350px;text-align:center;font-size:10px;letter-spacing:.5em;color:var(--gold);z-index:4;opacity:.8;padding-left:.5em}
+
+  /* abaixo */
+  .scrim{left:0;top:410px;width:390px;height:434px;background:linear-gradient(180deg,rgba(9,5,26,0) 0%,rgba(9,5,26,.82) 60px,rgba(9,5,26,.9) 100%)}
+  .sky{left:0;top:446px;width:390px;display:flex;justify-content:center}
+  .pl{width:120px;display:flex;flex-direction:column;align-items:center;position:relative}
+  .pl + .pl::before{content:"";position:absolute;left:-1px;top:6px;height:62px;border-left:1px solid rgba(217,179,106,.28)}
+  .gl{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle,rgba(185,161,255,.22),rgba(185,161,255,.04) 70%);box-shadow:0 0 0 1px rgba(217,179,106,.85),0 0 0 3px rgba(13,8,32,.9),0 0 0 4px rgba(217,179,106,.35),0 0 16px rgba(185,161,255,.35)}
+  .gl svg{display:block;filter:drop-shadow(0 0 4px rgba(217,179,106,.7))}
+  .pl .lab{margin-top:8px;font-family:"Cinzel",serif;font-size:11px;letter-spacing:.14em;color:var(--lil);text-transform:uppercase;white-space:nowrap}
+  .pl .val{font-size:25px;font-weight:600;line-height:1;margin-top:2px;display:flex;align-items:baseline;gap:6px;color:#fff}
+  .pl .val em{font-style:normal;font-family:"Noto Sans Symbols","Noto Sans Symbols 2",serif;font-size:16px;color:var(--gold)}
+
+  .els{left:20px;right:20px;top:538px;height:36px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(217,179,106,.28);border-bottom:1px solid rgba(217,179,106,.28);padding:0 4px}
+  .el{display:flex;align-items:center;gap:8px}
+  .el svg{flex:none;filter:drop-shadow(0 0 5px rgba(217,179,106,.5))}
+  .el b{display:block;font-weight:600;font-size:18px;line-height:1;color:#fff}
+  .el span{display:block;font-family:"Cinzel",serif;font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-top:2px;line-height:1}
+
+  .msg{left:20px;right:20px;top:584px;text-align:center}
+  .kick{display:flex;align-items:center;gap:8px;font-family:"Cinzel",serif;font-weight:600;font-size:11px;letter-spacing:.28em;color:var(--lil);text-transform:uppercase;white-space:nowrap}
+  .kick::before,.kick::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(217,179,106,0),rgba(217,179,106,.7))}
+  .kick::after{background:linear-gradient(90deg,rgba(217,179,106,.7),rgba(217,179,106,0))}
+  .kick i{font-style:normal;color:var(--gold);letter-spacing:0}
+  .quote{margin-top:6px;font-style:italic;font-weight:500;font-size:25px;line-height:1.05;color:#f3ecff;text-shadow:0 0 16px rgba(185,161,255,.55),0 2px 8px rgba(0,0,0,.6)}
+  .quote em{color:var(--gold2)}
+  .moons{left:20px;right:20px;top:648px;display:flex;align-items:center;justify-content:space-between}
+  .moons .row{display:flex;gap:6px}
+  .moons svg{display:block;flex:none}
+  .moons .cap{font-size:14px;font-style:italic;color:#cbbcf5;white-space:nowrap}
+  .moons .cap b{font-family:"Cinzel",serif;font-style:normal;font-weight:600;font-size:11px;letter-spacing:.14em;color:var(--gold)}
+
+  .ritual{left:14px;right:14px;top:690px;height:106px;padding:16px 14px 10px 16px;
+    background:linear-gradient(180deg,rgba(40,24,100,.6),rgba(18,10,50,.6));
+    border:1px solid rgba(217,179,106,.65);box-shadow:inset 0 0 0 3px rgba(13,8,32,.6),inset 0 0 0 4px rgba(217,179,106,.28),0 0 30px rgba(140,100,255,.22);
+    clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px),0 10px)}
+  .lg{position:absolute;left:30px;top:681px;padding:0 7px;background:#0b0624;font-family:"Cinzel",serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:var(--lil);text-transform:uppercase;z-index:3;line-height:16px}
+  .lg::before{content:"✦ ";color:var(--gold);letter-spacing:0}
+  .r1{display:flex;align-items:center;justify-content:space-between}
+  .song{font-size:21px;font-weight:600;line-height:1;color:#fff;white-space:nowrap}
+  .artist{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.22em;color:var(--lil);margin-top:5px;text-transform:uppercase;white-space:nowrap}
+  .ctrl{display:flex;align-items:center;gap:6px}
+  .rb{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--gold);background:radial-gradient(circle at 35% 30%,rgba(246,226,173,.22),rgba(13,8,32,.4));box-shadow:0 0 10px rgba(217,179,106,.3),inset 0 0 6px rgba(217,179,106,.2)}
+  .rb.big{width:48px;height:48px;border:none;background:radial-gradient(circle at 34% 28%,#fff0c4 0%,#e6c27a 35%,#b58733 75%,#8a6224 100%);box-shadow:0 0 0 2px rgba(13,8,32,.9),0 0 0 3px rgba(217,179,106,.7),0 0 20px rgba(217,179,106,.65),inset 0 -3px 6px rgba(100,60,10,.4)}
+  .thread{position:relative;height:18px;margin-top:7px}
+  .thread .ln{position:absolute;left:0;right:0;top:8px;height:1.5px;background:rgba(217,179,106,.25)}
+  .thread .fill{position:absolute;left:0;width:41%;top:7.5px;height:2.5px;border-radius:2px;background:linear-gradient(90deg,#9c7430,#f6e2ad);box-shadow:0 0 8px rgba(246,226,173,.8)}
+  .thread .bead{position:absolute;top:6.5px;width:4px;height:4px;border-radius:50%;background:rgba(217,179,106,.5)}
+  .thread .stm{position:absolute;left:41%;top:-3px;width:24px;height:24px;margin-left:-12px;filter:drop-shadow(0 0 6px #f6e2ad) drop-shadow(0 0 12px rgba(217,179,106,.8))}
+  .times{display:flex;justify-content:space-between;font-family:"Cinzel",serif;font-size:11px;letter-spacing:.12em;color:var(--gold);margin-top:0;line-height:12px}
+
+  .foot{left:20px;top:806px;width:320px;height:28px;display:flex;align-items:center;justify-content:space-between}
+  .ig{display:flex;align-items:center;gap:7px;font-size:20px;font-weight:600;color:#fff;letter-spacing:.02em}
+  .on{display:flex;align-items:center;gap:6px;font-family:"Cinzel",serif;font-size:11px;letter-spacing:.14em;color:var(--lil);text-transform:uppercase;padding:5px 11px 5px 8px;border:1px solid rgba(185,161,255,.5);border-radius:16px;background:rgba(185,161,255,.08);white-space:nowrap}
+  .on i{font-style:normal;color:#9dffc8;text-shadow:0 0 6px #5dffa5,0 0 12px #5dffa5;font-size:11px}
+
+  .selo{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    background:rgba(255,255,255,.08);border:1px solid rgba(217,179,106,.5);color:var(--gold2);font-size:17px;opacity:.9}
+</style>
+</head>
+<body>
+
+<svg class="stage" viewBox="0 0 390 844" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="neb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="40"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="aura"><stop offset="0" stop-color="#b9a1ff" stop-opacity=".5"/><stop offset=".45" stop-color="#7a4fe0" stop-opacity=".18"/><stop offset="1" stop-color="#7a4fe0" stop-opacity="0"/></radialGradient>
+    <linearGradient id="shoot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".95"/></linearGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 .8  0 0 0 0 .75  0 0 0 0 1  0 0 0 1.1 -.35"/></filter>
+    <radialGradient id="vig" cx="195" cy="380" r="560" gradientUnits="userSpaceOnUse"><stop offset=".55" stop-color="#05020f" stop-opacity="0"/><stop offset="1" stop-color="#05020f" stop-opacity=".7"/></radialGradient>
+  </defs>
+  <g filter="url(#neb)">
+    <ellipse cx="40" cy="80" rx="170" ry="100" fill="#4a1f9a" opacity=".5"/>
+    <ellipse cx="360" cy="150" rx="150" ry="100" fill="#8a2a9a" opacity=".36"/>
+    <ellipse cx="350" cy="560" rx="170" ry="120" fill="#1d3fae" opacity=".4"/>
+    <ellipse cx="30" cy="620" rx="160" ry="110" fill="#2a2aa8" opacity=".36"/>
+    <ellipse cx="195" cy="240" rx="230" ry="240" fill="#5a2bd0" opacity=".34"/>
+  </g>
+  <g id="starfield"></g>
+  <ellipse cx="195" cy="236" rx="260" ry="290" fill="url(#aura)"/>
+  <g id="wheel" transform="translate(195 238) scale(.57) rotate(-14)" fill="none" stroke="#d9b36a"></g>
+  <g id="bigstars"></g>
+  <g transform="rotate(22 300 40)"><rect x="236" y="38" width="64" height="1.4" fill="url(#shoot)"/><circle cx="300" cy="38.7" r="1.8" fill="#fff" filter="url(#glow)"/></g>
+  <rect width="390" height="844" fill="url(#vig)"/>
+  <rect width="390" height="844" filter="url(#grain)" opacity=".10" style="mix-blend-mode:screen"/>
+</svg>
+
+<div class="abs top"><span>✦</span><span>Recife · <b>8°03′S</b></span><span>✦</span></div>
+
+<!-- carta -->
+<div class="abs card">
+  <div class="in">
+    <svg width="0" height="0" style="position:absolute"><defs>
+      <g id="cornerG" fill="none" stroke="#d9b36a" stroke-linecap="round">
+        <path d="M3 58V14Q3 3 14 3H58" stroke-width="2.4"/>
+        <path d="M11 50V19Q11 11 19 11H50" stroke-width="1.1" opacity=".8"/>
+        <path d="M20 20c9 0 14 6 14 13s-8 10-12 6-1-9 3-8" stroke-width="1.8"/>
+        <path d="M36 11c4 5 9 5 14 0" stroke-width="1.2"/><path d="M11 36c5 4 5 9 0 14" stroke-width="1.2"/>
+        <path d="M9 9l3 -6 3 6 -3 6z" fill="#d9b36a" stroke="none" transform="translate(-4 -4) scale(.9)"/>
+        <circle cx="30" cy="30" r="1.8" fill="#d9b36a" stroke="none"/>
+      </g></defs></svg>
+    <svg class="corner" style="left:1px;top:1px" viewBox="0 0 62 62"><use href="#cornerG"/></svg>
+    <svg class="corner" style="right:1px;top:1px;transform:scaleX(-1)" viewBox="0 0 62 62"><use href="#cornerG"/></svg>
+    <svg class="corner" style="left:1px;bottom:1px;transform:scaleY(-1)" viewBox="0 0 62 62"><use href="#cornerG"/></svg>
+    <svg class="corner" style="right:1px;bottom:1px;transform:scale(-1,-1)" viewBox="0 0 62 62"><use href="#cornerG"/></svg>
+
+    <div class="num gt">XVII</div>
+    <svg class="abs" style="left:0;top:0;width:222px;height:50px;z-index:4" viewBox="0 0 222 50">
+      <g fill="#d9b36a"><path d="M56 26l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z"/><path d="M166 26l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z"/></g>
+      <g stroke="#d9b36a" fill="none" stroke-width=".8"><path d="M66 30H84M138 30H156" opacity=".8"/></g>
+    </svg>
+    <div class="arch">
+      <img src="../clientes/exemplo/perfil-feminino.jpg" alt="Marina Costa">
+      <div class="tint"></div><div class="tint2"></div>
+      <svg class="stars" viewBox="0 0 176 212" id="archStars"></svg>
+    </div>
+    <svg class="tdiv" viewBox="0 0 130 10"><g stroke="#d9b36a" fill="none" stroke-width=".8"><path d="M0 5H52M78 5H130"/></g><path d="M65 0l1.8 3.4 3.4 1.6-3.4 1.6-1.8 3.4-1.8-3.4-3.4-1.6 3.4-1.6z" fill="#f6e2ad"/></svg>
+    <div class="title gt">A SONHADORA</div>
+    <div class="sub">Marina Costa</div>
+    <div class="tbot">· · ✦ · ·</div>
+  </div>
+</div>
+
+<div class="abs scrim"></div>
+
+<!-- seu céu -->
+<div class="abs sky">
+  <div class="pl">
+    <div class="gl"><svg width="26" height="26" viewBox="0 0 38 38" fill="none" stroke="#d9b36a" stroke-width="2.4"><circle cx="19" cy="19" r="12.5"/><circle cx="19" cy="19" r="2.8" fill="#f6e2ad" stroke="none"/><g stroke-linecap="round"><path d="M19 1v4M19 33v4M1 19h4M33 19h4M6 6l3 3M29 29l3 3M32 6l-3 3M9 29l-3 3" stroke-width="1.8" opacity=".8"/></g></svg></div>
+    <div class="lab">Sol em</div><div class="val">Leão<em>&#x264C;&#xFE0E;</em></div>
+  </div>
+  <div class="pl">
+    <div class="gl"><svg width="26" height="26" viewBox="0 0 38 38" fill="none" stroke="#d9b36a" stroke-width="2.8" stroke-linecap="round"><path d="M27 6C16 7 11 15 14 23c3 8 11 10 17 6C22 31 14 25 14 17c0-5 5-10 13-11z" fill="rgba(246,226,173,.25)"/></svg></div>
+    <div class="lab">Lua em</div><div class="val">Peixes<em>&#x2653;&#xFE0E;</em></div>
+  </div>
+  <div class="pl">
+    <div class="gl"><svg width="26" height="26" viewBox="0 0 38 38" fill="none" stroke="#d9b36a" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 33V6M10 15l9-10 9 10"/><path d="M12 33h14" stroke-width="2" opacity=".7"/></svg></div>
+    <div class="lab">Ascendente em</div><div class="val">Libra<em>&#x264E;&#xFE0E;</em></div>
+  </div>
+</div>
+
+<!-- elementos -->
+<div class="abs els">
+  <div class="el"><svg width="24" height="24" viewBox="0 0 34 34" fill="none" stroke="#d9b36a" stroke-width="2.4" stroke-linejoin="round"><path d="M17 28L4 8h26z" fill="rgba(110,170,255,.22)"/></svg><div><b>Praia</b><span>Água</span></div></div>
+  <div class="el"><svg width="24" height="24" viewBox="0 0 34 34" fill="none" stroke="#d9b36a" stroke-width="2.4" stroke-linejoin="round"><path d="M17 6L4 26h26z" fill="rgba(185,161,255,.22)"/><path d="M9.5 18h15"/></svg><div><b>Leitura</b><span>Ar</span></div></div>
+  <div class="el"><svg width="24" height="24" viewBox="0 0 34 34" fill="none" stroke="#d9b36a" stroke-width="2.4" stroke-linejoin="round"><path d="M17 6L4 26h26z" fill="rgba(255,150,100,.25)"/></svg><div><b>Música</b><span>Fogo</span></div></div>
+</div>
+
+<!-- mensagem -->
+<div class="abs msg">
+  <div class="kick"><i>✦</i>Mensagem do dia<i>✦</i></div>
+  <div class="quote">“Sou feita de <em>mar</em>, café e dias de <em>sol</em>.”</div>
+</div>
+<div class="abs moons"><div class="row" id="moons"></div><div class="cap">Gibosa <b>· 78%</b></div></div>
+
+<!-- ritual -->
+<div class="abs ritual">
+  <div class="r1">
+    <div><div class="song">Distance &amp; Pixelated</div><div class="artist">Jeremy Passion</div></div>
+    <div class="ctrl">
+      <div class="rb"><svg width="15" height="15" viewBox="0 0 24 24" fill="#f6e2ad"><path d="M6 5h2.6v14H6zM20 5v14L9.5 12z"/></svg></div>
+      <div class="rb big"><svg width="20" height="20" viewBox="0 0 24 24" fill="#2a1a08"><path d="M6.5 4h4v16h-4zM13.5 4h4v16h-4z"/></svg></div>
+      <div class="rb"><svg width="15" height="15" viewBox="0 0 24 24" fill="#f6e2ad"><path d="M18 5h-2.6v14H18zM4 5v14l10.5-7z"/></svg></div>
+    </div>
+  </div>
+  <div class="thread" id="thread"><div class="ln"></div><div class="fill"></div>
+    <svg class="stm" viewBox="-16 -16 32 32"><path d="M0 -14Q1.6 -1.6 14 0Q1.6 1.6 0 14Q-1.6 1.6 -14 0Q-1.6 -1.6 0 -14z" fill="#fff6d8"/><circle r="2.2" fill="#fff"/></svg>
+  </div>
+  <div class="times"><span>1:24</span><span>3:28</span></div>
+</div>
+<div class="abs lg">Ritual sonoro</div>
+
+<div class="abs foot">
+  <div class="ig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d9b36a" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#d9b36a"/></svg>@marina.costa</div>
+  <div class="on"><i>✦</i>online no xat</div>
+</div>
+
+<div class="selo">✦</div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function mk(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+  var seed=29;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
+  var GOLD='#d9b36a';
+
+  var sf=document.getElementById('starfield');
+  for(var i=0;i<150;i++){var r=rnd()<.1?1.2:rnd()*.8+.3;
+    mk('circle',{cx:(rnd()*390).toFixed(1),cy:(rnd()*844).toFixed(1),r:r.toFixed(2),fill:rnd()<.2?'#d9b36a':(rnd()<.4?'#b9a1ff':'#fff'),opacity:(.25+rnd()*.7).toFixed(2)},sf);}
+  for(var i=0;i<14;i++){mk('circle',{cx:(rnd()*390).toFixed(1),cy:(rnd()*844).toFixed(1),r:(.8+rnd()*1.2).toFixed(1),fill:'#f6e2ad',opacity:(.25+rnd()*.4).toFixed(2),filter:'url(#glow)'},sf);}
+  var bs=document.getElementById('bigstars');
+  function spark(x,y,s,col){
+    var d='M'+x+' '+(y-s)+'Q'+(x+s*.1)+' '+(y-s*.1)+' '+(x+s)+' '+y+'Q'+(x+s*.1)+' '+(y+s*.1)+' '+x+' '+(y+s)+'Q'+(x-s*.1)+' '+(y+s*.1)+' '+(x-s)+' '+y+'Q'+(x-s*.1)+' '+(y-s*.1)+' '+x+' '+(y-s)+'z';
+    var g=mk('g',{},bs);
+    mk('circle',{cx:x,cy:y,r:s*.9,fill:col,opacity:.12,filter:'url(#glow)'},g);
+    mk('path',{d:d,fill:col,filter:'url(#glow)'},g);
+    mk('path',{d:'M'+(x-s*1.9)+' '+y+'H'+(x+s*1.9)+'M'+x+' '+(y-s*1.9)+'V'+(y+s*1.9),stroke:col,'stroke-width':.5,opacity:.5},g);
+  }
+  [[28,92,9,'#f6e2ad'],[360,226,7,'#b9a1ff'],[40,372,6,'#b9a1ff'],[354,64,6,'#f6e2ad'],[22,230,5,'#f6e2ad'],[368,420,7,'#f6e2ad'],[58,36,5,'#b9a1ff']].forEach(function(s){spark(s[0],s[1],s[2],s[3])});
+
+  /* roda zodiacal (escala .57; traços engrossados) */
+  var W=document.getElementById('wheel');
+  function circ(r,sw,op,dash){var a={cx:0,cy:0,r:r,'stroke-width':sw*1.7,opacity:op};if(dash)a['stroke-dasharray']=dash;mk('circle',a,W);}
+  for(var i=0;i<72;i++){var a=i*5*Math.PI/180;mk('line',{x1:Math.sin(a)*560,y1:-Math.cos(a)*560,x2:Math.sin(a)*1000,y2:-Math.cos(a)*1000,'stroke-width':1,opacity:.07},W);}
+  circ(700,1,.28);circ(694,.5,.2);
+  circ(536,1.6,.9);circ(528,.8,.7);circ(490,1,.7);circ(410,1.2,.8);circ(400,.6,.5);circ(330,.8,.4);circ(250,.6,.3,'3 6');
+  function poly(n,r,rot,op,sw,step){var pts=[];for(var i=0;i<n;i++){var a=(rot+i*360/n)*Math.PI/180;pts.push([Math.sin(a)*r,-Math.cos(a)*r]);}
+    var d='',k=step||1;for(var j=0;j<n;j++){var p=pts[(j*k)%n];d+=(j?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}d+='z';mk('path',{d:d,'stroke-width':sw*1.7,opacity:op},W);}
+  poly(3,400,0,.45,.9);poly(3,400,180,.45,.9);poly(12,330,0,.35,.7,5);
+  for(var k=0;k<12;k++){var a=k*30*Math.PI/180;mk('line',{x1:Math.sin(a)*410,y1:-Math.cos(a)*410,x2:Math.sin(a)*528,y2:-Math.cos(a)*528,'stroke-width':2,opacity:.8},W);}
+  for(var i=0;i<360;i+=2){
+    var a=i*Math.PI/180,len=(i%30==0)?38:(i%10==0)?24:(i%10==0)?15:12;
+    if(i%5!=0 && i%10!=0) len=9;
+    mk('line',{x1:Math.sin(a)*490,y1:-Math.cos(a)*490,x2:Math.sin(a)*(490+len),y2:-Math.cos(a)*(490+len),'stroke-width':(i%10==0)?1.7:1,opacity:(i%10==0)?.75:.4},W);
+  }
+  var gl=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+  for(var k=0;k<12;k++){
+    var ang=k*30+15;
+    var t=mk('text',{x:0,y:0,'font-family':'"Noto Sans Symbols","Noto Sans Symbols 2","Segoe UI Symbol",serif','font-size':56,fill:GOLD,stroke:'none','text-anchor':'middle','dominant-baseline':'central',transform:'rotate('+ang+') translate(0 -450)',style:'filter:drop-shadow(0 0 8px rgba(217,179,106,.55))'},W);
+    t.textContent=gl[k]+'︎';
+  }
+
+  var as=document.getElementById('archStars');
+  for(var i=0;i<18;i++){mk('circle',{cx:(rnd()*176).toFixed(1),cy:(rnd()*90).toFixed(1),r:(rnd()*1+.4).toFixed(2),fill:'#fff',opacity:(.4+rnd()*.6).toFixed(2)},as);}
+  [[32,34,6],[148,44,5],[88,14,6]].forEach(function(s){var x=s[0],y=s[1],z=s[2];
+    mk('path',{d:'M'+x+' '+(y-z)+'Q'+x+' '+y+' '+(x+z)+' '+y+'Q'+x+' '+y+' '+x+' '+(y+z)+'Q'+x+' '+y+' '+(x-z)+' '+y+'Q'+x+' '+y+' '+x+' '+(y-z)+'z',fill:'#fff6d8',style:'filter:drop-shadow(0 0 3px #fff)'},as);});
+
+  var M=document.getElementById('moons');
+  var ps=[0,.125,.25,.375,.5,.625,.75,.875],cur=3;
+  ps.forEach(function(p,i){
+    var s=document.createElementNS(NS,'svg');s.setAttribute('width',25);s.setAttribute('height',25);s.setAttribute('viewBox','-19 -19 38 38');
+    var r=14,active=(i==cur);
+    mk('circle',{r:r+4.5,fill:'none',stroke:active?'#f6e2ad':'rgba(217,179,106,0)','stroke-width':1.6},s);
+    mk('circle',{r:r,fill:'#1c1248',stroke:'rgba(217,179,106,.7)','stroke-width':1.4},s);
+    var q=p>.5?1-p:p,mirror=p>.5,rx=r*Math.abs(Math.cos(2*Math.PI*q)),sw=(q<.25)?0:1,d;
+    if(q>=.5-1e-6){d='M0 '+(-r)+'A'+r+' '+r+' 0 1 1 0 '+r+'A'+r+' '+r+' 0 1 1 0 '+(-r);}
+    else{d='M0 '+(-r)+'A'+r+' '+r+' 0 0 1 0 '+r+'A'+rx.toFixed(2)+' '+r+' 0 0 '+sw+' 0 '+(-r)+'z';}
+    if(q>0){var pa=mk('path',{d:d,fill:active?'#fff0c4':'#e9dcff',opacity:active?1:.88,transform:mirror?'scale(-1 1)':''},s);if(active)pa.setAttribute('style','filter:drop-shadow(0 0 4px rgba(246,226,173,.9))');}
+    M.appendChild(s);
+  });
+
+  var th=document.getElementById('thread');
+  for(var i=1;i<12;i++){var b=document.createElement('i');b.className='bead';b.style.left=(i/12*100)+'%';th.appendChild(b);}
+})();
+</script>
+</body>
+</html>

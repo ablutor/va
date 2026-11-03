@@ -1,0 +1,596 @@
+/* Modelo 55 · Mangá 2
+   Uma página de mangá em preto e branco: seis quadros de borda grossa com recortes diagonais,
+   retrato com retícula e linhas de velocidade, nome em letras de impacto, balões e efeitos sonoros
+   em japonês. Uma só cor de acento (--ac) aparece nos detalhes; cada cor troca só o acento.
+   Cores (nome → rótulo → bolinha):
+     original    → preto e branco com vermelho → #e5242b
+     masculino   → preto e branco com azul     → #1f6bff
+     feminino    → preto e branco com rosa     → #ff3d8b
+     feminino-2  → preto e branco com violeta  → #8a3dff
+     pastel-azul    → pastel azul    → #6f9fd0
+     pastel-menta   → pastel menta   → #5fb38f
+     pastel-areia   → pastel areia   → #b58e5c
+     pastel-rosa    → pastel rosa    → #e58aa0
+     pastel-lilas   → pastel lilás   → #9a7ed8
+     pastel-pessego → pastel pêssego → #e59a72 */
+
+:root {
+  --papel: #fbf8f0;      /* a folha */
+  --caixa: #fffdf5;      /* caixas, balões e legendas */
+  --tinta: #0b0b0b;      /* traço e quadros escuros */
+  --claro: #fff;         /* linhas e letras sobre o escuro */
+  --fundo-tela: #efeadc; /* quadros com retícula */
+  --mancha: rgba(150, 120, 50, .16);
+  --apagado: #8d8d8d;    /* selo offline */
+  --foto-brilho: 1.4;    /* ajustados pelo script conforme a foto */
+  --cena-brilho: 1.3;
+  --xs-marca-cor: var(--tinta);
+  --xs-marca-fundo: var(--caixa);
+  --xs-marca-destaque: var(--ac);
+}
+
+:root,
+[data-cor="original"]   { --ac: #e5242b; }
+[data-cor="masculino"]  { --ac: #1f6bff; }
+[data-cor="feminino"]   { --ac: #ff3d8b; }
+[data-cor="feminino-2"] { --ac: #8a3dff; }
+
+/* Nas pastel o papel, a tinta e o acento vêm da paleta */
+[data-cor^="pastel-"] {
+  --papel: var(--p-bg2);
+  --caixa: var(--p-papel);
+  --tinta: var(--p-dk);
+  --claro: var(--p-papel);
+  --fundo-tela: var(--p-bg);
+  --ac: var(--p-ac);
+  --mancha: color-mix(in srgb, var(--p-ac) 22%, transparent);
+  --apagado: color-mix(in srgb, var(--p-dk) 45%, var(--p-papel));
+}
+
+body {
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: "Patrick Hand", "Comic Sans MS", cursive;
+}
+
+.jp { font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif; font-weight: 900; }
+.c-borda { fill: var(--tinta); stroke: var(--tinta); }
+.c-caixa { fill: var(--caixa); }
+.c-solido { fill: var(--tinta); stroke: var(--tinta); }
+.c-solido-f { fill: var(--tinta); color: var(--tinta); }
+
+/* ---------- Folha, quadros e molduras ---------- */
+
+.desk { width: 1920px; }
+.mob { width: 390px; }
+.pagina { position: absolute; inset: 0; background: var(--papel); }
+
+/* Textura de papel e leve escurecimento nas bordas */
+.pagina::before {
+  content: ""; position: absolute; inset: 0; z-index: 50; pointer-events: none; mix-blend-mode: multiply; opacity: .5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .38  0 0 0 .55 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+}
+.pagina::after {
+  content: ""; position: absolute; inset: 0; z-index: 51; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, transparent 62%, var(--mancha) 100%);
+}
+
+.painel { position: absolute; overflow: hidden; background: var(--papel); isolation: isolate; }
+.p1, .p6 { background: var(--tinta); }
+.moldura { position: absolute; overflow: visible; pointer-events: none; z-index: 20; }
+.moldura polygon { fill: none; stroke: var(--tinta); stroke-linejoin: miter; }
+
+.tela {
+  background:
+    radial-gradient(circle, var(--tinta) 1.25px, transparent 1.7px) 0 0 / 8px 8px,
+    radial-gradient(circle, var(--tinta) 1.25px, transparent 1.7px) 4px 4px / 8px 8px;
+}
+.mob .tela {
+  background:
+    radial-gradient(circle, var(--tinta) 1px, transparent 1.4px) 0 0 / 6px 6px,
+    radial-gradient(circle, var(--tinta) 1px, transparent 1.4px) 3px 3px / 6px 6px;
+}
+
+/* Foto em preto e branco; o brilho é ajustado pelo script (fotos escuras clareiam, claras não estouram).
+   A máscara esmaece as bordas da foto para as linhas de velocidade aparecerem em volta do rosto. */
+.foto { position: absolute; isolation: isolate; }
+.foto i {
+  position: absolute; inset: 0; background-size: cover; background-position: 50% 14%; background-color: var(--tinta);
+  filter: grayscale(1) contrast(1.35) brightness(var(--foto-brilho));
+}
+/* Os pretos da foto viram a cor do quadro (a tinta), para emendar com o fundo nas paletas pastel */
+.foto::after { content: ""; position: absolute; inset: 0; background: var(--tinta); mix-blend-mode: lighten; }
+
+/* ================= 1 · Retrato ================= */
+
+.p1 .linhas {
+  position: absolute; inset: 0;
+  background:
+    repeating-conic-gradient(from 0deg at 60% 38%, var(--claro) 0deg .45deg, transparent .45deg 1.9deg),
+    repeating-conic-gradient(from .8deg at 60% 38%, var(--claro) 0deg 1.2deg, transparent 1.2deg 5.1deg),
+    repeating-conic-gradient(from 2.3deg at 60% 38%, var(--claro) 0deg .25deg, transparent .25deg 2.9deg);
+  -webkit-mask-image: radial-gradient(ellipse 340px 400px at 60% 38%, transparent 58%, #000 84%);
+          mask-image: radial-gradient(ellipse 340px 400px at 60% 38%, transparent 58%, #000 84%);
+}
+.mob .p1 .linhas {
+  background:
+    repeating-conic-gradient(from 0deg at 74.5% 36%, var(--claro) 0deg .5deg, transparent .5deg 2.1deg),
+    repeating-conic-gradient(from .8deg at 74.5% 36%, var(--claro) 0deg 1.3deg, transparent 1.3deg 5.4deg),
+    repeating-conic-gradient(from 2.3deg at 74.5% 36%, var(--claro) 0deg .28deg, transparent .28deg 3.1deg);
+  -webkit-mask-image: radial-gradient(ellipse 170px 210px at 74.5% 36%, transparent 55%, #000 84%);
+          mask-image: radial-gradient(ellipse 170px 210px at 74.5% 36%, transparent 55%, #000 84%);
+}
+.p1 .foto {
+  -webkit-mask-image: radial-gradient(ellipse 340px 540px at 50% 43%, #000 60%, transparent 100%);
+          mask-image: radial-gradient(ellipse 340px 540px at 50% 43%, #000 60%, transparent 100%);
+}
+.desk .p1 .foto, .desk .p1 .ht { left: 118px; top: -176px; width: 800px; height: 1200px; }
+.mob .p1 .foto, .mob .p1 .ht { left: 70px; top: -140px; width: 400px; height: 600px; }
+.mob .p1 .foto {
+  -webkit-mask-image: radial-gradient(ellipse 180px 280px at 50% 43%, #000 60%, transparent 100%);
+          mask-image: radial-gradient(ellipse 180px 280px at 50% 43%, #000 60%, transparent 100%);
+}
+
+/* Retícula nas sombras do lado direito do rosto */
+.p1 .ht {
+  position: absolute; mix-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(98deg, transparent 38%, rgba(0,0,0,.55) 60%, #000 82%);
+          mask-image: linear-gradient(98deg, transparent 38%, rgba(0,0,0,.55) 60%, #000 82%);
+  background:
+    radial-gradient(circle, #000 1.9px, transparent 2.3px) 0 0 / 6px 6px,
+    radial-gradient(circle, #000 1.9px, transparent 2.3px) 3px 3px / 6px 6px;
+}
+.mob .p1 .ht {
+  background:
+    radial-gradient(circle, #000 1.3px, transparent 1.7px) 0 0 / 4.5px 4.5px,
+    radial-gradient(circle, #000 1.3px, transparent 1.7px) 2.25px 2.25px / 4.5px 4.5px;
+}
+.p1 .escuro { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 52%, color-mix(in srgb, var(--tinta) 85%, transparent) 72%, var(--tinta) 100%); }
+.mob .p1 .escuro { background: linear-gradient(180deg, transparent 56%, color-mix(in srgb, var(--tinta) 85%, transparent) 76%, var(--tinta) 100%); }
+
+/* Nome em letras de impacto: o tamanho encolhe pelo script quando o nome é longo */
+.logo { position: absolute; z-index: 6; transform: rotate(-4deg); transform-origin: 0 100%; white-space: nowrap;
+  font-family: "Anton", Impact, sans-serif; text-transform: uppercase; line-height: .92; }
+.logo .nome-g {
+  display: block; color: var(--claro); paint-order: stroke fill; letter-spacing: .01em;
+}
+.lima {
+  position: absolute; left: 100%; z-index: 7; transform: skewX(-8deg);
+  background: var(--claro); color: var(--tinta); border-style: solid; border-color: var(--tinta);
+  font-family: "Anton", Impact, sans-serif; line-height: 1; letter-spacing: .1em; text-transform: uppercase;
+}
+.lima[hidden] { display: none; }
+
+.desk .logo { left: 14px; top: 586px; font-size: 218px; }
+.desk .logo .nome-g { -webkit-text-stroke: 15px var(--tinta); text-shadow: 9px 9px 0 var(--ac); }
+.desk .lima { bottom: -26px; margin-left: -56px; border-width: 6px; box-shadow: 7px 7px 0 var(--ac), 0 0 0 4px var(--claro); font-size: 74px; padding: 4px 20px 2px; }
+.mob .logo { left: 4px; top: 228px; font-size: 104px; }
+.mob .logo .nome-g { -webkit-text-stroke: 9px var(--tinta); text-shadow: 5px 5px 0 var(--ac); }
+.mob .lima { bottom: -12px; margin-left: -28px; border-width: 3.5px; box-shadow: 4px 4px 0 var(--ac), 0 0 0 2px var(--claro); font-size: 34px; padding: 3px 12px 1px; }
+
+/* Balão de fala com a frase */
+.balao-fala { position: absolute; z-index: 8; }
+.balao-fala svg { position: absolute; inset: 0; overflow: visible; }
+.balao-fala p {
+  position: absolute; display: flex; align-items: center; justify-content: center;
+  text-align: center; color: var(--tinta); line-height: 1.1;
+}
+.balao-fala p span { display: block; max-height: 100%; overflow: hidden; }
+.balao-fala mark { background: linear-gradient(transparent 62%, color-mix(in srgb, var(--ac) 55%, transparent) 62% 88%, transparent 88%); color: inherit; }
+.desk .balao-fala { left: 22px; top: 22px; width: 342px; height: 276px; }
+.desk .balao-fala p { left: 36px; top: 36px; width: 252px; height: 160px; font-size: 28px; }
+.mob .balao-fala { left: 6px; top: 8px; width: 214px; height: 134px; }
+.mob .balao-fala p { left: 30px; top: 14px; width: 148px; height: 76px; font-size: 15px; }
+
+/* Balão de pensamento: xícara se o primeiro gosto for café, senão uma notinha */
+.pensa { position: absolute; z-index: 8; }
+.pensa svg { position: absolute; inset: 0; overflow: visible; }
+.pensa .ic-cafe { stroke: var(--tinta); }
+.pensa .ic-nota { display: none; }
+.pensa.nota .ic-cafe { display: none; }
+.pensa.nota .ic-nota { display: block; }
+.desk .pensa { left: 662px; top: 30px; width: 168px; height: 150px; }
+.mob .pensa { left: 296px; top: 8px; width: 62px; height: 56px; }
+
+/* Efeitos sonoros */
+.sfx-don { position: absolute; z-index: 5; transform: rotate(-9deg); line-height: 1; }
+.sfx-don span { display: block; letter-spacing: -.04em; }
+.sfx-don .f { position: absolute; inset: 0; color: var(--ac); paint-order: stroke fill; }
+.sfx-don .b { color: var(--claro); }
+.desk .sfx-don { left: 10px; top: 318px; }
+.desk .sfx-don span { font-size: 214px; }
+.desk .sfx-don .f { -webkit-text-stroke: 12px var(--tinta); }
+.desk .sfx-don .b { -webkit-text-stroke: 34px var(--claro); }
+.mob .sfx-don { left: 2px; top: 124px; }
+.mob .sfx-don span { font-size: 88px; }
+.mob .sfx-don .f { -webkit-text-stroke: 6px var(--tinta); }
+.mob .sfx-don .b { -webkit-text-stroke: 17px var(--claro); }
+
+.sfx-vert {
+  position: absolute; z-index: 5; writing-mode: vertical-rl; transform: rotate(3deg);
+  font-family: "Bangers", Impact, sans-serif; text-transform: uppercase; line-height: 1; color: var(--claro);
+  paint-order: stroke fill; white-space: nowrap;
+}
+.sfx-vert i { font-style: normal; color: var(--ac); }
+.desk .sfx-vert { right: 54px; top: 188px; font-size: 78px; letter-spacing: .08em; -webkit-text-stroke: 9px var(--tinta); text-shadow: 6px 6px 0 var(--ac); }
+.mob .sfx-vert { right: 8px; top: 76px; font-size: 30px; letter-spacing: .06em; -webkit-text-stroke: 5px var(--tinta); text-shadow: 3px 3px 0 var(--ac); }
+
+/* ================= 2 · Paisagem ================= */
+
+.cena-foto { background: var(--tinta); }
+.cena-foto i { background-position: 50% 30%; filter: grayscale(1) contrast(1.2) brightness(var(--cena-brilho)); }
+.desk .cena-foto { left: -10px; top: -60px; width: 640px; height: 430px; }
+.mob .cena-foto { left: -10px; top: -14px; width: 250px; height: 150px; }
+.mob .cena-foto i { background-position: 45% 12%; }
+.hach, .hach2 { position: absolute; inset: 0; mix-blend-mode: multiply; }
+.hach {
+  background: repeating-linear-gradient(118deg, var(--tinta) 0 1.4px, transparent 1.4px 6.5px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.65) 22%, transparent 48%);
+          mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.65) 22%, transparent 48%);
+}
+.mob .hach { background: repeating-linear-gradient(118deg, var(--tinta) 0 1px, transparent 1px 4.5px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 28%, transparent 55%); mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 28%, transparent 55%); }
+.hach2 {
+  background: repeating-linear-gradient(62deg, var(--tinta) 0 1.2px, transparent 1.2px 7px);
+  -webkit-mask-image: linear-gradient(0deg, #000 0%, rgba(0,0,0,.4) 22%, transparent 42%);
+          mask-image: linear-gradient(0deg, #000 0%, rgba(0,0,0,.4) 22%, transparent 42%);
+}
+.pontos { position: absolute; inset: 0; mix-blend-mode: multiply; opacity: .55;
+  -webkit-mask-image: linear-gradient(90deg, #000, transparent 55%); mask-image: linear-gradient(90deg, #000, transparent 55%); }
+
+.legenda { position: absolute; z-index: 6; background: var(--caixa); border-style: solid; border-color: var(--tinta); display: flex; align-items: center; color: var(--tinta); }
+.legenda b { font-family: "Anton"; font-weight: 400; background: var(--ac); color: #fff; letter-spacing: .12em; }
+.legenda span { font-family: "Anton"; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.desk .legenda { left: 40px; top: 28px; border-width: 5px; padding: 7px 16px 5px 14px; gap: 12px; box-shadow: 6px 6px 0 var(--tinta); max-width: 500px; }
+.desk .legenda b { font-size: 11px; padding: 4px 8px 2px; flex: none; }
+.desk .legenda span { font-size: 22px; letter-spacing: .08em; line-height: 1.1; }
+.mob .legenda { left: 12px; top: 16px; border-width: 3px; padding: 4px 8px 3px 6px; gap: 6px; box-shadow: 3px 3px 0 var(--tinta); max-width: 170px; }
+.mob .legenda b { font-size: 11px; padding: 3px 5px 1px; letter-spacing: .06em; flex: none; }
+.mob .legenda span { font-size: 12px; letter-spacing: .06em; line-height: 1.12; white-space: normal; max-height: 28px; }
+.sfx-fuwa { position: absolute; z-index: 6; transform: rotate(-8deg); color: var(--claro); paint-order: stroke fill; }
+.desk .sfx-fuwa { right: 54px; bottom: 36px; font-size: 62px; -webkit-text-stroke: 9px var(--tinta); letter-spacing: -.02em; }
+.mob .sfx-fuwa { right: 22px; bottom: 8px; font-size: 26px; -webkit-text-stroke: 5px var(--tinta); }
+
+/* ================= 3 · Capítulo ================= */
+
+.p3 { background: var(--fundo-tela); }
+.tela-fundo { position: absolute; inset: 0; opacity: .3; }
+.p3 .grande { position: absolute; font-family: "Anton"; line-height: 1; letter-spacing: -.02em; color: var(--tinta); }
+.p3 .grande::after { content: "01"; position: absolute; left: 0; top: 0; color: var(--tinta); text-shadow: none; }
+.desk .p3 .grande { left: 44px; top: 56px; font-size: 276px; text-shadow: 11px 11px 0 var(--ac); }
+.mob .p3 .grande { left: 24px; top: 22px; font-size: 92px; text-shadow: 5px 5px 0 var(--ac); }
+.p3 .fita { position: absolute; background: var(--caixa); border-style: solid; border-color: var(--tinta); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.p3 .fita .vert { writing-mode: vertical-rl; font-family: "Anton"; text-transform: uppercase; white-space: nowrap; color: var(--tinta); }
+.p3 .fita em { font-style: normal; color: var(--ac); }
+.desk .p3 .fita { right: 22px; top: 26px; bottom: 40px; width: 122px; border-width: 5px; box-shadow: -6px 6px 0 var(--tinta); }
+.desk .p3 .fita .vert { font-size: 34px; letter-spacing: .12em; line-height: 1.25; }
+.mob .p3 .fita { right: 8px; top: 10px; bottom: 14px; width: 48px; border-width: 3px; box-shadow: -3px 3px 0 var(--tinta); }
+.mob .p3 .fita .vert { font-size: 13px; letter-spacing: .04em; line-height: 1.25; }
+.cap { position: absolute; z-index: 3; font-family: "Anton"; background: var(--tinta); color: var(--claro); }
+.desk .cap { left: 66px; top: 22px; font-size: 15px; letter-spacing: .3em; padding: 5px 10px 3px; }
+.mob .cap { left: 22px; top: 8px; font-size: 11px; letter-spacing: .24em; padding: 2px 6px 1px; }
+.selo-jp { position: absolute; z-index: 3; background: var(--ac); color: #fff; display: grid; place-items: center; text-align: center; border-style: solid; border-color: var(--tinta); transform: rotate(-5deg); }
+.desk .selo-jp { left: 30px; bottom: 44px; width: 70px; height: 70px; font-size: 30px; line-height: 1.05; border-width: 3px; box-shadow: 4px 4px 0 var(--tinta); }
+.mob .selo-jp { left: 10px; bottom: 10px; width: 36px; height: 36px; font-size: 13px; line-height: 1.05; border-width: 2px; box-shadow: 2px 2px 0 var(--tinta); }
+
+/* ================= 4 · Habilidades especiais ================= */
+
+.foco { position: absolute; inset: 0; }
+.desk .foco {
+  background:
+    repeating-conic-gradient(from 0deg at 50% 52%, var(--tinta) 0deg .5deg, transparent .5deg 2.2deg),
+    repeating-conic-gradient(from 1deg at 50% 52%, var(--tinta) 0deg 1.1deg, transparent 1.1deg 6.3deg);
+  -webkit-mask-image: radial-gradient(ellipse 560px 190px at 50% 52%, transparent 40%, #000 100%);
+          mask-image: radial-gradient(ellipse 560px 190px at 50% 52%, transparent 40%, #000 100%);
+}
+.mob .foco {
+  background:
+    repeating-conic-gradient(from 0deg at 50% 52%, var(--tinta) 0deg .6deg, transparent .6deg 2.6deg),
+    repeating-conic-gradient(from 1deg at 50% 52%, var(--tinta) 0deg 1.2deg, transparent 1.2deg 7deg);
+  -webkit-mask-image: radial-gradient(ellipse 230px 70px at 50% 52%, transparent 35%, #000 100%);
+          mask-image: radial-gradient(ellipse 230px 70px at 50% 52%, transparent 35%, #000 100%);
+}
+.p4 .titulo { position: absolute; z-index: 2; background: var(--tinta); color: var(--claro); font-family: "Anton"; }
+.p4 .titulo b { color: var(--ac); font-weight: 400; }
+.desk .p4 .titulo { left: 62px; top: 56px; transform: rotate(-2deg) skewX(-10deg); font-size: 33px; letter-spacing: .1em; padding: 6px 26px 4px 20px; box-shadow: 6px 6px 0 var(--ac); }
+.mob .p4 .titulo { left: 14px; top: 16px; transform: rotate(-1.5deg) skewX(-10deg); font-size: 14.5px; letter-spacing: .08em; padding: 4px 14px 2px 12px; box-shadow: 3px 3px 0 var(--ac); }
+
+.habs { position: absolute; z-index: 5; display: flex; justify-content: center; }
+.desk .habs { left: 44px; top: 126px; width: 928px; gap: 26px; }
+.mob .habs { left: 7px; top: 53px; width: 348px; gap: 7px; }
+.hab { position: relative; background: var(--caixa); border-style: solid; border-color: var(--tinta); color: var(--tinta); }
+.hab .ic { flex: none; border-radius: 50%; background: var(--tinta); display: grid; place-items: center; color: var(--claro); }
+.hab .ic svg { stroke: var(--claro); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.hab .ic svg .sol { fill: var(--claro); }
+/* O padding-top com margem negativa deixa os acentos (CAFÉ, MÚSICA) dentro da caixa do overflow, sem mexer no layout */
+.hab h3 { margin: -.3em 0 0; padding-top: .3em; font-family: "Anton"; font-weight: 400; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hab h3 small { display: block; font-family: "Zen Kaku Gothic New"; font-weight: 900; color: var(--ac); }
+.hab .nv { position: absolute; color: var(--ac); background: var(--tinta); line-height: 1.1; }
+.hab p { margin: 0; line-height: 1.1; color: var(--tinta); }
+
+.desk .hab { flex: 1 1 0; max-width: 292px; border-width: 5px; box-shadow: 8px 8px 0 var(--tinta); padding: 14px 18px 12px; }
+.desk .hab:nth-child(1) { transform: rotate(-1.6deg); }
+.desk .hab:nth-child(2) { transform: translateY(14px) rotate(1.2deg); }
+.desk .hab:nth-child(3) { transform: translateY(2px) rotate(-1deg); }
+.desk .hab .linha { display: flex; align-items: center; gap: 12px; }
+.desk .hab .ic { width: 54px; height: 54px; }
+.desk .hab .ic svg { width: 34px; height: 34px; }
+.desk .hab h3 { font-size: 41px; line-height: 1; letter-spacing: .04em; }
+.desk .hab h3 small { font-size: 13px; letter-spacing: .3em; margin-top: 2px; }
+.desk .hab p { margin-top: 8px; font-size: 20.5px; }
+.desk .hab .nv { right: 14px; top: -17px; font-size: 13px; letter-spacing: 3px; padding: 3px 8px 2px 10px; }
+.desk .hab .nv::before { content: "NV.MÁX"; font-family: "Anton"; color: var(--claro); font-size: 11px; margin-right: 8px; letter-spacing: .12em; }
+
+.mob .hab { flex: 1 1 0; max-width: 112px; height: 44px; border-width: 3px; box-shadow: 3px 3px 0 var(--tinta); padding: 3px 6px; display: flex; align-items: center; gap: 6px; }
+.mob .hab:nth-child(1) { transform: rotate(-1.4deg); }
+.mob .hab:nth-child(2) { transform: translateY(2px) rotate(1deg); }
+.mob .hab:nth-child(3) { transform: translateY(-3px) rotate(-1deg); }
+.mob .hab .linha { display: contents; }
+.mob .hab .ic { width: 28px; height: 28px; }
+.mob .hab .ic svg { width: 18px; height: 18px; }
+.mob .hab .tx { min-width: 0; }
+.mob .hab h3 { font-size: 18px; line-height: 1; letter-spacing: .03em; }
+.mob .hab h3 small { font-size: 11px; letter-spacing: .12em; margin-top: 2px; line-height: 1; }
+.mob .hab p { display: none; }
+.mob .hab .nv { right: 4px; top: -15px; font-size: 10px; letter-spacing: 1px; padding: 2px 4px 1px 5px; }
+
+/* ================= 5 · Trilha sonora ================= */
+
+.p5 { background: color-mix(in srgb, var(--fundo-tela) 70%, var(--papel)); }
+.p5 .tela-fundo { opacity: .16;
+  -webkit-mask-image: linear-gradient(110deg, transparent 30%, #000); mask-image: linear-gradient(110deg, transparent 30%, #000); }
+.tag { position: absolute; z-index: 4; background: var(--tinta); color: var(--claro); font-family: "Anton"; transform: skewX(-12deg); }
+.tag span { display: inline-block; transform: skewX(12deg); }
+.tag i { font-style: normal; color: var(--ac); }
+.desk .tag { left: 50px; top: 16px; font-size: 21px; letter-spacing: .16em; padding: 5px 16px 3px 14px; box-shadow: 5px 5px 0 var(--ac); }
+.mob .tag { left: 14px; top: 16px; font-size: 13px; letter-spacing: .14em; padding: 3px 10px 1px 9px; box-shadow: 3px 3px 0 var(--ac); }
+
+.p5 .titulo-m { position: absolute; font-family: "Anton"; line-height: 1; text-transform: uppercase; white-space: nowrap; color: var(--tinta); }
+.p5 .titulo-m span { display: block !important; overflow: hidden; text-overflow: ellipsis; }
+.desk .p5 .titulo-m { left: 52px; top: 63px; font-size: 38px; letter-spacing: .03em; width: 312px; }
+.mob .p5 .titulo-m { left: 14px; top: 43px; font-size: 22px; letter-spacing: .02em; width: 186px; }
+.p5 .artista { position: absolute; line-height: 1; color: var(--tinta); white-space: nowrap; }
+.p5 .artista b { font-weight: 400; background: var(--tinta); color: var(--claro); }
+.p5 .artista span { display: inline-block; max-width: 220px; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
+.desk .p5 .artista { left: 54px; top: 106px; font-size: 24px; }
+.desk .p5 .artista b { padding: 1px 8px 0; margin-right: 6px; font-size: 18px; }
+.mob .p5 .artista { left: 15px; top: 68px; font-size: 16px; }
+.mob .p5 .artista b { padding: 1px 5px 0; margin-right: 5px; font-size: 12px; }
+.mob .p5 .artista span { max-width: 110px; }
+
+/* Botões do player: quadrados de bordas grossas */
+.ctl { position: absolute; border-style: solid; border-color: var(--tinta); background: var(--caixa); color: var(--tinta); display: grid; place-items: center; transform: rotate(-2deg); padding: 0; }
+.ctl svg { fill: var(--tinta); }
+.ctl.play { background: var(--ac); transform: rotate(2deg); }
+.ctl.play svg { fill: var(--claro); stroke: var(--tinta); stroke-width: 1.6; stroke-linejoin: round; }
+.desk .ctl { top: 140px; width: 50px; height: 50px; border-width: 5px; box-shadow: 5px 5px 0 var(--tinta); }
+.desk .ctl svg { width: 22px; height: 22px; }
+.desk .ctl.play { top: 133px; width: 58px; height: 58px; }
+.desk .ctl.play svg { width: 26px; height: 26px; }
+.desk .ctl:last-of-type { top: 144px; width: 44px; height: 44px; }
+.mob .ctl { top: 52px; width: 38px; height: 38px; border-width: 3px; box-shadow: 3px 3px 0 var(--tinta); }
+.mob .ctl svg { width: 16px; height: 16px; }
+.mob .ctl.play { top: 46px; width: 46px; height: 46px; }
+.mob .ctl.play svg { width: 20px; height: 20px; }
+
+/* Barra de progresso como linha de ação: o traço cresce com a música e termina numa seta */
+.acao { position: absolute; }
+.desk .acao { left: 52px; top: 142px; width: 270px; height: 26px; }
+.mob .acao { left: 46px; top: 90px; width: 124px; height: 14px; }
+.acao .trilho { position: absolute; left: 0; right: 0; background: repeating-linear-gradient(90deg, var(--tinta) 0 8px, transparent 8px 15px); opacity: .3; }
+.desk .acao .trilho { top: 11px; height: 3px; }
+.mob .acao .trilho { top: 6px; height: 2px; }
+.acao .fill { position: absolute; left: 0; background: var(--tinta); }
+.desk .acao .fill { top: 8px; height: 9px; }
+.mob .acao .fill { top: 4px; height: 5px; }
+.acao .fill::before { content: ""; position: absolute; left: 0; width: 70%; background: var(--tinta); }
+.desk .acao .fill::before { top: -7px; height: 2.5px; box-shadow: 0 20px 0 var(--tinta); }
+.mob .acao .fill::before { top: -4px; height: 1.6px; box-shadow: 0 11px 0 var(--tinta); }
+.acao .seta { position: absolute; background: var(--tinta); clip-path: polygon(0 0, 100% 50%, 0 100%, 24% 50%); }
+.acao .seta::after { content: ""; position: absolute; inset: 0; background: var(--ac); clip-path: polygon(10% 24%, 80% 50%, 10% 76%, 27% 50%); }
+.desk .acao .seta { right: -26px; top: -8px; width: 34px; height: 26px; }
+.mob .acao .seta { right: -15px; top: -5px; width: 20px; height: 14px; }
+.tempo { position: absolute; font-family: "Anton"; letter-spacing: .08em; color: var(--tinta); }
+.desk .tempo { font-size: 14px; }
+.mob .tempo { font-size: 11px; }
+
+/* Notinhas flutuando perto da etiqueta: só se mexem enquanto toca */
+.nota-s { position: absolute; color: var(--tinta); }
+.nota-s.n1 { transform: rotate(12deg); }
+.nota-s.n2 { transform: rotate(-10deg); }
+.nota-s.n3 { transform: rotate(8deg); }
+.nota-s.verm { color: var(--ac); }
+.xs-tocando .nota-s { animation: nota-sobe 1.8s ease-in-out infinite; }
+.xs-tocando .nota-s.n2 { animation-delay: -.6s; }
+.xs-tocando .nota-s.n3 { animation-delay: -1.2s; }
+@keyframes nota-sobe { 0%, 100% { translate: 0 0; } 50% { translate: 2px -7px; } }
+.xs-tocando .acao .seta { animation: seta-bate .5s steps(2, jump-none) infinite; }
+@keyframes seta-bate { 0% { translate: 0 0; } 100% { translate: 3px 0; } }
+.xs-tocando .p1 .linhas, .xs-tocando .p6 .linhas { animation: vibra .35s steps(2, jump-none) infinite; }
+@keyframes vibra { 0% { translate: 0 0; } 100% { translate: 1.5px -1px; } }
+
+/* ================= 6 · Instagram e status ================= */
+
+.p6 .linhas { position: absolute; inset: 0; }
+.desk .p6 .linhas {
+  background:
+    repeating-conic-gradient(from 0deg at 76% 52%, var(--claro) 0deg .5deg, transparent .5deg 2.1deg),
+    repeating-conic-gradient(from .9deg at 76% 52%, var(--claro) 0deg 1.2deg, transparent 1.2deg 5.4deg);
+  -webkit-mask-image: radial-gradient(ellipse 130px 100px at 76% 52%, transparent 30%, #000 100%);
+          mask-image: radial-gradient(ellipse 130px 100px at 76% 52%, transparent 30%, #000 100%);
+}
+.mob .p6 .linhas {
+  background:
+    repeating-conic-gradient(from 0deg at 76% 50%, var(--claro) 0deg .6deg, transparent .6deg 2.4deg),
+    repeating-conic-gradient(from .9deg at 76% 50%, var(--claro) 0deg 1.3deg, transparent 1.3deg 6deg);
+  -webkit-mask-image: radial-gradient(ellipse 80px 50px at 76% 50%, transparent 30%, #000 100%);
+          mask-image: radial-gradient(ellipse 80px 50px at 76% 50%, transparent 30%, #000 100%);
+}
+.ig { position: absolute; z-index: 3; background: var(--caixa); color: var(--tinta); border-style: solid; border-color: var(--tinta); transform: rotate(-3deg); display: flex; align-items: center; }
+.ig > span { min-width: 0; }
+.ig small { display: block; font-family: "Anton"; color: var(--ac); }
+.ig b { display: block !important; font-family: "Anton"; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.desk .ig { left: 44px; top: 50px; border-width: 5px; box-shadow: 7px 7px 0 var(--ac); padding: 10px 16px 8px 12px; gap: 10px; max-width: 262px; }
+.desk .ig svg { flex: none; width: 34px; height: 34px; }
+.desk .ig small { font-size: 11px; letter-spacing: .24em; }
+.desk .ig b { font-size: 29px; letter-spacing: .03em; line-height: 1.05; }
+.mob .ig { left: 12px; top: 22px; border-width: 3px; box-shadow: 4px 4px 0 var(--ac); padding: 5px 12px 4px 8px; gap: 8px; max-width: 176px; }
+.mob .ig svg { flex: none; width: 26px; height: 26px; }
+.mob .ig small { font-size: 11px; letter-spacing: .2em; line-height: 1.1; }
+.mob .ig b { font-size: 21px; letter-spacing: .02em; line-height: 1.05; }
+.sfx-ping { position: absolute; z-index: 3; color: var(--claro); paint-order: stroke fill; transform: rotate(-5deg); }
+.sfx-ping small { font-family: "Bangers"; letter-spacing: .12em; margin-left: 8px; }
+.desk .sfx-ping { left: 44px; bottom: 26px; font-size: 38px; -webkit-text-stroke: 7px var(--tinta); text-shadow: 4px 4px 0 var(--ac); }
+.desk .sfx-ping small { font-size: 24px; -webkit-text-stroke: 5px var(--tinta); }
+.mob .sfx-ping { left: 16px; bottom: 10px; font-size: 18px; -webkit-text-stroke: 4px var(--tinta); text-shadow: 2px 2px 0 var(--ac); }
+
+/* Estrela de impacto "ONLINE!" */
+.burst { position: absolute; z-index: 4; }
+.burst svg { position: absolute; inset: 0; overflow: visible; }
+.burst span { position: absolute; inset: 0; display: grid; place-items: center; font-family: "Bangers"; letter-spacing: .04em; color: #fff; paint-order: stroke fill; transform: rotate(-9deg); }
+.e-fundo { fill: var(--claro); stroke: var(--claro); stroke-width: 8; }
+.e-cor { fill: var(--ac); stroke: var(--tinta); stroke-width: 6; stroke-linejoin: miter; }
+.desk .burst { left: 276px; top: 18px; width: 232px; height: 190px; }
+.desk .burst span { font-size: 49px; -webkit-text-stroke: 7px var(--tinta); }
+.mob .burst { left: 192px; top: 4px; width: 168px; height: 92px; }
+.mob .burst span { font-size: 27px; -webkit-text-stroke: 4px var(--tinta); }
+.mob .e-fundo { stroke-width: 5; }
+.mob .e-cor { stroke-width: 4; }
+/* Offline: estrela apagada */
+.burst.xs-off .e-cor { fill: var(--apagado); }
+/* Sem status no xat: o quadro fica só com o Instagram, no meio */
+.p6.sem-status .ig { left: 50%; margin-left: -140px; }
+.mob .p6.sem-status .ig { margin-left: -88px; }
+.p6.sem-status .sfx-ping { left: auto; right: 44px; }
+.mob .p6.sem-status .sfx-ping { right: 24px; }
+
+/* ================= Margens da página ================= */
+
+.num-pag { position: absolute; left: 0; text-align: center; font-family: "Anton"; z-index: 10; width: 100%; color: var(--tinta); }
+.num-pag i { font-style: normal; color: var(--ac); }
+.desk .num-pag { top: 858px; font-size: 18px; letter-spacing: .4em; }
+.mob .num-pag { top: 806px; font-size: 14px; letter-spacing: .4em; }
+.marcas { position: absolute; inset: 0; z-index: 10; pointer-events: none; stroke: var(--tinta); }
+.lateral { position: absolute; z-index: 10; writing-mode: vertical-rl; font-family: "Anton"; text-transform: uppercase; font-size: 11px; letter-spacing: .38em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--tinta); opacity: .8; }
+.lateral b { color: var(--ac); font-weight: 400; }
+.lateral { left: 9px; top: 140px; transform: rotate(180deg); max-height: 420px; }
+.lateral-d { left: auto; right: 9px; top: 460px; transform: none; max-height: 380px; }
+
+/* Selo no canto: embaixo no celular, fora dos quadros */
+.xs-mobile .xs-marca { top: auto; bottom: 8px; right: 8px; }
+
+/* ================= Movimento ================= */
+/* Só transform, opacity e as propriedades translate/rotate/scale. A página parada (sem animação) é a mesma de sempre. */
+
+/* Cada quadro entra de um lado diferente (--dx, --dy em px no desktop; no celular vale a metade) e na sua vez (--i) */
+.desk { --k: 1; }
+.mob { --k: .5; }
+.p1, .p1 + .moldura { --i: 0; --dx: -70; --dy: 0; }
+.p2, .p2 + .moldura { --i: 1; --dx: 0; --dy: -50; }
+.p3, .p3 + .moldura { --i: 2; --dx: 50; --dy: -40; }
+.p4, .p4 + .moldura { --i: 3; --dx: 80; --dy: 0; }
+.p5, .p5 + .moldura { --i: 4; --dx: -30; --dy: 50; }
+.p6, .p6 + .moldura { --i: 5; --dx: 50; --dy: 50; }
+
+/* Linhas de velocidade do retrato pulsam devagar, sempre */
+.p1 .linhas { animation: m-pulso 3s ease-in-out infinite; }
+@keyframes m-pulso { 0%, 100% { scale: 1; opacity: 1; } 50% { scale: 1.03; opacity: .86; } }
+/* Com música, a vibração entra junto com o pulso */
+.xs-tocando .p1 .linhas { animation: m-pulso 3s ease-in-out infinite, vibra .35s steps(2, jump-none) infinite; }
+/* Selo ONLINE! balança de leve */
+.burst { animation: m-balanca 2.8s ease-in-out infinite; }
+@keyframes m-balanca { 0%, 100% { rotate: -2.5deg; } 50% { rotate: 2.5deg; } }
+
+/* Retrato clicável */
+.p1[data-impacto] { cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; }
+.p1[data-impacto]:focus-visible + .moldura polygon { stroke: var(--ac); }
+.clarao {
+  position: absolute; inset: 0; z-index: 4; opacity: 0; pointer-events: none;
+  background: radial-gradient(circle at 60% 38%, #fff 0%, rgba(255, 255, 255, .65) 22%, transparent 60%);
+}
+.mob .clarao { background: radial-gradient(circle at 74% 36%, #fff 0%, rgba(255, 255, 255, .65) 22%, transparent 60%); }
+.sfx-impacto { position: absolute; z-index: 9; opacity: 0; pointer-events: none; line-height: 1; text-align: center; rotate: -8deg; }
+.sfx-impacto span { display: block; letter-spacing: -.04em; paint-order: stroke fill; }
+.sfx-impacto .f { position: absolute; left: 0; right: 0; top: 0; color: var(--ac); }
+.sfx-impacto .b { color: var(--claro); }
+.sfx-impacto small {
+  display: block; font-family: "Bangers", Impact, sans-serif; color: var(--claro); paint-order: stroke fill; letter-spacing: .08em;
+}
+.desk .sfx-impacto { left: 18px; top: 232px; }
+.desk .sfx-impacto span { font-size: 156px; }
+.desk .sfx-impacto .b { -webkit-text-stroke: 34px var(--claro); }
+.desk .sfx-impacto .f { -webkit-text-stroke: 12px var(--tinta); }
+.desk .sfx-impacto small { font-size: 84px; -webkit-text-stroke: 10px var(--tinta); text-shadow: 5px 5px 0 var(--ac); margin-top: -14px; }
+.mob .sfx-impacto { left: 4px; top: 112px; }
+.mob .sfx-impacto span { font-size: 66px; }
+.mob .sfx-impacto .b { -webkit-text-stroke: 16px var(--claro); }
+.mob .sfx-impacto .f { -webkit-text-stroke: 6px var(--tinta); }
+.mob .sfx-impacto small { font-size: 34px; -webkit-text-stroke: 5px var(--tinta); text-shadow: 3px 3px 0 var(--ac); margin-top: -6px; }
+
+/* Clique: o quadro treme, as linhas explodem com um clarão e o efeito sonoro aparece */
+.p1.impacto, .p1.impacto + .moldura { animation: m-treme 450ms linear; }
+html .p1.impacto .linhas { animation: m-explode 650ms ease-out; }
+.p1.impacto .clarao { animation: m-clarao 420ms ease-out; }
+.p1.impacto .sfx-impacto { animation: m-sfx 720ms cubic-bezier(.2, 1.3, .4, 1) both; }
+/* O ドン de sempre cede o lugar ao ドーン! */
+.p1.impacto .sfx-don { animation: m-cede 720ms linear both; }
+@keyframes m-cede { 0%, 100% { opacity: 1; } 8%, 88% { opacity: 0; } }
+@keyframes m-treme {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  10% { translate: calc(-7px * var(--k)) calc(3px * var(--k)); rotate: -.5deg; }
+  22% { translate: calc(6px * var(--k)) calc(-4px * var(--k)); rotate: .5deg; }
+  34% { translate: calc(-5px * var(--k)) calc(-3px * var(--k)); rotate: -.3deg; }
+  46% { translate: calc(5px * var(--k)) calc(3px * var(--k)); rotate: .3deg; }
+  60% { translate: calc(-3px * var(--k)) calc(2px * var(--k)); }
+  76% { translate: calc(2px * var(--k)) calc(-1px * var(--k)); }
+}
+@keyframes m-explode {
+  0% { scale: 1; opacity: 1; }
+  22% { scale: 1.5; opacity: .45; }
+  100% { scale: 1; opacity: 1; }
+}
+@keyframes m-clarao { 0% { opacity: 0; } 18% { opacity: .9; } 100% { opacity: 0; } }
+@keyframes m-sfx {
+  0% { opacity: 0; scale: .3; rotate: -22deg; }
+  16% { opacity: 1; scale: 1.25; rotate: -6deg; }
+  28% { scale: 1; rotate: -8deg; }
+  80% { opacity: 1; scale: 1.04; }
+  100% { opacity: 0; scale: 1.1; }
+}
+
+/* Entrada: antes de começar os quadros ficam escondidos; depois entram um a um */
+html.manga-prep .painel, html.manga-prep .moldura, html.manga-prep .lateral, html.manga-prep .num-pag, html.manga-prep .marcas { opacity: 0; }
+html.manga-entra .painel, html.manga-entra .moldura {
+  animation: m-entra 460ms cubic-bezier(.2, 1.35, .4, 1) both;
+  animation-delay: calc(var(--i) * 120ms);
+}
+html.manga-entra .lateral, html.manga-entra .num-pag, html.manga-entra .marcas { animation: m-fade 400ms ease-out 800ms both; }
+html.manga-entra .sfx-don { animation: m-chega 520ms cubic-bezier(.2, 1.2, .4, 1) 420ms both; }
+html.manga-entra .logo { animation: m-chega 560ms cubic-bezier(.2, 1.2, .4, 1) 560ms both; }
+html.manga-entra .balao-fala { animation: m-pop 420ms cubic-bezier(.2, 1.4, .4, 1) 700ms both; transform-origin: 20% 90%; }
+html.manga-entra .pensa { animation: m-pop 400ms cubic-bezier(.2, 1.4, .4, 1) 780ms both; transform-origin: 20% 90%; }
+html.manga-entra .sfx-vert { animation: m-fade 380ms ease-out 760ms both; }
+@keyframes m-entra {
+  0% { opacity: 0; scale: .94; translate: calc(var(--dx) * var(--k) * 1px) calc(var(--dy) * var(--k) * 1px); }
+  100% { opacity: 1; scale: 1; translate: 0 0; }
+}
+@keyframes m-chega {
+  0% { opacity: 0; scale: .2; rotate: -25deg; }
+  55% { opacity: 1; scale: 1.2; rotate: 5deg; }
+  100% { opacity: 1; scale: 1; rotate: 0deg; }
+}
+@keyframes m-pop { 0% { opacity: 0; scale: .5; } 100% { opacity: 1; scale: 1; } }
+@keyframes m-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Quem prefere menos movimento: sem entrada, sem pulso e sem tremor; o clique só realça o contorno e mostra o efeito sonoro parado */
+@media (prefers-reduced-motion: reduce) {
+  html .p1 .linhas, html.xs-tocando .p1 .linhas, html .p6 .linhas, .burst, .nota-s, .acao .seta,
+  html.manga-entra .painel, html.manga-entra .moldura, html.manga-entra .sfx-don, html.manga-entra .logo,
+  html.manga-entra .balao-fala, html.manga-entra .pensa, html.manga-entra .sfx-vert, html.manga-entra .lateral,
+  html.manga-entra .num-pag, html.manga-entra .marcas,
+  .p1.impacto, .p1.impacto + .moldura, html .p1.impacto .linhas, .p1.impacto .clarao, .p1.impacto .sfx-impacto, .p1.impacto .sfx-don { animation: none !important; }
+  html.manga-prep .painel, html.manga-prep .moldura, html.manga-prep .lateral, html.manga-prep .num-pag, html.manga-prep .marcas { opacity: 1; }
+  .p1.impacto .sfx-impacto { opacity: 1; }
+  .p1.impacto .sfx-don { opacity: 0; }
+  .p1.impacto + .moldura polygon { stroke: var(--ac); }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Cinema</title>
+  <!-- Faixa de filme: cena em tela larga com barras pretas de cima e de baixo; a moldura é um fotograma com perfurações
+       (quadrado) ou um carretel (redondo). -->
+  <link rel="stylesheet" href="_base.css">
+  <link rel="stylesheet" href="../core/cores.css">
+  <style>
+    :root, [data-cor="original"] { --bg: #050505; --ink: #f2efe9; --barra: #f2efe9; --furo: #f2efe9; --fotograma: #0a0a0a; --fio: rgba(242,239,233,.55); }
+    [data-cor^="pastel-"] { --bg: var(--p-bg); --ink: var(--p-ink); --barra: var(--p-act); --furo: var(--p-bg2); --fotograma: var(--p-dk); --fio: rgba(255,255,255,.5); }
+    html, body { background: var(--bg); }
+    .tudo { background: var(--bg); }
+
+    /* cena em tela larga */
+    .cena { filter: brightness(1.18); position: absolute; left: 0; right: 0; top: 5px; bottom: 5px; overflow: hidden; background: #222 50% 62% / cover no-repeat; }
+    .cena::before { content: ""; position: absolute; inset: 0; }
+    .cena::after { content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.42) 0, rgba(0,0,0,.34) 215px, rgba(0,0,0,.12) 290px, rgba(0,0,0,0) 330px),
+        radial-gradient(ellipse at 60% 50%, transparent 55%, rgba(0,0,0,.5)); }
+    [data-cor="masculino"] .cena { filter: grayscale(1) contrast(1.15) brightness(1.15); }
+    [data-cor="feminino"] .cena::before { background: rgba(255,110,160,.4); mix-blend-mode: soft-light; z-index: 1; }
+    [data-cor="feminino-2"] .cena::before { background: rgba(120,80,255,.45); mix-blend-mode: soft-light; z-index: 1; }
+    [data-cor^="pastel-"] .cena { filter: brightness(1.6) saturate(.85); }
+    [data-cor^="pastel-"] .cena::before { background: var(--p-ac); opacity: .32; z-index: 1; }
+    [data-cor^="pastel-"] .cena::after { background:
+        linear-gradient(90deg, rgba(20,30,45,.28) 0, rgba(20,30,45,.2) 215px, rgba(20,30,45,.03) 290px, rgba(20,30,45,0) 330px),
+        radial-gradient(ellipse at 60% 50%, transparent 60%, rgba(0,0,0,.22)); }
+
+    /* trilha de reprodução, discreta, no lado direito */
+    .trilha { position: absolute; left: 238px; top: 77px; width: 118px; height: 2px; background: rgba(255,255,255,.28); border-radius: 1px; box-shadow: 0 0 3px rgba(0,0,0,.5); }
+    .trilha i { position: absolute; left: 0; top: 0; height: 2px; width: 44px; background: var(--barra); border-radius: 1px; }
+    [data-cor="original"] .trilha i, [data-cor="masculino"] .trilha i { background: #f2efe9; }
+    [data-cor="feminino"] .trilha i { background: #ffd6e2; }
+    [data-cor="feminino-2"] .trilha i { background: #e6dcff; }
+    [data-cor^="pastel-"] .trilha i { background: #fff; }
+    .play { position: absolute; left: 216px; top: 70px; width: 16px; height: 16px; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; box-shadow: 0 0 3px rgba(0,0,0,.4); }
+    .play::after { content: ""; position: absolute; left: 6px; top: 4px; border-left: 5px solid rgba(255,255,255,.7); border-top: 3px solid transparent; border-bottom: 3px solid transparent; }
+
+    /* moldura: fotograma */
+    .moldura { filter: drop-shadow(0 1px 3px rgba(0,0,0,.6)); }
+    .moldura svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .moldura .redondo { display: none; }
+    .redonda .moldura .redondo { display: block; }
+    .redonda .moldura .quadrado { display: none; }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="cena" id="cena"></div>
+    <div class="moldura" id="moldura">
+      <svg class="quadrado" viewBox="0 0 84 84" id="sq"></svg>
+      <svg class="redondo" viewBox="0 0 84 84" id="rd"></svg>
+    </div>
+  </div>
+  <script src="_base.js"></script>
+  <script>
+    XB.pronto.then(function (d) {
+      var NS = "http://www.w3.org/2000/svg";
+      function el(p, n, a) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; }
+      document.getElementById("cena").style.backgroundImage = "url('" + '../clientes/exemplo/estrada-deserto.jpg' + "')";
+      // Quadrado: fotograma preto com perfurações nos quatro lados
+      var sq = document.getElementById("sq");
+      el(sq, "rect", { width: 84, height: 84, rx: 2.5, style: "fill:var(--fotograma)" });
+      el(sq, "rect", { x: .35, y: .35, width: 83.3, height: 83.3, rx: 2.2, fill: "none", style: "stroke:var(--fio)", "stroke-width": .6 });
+      var n = 11, passo = 6.6, ini = 84 / 2 - (n - 1) * passo / 2;
+      for (var i = 0; i < n; i++) {
+        var c = ini + i * passo;
+        el(sq, "rect", { x: 1, y: c - 1.7, width: 2, height: 3.4, rx: .6, style: "fill:var(--furo)" });
+        el(sq, "rect", { x: 81, y: c - 1.7, width: 2, height: 3.4, rx: .6, style: "fill:var(--furo)" });
+        el(sq, "rect", { x: c - 1.7, y: 1, width: 3.4, height: 2, rx: .6, style: "fill:var(--furo)" });
+        el(sq, "rect", { x: c - 1.7, y: 81, width: 3.4, height: 2, rx: .6, style: "fill:var(--furo)" });
+      }
+      // Redondo: carretel, com furos em anel
+      var rd = document.getElementById("rd");
+      el(rd, "circle", { cx: 42, cy: 42, r: 42, style: "fill:var(--fotograma)" });
+      el(rd, "circle", { cx: 42, cy: 42, r: 41.6, fill: "none", style: "stroke:var(--fio)", "stroke-width": .6 });
+      for (var j = 0; j < 20; j++) {
+        var a = j / 20 * Math.PI * 2;
+        el(rd, "ellipse", { cx: 42 + 40 * Math.cos(a), cy: 42 + 40 * Math.sin(a), rx: 1.1, ry: 1.7, transform: "rotate(" + (a * 180 / Math.PI + 90) + " " + (42 + 40 * Math.cos(a)) + " " + (42 + 40 * Math.sin(a)) + ")", style: "fill:var(--furo)" });
+      }
+      XB.pronto2();
+    });
+  </script>
+</body>
+</html>

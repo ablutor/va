@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Capa de disco</title>
+  <!-- Fundo em degradê com um vinil grande à direita; a moldura é a capa do disco (borda na cor de destaque, com o vinil
+       aparecendo atrás) ou, no avatar redondo, o próprio vinil com o selo em volta da foto. -->
+  <link rel="stylesheet" href="_base.css">
+  <link rel="stylesheet" href="../core/cores.css">
+  <style>
+    :root, [data-cor="original"]   { --bg: #14100f; --bg2: #3a1714; --ink: #f4ece4; --ac: #e8342a; --tint: var(--ac); }
+    [data-cor="masculino"]  { --bg: #0d1117; --bg2: #13284a; --ink: #e8eef7; --ac: #2f7fe8; }
+    [data-cor="feminino"]   { --bg: #140d11; --bg2: #3d1530; --ink: #fbe9f1; --ac: #ff4f9a; }
+    [data-cor="feminino-2"] { --bg: #100d16; --bg2: #2a1c47; --ink: #efe8fb; --ac: #9b6bff; }
+    :root { --tint: var(--ac); --vinil: #111; --vinil-2: #1c1c1c; --selo: var(--ac); --sombra: rgba(0,0,0,.6); --miolo: var(--bg); --fio-moldura: rgba(0,0,0,.35); }
+    [data-cor^="pastel-"] { --bg: var(--p-bg); --bg2: var(--p-bg2); --ink: var(--p-ink); --ac: var(--p-ac);
+      --tint: color-mix(in srgb, var(--p-ac) 60%, #fff); --vinil: var(--p-dk); --vinil-2: color-mix(in srgb, var(--p-dk) 85%, #fff);
+      --selo: var(--tint); --sombra: rgba(0,0,0,.2); --miolo: var(--p-bg2); --fio-moldura: rgba(0,0,0,.18); }
+    html, body { background: var(--bg) radial-gradient(ellipse at 30% 50%, var(--bg2), var(--bg) 65%) no-repeat; }
+    .tudo { background: radial-gradient(ellipse at 30% 50%, var(--bg2), var(--bg) 65%); }
+
+    .vinil { position: absolute; border-radius: 50%;
+      background:
+        conic-gradient(from 20deg, transparent 0 30deg, rgba(255,255,255,.10) 55deg, transparent 80deg, transparent 200deg, rgba(255,255,255,.10) 235deg, transparent 260deg, transparent 360deg),
+        repeating-radial-gradient(circle, var(--vinil) 0 1.4px, var(--vinil-2) 1.4px 2.8px);
+      box-shadow: 0 6px 14px var(--sombra), inset 0 0 0 1px rgba(255,255,255,.07); }
+    .vinil::after { content: ""; position: absolute; left: 50%; top: 50%; border-radius: 50%; background: var(--selo) radial-gradient(circle, var(--bg) 0 2.2px, transparent 2.7px); }
+    /* vinil grande da direita (cortado pela borda) */
+    .grande { left: 262px; top: -26px; width: 152px; height: 152px; }
+    .grande::after { width: 52px; height: 52px; margin: -26px; }
+    /* vinil que aparece atrás da capa quadrada */
+    .vinil.atras { left: 21px; top: 6px; width: 84px; height: 84px; box-shadow: 0 3px 7px var(--sombra), inset 0 0 0 1px rgba(255,255,255,.3); background: repeating-radial-gradient(circle, var(--vinil-2) 0 1.4px, color-mix(in srgb, var(--vinil-2) 70%, #fff) 1.4px 2.8px); }
+    .redonda .atras { display: none; }
+
+    /* trilha fina de reprodução */
+    .trilha { position: absolute; left: 216px; top: 80px; width: 40px; height: 3px; border-radius: 2px; background: color-mix(in srgb, var(--ink) 16%, transparent); }
+    .trilha i { display: block; height: 3px; width: 16px; border-radius: 2px; background: var(--ac); }
+    [data-cor^="pastel-"] .trilha i { background: var(--p-act); }
+
+    /* moldura: capa do disco */
+    .moldura { background: var(--tint); box-shadow: 0 3px 8px var(--sombra); border-radius: 2px; }
+    .moldura::before { content: ""; position: absolute; inset: 3px; background: var(--miolo); border-radius: inherit; box-shadow: 0 0 0 1px var(--fio-moldura); }
+    .redonda .moldura, .moldura.redonda { border-radius: 50%; background: repeating-radial-gradient(circle, var(--vinil) 0 1.1px, var(--vinil-2) 1.1px 2.2px); box-shadow: 0 3px 8px var(--sombra), inset 0 0 0 1px rgba(255,255,255,.1); }
+    .redonda .moldura::before { inset: 3px; background: var(--miolo); box-shadow: 0 0 0 1.5px var(--selo); }
+    /* brilho do vinil sobre o anel de sulcos */
+    .moldura::after { content: ""; position: absolute; inset: 0; border-radius: inherit; display: none; background: conic-gradient(from 20deg, transparent 0 30deg, rgba(255,255,255,.22) 55deg, transparent 80deg, transparent 200deg, rgba(255,255,255,.22) 235deg, transparent 260deg); }
+    .redonda .moldura::after { display: block; }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="vinil grande"></div>
+    <div class="vinil atras"></div>
+    <div class="moldura" id="moldura"></div>
+  </div>
+  <script src="_base.js"></script>
+  <script>XB.pronto.then(function () { XB.pronto2(); });</script>
+</body>
+</html>

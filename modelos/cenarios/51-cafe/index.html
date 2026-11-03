@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Café</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../../core/cores.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- A foto do café, desfocada, cobre a tela atrás do cartão -->
+  <div class="xs-fundo fundo"></div>
+
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <div class="cartao">
+      <div class="vista">
+        <span class="mono a">café da esquina · mesa 4</span>
+        <span class="mono b">15h30 · garoa lá fora</span>
+        <span class="mono c">dois cappuccinos, por favor</span>
+        <span class="mono d" data-xs-se="local" data-xs="local"></span>
+      </div>
+      <div class="colunas">
+        <div class="col">
+          <div class="quem"><div class="foto ph" data-xs-bg="fotos.perfil"></div><div class="mono mudo">cliente<br>da casa</div></div>
+          <h1><span data-xs="nome">Albert</span><i>.</i></h1>
+          <div class="mono id">
+            <button type="button" data-xs-se="xat" data-copiar>ID <span data-xs="xat"></span></button>
+            <span class="on" data-xs-se="online" hidden>● online</span>
+            <a data-xs-se="instagram" data-xs-link="instagramUrl">@<span data-xs="instagram"></span></a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mono mudo">cardápio de mim</div>
+          <p class="bio" data-xs="frase"></p>
+          <blockquote class="citacao" data-xs-se="citacao.texto"><span data-xs="citacao.texto"></span><small data-xs="citacao.autor"></small></blockquote>
+        </div>
+        <div class="col player" data-xs-player>
+          <div class="mono mudo tocando"><span>tocando no café</span><span>♪</span></div>
+          <div class="musica"><b data-xs="musica.titulo"></b><span data-xs="musica.artista"></span></div>
+          <div class="relogio"><b data-xs-tempo>0:00</b>/ <span data-xs-duracao>0:00</span></div>
+          <div class="barra"><i data-xs-barra></i></div>
+          <span class="xs-controles">
+            <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+            <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+              <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+              <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+            </button>
+            <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <div class="vista">
+      <span class="mono a">café da esquina · mesa 4</span>
+      <span class="mono d" data-xs-se="local" data-xs="local"></span>
+    </div>
+    <div class="corpo">
+      <div class="quem">
+        <div class="foto ph" data-xs-bg="fotos.perfil"></div>
+        <div>
+          <h1><span data-xs="nome">Albert</span><i>.</i></h1>
+          <div class="mono id">
+            <button type="button" data-xs-se="xat" data-copiar>ID <span data-xs="xat"></span></button>
+            <span class="on" data-xs-se="online" hidden>● online</span>
+            <a data-xs-se="instagram" data-xs-link="instagramUrl">@<span data-xs="instagram"></span></a>
+          </div>
+        </div>
+      </div>
+      <p class="bio" data-xs="frase"></p>
+      <blockquote class="citacao" data-xs-se="citacao.texto"><span data-xs="citacao.texto"></span><small data-xs="citacao.autor"></small></blockquote>
+    </div>
+    <div class="player" data-xs-player>
+      <div class="musica"><b data-xs="musica.titulo"></b><span data-xs="musica.artista"></span></div>
+      <div class="relogio"><b data-xs-tempo>0:00</b>/ <span data-xs-duracao>0:00</span></div>
+      <div class="barra"><i data-xs-barra></i></div>
+      <span class="xs-controles">
+        <button class="xs-pular" type="button" data-xs-anterior aria-label="Música anterior"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM19 5v14L9 12z"/></svg></button>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <button class="xs-pular" type="button" data-xs-proxima aria-label="Próxima música"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM5 5v14l10-7z"/></svg></button>
+      </span>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

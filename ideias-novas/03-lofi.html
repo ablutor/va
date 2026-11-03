@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Marina Costa · Madrugada lo-fi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;width:1920px;height:900px;overflow:hidden;background:#120d2e}
+  *{box-sizing:border-box}
+  body{position:relative;font-family:"Quicksand",system-ui,sans-serif;color:#f3e9ff}
+  svg.layer{position:absolute;left:0;top:0;width:1920px;height:900px;display:block}
+  .abs{position:absolute}
+
+  /* ---------- Polaroids ---------- */
+  .quadro{position:absolute;left:348px;top:98px;width:304px;height:384px;box-sizing:border-box;padding:15px;transform:rotate(-1.2deg);
+    background:linear-gradient(145deg,#6a4529,#3b2415 55%,#52341e);border-radius:3px;
+    box-shadow:0 20px 32px rgba(4,2,20,.62),0 3px 5px rgba(0,0,0,.5),inset 0 0 0 2px rgba(255,205,150,.20),inset 0 0 0 6px rgba(0,0,0,.30),inset 0 0 0 7px rgba(255,205,150,.10)}
+  .quadro .mat{position:relative;height:100%;box-sizing:border-box;padding:22px 22px 0;background:#eee4d0;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.22),inset 0 4px 10px rgba(0,0,0,.28)}
+  .quadro .foto{position:relative;height:252px;overflow:hidden;background:#3b2f63;box-shadow:0 0 0 1px rgba(0,0,0,.35),0 0 0 4px #e5d9c1}
+  .quadro .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 24%;display:block;filter:saturate(.9) contrast(1.04) brightness(.96) sepia(.1)}
+  .quadro .foto::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,176,110,.20),rgba(88,56,170,.30));mix-blend-mode:soft-light}
+  .quadro .foto::before{content:"";position:absolute;inset:0;z-index:2;box-shadow:inset 0 0 18px rgba(30,10,60,.45);pointer-events:none}
+  .quadro .nome{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:"Caveat",cursive;font-weight:700;font-size:34px;line-height:1;color:#4a3a63}
+  .quadro .nome small{display:block;margin-top:2px;font-family:"Quicksand",sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#8d7aa8}
+  .quadro .vidro{position:absolute;inset:15px;z-index:4;pointer-events:none;
+    background:linear-gradient(118deg,rgba(255,255,255,.17) 0,rgba(255,255,255,.06) 24%,transparent 25%,transparent 52%,rgba(255,255,255,.07) 53%,transparent 66%)}
+  .quadro .luz{position:absolute;left:-30px;right:-30px;top:-44px;height:300px;z-index:3;pointer-events:none;
+    background:radial-gradient(ellipse 60% 100% at 50% 0,rgba(255,214,140,.38),rgba(255,190,110,.10) 55%,transparent 75%);mix-blend-mode:screen}
+  .quadro .lamp{position:absolute;left:50%;top:-38px;width:210px;height:44px;margin-left:-105px;z-index:5;filter:drop-shadow(0 4px 3px rgba(0,0,0,.5))}
+  .quadro .prego{position:absolute;left:50%;top:-62px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f5e1b0,#9b7440);z-index:5}
+
+  /* ---------- Neon ---------- */
+  .neon{left:40px;top:372px;transform:rotate(-5deg);transform-origin:0 50%}
+  .neon .t{font-family:"Pacifico",cursive;font-size:82px;line-height:1.1;color:#ffe3f3;
+    text-shadow:0 0 3px #fff,0 0 8px #ff9bd6,0 0 20px #ff4fb4,0 0 42px #ff2f9f,0 0 90px #ff2f9f}
+  .neon .t.off{position:absolute;left:0;top:0;color:transparent;-webkit-text-stroke:2px rgba(255,160,215,.45);text-shadow:none}
+  .neon svg{position:absolute;left:0;top:0;overflow:visible}
+
+  /* ---------- Post-it ---------- */
+  .postit{left:664px;top:372px;width:196px;height:178px;padding:30px 20px 12px;transform:rotate(-3.5deg);
+    background:linear-gradient(170deg,#ffe98a 0%,#ffd95c 100%);color:#5a3d12;
+    font-family:"Caveat",cursive;font-weight:700;font-size:34px;line-height:1.02;
+    box-shadow:0 10px 16px rgba(6,3,24,.5),0 1px 2px rgba(0,0,0,.35)}
+  .postit::before{content:"";position:absolute;left:50%;top:-12px;width:80px;height:24px;margin-left:-40px;transform:rotate(2deg);
+    background:rgba(255,250,235,.55);box-shadow:0 1px 3px rgba(0,0,0,.25)}
+  .postit::after{content:"";position:absolute;right:0;bottom:0;width:30px;height:30px;
+    background:linear-gradient(315deg,rgba(0,0,0,.20) 0%,rgba(0,0,0,0) 50%),linear-gradient(315deg,#f3dc7a 50%,transparent 50%);}
+  .postit small{display:block;margin-top:6px;font-size:21px;font-weight:500;color:#8a6420;letter-spacing:.2px}
+
+  /* ---------- Pill cidade ---------- */
+  .pill{left:44px;top:34px;height:42px;padding:0 20px 0 14px;display:flex;align-items:center;gap:10px;border-radius:30px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.20);backdrop-filter:blur(8px);
+    box-shadow:0 6px 18px rgba(0,0,0,.3);font-weight:600;font-size:15px;letter-spacing:.3px;color:#e9ddff}
+  .pill b{color:#ffcf8a;font-weight:700}
+
+  /* ---------- Rádio ---------- */
+  .radio{left:48px;top:500px;width:446px;height:208px;border-radius:22px 22px 14px 14px;padding:14px 16px 14px 16px;
+    background:linear-gradient(180deg,#6a4f9a 0%,#4b3a7c 40%,#3a2c63 100%);
+    box-shadow:0 2px 0 #8f78c4 inset,0 -6px 14px rgba(0,0,0,.35) inset,0 18px 24px rgba(3,1,18,.6);
+    border:1px solid rgba(190,165,255,.25)}
+  .radio::before{content:"";position:absolute;left:30px;right:30px;top:-12px;height:14px;border-radius:10px 10px 0 0;
+    background:linear-gradient(180deg,#8f78c4,#5b4690);box-shadow:0 -2px 6px rgba(0,0,0,.3)}
+  .radio .top{display:flex;align-items:center;justify-content:space-between;height:22px;font-size:11.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:#e7d8ff;opacity:.92}
+  .radio .live{display:flex;align-items:center;gap:6px;color:#ff9cc4}
+  .radio .live i{width:8px;height:8px;border-radius:50%;background:#ff5d9c;box-shadow:0 0 8px #ff3d86,0 0 16px #ff3d86}
+  .radio .row{display:flex;gap:14px;margin-top:6px}
+  .grille{width:112px;height:112px;border-radius:50%;flex:none;position:relative;
+    background:radial-gradient(circle,#1e1540 0 1.6px,transparent 2px) 0 0/9px 9px,radial-gradient(circle at 40% 35%,#52418a,#2b2050);
+    box-shadow:inset 0 3px 10px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.2)}
+  .grille::after{content:"";position:absolute;inset:6px;border-radius:50%;border:2px solid rgba(255,255,255,.08)}
+  .visor{flex:1;height:112px;border-radius:12px;padding:11px 14px 9px;position:relative;overflow:hidden;
+    background:linear-gradient(180deg,#2a1a14,#1a0f10);border:2px solid #20163f;
+    box-shadow:inset 0 0 22px rgba(255,150,40,.28),inset 0 2px 8px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.18)}
+  .visor::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.12) 0,rgba(255,255,255,0) 40%);pointer-events:none}
+  .visor .ti{font-weight:700;font-size:16.5px;color:#ffc46b;text-shadow:0 0 8px rgba(255,160,50,.8);white-space:nowrap;letter-spacing:.2px}
+  .visor .ar{font-size:12.5px;font-weight:600;color:#d98f4a;margin-top:1px;text-shadow:0 0 6px rgba(255,140,40,.6)}
+  .eq{position:absolute;right:13px;top:12px;display:flex;gap:3px;align-items:flex-end;height:30px}
+  .eq i{width:4px;border-radius:2px;background:linear-gradient(0deg,#ff8f3a,#ffd27a);box-shadow:0 0 6px rgba(255,150,50,.8)}
+  .prog{position:absolute;left:14px;right:14px;bottom:12px;font-size:11px;font-weight:700;color:#d98f4a;display:flex;align-items:center;gap:8px}
+  .prog .bar{flex:1;height:4px;border-radius:3px;background:rgba(255,160,60,.22);position:relative}
+  .prog .bar i{position:absolute;left:0;top:0;bottom:0;width:41%;border-radius:3px;background:linear-gradient(90deg,#ff8f3a,#ffcf7a);box-shadow:0 0 8px rgba(255,150,50,.9)}
+  .prog .bar i::after{content:"";position:absolute;right:-4px;top:-3px;width:10px;height:10px;border-radius:50%;background:#ffe3a8;box-shadow:0 0 8px #ffb04a}
+  .btns{display:flex;align-items:center;gap:12px;margin-top:12px;padding-left:2px}
+  .btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+    background:linear-gradient(180deg,#8a73c4,#4f3d86);box-shadow:0 3px 0 #2d2056,0 5px 8px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.35)}
+  .btn.play{width:46px;height:46px;background:linear-gradient(180deg,#ffc977,#f08a3a);box-shadow:0 3px 0 #a14f1c,0 6px 12px rgba(0,0,0,.5),0 0 18px rgba(255,160,60,.45),inset 0 1px 0 rgba(255,255,255,.6)}
+  .btn svg{display:block}
+  .sp{flex:1}
+  .knob{width:34px;height:34px;border-radius:50%;background:conic-gradient(from 20deg,#6d57a8,#a58fe0,#5b4690,#7f69bb,#6d57a8);box-shadow:0 3px 6px rgba(0,0,0,.5),inset 0 0 0 3px rgba(30,20,70,.55);position:relative}
+  .knob::after{content:"";position:absolute;left:50%;top:4px;width:3px;height:10px;margin-left:-1.5px;border-radius:2px;background:#ffd9a0;transform-origin:50% 13px;transform:rotate(40deg)}
+  .vol{font-size:10px;font-weight:700;letter-spacing:1.2px;color:#cdb9f5;text-align:center;margin-top:2px}
+
+  /* ---------- Gaveta: adesivos e plaqueta ---------- */
+  .st{position:absolute;display:flex;align-items:center;gap:12px;height:70px;padding:0 28px 0 11px;border-radius:36px;background:#fdf8ee;color:#3d2c63;font-weight:700;font-size:25px;
+      border:3px solid #fff;box-shadow:0 0 0 1px rgba(60,40,110,.25),0 6px 10px rgba(0,0,0,.45);letter-spacing:.2px}
+  .st .ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center}
+  .plate{left:1020px;top:762px;width:360px;height:108px;border-radius:10px;padding:14px 20px;
+    background:linear-gradient(135deg,#f0d8a0 0%,#c9a465 45%,#e8cf93 70%,#b58f4f 100%);
+    box-shadow:0 8px 14px rgba(0,0,0,.5),inset 0 0 0 2px rgba(255,255,255,.35),inset 0 0 0 5px rgba(120,80,20,.25);color:#3b2810}
+  .plate .nm{font-family:"Pacifico",cursive;font-size:34px;line-height:1.1}
+  .plate .ig{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;margin-top:6px;letter-spacing:.3px}
+  .plate .on{position:absolute;right:20px;bottom:17px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#3b2810}
+  .plate .on i{width:9px;height:9px;border-radius:50%;background:#4dff9a;box-shadow:0 0 0 2px rgba(0,0,0,.25),0 0 10px #3dff8a}
+  .plate .scr{position:absolute;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3cf,#7a5420)}
+
+  /* selo */
+  .selo{position:absolute;right:16px;bottom:14px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);color:#ffe3a8;font-size:17px;backdrop-filter:blur(4px);opacity:.9}
+</style>
+</head>
+<body>
+
+<!-- ================= CAMADA 1: parede, janela, mesa ================= -->
+<svg class="layer" id="back" viewBox="0 0 1920 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b1546"/><stop offset=".6" stop-color="#241a57"/><stop offset="1" stop-color="#1a1240"/>
+    </linearGradient>
+    <pattern id="stripes" width="64" height="10" patternUnits="userSpaceOnUse">
+      <rect width="32" height="10" fill="rgba(255,255,255,.028)"/>
+    </pattern>
+    <pattern id="dots" width="48" height="48" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="1.6" fill="rgba(200,180,255,.07)"/><circle cx="36" cy="36" r="1.6" fill="rgba(200,180,255,.07)"/>
+    </pattern>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0829"/><stop offset=".45" stop-color="#25175a"/><stop offset=".78" stop-color="#6a3a8c"/><stop offset="1" stop-color="#d56f8e"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a5a3c"/><stop offset=".5" stop-color="#6e4630"/><stop offset="1" stop-color="#4f3223"/>
+    </linearGradient>
+    <linearGradient id="woodFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5c3b2c"/><stop offset="1" stop-color="#34211f"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4b3a74"/><stop offset="1" stop-color="#2a1f4d"/>
+    </linearGradient>
+    <radialGradient id="moonGlow"><stop offset="0" stop-color="#fff2c8" stop-opacity=".55"/><stop offset=".4" stop-color="#ffe6a8" stop-opacity=".14"/><stop offset="1" stop-color="#ffe6a8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="horizon" cx=".5" cy="1" r=".7"><stop offset="0" stop-color="#ff8fa8" stop-opacity=".5"/><stop offset="1" stop-color="#ff8fa8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="drop" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".3" stop-color="#cfd9ff" stop-opacity=".18"/><stop offset="1" stop-color="#9fb0ff" stop-opacity=".12"/></radialGradient>
+    <clipPath id="glass"><rect x="1114" y="74" width="702" height="562" rx="4"/></clipPath>
+    <mask id="crescent">
+      <rect x="1500" y="80" width="300" height="200" fill="#000"/>
+      <circle cx="1690" cy="176" r="40" fill="#fff"/>
+      <circle cx="1710" cy="164" r="36" fill="#000"/>
+    </mask>
+    <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="blur2"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+
+  <!-- parede -->
+  <rect width="1920" height="900" fill="url(#wall)"/>
+  <rect width="1920" height="720" fill="url(#stripes)"/>
+  <rect width="1920" height="720" fill="url(#dots)"/>
+  <!-- rodapé / lambri -->
+  <rect y="660" width="1920" height="50" fill="rgba(10,6,36,.35)"/>
+
+  <!-- janela: céu -->
+  <g clip-path="url(#glass)">
+    <rect x="1114" y="74" width="702" height="562" fill="url(#sky)"/>
+    <g id="stars"></g>
+    <circle cx="1690" cy="176" r="130" fill="url(#moonGlow)"/>
+    <g mask="url(#crescent)"><circle cx="1690" cy="176" r="40" fill="#fff6d8"/></g>
+    <circle cx="1675" cy="170" r="3" fill="rgba(0,0,0,.06)"/>
+    <!-- nuvens -->
+    <g fill="#7a5aa8" opacity=".35" filter="url(#blur6)">
+      <ellipse cx="1330" cy="250" rx="120" ry="16"/><ellipse cx="1420" cy="238" rx="80" ry="14"/>
+      <ellipse cx="1620" cy="330" rx="140" ry="14"/><ellipse cx="1220" cy="360" rx="100" ry="12"/>
+    </g>
+    <rect x="1114" y="360" width="702" height="276" fill="url(#horizon)"/>
+    <g id="city"></g>
+    <g id="rain"></g>
+    <!-- gotas no vidro -->
+    <g id="drops"></g>
+    <!-- reflexos -->
+    <polygon points="1150,74 1250,74 1114,300 1114,200" fill="#fff" opacity=".07"/>
+    <polygon points="1290,74 1330,74 1114,520 1114,470" fill="#fff" opacity=".05"/>
+    <polygon points="1620,636 1700,636 1816,420 1816,330" fill="#fff" opacity=".05"/>
+    <!-- reflexo quente da luminária -->
+    <rect x="1114" y="74" width="702" height="562" fill="rgba(255,170,80,.06)"/>
+  </g>
+
+  <!-- moldura -->
+  <g>
+    <rect x="1090" y="50" width="750" height="24" fill="url(#frame)"/>
+    <rect x="1090" y="636" width="750" height="24" fill="url(#frame)"/>
+    <rect x="1090" y="50" width="24" height="610" fill="url(#frame)"/>
+    <rect x="1816" y="50" width="24" height="610" fill="url(#frame)"/>
+    <rect x="1458" y="74" width="14" height="562" fill="url(#frame)"/>
+    <rect x="1114" y="348" width="702" height="14" fill="url(#frame)"/>
+    <path d="M1090 50H1840M1090 74H1840M1090 636H1840" stroke="rgba(190,170,255,.28)" stroke-width="1.2" fill="none"/>
+    <path d="M1114 74V636M1816 74V636M1458 74V636M1472 74V636" stroke="rgba(190,170,255,.18)" stroke-width="1" fill="none"/>
+    <!-- peitoril -->
+    <rect x="1070" y="658" width="790" height="16" rx="3" fill="#5c4a8a"/>
+    <rect x="1070" y="658" width="790" height="3" fill="rgba(255,255,255,.22)"/>
+    <rect x="1070" y="674" width="790" height="10" fill="rgba(0,0,0,.35)"/>
+  </g>
+
+  <!-- mesa: tampo -->
+  <rect x="0" y="684" width="1920" height="40" fill="url(#wood)"/>
+  <g stroke="rgba(30,15,10,.25)" stroke-width="1" fill="none">
+    <path d="M0 696C300 693 700 700 1100 695S1700 699 1920 696"/>
+    <path d="M0 706C400 709 800 703 1200 707S1700 704 1920 708"/>
+    <path d="M0 715C250 713 650 717 1000 714S1600 716 1920 715"/>
+  </g>
+  <rect x="0" y="684" width="1920" height="3" fill="rgba(255,210,160,.28)"/>
+  <rect x="0" y="722" width="1920" height="8" fill="#a06b48"/>
+  <rect x="0" y="722" width="1920" height="2" fill="rgba(255,220,180,.35)"/>
+  <!-- mesa: frente -->
+  <rect x="0" y="730" width="1920" height="170" fill="url(#woodFront)"/>
+  <rect x="0" y="730" width="1920" height="22" fill="rgba(0,0,0,.35)"/>
+  <g fill="#3d2723" stroke="rgba(255,200,150,.25)" stroke-width="1.5">
+    <rect x="36" y="752" width="910" height="136" rx="6"/>
+    <rect x="974" y="752" width="910" height="136" rx="6"/>
+  </g>
+  <g fill="none" stroke="rgba(0,0,0,.25)" stroke-width="2">
+    <rect x="52" y="766" width="878" height="108" rx="3"/>
+    <rect x="990" y="766" width="878" height="108" rx="3"/>
+  </g>
+  <g>
+    <circle cx="491" cy="820" r="13" fill="#d8b46c"/><circle cx="487" cy="816" r="5" fill="#f6e2ae"/>
+    <circle cx="1429" cy="820" r="13" fill="#d8b46c"/><circle cx="1425" cy="816" r="5" fill="#f6e2ae"/>
+    <ellipse cx="491" cy="835" rx="14" ry="3" fill="rgba(0,0,0,.4)"/><ellipse cx="1429" cy="835" rx="14" ry="3" fill="rgba(0,0,0,.4)"/>
+  </g>
+</svg>
+
+<!-- ================= Parede: varal, polaroids, neon, post-it ================= -->
+<svg class="layer" id="wire" viewBox="0 0 1920 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bulb"><stop offset="0" stop-color="#fff3c9"/><stop offset=".35" stop-color="#ffd27a"/><stop offset="1" stop-color="#ffb04a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bulbP"><stop offset="0" stop-color="#ffe0f0"/><stop offset=".35" stop-color="#ff9cc9"/><stop offset="1" stop-color="#ff5fa8" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g id="wireG"></g>
+</svg>
+
+<div class="abs pill"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="#ffe3a8"/></svg>
+  <span>Recife · <b>03:12</b> da manhã</span></div>
+
+<div class="abs neon">
+  <svg width="340" height="140" viewBox="0 0 340 140">
+    
+    <g fill="#8a78c0"><circle cx="16" cy="16" r="4.5"/><circle cx="250" cy="10" r="4.5"/><circle cx="14" cy="104" r="4.5"/><circle cx="236" cy="114" r="4.5"/></g>
+  </svg>
+  <div class="t off">Marina</div>
+  <div class="t">Marina</div>
+  <svg width="340" height="140" viewBox="0 0 340 140">
+    <path d="M18 104C80 116 160 120 240 112" stroke="#ffe3f3" stroke-width="3" fill="none" stroke-linecap="round" style="filter:drop-shadow(0 0 4px #ff9bd6) drop-shadow(0 0 12px #ff3fa8)"/>
+    <path d="M286 22l4.5 11 11 4.5-11 4.5-4.5 11-4.5-11-11-4.5 11-4.5z" fill="#ffe3f3" style="filter:drop-shadow(0 0 4px #ff9bd6) drop-shadow(0 0 12px #ff3fa8)"/>
+  </svg>
+</div>
+
+<div class="abs postit">Sou feita de mar, café e dias de sol.</div>
+
+<div class="quadro">
+  <div class="luz"></div>
+  <svg class="lamp" viewBox="0 0 210 44"><defs><linearGradient id="brassL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5e1b0"/><stop offset="1" stop-color="#a9803f"/></linearGradient></defs>
+    <path d="M105 0V12M105 12C70 12 52 20 44 34M105 12C140 12 158 20 166 34" stroke="#b58d52" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="30" y="30" width="150" height="9" rx="4.5" fill="url(#brassL)"/><ellipse cx="105" cy="40" rx="62" ry="2.5" fill="#ffe3a8" opacity=".9"/></svg>
+  <div class="mat">
+    <div class="foto"><img src="../clientes/exemplo/perfil-feminino.jpg" alt=""></div>
+    <div class="nome">Marina Costa<small>Recife · 03:12</small></div>
+  </div>
+  <div class="vidro"></div>
+</div>
+
+<!-- ================= CAMADA 2: objetos da mesa ================= -->
+<svg class="layer" id="mid" viewBox="0 0 1920 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6fe3ff"/><stop offset=".55" stop-color="#7a8cff"/><stop offset="1" stop-color="#d97bff"/></linearGradient>
+    <linearGradient id="clay" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c26a4a"/><stop offset=".5" stop-color="#e08a62"/><stop offset="1" stop-color="#9c4e38"/></linearGradient>
+    <linearGradient id="mug" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f1e7d6"/><stop offset=".6" stop-color="#d8c8ae"/><stop offset="1" stop-color="#a8977e"/></linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d9b57a"/><stop offset=".5" stop-color="#f5e1b0"/><stop offset="1" stop-color="#b58d52"/></linearGradient>
+    <radialGradient id="bulbGlow"><stop offset="0" stop-color="#fff6d0"/><stop offset=".3" stop-color="#ffd37a"/><stop offset="1" stop-color="#ff9a30" stop-opacity="0"/></radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="steamBlur"><feGaussianBlur stdDeviation="2.4"/></filter>
+    <linearGradient id="vinyl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18122e"/><stop offset=".5" stop-color="#2e2556"/><stop offset="1" stop-color="#120d28"/></linearGradient>
+  </defs>
+
+  <!-- sombras de contato -->
+  <g fill="rgba(10,4,22,.55)" filter="url(#soft)">
+    <ellipse cx="1040" cy="708" rx="130" ry="9"/>
+    <ellipse cx="1393" cy="708" rx="140" ry="8"/>
+    <ellipse cx="1197" cy="708" rx="42" ry="6"/>
+    <ellipse cx="740" cy="708" rx="50" ry="6"/>
+    <ellipse cx="605" cy="709" rx="92" ry="7"/>
+    <ellipse cx="1660" cy="708" rx="118" ry="8"/>
+    <ellipse cx="1850" cy="710" rx="70" ry="8"/>
+  </g>
+
+  <!-- livros -->
+  <g id="books">
+    <rect x="520" y="676" width="170" height="30" rx="3" fill="#2f5b73"/>
+    <rect x="520" y="676" width="170" height="5" fill="rgba(255,255,255,.18)"/>
+    <rect x="526" y="690" width="158" height="4" fill="#e8d9b5" opacity=".85"/>
+    <rect x="534" y="648" width="150" height="28" rx="3" fill="#b0486a"/>
+    <rect x="534" y="648" width="150" height="5" fill="rgba(255,255,255,.2)"/>
+    <rect x="548" y="660" width="26" height="3" fill="#ffd9a0" opacity=".8"/>
+    <rect x="514" y="622" width="160" height="26" rx="3" fill="#d9a95b"/>
+    <rect x="514" y="622" width="160" height="5" fill="rgba(255,255,255,.28)"/>
+    <rect x="522" y="636" width="146" height="3" fill="#6c4a22" opacity=".5"/>
+    <rect x="540" y="598" width="124" height="24" rx="3" fill="#5d4aa3"/>
+    <rect x="540" y="598" width="124" height="5" fill="rgba(255,255,255,.22)"/>
+    <rect x="552" y="609" width="90" height="3" fill="#e2d4ff" opacity=".6"/>
+    <!-- xícara pequena de chá sobre os livros? marcador de página -->
+    <path d="M660 676 l18 0 l0 20 l-9 -7 l-9 7z" fill="#ff7aa8" opacity=".9"/>
+  </g>
+
+  <!-- planta pequena (jiboia) -->
+  <g id="plant1"></g>
+  <path d="M706 660h68l-9 46h-50z" fill="url(#clay)"/>
+  <rect x="702" y="652" width="76" height="14" rx="3" fill="#d27a56"/>
+  <rect x="702" y="652" width="76" height="3" fill="rgba(255,255,255,.3)"/>
+
+  <!-- laptop -->
+  <g id="laptop">
+    <path d="M806 668H1026L1054 706H778z" fill="#3a2f66"/>
+    <path d="M806 668H1026L1030 673H802z" fill="rgba(255,255,255,.18)"/>
+    <path d="M815 680H1017L1030 696H802z" fill="#2a2150"/>
+    <g stroke="rgba(180,160,255,.25)" stroke-width="1.5"><path d="M822 684H1010M818 689H1014M814 694H1018"/></g>
+    <rect x="800" y="536" width="232" height="134" rx="8" fill="#241b4a"/>
+    <rect x="800" y="536" width="232" height="134" rx="8" fill="none" stroke="rgba(190,170,255,.4)" stroke-width="1.5"/>
+    <rect x="808" y="544" width="216" height="118" rx="4" fill="#0e0a26"/>
+    <!-- tela: vídeo lo-fi -->
+    <rect x="808" y="544" width="216" height="118" rx="4" fill="url(#screen)" opacity=".9"/>
+    <rect x="808" y="544" width="216" height="118" rx="4" fill="rgba(20,10,60,.35)"/>
+    <circle cx="975" cy="578" r="12" fill="#fff6d8" opacity=".95"/>
+    <path d="M808 640 L850 612 L885 630 L930 600 L1024 645 V662 H808z" fill="rgba(25,14,70,.85)"/>
+    <path d="M808 650 L860 630 L910 648 L970 625 L1024 655 V662 H808z" fill="rgba(14,8,44,.9)"/>
+    <g fill="#ffd27a"><rect x="868" y="640" width="3" height="4"/><rect x="874" y="644" width="3" height="4"/><rect x="934" y="635" width="3" height="4"/><rect x="990" y="645" width="3" height="4"/></g>
+    <!-- barra de player na tela -->
+    <rect x="818" y="651" width="196" height="3" rx="2" fill="rgba(255,255,255,.35)"/><rect x="818" y="651" width="70" height="3" rx="2" fill="#fff"/>
+    <text x="818" y="566" font-family="Quicksand" font-weight="700" font-size="9" fill="#fff" opacity=".9" letter-spacing="1">lofi beats to relax/study to</text>
+    <circle cx="916" cy="540" r="1.8" fill="#6a5aa0"/>
+    <!-- adesivos na tampa -->
+  </g>
+
+  <!-- caneca -->
+  <g id="mugG">
+    <path d="M1166 654h60l-4 52h-52z" fill="url(#mug)"/>
+    <ellipse cx="1196" cy="654" rx="30" ry="6" fill="#4a2a1c"/>
+    <ellipse cx="1196" cy="654" rx="30" ry="6" fill="none" stroke="#efe2cb" stroke-width="2"/>
+    <path d="M1226 664c20 -4 22 26 -2 30" fill="none" stroke="#d8c8ae" stroke-width="6" stroke-linecap="round"/>
+    <path d="M1172 676h48" stroke="#e86a8f" stroke-width="5" opacity=".85"/>
+    <path d="M1170 688h50" stroke="#e86a8f" stroke-width="3" opacity=".6"/>
+    <g fill="none" stroke="rgba(240,230,255,.5)" stroke-width="5" stroke-linecap="round" filter="url(#steamBlur)">
+      <path d="M1186 640c-12 -14 12 -22 0 -38s12 -26 2 -44"/>
+      <path d="M1204 642c10 -12 -10 -22 2 -34s-8 -24 0 -40"/>
+    </g>
+  </g>
+
+  <!-- gato dormindo -->
+  <g id="cat" transform="translate(1262 632)">
+    <!-- cauda -->
+    <path d="M222 62C262 72 256 22 218 30" fill="none" stroke="#c5774a" stroke-width="15" stroke-linecap="round"/>
+    <path d="M222 62C262 72 256 22 218 30" fill="none" stroke="#8c4f2d" stroke-width="15" stroke-linecap="butt" stroke-dasharray="4 11" opacity=".75"/>
+    <!-- corpo -->
+    <path d="M12 74C-6 40 30 6 100 4C180 0 244 28 234 70C230 76 20 80 12 74z" fill="#d68b55"/>
+    <path d="M14 70C0 44 36 12 100 9C176 6 238 32 230 68C170 74 70 76 14 70z" fill="#e39a62"/>
+    <g stroke="#a65f36" stroke-width="7" stroke-linecap="round" fill="none" opacity=".8">
+      <path d="M112 8c-2 14 -2 26 2 36"/><path d="M142 6c0 16 2 28 8 38"/><path d="M172 8c2 14 6 26 14 34"/><path d="M202 16c4 12 10 22 20 28"/><path d="M82 12c-4 12 -6 22 -4 32"/>
+    </g>
+    <!-- luz da lua no dorso -->
+    <path d="M60 14C110 0 190 0 232 36C190 18 120 14 60 14z" fill="rgba(180,200,255,.35)"/>
+    <!-- patinhas -->
+    <ellipse cx="46" cy="72" rx="20" ry="8" fill="#f2c9a0"/>
+    <ellipse cx="82" cy="74" rx="18" ry="7" fill="#f2c9a0"/>
+    <!-- cabeça -->
+    <g transform="translate(18 14)">
+      <path d="M2 18L8 -10L30 6z" fill="#d68b55"/><path d="M60 8L74 -12L82 14z" fill="#d68b55"/>
+      <path d="M8 14L11 -2L24 8z" fill="#f4b4a4"/><path d="M66 8L72 -3L75 10z" fill="#f4b4a4"/>
+      <ellipse cx="40" cy="34" rx="42" ry="30" fill="#e39a62"/>
+      <path d="M32 6c-1 8 0 14 2 18M44 5c0 8 0 14 -1 18M20 8c1 6 3 11 6 15" stroke="#a65f36" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <ellipse cx="46" cy="44" rx="18" ry="13" fill="#f6d3ae"/>
+      <path d="M16 36q8 7 16 0M50 36q8 7 16 0" stroke="#4a2a22" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <path d="M38 44l5 0-2.5 3.5z" fill="#e88aa0"/>
+      <path d="M41 47.5q-3 4 -7 2M41 47.5q3 4 7 2" stroke="#7a4a3a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <g stroke="rgba(255,240,230,.7)" stroke-width="1.2" fill="none"><path d="M24 46l-22 -3M24 50l-22 4M60 46l22 -3M60 50l22 4"/></g>
+    </g>
+    <!-- zzz -->
+    <g font-family="Quicksand" font-weight="700" fill="#cdbbff" style="filter:drop-shadow(0 0 6px rgba(190,160,255,.8))">
+      <text x="-8" y="-16" font-size="16">z</text><text x="6" y="-34" font-size="22">z</text><text x="24" y="-58" font-size="28">Z</text>
+    </g>
+  </g>
+
+  <!-- vitrola -->
+  <g id="turn">
+    <path d="M1546 686H1774L1790 706H1530z" fill="#33295e"/>
+    <path d="M1546 686H1774L1776 690H1544z" fill="rgba(255,255,255,.25)"/>
+    <rect x="1530" y="700" width="260" height="8" fill="#241b48"/>
+    <rect x="1548" y="650" width="224" height="38" rx="4" fill="#4a3b86" transform="skewX(0)"/>
+    <path d="M1548 650H1772L1790 668H1530z" fill="#6a56ad"/>
+    <ellipse cx="1650" cy="664" rx="86" ry="14" fill="#1a1236"/>
+    <ellipse cx="1650" cy="663" rx="80" ry="12" fill="url(#vinyl)"/>
+    <g fill="none" stroke="rgba(180,160,255,.18)" stroke-width="1"><ellipse cx="1650" cy="663" rx="70" ry="10"/><ellipse cx="1650" cy="663" rx="58" ry="8"/><ellipse cx="1650" cy="663" rx="46" ry="6.5"/></g>
+    <ellipse cx="1650" cy="663" rx="22" ry="3.8" fill="#ff8fb4"/><circle cx="1650" cy="663" r="1.6" fill="#1a1236"/>
+    <path d="M1690 640C1720 640 1740 650 1740 664" stroke="#ccb6ff" stroke-width="0" fill="none"/>
+    <!-- braço -->
+    <circle cx="1744" cy="660" r="8" fill="#8a73c4"/>
+    <path d="M1744 660L1692 658L1678 664" stroke="#d8c8ff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="1672" y="662" width="10" height="5" rx="1.5" fill="#ffc46b"/>
+    <circle cx="1560" cy="676" r="4" fill="#ffc46b"/><circle cx="1574" cy="676" r="4" fill="#ff8fb4"/>
+  </g>
+
+  <!-- planta grande -->
+  <g id="plant2"></g>
+  <path d="M1814 640h84l-8 66h-68z" fill="#e9dcc9"/>
+  <path d="M1814 640h84l-1 8h-82z" fill="#fff3e0"/>
+  <path d="M1822 668h68" stroke="#9a8cc8" stroke-width="5" opacity=".7"/>
+
+  <!-- luminária -->
+  <g id="lamp">
+    <ellipse cx="1106" cy="704" rx="42" ry="9" fill="#2a2150"/>
+    <path d="M1068 704C1068 686 1086 676 1106 676S1144 686 1144 704z" fill="url(#brass)"/>
+    <path d="M1074 698C1080 686 1094 681 1106 681" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none"/>
+    <path d="M1104 680L1056 566" stroke="#8b78bf" stroke-width="7" stroke-linecap="round"/>
+    <path d="M1104 680L1056 566" stroke="#cdbcff" stroke-width="2" stroke-linecap="round" transform="translate(-1.5 0)"/>
+    <path d="M1056 566L1008 392" stroke="#8b78bf" stroke-width="7" stroke-linecap="round"/>
+    <path d="M1056 566L1008 392" stroke="#cdbcff" stroke-width="2" stroke-linecap="round" transform="translate(-1.5 0)"/>
+    <circle cx="1104" cy="680" r="8" fill="url(#brass)"/><circle cx="1056" cy="566" r="9" fill="url(#brass)"/><circle cx="1008" cy="392" r="9" fill="url(#brass)"/>
+    <g transform="translate(1008 392) rotate(20)">
+      <path d="M-15 -12H15L50 50H-50z" fill="#f0d9c0"/>
+      <path d="M-15 -12H15L50 50H-50z" fill="url(#brass)" opacity=".5"/>
+      <path d="M-12 -8L-44 46" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="0" cy="50" rx="50" ry="8" fill="#ffd886"/>
+      <ellipse cx="0" cy="51" rx="34" ry="5" fill="#fff6d0"/>
+    </g>
+    <circle cx="982" cy="441" r="60" fill="url(#bulbGlow)" opacity=".8"/>
+  </g>
+</svg>
+
+<!-- ================= Rádio / player ================= -->
+<div class="abs radio">
+  <div class="top"><span>lofi radio · ao vivo 24/7</span><span class="live"><i></i>ao vivo</span></div>
+  <div class="row">
+    <div class="grille"></div>
+    <div class="visor">
+      <div class="ti">Distance &amp; Pixelated</div>
+      <div class="ar">Jeremy Passion</div>
+      <div class="eq" id="eq"></div>
+      <div class="prog"><span>1:24</span><div class="bar"><i></i></div><span>3:28</span></div>
+    </div>
+  </div>
+  <div class="btns">
+    <div class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M6 5h3v14H6zM20 5v14L10 12z"/></svg></div>
+    <div class="btn play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#4a2208"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg></div>
+    <div class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M18 5h-3v14h3zM4 5v14l10-7z"/></svg></div>
+    <div class="sp"></div>
+    <div class="knob"></div>
+    <div class="knob" style="transform:rotate(-50deg)"></div>
+  </div>
+</div>
+
+<!-- adesivos (gostos) -->
+<div class="st" style="left:70px;top:774px;transform:rotate(-3deg)">
+  <span class="ic" style="background:#bfe9f5"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1d6c8a" stroke-width="2" stroke-linecap="round"><path d="M2 15c2.5-3 5-3 7.5 0s5 3 7.5 0 3-2.5 5-1.5"/><path d="M2 20c2.5-3 5-3 7.5 0s5 3 7.5 0 3-2.5 5-1.5"/><circle cx="17" cy="6" r="3" fill="#ffd36e" stroke="#e8a13a"/></svg></span>Praia</div>
+<div class="st" style="left:258px;top:792px;transform:rotate(2.5deg)">
+  <span class="ic" style="background:#ffd9e4"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a63a68" stroke-width="2" stroke-linejoin="round"><path d="M3 5.5C6 4 9 4.2 12 6c3-1.8 6-2 9-.5V19c-3-1.5-6-1.3-9 .5-3-1.8-6-2-9-.5z"/><path d="M12 6v13.5"/></svg></span>Leitura</div>
+<div class="st" style="left:562px;top:778px;transform:rotate(-2deg)">
+  <span class="ic" style="background:#dcd2ff"><svg width="30" height="30" viewBox="0 0 24 24" fill="#5a3fb0"><path d="M9 17V5l11-2v12" fill="none" stroke="#5a3fb0" stroke-width="2" stroke-linejoin="round"/><circle cx="6.5" cy="17.5" r="3"/><circle cx="17.5" cy="15.5" r="3"/></svg></span>Música</div>
+<!-- adesivos decorativos -->
+<svg class="abs" style="left:770px;top:772px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.5))" width="150" height="100" viewBox="0 0 150 100">
+  <g stroke="#fff" stroke-width="6" stroke-linejoin="round" paint-order="stroke">
+    <path d="M30 14a28 28 0 1 0 28 40A24 24 0 0 1 30 14z" fill="#ffd36e" transform="rotate(-12 40 40)"/>
+    <path d="M104 20l7 17 18 2-14 12 5 18-16-10-16 10 5-18-14-12 18-2z" fill="#ff8fb4" transform="rotate(10 104 44)"/>
+  </g>
+  <circle cx="22" cy="40" r="2" fill="#b58a2a"/>
+</svg>
+<svg class="abs" style="left:1500px;top:770px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.5))" width="360" height="100" viewBox="0 0 360 100">
+  <g stroke="#fff" stroke-width="6" stroke-linejoin="round" paint-order="stroke">
+    <path d="M30 78c-18 0-22-24-6-28 0-18 26-24 36-8 14-6 28 6 22 20 12 2 12 16-4 16z" fill="#bfe9f5" transform="rotate(-4 50 60)"/>
+    <path d="M150 80C100 50 112 18 140 22c8 1 10 8 10 8s2-7 10-8c28-4 40 28-10 58z" fill="#ff7aa8" transform="rotate(6 150 50)"/>
+    <g transform="rotate(-8 240 50)"><ellipse cx="240" cy="62" rx="20" ry="17" fill="#c5a8ff"/><ellipse cx="212" cy="40" rx="8" ry="10" fill="#c5a8ff"/><ellipse cx="232" cy="30" rx="8" ry="10" fill="#c5a8ff"/><ellipse cx="252" cy="30" rx="8" ry="10" fill="#c5a8ff"/><ellipse cx="270" cy="40" rx="8" ry="10" fill="#c5a8ff"/></g>
+    <path d="M326 12l7 18 18 2-14 12 5 18-16-10-16 10 5-18-14-12 18-2z" fill="#ffd36e" transform="rotate(14 326 38)"/>
+  </g>
+</svg>
+
+<!-- plaqueta -->
+<div class="abs plate">
+  <i class="scr" style="left:7px;top:7px"></i><i class="scr" style="right:7px;top:7px"></i><i class="scr" style="left:7px;bottom:7px"></i><i class="scr" style="right:7px;bottom:7px"></i>
+  <div class="on"><i></i>online no xat</div>
+  <div class="nm">Marina Costa</div>
+  <div class="ig"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b2810" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#3b2810"/></svg>@marina.costa</div>
+</div>
+
+<!-- ================= CAMADA 3: luz, vinheta, grão ================= -->
+<svg class="layer" id="front" viewBox="0 0 1920 900" xmlns="http://www.w3.org/2000/svg" style="pointer-events:none">
+  <defs>
+    <linearGradient id="cone" x1=".5" y1="0" x2=".5" y2="1">
+      <stop offset="0" stop-color="#ffd17a" stop-opacity=".62"/><stop offset=".6" stop-color="#ffb457" stop-opacity=".2"/><stop offset="1" stop-color="#ff9a40" stop-opacity=".10"/>
+    </linearGradient>
+    <radialGradient id="wallGlow" cx="960" cy="440" r="520" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffb35a" stop-opacity=".34"/><stop offset=".5" stop-color="#ff8f48" stop-opacity=".10"/><stop offset="1" stop-color="#ff8f48" stop-opacity="0"/></radialGradient>
+    <radialGradient id="deskGlow" cx="900" cy="706" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(900 706) scale(300 40) translate(-900 -706)"><stop offset="0" stop-color="#ffd48a" stop-opacity=".6"/><stop offset="1" stop-color="#ffb05a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="lapGlow" cx="916" cy="610" r="190" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7fd9ff" stop-opacity=".30"/><stop offset="1" stop-color="#7fd9ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="moonSpill" cx="1560" cy="300" r="620" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8ea8ff" stop-opacity=".16"/><stop offset="1" stop-color="#8ea8ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="vig" cx="960" cy="450" r="1100" gradientUnits="userSpaceOnUse"><stop offset=".55" stop-color="#05021a" stop-opacity="0"/><stop offset="1" stop-color="#05021a" stop-opacity=".72"/></radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="7" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.2 -.3"/>
+    </filter>
+    <filter id="blurC"><feGaussianBlur stdDeviation="8"/></filter>
+    <linearGradient id="dim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0526" stop-opacity=".25"/><stop offset="1" stop-color="#0a0526" stop-opacity=".1"/></linearGradient>
+  </defs>
+  <rect width="1920" height="900" fill="url(#dim)"/>
+  <g style="mix-blend-mode:screen">
+    <rect width="1920" height="900" fill="url(#moonSpill)"/>
+    <rect width="1920" height="900" fill="url(#wallGlow)"/>
+    <polygon points="980,432 996,432 1120,706 690,706" fill="url(#cone)" filter="url(#blurC)"/>
+    <polygon points="976,438 990,438 1080,706 730,706" fill="url(#cone)" opacity=".55"/>
+    <ellipse cx="900" cy="708" rx="300" ry="40" fill="url(#deskGlow)"/>
+    <rect width="1920" height="900" fill="url(#lapGlow)"/>
+  </g>
+  <rect width="1920" height="900" fill="url(#vig)"/>
+  <rect width="1920" height="900" filter="url(#grain)" opacity=".16" style="mix-blend-mode:overlay"/>
+</svg>
+
+<div class="selo">✦</div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function mk(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+  var seed=11;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
+  function pick(a){return a[Math.floor(rnd()*a.length)];}
+
+  /* estrelas */
+  var st=document.getElementById('stars');
+  for(var i=0;i<90;i++){
+    var x=1114+rnd()*702,y=74+rnd()*300,r=rnd()<.15?1.8:rnd()*1.1+.4;
+    mk('circle',{cx:x,cy:y,r:r,fill:'#fff',opacity:(.35+rnd()*.6).toFixed(2)},st);
+  }
+  [[1240,130],[1560,120],[1400,230]].forEach(function(p){
+    mk('path',{d:'M'+p[0]+' '+(p[1]-7)+'Q'+p[0]+' '+p[1]+' '+(p[0]+7)+' '+p[1]+'Q'+p[0]+' '+p[1]+' '+p[0]+' '+(p[1]+7)+'Q'+p[0]+' '+p[1]+' '+(p[0]-7)+' '+p[1]+'Q'+p[0]+' '+p[1]+' '+p[0]+' '+(p[1]-7)+'z',fill:'#fff',opacity:.9},st);
+  });
+
+  /* cidade */
+  var city=document.getElementById('city');
+  var layers=[
+    {col:'#3a2a78',min:110,max:230,wmin:26,wmax:56,lit:.10,y:636},
+    {col:'#2a1d62',min:150,max:300,wmin:30,wmax:64,lit:.18,y:636},
+    {col:'#190f42',min:130,max:330,wmin:36,wmax:80,lit:.28,y:636}
+  ];
+  var lc=['#ffc86b','#ffc86b','#ffc86b','#ff9ac8','#8fe3ff','#ffe6a8'];
+  layers.forEach(function(L,li){
+    var x=1114-10;
+    while(x<1816){
+      var w=L.wmin+rnd()*(L.wmax-L.wmin),h=L.min+rnd()*(L.max-L.min);
+      mk('rect',{x:x,y:L.y-h,width:w,height:h,fill:L.col},city);
+      if(rnd()<.25){mk('rect',{x:x+w*.45,y:L.y-h-18,width:2,height:18,fill:L.col},city);}
+      if(rnd()<.2){mk('rect',{x:x+4,y:L.y-h-6,width:w*.4,height:6,fill:L.col},city);}
+      for(var yy=L.y-h+10;yy<L.y-6;yy+=13){
+        for(var xx=x+6;xx<x+w-8;xx+=11){
+          if(rnd()<L.lit){mk('rect',{x:xx,y:yy,width:5,height:7,fill:pick(lc),opacity:(.55+rnd()*.45).toFixed(2)},city);}
+        }
+      }
+      x+=w+(rnd()<.3?rnd()*6:0);
+    }
+  });
+  /* neblina na base */
+  var g=mk('linearGradient',{id:'fog',x1:0,y1:0,x2:0,y2:1},document.querySelector('#back defs'));
+  mk('stop',{offset:0,'stop-color':'#b36bb5','stop-opacity':0},g);mk('stop',{offset:1,'stop-color':'#b36bb5','stop-opacity':.38},g);
+  mk('rect',{x:1114,y:500,width:702,height:136,fill:'url(#fog)'},city);
+
+  /* chuva */
+  var rain=document.getElementById('rain');
+  for(var i=0;i<230;i++){
+    var x=1100+rnd()*760,y=60+rnd()*580,l=14+rnd()*38;
+    mk('line',{x1:x,y1:y,x2:x-l*.22,y2:y+l,stroke:'#cfd8ff','stroke-width':(rnd()<.2?1.5:1),opacity:(.12+rnd()*.28).toFixed(2)},rain);
+  }
+
+  /* gotas no vidro */
+  var dr=document.getElementById('drops');
+  var drops=[];
+  for(var i=0;i<46;i++){
+    var x=1124+rnd()*682,y=90+rnd()*530,r=1.8+rnd()*4.6;
+    drops.push([x,y,r]);
+    if(rnd()<.4){var l=18+rnd()*60;
+      mk('path',{d:'M'+x+' '+(y-l)+'Q'+(x+(rnd()*6-3))+' '+(y-l/2)+' '+x+' '+y,stroke:'rgba(205,220,255,.28)','stroke-width':Math.max(1,r*.45),fill:'none','stroke-linecap':'round'},dr);}
+  }
+  drops.forEach(function(d){
+    mk('ellipse',{cx:d[0],cy:d[1],rx:d[2],ry:d[2]*1.25,fill:'url(#drop)',stroke:'rgba(220,230,255,.45)','stroke-width':.7},dr);
+    mk('circle',{cx:d[0]-d[2]*.3,cy:d[1]-d[2]*.4,r:Math.max(.6,d[2]*.22),fill:'#fff',opacity:.9},dr);
+  });
+  /* bokeh */
+  [[1260,540,16,'#ffc86b'],[1330,500,10,'#ff9ac8'],[1700,560,14,'#8fe3ff'],[1560,520,9,'#ffc86b'],[1180,470,12,'#ff9ac8']].forEach(function(b){
+    mk('circle',{cx:b[0],cy:b[1],r:b[2],fill:b[3],opacity:.12,filter:'url(#blur2)'},dr);
+  });
+
+  /* folhas */
+  function leaf(parent,x,y,ang,len,col,hi){
+    var w=len*.36;
+    var g=mk('g',{transform:'translate('+x+' '+y+') rotate('+ang+')'},parent);
+    mk('path',{d:'M0 0C'+(len*.25)+' '+(-w)+' '+(len*.8)+' '+(-w*.85)+' '+len+' 0C'+(len*.8)+' '+(w*.85)+' '+(len*.25)+' '+w+' 0 0z',fill:col},g);
+    mk('path',{d:'M0 0L'+(len*.96)+' 0',stroke:hi,'stroke-width':1.4,opacity:.55,fill:'none'},g);
+    mk('path',{d:'M'+(len*.2)+' 0L'+(len*.46)+' '+(-w*.62)+'M'+(len*.2)+' 0L'+(len*.46)+' '+(w*.62)+'M'+(len*.48)+' 0L'+(len*.72)+' '+(-w*.5)+'M'+(len*.48)+' 0L'+(len*.72)+' '+(w*.5),stroke:hi,'stroke-width':.9,opacity:.35,fill:'none'},g);
+  }
+  /* jiboia */
+  var p1=document.getElementById('plant1');
+  var cols=['#3f9a7e','#2f7f6c','#52b08f','#2a6a5f'];
+  [[-60,50],[-35,64],[-15,56],[10,60],[35,52],[62,46],[-85,34],[85,30]].forEach(function(a,i){
+    var bx=740,by=654,len=a[1];
+    var rad=a[0]*Math.PI/180;
+    var ex=bx+Math.sin(rad)*len*1.5,ey=by-Math.cos(rad)*len*1.5;
+    mk('path',{d:'M'+bx+' '+by+'Q'+(bx+Math.sin(rad)*len)+' '+(by-len*1.4)+' '+ex+' '+ey,stroke:'#3f9a7e','stroke-width':2.4,fill:'none'},p1);
+    leaf(p1,ex,ey,a[0]-90+ (a[0]>0?30:-30)+ (i%2?20:-20),len*.55,cols[i%4],'#d8ffe9');
+  });
+  /* pendentes caindo do vaso */
+  [[706,666,-30],[774,668,40]].forEach(function(t,i){
+    mk('path',{d:'M'+t[0]+' '+t[1]+'Q'+(t[0]+t[2])+' '+(t[1]+20)+' '+(t[0]+t[2]*.8)+' '+(t[1]+36),stroke:'#2f6f5a','stroke-width':2,fill:'none'},p1);
+    leaf(p1,t[0]+t[2]*.8,t[1]+36,90+(t[2]>0?-20:20),22,cols[i],'#d8ffe9');
+  });
+  /* planta grande */
+  var p2=document.getElementById('plant2');
+  var big=[[-78,170,-12],[-58,230,-4],[-38,300,6],[-20,250,2],[-4,340,0],[14,280,8],[32,330,10],[52,230,6],[72,170,12],[-100,120,-20],[90,120,12],[-46,160,0],[24,170,0]];
+  big.forEach(function(b,i){
+    var bx=1858,by=644,len=b[1],rad=b[0]*Math.PI/180;
+    var ex=bx+Math.sin(rad)*len,ey=by-Math.cos(rad)*len;
+    mk('path',{d:'M'+bx+' '+by+'Q'+(bx+Math.sin(rad)*len*.2)+' '+(by-len*.6)+' '+ex+' '+ey,stroke:'#3aa085','stroke-width':4,fill:'none'},p2);
+    leaf(p2,ex,ey,b[0]-90+b[2]*3,len*.5,pick(['#2f8a73','#3aa085','#27705f','#46b295']),'#e4fff0');
+  });
+
+  /* equalizador */
+  var eq=document.getElementById('eq');
+  [10,18,26,14,30,22,12,24,16,28,8,20].forEach(function(h){var i=document.createElement('i');i.style.height=h+'px';eq.appendChild(i);});
+
+  /* fio de luzes */
+  var nails=[[-10,62],[290,84],[650,74],[1010,90]],sag=84;
+  var wg=document.getElementById('wireG');
+  function bez(p0,c,p2,t){var u=1-t;return [u*u*p0[0]+2*u*t*c[0]+t*t*p2[0],u*u*p0[1]+2*u*t*c[1]+t*t*p2[1]];}
+  var d='M'+nails[0][0]+' '+nails[0][1],mids=[];
+  for(var i=0;i<3;i++){
+    var a=nails[i],b=nails[i+1],c=[(a[0]+b[0])/2,(a[1]+b[1])/2+sag];
+    d+='Q'+c[0]+' '+c[1]+' '+b[0]+' '+b[1];
+    mids.push(bez(a,c,b,.5));
+  }
+  mk('path',{d:d,stroke:'#0f0b26','stroke-width':2.6,fill:'none'},wg);
+  for(var i=0;i<3;i++){
+    var a=nails[i],b=nails[i+1],c=[(a[0]+b[0])/2,(a[1]+b[1])/2+sag];
+    for(var k=1;k<=11;k++){
+      var t=k/12,pt=bez(a,c,b,t);
+      if(Math.abs(pt[0]-mids[i][0])<48&&i<3) {continue;}
+      var col=(k%2)?'bulb':'bulbP';
+      mk('circle',{cx:pt[0],cy:pt[1]+7,r:15,fill:'url(#'+col+')',opacity:.75},wg);
+      mk('ellipse',{cx:pt[0],cy:pt[1]+7,rx:3.2,ry:4.4,fill:(k%2)?'#fff2c4':'#ffd9ec'},wg);
+      mk('rect',{x:pt[0]-2,y:pt[1]-1,width:4,height:4,fill:'#0f0b26'},wg);
+    }
+    mk('circle',{cx:nails[i+1][0],cy:nails[i+1][1],r:4,fill:'#8a78c0'},wg);
+  }
+
+})();
+</script>
+</body>
+</html>

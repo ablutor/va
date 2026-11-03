@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Marina · Aurora Boreal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root{ --verde:#62ffb6; --ciano:#3fd6d0; --rosa:#d77cff; --txt:#effaf7; --dim:#9fc2c0 }
+body{ background:#020812; color:var(--txt); font-family:"DM Sans",sans-serif }
+.vidro{ position:absolute; background:linear-gradient(160deg, rgba(160,255,230,.10), rgba(10,30,40,.35)); border:1px solid rgba(190,255,235,.2);
+  backdrop-filter:blur(18px) saturate(1.3); box-shadow:0 30px 60px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.18) }
+.postal{ left:110px; top:470px; width:600px; padding:34px 38px 32px; border-radius:30px }
+.linha{ display:flex; gap:24px; align-items:center }
+.foto{ width:118px; height:118px; border-radius:50%; padding:3px; flex:none; background:conic-gradient(from 200deg, var(--verde), var(--ciano), var(--rosa), var(--verde)) }
+.foto img{ width:100%; height:100%; border-radius:50%; object-fit:cover; object-position:50% 22%; border:3px solid #06202a; display:block }
+.local{ display:flex; gap:7px; align-items:center; font-size:12.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--verde) }
+.local svg{ width:15px; height:15px }
+h1{ margin:6px 0 0; font:italic 600 74px/1 "Fraunces",serif; letter-spacing:-.02em; color:#f4fffb; text-shadow:0 0 40px rgba(98,255,182,.35) }
+.meta{ margin-top:8px; display:flex; gap:16px; font-size:13.5px; color:var(--dim) }
+.meta span{ display:flex; gap:6px; align-items:center } .meta svg{ width:14px; height:14px }
+.meta .on{ width:8px; height:8px; border-radius:50%; background:var(--verde); box-shadow:0 0 8px var(--verde) }
+.bio{ margin:22px 0 0; font-size:16.5px; line-height:1.65; color:#d3ebe7 }
+.redes{ margin-top:20px; display:flex; gap:10px }
+.redes span{ display:flex; gap:8px; align-items:center; padding:9px 14px; border-radius:12px; background:rgba(255,255,255,.07); font-size:13px; font-weight:600 }
+.redes svg{ width:16px; height:16px }
+
+.player{ right:90px; top:64px; width:470px; height:78px; border-radius:999px; display:flex; align-items:center; gap:16px; padding:0 26px 0 12px }
+.tocar{ width:56px; height:56px; border-radius:50%; background:linear-gradient(140deg, var(--verde), var(--ciano) 55%, var(--rosa)); color:#03201b; display:grid; place-items:center; box-shadow:0 0 30px rgba(98,255,182,.45) }
+.tocar svg{ width:22px; height:22px; margin-left:3px }
+.faixa{ flex:1 } .faixa b{ font-size:14.5px } .faixa span{ display:block; font-size:12px; color:var(--dim); margin:2px 0 8px }
+.barra{ height:4px; border-radius:4px; background:rgba(255,255,255,.14); overflow:hidden } .barra i{ display:block; width:42%; height:100%; background:linear-gradient(90deg, var(--verde), var(--ciano)) }
+.tempo{ font-size:12px; color:var(--dim) }
+
+.citacao{ position:absolute; right:120px; bottom:118px; width:440px; text-align:right; font:italic 400 30px/1.3 "Fraunces",serif; color:rgba(240,255,250,.9); text-shadow:0 2px 20px rgba(0,0,0,.6) }
+.citacao small{ display:block; margin-top:10px; font:600 11.5px "DM Sans"; letter-spacing:.24em; text-transform:uppercase; color:var(--verde); font-style:normal }
+.rotulo{ position:absolute; left:110px; top:70px; font-size:12px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(220,255,245,.7) }
+.rotulo b{ display:block; margin-top:8px; font:italic 400 15px "Fraunces",serif; letter-spacing:0; text-transform:none; color:rgba(220,255,245,.55) }
+</style>
+</head>
+<body>
+<canvas id="ceu" class="fundo"></canvas>
+<div class="rotulo">noite polar · céu limpo<b>a próxima aurora passa às 23h47</b></div>
+
+<div class="vidro player">
+  <div class="tocar"><i data-i="play"></i></div>
+  <div class="faixa"><b>AURORA · Runaway</b><span>tocando no meu perfil</span><div class="barra"><i></i></div></div>
+  <div class="tempo">1:31</div>
+</div>
+
+<div class="vidro postal">
+  <div class="linha">
+    <div class="foto"><img src="../clientes/exemplo/perfil-feminino.jpg" alt=""></div>
+    <div>
+      <div class="local"><i data-i="pin"></i>69° N · céu do norte</div>
+      <h1>Marina</h1>
+      <div class="meta"><span><i class="on"></i>online</span><span>ID 82460885 <i data-i="copy"></i></span></div>
+    </div>
+  </div>
+  <p class="bio">Sou feita de mar, café e dias de sol. Mas confesso que a noite também tem os seus encantos.</p>
+  <div class="redes"><span><i data-i="insta"></i>@marina.costa</span><span><i data-i="heart"></i>1,2 mil</span></div>
+</div>
+
+<div class="citacao">Algumas luzes só aparecem no escuro.<small>— eu, numa noite fria</small></div>
+
+<script src="cosmos.js"></script>
+<script>
+const C = Cosmos; C.icones();
+const { ctx, w, h } = C.tela("#ceu"), H = 590;
+C.gradiente(ctx, w, h, [[0, "#01050d"], [.45, "#04131f"], [.66, "#0a2a33"], [1, "#020812"]]);
+C.estrelas(ctx, w, H, { n: 1100, semente: 6, max: 1.3, cores: ["#ffffff", "#dffcff", "#e8fff4"] });
+C.aurora(ctx, w, h, { cores: ["#5dffb0", "#2fd6c8", "#c46bff"], camadas: [
+  { base: 380, amp: 70, alt: 330, freq: 1 / 900, forca: .9, semente: 2 },
+  { base: 300, amp: 90, alt: 260, freq: 1 / 650, forca: .55, semente: 7 },
+  { base: 450, amp: 40, alt: 200, freq: 1 / 500, forca: .5, semente: 13, janela: x => C.ss(600, 1100, x) },
+] });
+C.brilho(ctx, 1150, 560, 700, "#2fffb0", .12);
+// cordilheira do fundo, com neve, e a da frente, mais escura
+C.montanhas(ctx, w, h, { semente: 3, base: H, amp: 220, freq: 1 / 380, neve: "#b4ddd5", sombra: "#1d3346", forcaNeve: .8, linhaNeve: .5, gradiente: [[0, "#21344a"], [.6, "#0b1825"], [1, "#050c14"]] });
+C.montanhas(ctx, w, h, { semente: 17, base: H, amp: 80, freq: 1 / 240, gradiente: [[0, "#0b1621"], [1, "#03080d"]] });
+// lago congelado espelhando tudo
+ctx.fillStyle = "#020912"; ctx.fillRect(0, H, w, h - H);
+C.reflexo(ctx, w, H, h - H, { alfa: .55, blur: 2.5, cor: "#bfffe8", linhas: 90 });
+const g = ctx.createLinearGradient(0, H, 0, h); g.addColorStop(0, "rgba(2,9,18,0)"); g.addColorStop(1, "rgba(2,9,18,.75)");
+ctx.fillStyle = g; ctx.fillRect(0, H, w, h - H);
+// pinheiros na margem
+const r = C.rng(40);
+ctx.fillStyle = "#01050a";
+for (let i = 0; i < 90; i++) {
+  const x = r() < .5 ? r() * 520 : 1400 + r() * 520, a = 26 + r() * 70, b = H + 6 + r() * 4;
+  ctx.beginPath(); ctx.moveTo(x, b - a);
+  for (let k = 1; k <= 5; k++) { const y = b - a + a * k / 5, l = a * .22 * k / 5 + 3; ctx.lineTo(x + l, y); ctx.lineTo(x + l * .45, y); }
+  ctx.lineTo(x - 1, b);
+  for (let k = 5; k >= 1; k--) { const y = b - a + a * k / 5, l = a * .22 * k / 5 + 3; ctx.lineTo(x - l * .45, y); ctx.lineTo(x - l, y); }
+  ctx.fill();
+}
+ctx.fillRect(0, H, 560, 10); ctx.fillRect(1380, H, 540, 10);
+</script>
+</body>
+</html>

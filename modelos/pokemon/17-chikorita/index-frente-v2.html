@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-cores="original masculino feminino feminino-2">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xatspace · Chikorita</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../core/base.css">
+  <link rel="stylesheet" href="../../_fofinhos/fofinhos.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Desenhos usados mais de uma vez: a pegada e o bichinho -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Pegada de Chikorita: patinha de dinossauro com três dedinhos pontudos -->
+      <symbol id="pegada" viewBox="0 0 100 100">
+        <g fill="currentColor">
+          <path d="M50 52 C64 52 72 64 70 78 C68 90 58 92 50 90 C42 92 32 90 30 78 C28 64 36 52 50 52 Z"/>
+          <path d="M30 56 C22 46 18 34 20 22 C28 30 36 42 40 52 Z"/>
+          <path d="M44 48 C44 34 46 20 50 8 C54 20 56 34 56 48 Z"/>
+          <path d="M70 56 C78 46 82 34 80 22 C72 30 64 42 60 52 Z"/>
+        </g>
+      </symbol>
+
+      <!-- Pele verde-clarinha, folha e brotinhos do pescoço -->
+      <radialGradient id="ck-pele" cx="40%" cy="30%" r="75%">
+        <stop offset="0" stop-color="var(--pele-luz)"/>
+        <stop offset=".55" stop-color="var(--pele)"/>
+        <stop offset="1" stop-color="var(--pele-sombra)"/>
+      </radialGradient>
+      <linearGradient id="ck-folha" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="var(--folha-sombra)"/>
+        <stop offset=".5" stop-color="var(--folha)"/>
+        <stop offset="1" stop-color="var(--folha-luz)"/>
+      </linearGradient>
+      <radialGradient id="ck-broto" cx="40%" cy="30%" r="80%">
+        <stop offset="0" stop-color="var(--folha-luz)"/>
+        <stop offset="1" stop-color="var(--folha-sombra)"/>
+      </radialGradient>
+      <radialGradient id="ck-olho" cx="50%" cy="65%" r="60%">
+        <stop offset="0" stop-color="var(--olho-luz)"/>
+        <stop offset="1" stop-color="var(--olho)"/>
+      </radialGradient>
+      <!-- Contorno fino: encolhe só a borda de fora da silhueta preta -->
+      <filter id="ck-contorno-fino" x="-5%" y="-5%" width="110%" height="110%">
+        <feMorphology operator="erode" radius=".3"/>
+      </filter>
+      <!-- A borda da folha é mais fina no desenho, então encolhe menos -->
+      <filter id="ck-contorno-folha" x="-5%" y="-5%" width="110%" height="110%">
+        <feMorphology operator="erode" radius=".6"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- O bichinho: o fofinhos.js copia este desenho para dentro de cada .bicho -->
+  <template id="bichinho">
+    <svg viewBox="-8 -14 380 400">
+        <!-- folhinhas e pétalas caindo devagar (não recebem clique) -->
+        <g class="folhas" pointer-events="none">
+          <g transform="translate(-50 -60)"><g class="folhinha f1"><path d="M0 -14 C10 -8 10 8 0 14 C-10 8 -10 -8 0 -14 Z" fill="var(--cai1)"/><path d="M0 -11 L0 17" stroke="var(--folha-veia)" stroke-width="1.5" stroke-linecap="round"/></g></g>
+          <g transform="translate(60 -130)"><g class="folhinha f2"><ellipse rx="7" ry="10" fill="var(--cai2)"/></g></g>
+          <g transform="translate(340 -110)"><g class="folhinha f3"><path d="M0 -14 C10 -8 10 8 0 14 C-10 8 -10 -8 0 -14 Z" fill="var(--cai1)"/><path d="M0 -11 L0 17" stroke="var(--folha-veia)" stroke-width="1.5" stroke-linecap="round"/></g></g>
+          <g transform="translate(440 -30)"><g class="folhinha f4"><ellipse rx="7" ry="10" fill="var(--cai2)"/></g></g>
+        </g>
+        <g class="pulo-todo">
+          <g class="corpo-todo" stroke="var(--contorno)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+            <!-- folha grande para a esquerda, presa no alto da cabeça (balança sozinha) -->
+            <g class="folha-cabeca">
+              <path d="M238 86 C234 64 222 46 204 36" fill="none" stroke="var(--folha-sombra)" stroke-width="7"/>
+              <path d="M238 86 C234 64 222 46 204 36" fill="none" stroke="var(--folha)" stroke-width="3.5"/>
+              <path d="M206 34 C150 18 72 56 40 116 C16 162 8 208 12 248 C64 226 124 186 152 132 C172 96 190 62 206 34 Z" fill="url(#ck-folha)"/>
+              <path d="M202 40 C152 92 84 168 16 242" fill="none" stroke="var(--folha-veia)" stroke-width="2.5"/>
+              <path d="M160 74 C140 72 120 76 100 84 M128 110 C108 110 88 116 70 126 M98 150 C80 152 62 160 46 172" fill="none" stroke="var(--folha-veia)" stroke-width="1.5" opacity=".6"/>
+            </g>
+            <!-- perna de trás (direita) -->
+            <path d="M300 286 C332 276 360 290 362 326 C362 356 354 372 342 377 C328 382 312 376 310 362 Z" fill="var(--pele-sombra)"/>
+            <!-- perninhas de trás, entre as da frente -->
+            <path d="M234 318 C250 312 270 312 284 318 L286 368 C276 378 244 378 232 368 Z" fill="var(--pele-sombra)"/>
+            <!-- patas da frente (a barriga cobre o alto delas) -->
+            <path d="M170 296 C164 328 166 356 176 370 C188 382 226 382 236 370 C244 350 244 322 238 296 Z" fill="url(#ck-pele)"/>
+            <path d="M276 296 C270 326 272 354 280 368 C292 380 324 380 334 368 C342 346 340 318 334 292 Z" fill="url(#ck-pele)"/>
+            <!-- cabeça e corpo -->
+            <path d="M238 82 C284 82 314 110 316 152 C318 186 316 208 320 220 C350 236 364 264 362 298 C360 300 344 312 308 312 C272 320 228 320 196 312 C172 306 160 292 164 272 C168 244 180 226 182 206 C180 180 176 150 180 128 C188 100 208 82 238 82 Z" fill="url(#ck-pele)"/>
+            <!-- luz no alto da cabeça e sombra na barriga (sem contorno) -->
+            <g stroke="none" pointer-events="none">
+              <ellipse cx="236" cy="112" rx="34" ry="18" fill="#fff" opacity=".35"/>
+              <ellipse cx="262" cy="296" rx="88" ry="18" fill="var(--pele-sombra)" opacity=".35"/>
+            </g>
+            <!-- unhas -->
+            <g fill="#fff" stroke-width="1.5">
+              <ellipse cx="196" cy="377" rx="5" ry="3"/><ellipse cx="220" cy="377" rx="5" ry="3"/>
+              <ellipse cx="294" cy="376" rx="5" ry="3"/><ellipse cx="318" cy="375" rx="5" ry="3"/>
+            </g>
+            <!-- brotinhos do pescoço, como cones -->
+            <g fill="url(#ck-broto)">
+              <path transform="translate(158 244) rotate(62) scale(1.35)" d="M-12 -4 C-9 -14 9 -14 12 -4 C12 6 5 14 0 20 C-5 14 -12 6 -12 -4Z"/>
+              <path transform="translate(212 254) rotate(8) scale(1.35)" d="M-12 -4 C-9 -14 9 -14 12 -4 C12 6 5 14 0 20 C-5 14 -12 6 -12 -4Z"/>
+              <path transform="translate(256 262) rotate(0) scale(1.35)" d="M-12 -4 C-9 -14 9 -14 12 -4 C12 6 5 14 0 20 C-5 14 -12 6 -12 -4Z"/>
+              <path transform="translate(302 252) rotate(-10) scale(1.35)" d="M-12 -4 C-9 -14 9 -14 12 -4 C12 6 5 14 0 20 C-5 14 -12 6 -12 -4Z"/>
+              <path transform="translate(334 222) rotate(-60) scale(0.85)" d="M-12 -4 C-9 -14 9 -14 12 -4 C12 6 5 14 0 20 C-5 14 -12 6 -12 -4Z"/>
+            </g>
+            <!-- bochechas -->
+            <g stroke="none"><ellipse cx="194" cy="192" rx="12" ry="6" fill="var(--bochecha)" opacity=".45"/><ellipse cx="312" cy="188" rx="8" ry="5" fill="var(--bochecha)" opacity=".45"/></g>
+            <!-- boca aberta -->
+            <path d="M238 174 C252 182 270 182 284 172 C282 196 272 208 261 208 C250 208 240 196 238 174 Z" fill="var(--boca)"/>
+            <path d="M246 194 C254 187 268 187 276 194 C272 204 266 208 261 208 C255 208 249 204 246 194 Z" fill="var(--lingua-luz)" stroke="none"/>
+            <!-- olhos -->
+            <g class="olhos-abertos">
+              <ellipse cx="215" cy="150" rx="18" ry="28" fill="url(#ck-olho)"/>
+              <ellipse cx="300" cy="146" rx="13" ry="26" fill="url(#ck-olho)"/>
+              <g stroke="none">
+                <ellipse cx="215" cy="166" rx="12" ry="9" fill="var(--olho-luz)" opacity=".8"/>
+                <ellipse cx="301" cy="162" rx="8" ry="8" fill="var(--olho-luz)" opacity=".8"/>
+                <ellipse cx="208" cy="138" rx="7" ry="10" fill="#fff"/>
+                <ellipse cx="295" cy="134" rx="5" ry="8" fill="#fff"/>
+                <circle cx="222" cy="164" r="2.5" fill="#fff"/>
+                <circle cx="305" cy="160" r="2" fill="#fff"/>
+              </g>
+            </g>
+            <g class="olhos-felizes" fill="none" stroke-width="4">
+              <path d="M199 154 q16 -16 32 0"/>
+              <path d="M288 150 q12 -14 24 0"/>
+            </g>
+          </g>
+        </g>
+    </svg>
+  </template>
+
+  <!-- Fundo da tela toda, com rastros de pegadas -->
+  <div class="xs-fundo fundo"><div class="pegadas" data-pegadas="6"></div></div>
+
+  <!-- Desktop: desenhado em 1920×900 -->
+  <div class="xs-palco desk" data-largura="1920" data-altura="900">
+    <section class="perfil card">
+      <div class="topo">
+        <div class="foto" data-xs-bg="fotos.perfil"></div>
+        <div>
+          <h1 class="nome" data-xs="nome">Albert</h1>
+          <div class="sobrenome nome" data-xs="sobrenome">Alves</div>
+        </div>
+      </div>
+      <div class="linha-online">
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+      <p class="local" data-xs-se="local">📍 <span data-xs="local"></span></p>
+      <div class="cap">Meu mundinho</div>
+      <ul class="chips" data-gostos style="margin-top:10px"></ul>
+      <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span> ↗</a>
+    </section>
+
+    <div class="cena">
+      <p class="balao" data-balao></p>
+      <button class="bicho" type="button" aria-label="Fazer carinho na Chikorita"></button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="lado">
+      <div class="card carinho">
+        <span class="num" data-carinhos>0</span>
+        <div><span class="cap">Carinhos na Chikorita</span><p>Clica nela para dar mais um ♥</p></div>
+      </div>
+      <div class="card citacao" data-xs-se="citacao.texto">
+        <span class="cap">Frase favorita</span>
+        <p data-xs="citacao.texto"></p>
+        <small>— <span data-xs="citacao.autor"></span></small>
+      </div>
+      <div class="card player" data-xs-player>
+        <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <div class="info">
+          <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+          <div class="barra"><span data-xs-barra></span></div>
+        </div>
+        <span class="eq"><i></i><i></i><i></i><i></i></span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Mobile: desenhado em 390×844 -->
+  <div class="xs-palco xs-palco--mobile mob" data-largura="390" data-altura="844">
+    <div class="cabeca">
+      <div class="foto" data-xs-bg="fotos.perfil"></div>
+      <div>
+        <h1 class="nome" data-xs="nome">Albert</h1>
+        <span class="online" data-xs-se="online">online</span>
+      </div>
+    </div>
+
+    <div class="cena">
+      <p class="balao" data-balao></p>
+      <button class="bicho" type="button" aria-label="Fazer carinho na Chikorita"></button>
+      <div class="chao"></div>
+    </div>
+
+    <section class="perfil card">
+      <div class="cap" style="margin-bottom:8px">Meu mundinho</div>
+      <ul class="chips" data-gostos></ul>
+      <div class="rodape">
+        <div class="carinho"><span class="num" data-carinhos>0</span><p>carinhos ♥</p></div>
+        <a class="insta" data-xs-link="instagramUrl" data-xs-se="instagram">@<span data-xs="instagram"></span></a>
+      </div>
+    </section>
+
+    <div class="card player" data-xs-player>
+      <button class="play" type="button" data-xs-tocar aria-label="Tocar música">
+        <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+        <svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      </button>
+      <div class="info">
+        <b data-xs="musica.titulo"></b><i data-xs="musica.artista"></i>
+        <div class="barra"><span data-xs-barra></span></div>
+      </div>
+      <span class="eq"><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+
+  <script src="../../../core/config.js"></script>
+  <script src="../../../core/xatspace.js"></script>
+  <script src="../../_fofinhos/fofinhos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

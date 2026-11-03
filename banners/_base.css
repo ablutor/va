@@ -1,0 +1,32 @@
+/* Base dos banners de 380×100 (janelinha do perfil no xat). Cada banner NN-modelo.html inclui este arquivo e o _base.js.
+
+   GEOMETRIA (em px da imagem de 380×100; medida em prints do perfil no xat):
+   - O xat mostra o banner ampliado em 5% e corta uns 9 px de cada lado: a faixa útil é de x=9 a x=371.
+   - O xat desenha por cima: o AVATAR da pessoa (quadrado, 76×76, a 19 px da esquerda e a 10 px do topo) e duas ETIQUETAS
+     (o nome e "Online Member", de x≈109 a x≈200, em y≈20–39 e y≈46–64). O fundo dessa zona deve ser calmo.
+   - A MOLDURA é o que o banner desenha em volta do avatar: 84×84 px, a 15 px da esquerda e 6 px do topo (4 px de margem). */
+:root {
+  --av-x: 19px; --av-y: 10px; --av-t: 76px;
+  --mol-x: 15px; --mol-y: 6px; --mol-t: 84px;
+}
+html, body { margin: 0; width: 380px; height: 100px; overflow: hidden; }
+body { position: relative; }
+* { box-sizing: border-box; }
+.tudo { position: absolute; inset: 0; overflow: hidden; }
+
+/* Caixa da moldura: coloque nela (ou use como referência) o desenho da moldura do tema. Com o avatar redondo (?forma=redonda,
+   classe .redonda no html) ela vira círculo (50%): desenhe a moldura para funcionar nas duas formas. */
+.moldura { position: absolute; left: var(--mol-x); top: var(--mol-y); width: var(--mol-t); height: var(--mol-t); }
+.moldura.redonda, .redonda .moldura { border-radius: 50%; }
+
+/* Simulação do que o xat desenha por cima do banner (?previa=1), só para avaliar o desenho */
+#xat { position: absolute; inset: 0; z-index: 1000; }
+#xat .avatar { position: absolute; left: var(--av-x); top: var(--av-y); width: var(--av-t); height: var(--av-t); background: 50% 12% / cover no-repeat; }
+#xat .etiqueta { position: absolute; left: 109px; padding: 0 5px; border-radius: 3px; background: rgba(105, 105, 105, .62); color: #fff; font: 13.3px/19px Arial, Helvetica, sans-serif; white-space: nowrap; text-shadow: 0 0 2px rgba(0, 0, 0, .4); }
+#xat .nome { top: 20px; }
+#xat .status { top: 46px; font-size: 11.4px; line-height: 18px; }
+
+/* Guia (?guia=1): contorno do avatar, da zona das etiquetas e da faixa cortada pelo xat */
+#guia { position: absolute; inset: 0; z-index: 1001; pointer-events: none; }
+#guia i { position: absolute; outline: 1px dashed rgba(255, 0, 80, .9); }
+#guia .corte { top: 0; bottom: 0; width: 9px; background: rgba(255, 0, 80, .25); outline: none; }

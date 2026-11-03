@@ -1,0 +1,518 @@
+/* Modelo 28 · Windows 98
+   A área de trabalho do Windows 98: fundo verde-água, ícones, janelas cinzas em relevo
+   (Visualizador de imagens, Bloco de notas, o player Xatamp e a cópia de arquivos) e barra de tarefas.
+   As janelas são desenhadas aqui, vazias por dentro; só a foto do cliente entra nelas.
+   Cor: original (verde-água 98). Para outra cor, troque as variáveis abaixo. */
+
+:root,
+[data-cor="original"] {
+  --area: #008080;        /* verde-água da área de trabalho */
+  --cinza: #c0c0c0;       /* corpo das janelas e da barra */
+  --luz: #fff;            /* relevo: lado claro */
+  --luz-2: #dfdfdf;
+  --sombra: #808080;      /* relevo: lado escuro */
+  --sombra-2: #0a0a0a;
+  --tit-1: #000080;       /* faixa do título, da esquerda para a direita */
+  --tit-2: #1084d0;
+  --inativo-1: #808080;   /* título de janela sem foco */
+  --inativo-2: #b5b5b5;
+  --inativo-tinta: #dcdcdc;
+  --player-1: #3c3c3c;    /* título do Xatamp */
+  --player-2: #9a9a9a;
+  --tela: #000;           /* visor do Xatamp */
+  --verde: #1fd31f;
+  --progresso: #000080;
+  --aleatorio: #1f6fe0;
+  --tinta: #000;
+  --icone-tinta: #fff;
+}
+
+:root {
+  --xs-marca-cor: #fff;
+  --xs-marca-fundo: var(--tit-1);
+  --xs-marca-destaque: var(--tit-2);
+}
+
+body {
+  background: var(--area);
+  color: var(--tinta);
+  font-family: Tahoma, Verdana, "DejaVu Sans", sans-serif;
+}
+
+.papel {
+  background: var(--area);
+}
+
+/* ---------- Relevo do Windows 98 ---------- */
+
+/* Para fora: janelas e botões */
+.jan,
+.bt98 {
+  background: var(--cinza);
+  box-shadow: inset -1px -1px var(--sombra-2), inset 1px 1px var(--luz-2), inset -2px -2px var(--sombra), inset 2px 2px var(--luz);
+}
+
+/* Para dentro: áreas de conteúdo */
+.moldura,
+.texto,
+.status-barra span,
+.progresso,
+.bandeja {
+  box-shadow: inset 1px 1px var(--sombra), inset -1px -1px var(--luz), inset 2px 2px var(--sombra-2), inset -2px -2px var(--luz-2);
+}
+
+.bt98 {
+  display: grid;
+  place-items: center;
+  color: var(--tinta);
+}
+
+.bt98 svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+/* ---------- Ícones da área de trabalho ---------- */
+
+.icones {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+.icone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: var(--icone-tinta);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.icone span { max-width: 76px; }
+
+.icone svg {
+  width: 36px;
+  height: 36px;
+}
+
+/* ---------- Janela ---------- */
+
+.jan {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+}
+
+.tit {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  padding: 0 2px 0 4px;
+  background: linear-gradient(90deg, var(--tit-1), var(--tit-2));
+  color: #fff;
+  font-weight: 700;
+}
+
+.inativa .tit {
+  background: linear-gradient(90deg, var(--inativo-1), var(--inativo-2));
+  color: var(--inativo-tinta);
+}
+
+.tit-ico {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.tit-t {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tit-bts {
+  display: flex;
+}
+
+/* Minimizar, maximizar e fechar, desenhados em CSS */
+.tit-bts i {
+  position: relative;
+  background: var(--cinza);
+  box-shadow: inset -1px -1px var(--sombra-2), inset 1px 1px var(--luz), inset -2px -2px var(--sombra), inset 2px 2px var(--luz-2);
+}
+
+.tit-bts .b-fec { margin-left: 2px; }
+
+.tit-bts .b-min::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  bottom: 3px;
+  width: 6px;
+  height: 2px;
+  background: #000;
+}
+
+.tit-bts .b-max::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 2px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px solid #000;
+  border-top-width: 2px;
+}
+
+.tit-bts .b-fec::before,
+.tit-bts .b-fec::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.6px;
+  height: var(--xis, 9px);
+  margin: calc(var(--xis, 9px) / -2 - .5px) 0 0 -1.5px;
+  background: #000;
+  transform: rotate(45deg);
+}
+
+.tit-bts .b-fec::after { transform: rotate(-45deg); }
+
+.menu {
+  display: flex;
+  flex: none;
+}
+
+.menu span::first-letter { text-decoration: underline; }
+
+/* ---------- Visualizador de imagens ---------- */
+
+/* O espaço de dentro existe sem a foto: fundo escuro e moldura afundada */
+.moldura {
+  position: relative;
+  flex: 1;
+  background: #1c1c1c;
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+
+.foto {
+  position: absolute;
+  inset: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  object-fit: cover;
+}
+
+.status-barra {
+  display: flex;
+  gap: 2px;
+  flex: none;
+  margin-top: 3px;
+}
+
+.status-barra span {
+  flex: 1;
+  padding: 2px 5px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ---------- Bloco de notas ---------- */
+
+.texto {
+  flex: 1;
+  background: #fff;
+  font-family: "Courier New", Courier, monospace;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+.linhas {
+  display: block;
+  max-width: 43ch;
+}
+
+.cursor {
+  display: inline-block;
+  width: .55em;
+  height: 1.15em;
+  margin-left: 1px;
+  vertical-align: -.2em;
+  background: #000;
+  animation: piscar 1s steps(1) infinite;
+}
+
+@keyframes piscar {
+  50% { opacity: 0; }
+}
+
+/* ---------- Xatamp ---------- */
+
+.xatamp .tit {
+  background: linear-gradient(90deg, var(--player-1), var(--player-2));
+}
+
+.fones { color: #fff; }
+
+.tela {
+  position: relative;
+  flex: none;
+  background: var(--tela);
+  color: var(--verde);
+  font-family: "Courier New", Courier, monospace;
+  overflow: hidden;
+}
+
+/* Triângulo do play, desenhado em CSS */
+.seta {
+  flex: none;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--verde);
+}
+
+.tempo {
+  font-family: "Lucida Console", "DejaVu Sans Mono", monospace;
+  letter-spacing: .12em;
+}
+
+.letreiro {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* O nome da música corre pelo visor enquanto toca */
+.rolar {
+  display: inline-flex;
+  animation: rolar 14s linear infinite;
+  animation-play-state: paused;
+}
+
+.rolar > span { padding-right: .6em; }
+
+.xs-tocando .rolar { animation-play-state: running; }
+
+@keyframes rolar {
+  to { transform: translateX(-50%); }
+}
+
+.eq {
+  display: flex;
+  align-items: flex-end;
+}
+
+.eq i {
+  flex: none;
+  background: linear-gradient(0deg, #2fd82f, #e8e020 55%, #ff3b1f);
+  transform-origin: bottom;
+}
+
+.comandos {
+  display: flex;
+  align-items: center;
+}
+
+.comandos .xs-pular {
+  opacity: 1;
+  color: var(--tinta);
+}
+
+.aleatorio {
+  margin-left: auto;
+  color: #fff;
+  background: var(--aleatorio);
+}
+
+/* ---------- Cópia de arquivos ---------- */
+
+.copia-corpo p { white-space: nowrap; }
+
+.copia-corpo .de { color: #444; }
+
+/* Barra de progresso em blocos azuis que vai enchendo */
+.progresso {
+  display: block;
+  padding: 2px;
+  background: #fff;
+}
+
+.progresso i {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, var(--progresso) 0 8px, transparent 8px 10px);
+  animation: copiar 6s steps(20) infinite;
+}
+
+@keyframes copiar {
+  from { width: 10%; }
+  to { width: 100%; }
+}
+
+.copia-baixo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ---------- Barra de tarefas ---------- */
+
+.barra {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 3px;
+  background: var(--cinza);
+  box-shadow: inset 0 1px var(--luz-2), inset 0 2px var(--luz);
+}
+
+.iniciar {
+  display: flex;
+  gap: 4px;
+  flex: none;
+  font-weight: 700;
+}
+
+.iniciar svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tarefas {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.tarefa {
+  display: flex;
+  justify-items: start;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+/* Janela ativa: botão afundado com o xadrezinho do 98 */
+.tarefa.ativa {
+  background: repeating-conic-gradient(var(--luz) 0 25%, var(--cinza) 0 50%) 0 0 / 2px 2px;
+  box-shadow: inset 1px 1px var(--sombra-2), inset -1px -1px var(--luz), inset 2px 2px var(--sombra), inset -2px -2px var(--luz-2);
+}
+
+.tarefa svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.tarefa .ico-fones { color: #000; }
+
+.tarefa span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bandeja {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  padding: 0 10px;
+}
+
+.bandeja svg {
+  width: 16px;
+  height: 16px;
+}
+
+.bandeja span::before { content: "✦ "; }
+
+/* ---------- Desktop (1920×900) ---------- */
+
+.desk {
+  width: 1920px;
+  font-size: 12px;
+}
+
+.desk .icones { left: 19px; top: 23px; width: 90px; gap: 30px; }
+.desk .icone { height: 60px; }
+
+.desk .tit { height: 18px; font-size: 13px; }
+.desk .tit-bts i { width: 16px; height: 14px; }
+.desk .menu { gap: 14px; height: 26px; padding: 6px 5px 0; font-size: 12px; }
+
+.desk .visor { left: 180px; top: 40px; width: 559px; height: 696px; }
+.desk .status-barra span { height: 19px; }
+
+.desk .bloco { left: 800px; top: 90px; width: 598px; height: 354px; }
+.desk .texto { padding: 12px 11px; font-size: 15.6px; line-height: 24px; }
+
+.desk .xatamp { left: 1460px; top: 150px; width: 389px; height: 205px; }
+.desk .tela { height: 137px; margin-top: 4px; padding: 0 12px; }
+.desk .tela-topo { display: flex; align-items: center; gap: 26px; height: 60px; padding-left: 2px; }
+.desk .seta { border-width: 12px 0 12px 21px; }
+.desk .tempo { font-size: 28px; }
+.desk .letreiro { font-size: 11.5px; letter-spacing: .04em; font-weight: 700; }
+.desk .eq { gap: 4px; height: 44px; margin-top: 12px; }
+.desk .eq i { width: 13px; }
+.desk .comandos { gap: 4px; margin-top: 7px; }
+.desk .comandos .bt98 { width: 29px; height: 22px; }
+.desk .comandos .aleatorio { width: 31px; margin-right: 1px; }
+
+.desk .copia { left: 1180px; top: 520px; width: 419px; height: 139px; }
+.desk .copia-corpo { padding: 13px 13px 0; }
+.desk .copia-corpo p { line-height: 16px; }
+.desk .progresso { height: 16px; margin: 7px 0 12px; }
+.desk .cancelar { width: 65px; height: 23px; font-style: normal; }
+
+.desk .barra { height: 34px; }
+.desk .iniciar { height: 26px; padding: 0 6px; font-size: 13px; }
+.desk .tarefas .tarefa { flex: none; width: 190px; height: 26px; font-size: 12px; }
+.desk .bandeja { height: 26px; font-size: 12px; }
+
+/* ---------- Mobile (390×844) ---------- */
+
+.mob {
+  width: 390px;
+  font-size: 11px;
+}
+
+.mob .tit { height: 21px; font-size: 11.2px; }
+.mob .tit-bts i { --xis: 8px; width: 15px; height: 13px; }
+.mob .menu { gap: 10px; height: 20px; padding: 2px 3px 0; font-size: 11px; }
+
+.mob .visor { left: 10px; top: 14px; width: 370px; height: 389px; }
+
+.mob .bloco { left: 10px; top: 412px; width: 370px; height: 207px; }
+.mob .bloco .texto { margin-top: 2px; padding: 5px 8px; font-size: 11.6px; line-height: 17px; }
+.mob .linhas { max-width: 37ch; }
+
+.mob .xatamp { left: 10px; top: 640px; width: 370px; height: 106px; }
+.mob .tela { display: flex; align-items: center; height: 47px; margin-top: 2px; padding: 0 10px; }
+.mob .seta { border-width: 9px 0 9px 16px; }
+.mob .tempo { margin: 0 14px 0 14px; font-size: 19px; }
+.mob .letreiro { flex: 1; font-size: 9.6px; letter-spacing: .03em; }
+.mob .comandos { gap: 4px; margin-top: 4px; }
+.mob .comandos .bt98 { width: 23px; height: 20px; }
+.mob .comandos .bt98 svg { width: 12px; height: 12px; }
+
+.mob .barra { height: 29px; padding: 0 2px; gap: 3px; }
+.mob .iniciar { height: 25px; padding: 0 5px; font-size: 11px; }
+.mob .tarefas { gap: 3px; }
+.mob .tarefas .tarefa { flex: none; width: 130px; height: 25px; font-size: 11px; }
+.mob .bandeja { height: 25px; margin-left: auto; padding: 0 6px; font-size: 11px; }

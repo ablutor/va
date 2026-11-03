@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Banner · Estrada</title>
+  <!-- Banner do modelo 52 · Estrada: a estrada no deserto no fim do banner, véu escuro do lado das etiquetas e moldura de
+       vidro escuro com faixa tracejada de estrada em volta. -->
+  <link rel="stylesheet" href="_base.css">
+  <style>
+    :root { --b1: #3c261c; --b2: #1c120d; --bg: #1b120d; --ink: #f4e3cf; --ac: #e07a4f; --ac2: #ffc59e; --tinta: transparent; --tinta-op: 0; }
+    [data-cor="original"]  { --b1: #3c261c; --b2: #1c120d; --bg: #1b120d; --ink: #f4e3cf; --ac: #e07a4f; --ac2: #ffc59e; --tinta: #e07a4f; --tinta-op: 0; }
+    [data-cor="masculino"] { --b1: #1d2c33; --b2: #10171b; --bg: #0f1619; --ink: #e8f0f2; --ac: #3fa7b8; --ac2: #a5e3ec; --tinta: #2c6f80; --tinta-op: .55; }
+    [data-cor="feminino"]  { --b1: #3d2229; --b2: #1e1115; --bg: #1c1014; --ink: #fbe7ea; --ac: #ec7f8e; --ac2: #ffc2cb; --tinta: #e58a9c; --tinta-op: .42; }
+    html, body { background: var(--bg); }
+    .tudo { background: var(--bg); }
+    .foto { position: absolute; inset: 0; background: url(../modelos/cenarios/52-estrada/estrada.jpg) 40% 49% / 560px auto no-repeat; background-position: -10px -412px; filter: saturate(1.15) contrast(1.05); }
+    .tinta { position: absolute; inset: 0; background: var(--tinta); opacity: var(--tinta-op); mix-blend-mode: color; }
+    .veu { position: absolute; inset: 0; background:
+      linear-gradient(90deg, color-mix(in srgb, var(--b2) 90%, transparent) 0, color-mix(in srgb, var(--b2) 84%, transparent) 195px, color-mix(in srgb, var(--b2) 30%, transparent) 262px, transparent 300px),
+      linear-gradient(180deg, color-mix(in srgb, var(--b2) 55%, transparent), transparent 40%, transparent 70%, color-mix(in srgb, var(--b2) 60%, transparent)); }
+    /* bloco de vidro escuro, como os blocos do modelo, com a faixa tracejada da estrada por fora */
+    .moldura { border-radius: 8px; background: linear-gradient(160deg, var(--b1), var(--b2));
+      border: 1.5px solid var(--ac); box-shadow: 0 6px 16px rgba(0,0,0,.6), inset 0 0 0 1px color-mix(in srgb, var(--ink) 10%, transparent); }
+    .moldura::before { content: ""; position: absolute; inset: -5px; border-radius: 13px; border: 2px dashed var(--ac2); opacity: .85; }
+    .moldura.redonda, .redonda .moldura { border-radius: 50%; }
+    .redonda .moldura::before { border-radius: 50%; }
+    /* detalhe do lado direito: linha dupla de pista, bem fina */
+    .pista { position: absolute; left: 296px; top: 92px; width: 70px; height: 5px; border-top: 1px solid color-mix(in srgb, var(--ac2) 55%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ac2) 55%, transparent); transform: skewX(-30deg); display: none; }
+  </style>
+</head>
+<body>
+  <div class="tudo">
+    <div class="foto"></div><div class="tinta"></div><div class="veu"></div>
+    <div class="moldura" id="moldura"></div>
+  </div>
+  <script src="_base.js"></script>
+  <script>XB.pronto.then(function () { XB.pronto2(); });</script>
+</body>
+</html>
