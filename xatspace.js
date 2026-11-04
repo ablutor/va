@@ -183,11 +183,20 @@
       if (ehMobile) {
         // Cabe na tela inteira: encolhe pela largura ou pela altura, o que limitar primeiro
         var e = Math.min(w / pw, h / ph);
+        var esquerda = (w - pw * e) / 2;
+        var topo = (h - ph * e) / 2;
         palco.style.height = ph + "px";
         palco.style.transform = "scale(" + e + ")";
-        palco.style.left = (w - pw * e) / 2 + "px";
-        palco.style.top = (h - ph * e) / 2 + "px";
+        palco.style.left = esquerda + "px";
+        palco.style.top = topo + "px";
         document.body.style.height = "";
+        // Selo na mesma altura do Eclipse: abaixo da faixa do xat, no canto direito do palco
+        var marca = document.querySelector(".xs-marca");
+        if (marca) {
+          marca.style.top = topo + 48 * e + 10 + "px";
+          marca.style.right = esquerda + 16 * e + "px";
+          marca.style.bottom = "auto";
+        }
       } else {
         var esc = Math.min(w / pw, h / ph);
         palco.style.height = ph + "px";
@@ -195,6 +204,12 @@
         palco.style.left = (w - pw * esc) / 2 + "px";
         palco.style.top = (h - ph * esc) / 2 + "px";
         document.body.style.height = "";
+        var marcaDesk = document.querySelector(".xs-marca");
+        if (marcaDesk) {
+          marcaDesk.style.top = "";
+          marcaDesk.style.right = "";
+          marcaDesk.style.bottom = "";
+        }
       }
     });
   }
